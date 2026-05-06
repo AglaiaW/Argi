@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #14D1A0;
+  --color-primary-dark: #0EA881;
+  --color-azure: #2B59C3;
+  --color-deep-blue: #1A3A8A;
+  --color-accent-gold: #FFD23F;
+  --color-dark-bg: #010409;
+  --color-dark-card: #0F172A;
+  
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Grotesk", ui-monospace, SFMono-Regular, monospace;
+
+  --animate-slow-spin: slow-spin 60s linear infinite;
+
+  @keyframes slow-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-dark-bg text-slate-200 antialiased overflow-x-hidden selection:bg-primary selection:text-white;
+  }
+  
+  h1, h2, h3 {
+    @apply font-mono tracking-tight;
+  }
+}
+
+/* Awwwards Style Utilities */
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.premium-glass {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)];
+}
+
+.bento-card {
+  @apply relative overflow-hidden rounded-[2rem] border border-white/5 bg-white/5 p-8 transition-all duration-500 hover:border-primary/30 hover:bg-white/10;
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(23, 184, 144, 0.4);
+}
+
+.gradient-mesh {
+  background: radial-gradient(at 0% 0%, hsla(220, 100%, 48%, 0.15) 0, transparent 50%),
+              radial-gradient(at 100% 100%, hsla(164, 100%, 42%, 0.15) 0, transparent 50%);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.mask-edge {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.neon-btn {
+  @apply relative overflow-hidden bg-primary text-dark-bg transition-all duration-300 hover:shadow-[0_0_30px_rgba(0,245,212,0.5)] active:scale-95;
+}
+
+.community-masonry {
+  column-count: 1;
+  column-gap: 1.25rem;
+}
+
+.community-masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .community-masonry {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 1280px) {
+  .community-masonry {
+    column-count: 3;
+  }
+}

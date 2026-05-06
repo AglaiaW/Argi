@@ -1,0 +1,45 @@
+<svg width="420" height="340" viewBox="0 0 420 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="aagiBlue" x1="24" y1="64" x2="332" y2="228" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2B67B2"/>
+      <stop offset="1" stop-color="#3659A9"/>
+    </linearGradient>
+    <linearGradient id="aagiTeal" x1="95" y1="36" x2="205" y2="162" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2FB48B"/>
+      <stop offset="1" stop-color="#2A8CC0"/>
+    </linearGradient>
+    <linearGradient id="aagiTealDark" x1="52" y1="84" x2="182" y2="198" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2AA8A3"/>
+      <stop offset="1" stop-color="#244FA5"/>
+    </linearGradient>
+  </defs>
+
+  <path d="M78 36H207L279 228H194C182.4 228 173 218.6 173 207V164H160L147 207C144.3 220.1 132.7 228 119.3 228H24L78 36Z" fill="url(#aagiBlue)"/>
+  <path d="M248 36H365L391 117H283L248 36Z" fill="#355BA9"/>
+  <path d="M272 36H365L391 117H296L272 36Z" fill="#34569E" fill-opacity=".78"/>
+  <path d="M289 150H397L420 228H324L289 150Z" fill="#355BA9"/>
+  <path d="M110 72L175 54L239 102L155 170L84 135L110 72Z" fill="url(#aagiTeal)"/>
+  <path d="M54 119L84 135L155 170L78 219L34 154L54 119Z" fill="url(#aagiTealDark)"/>
+  <path d="M155 170L239 102L286 137L210 208L183 208L173 164H160L155 170Z" fill="#2B86B0"/>
+  <path d="M239 102L286 137L279 177L210 208L239 102Z" fill="#2763A2"/>
+  <path d="M161 129L173 207C176 221 187.7 228 200 228H229L161 129Z" fill="white"/>
+  <path d="M120 167H196L170 192L177 228H137L145 192L120 167Z" fill="white"/>
+  <path d="M83 43L67 101L87 84L119 51L83 43Z" fill="white" fill-opacity=".92"/>
+  <path d="M207 36L221 95L200 83L170 51L207 36Z" fill="white" fill-opacity=".92"/>
+  <path d="M67 101L83 43H207L221 95" stroke="#2FB48B" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M67 101L107 68L134 44L173 45L207 36L183 81L161 129L112 121L67 101Z" stroke="#2FB48B" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="83" cy="43" r="10" fill="#2FB48B"/>
+  <circle cx="134" cy="44" r="10" fill="#2FB48B"/>
+  <circle cx="207" cy="36" r="10" fill="#2FB48B"/>
+  <circle cx="112" cy="121" r="10" fill="#2FB48B"/>
+  <circle cx="183" cy="81" r="10" fill="#2FB48B"/>
+  <circle cx="161" cy="129" r="10" fill="#FFCB29"/>
+
+  <g fill="#050505">
+    <path d="M32 278C32 253.699 51.6995 234 76 234H150C174.301 234 194 253.699 194 278V330H170V300H56V330H32V278ZM56 276H170V270C170 258.954 161.046 250 150 250H76C64.9543 250 56 258.954 56 270V276Z"/>
+    <path d="M227 234H323C347.301 234 367 253.699 367 278V330H343V278C343 266.954 334.046 258 323 258H227V330H203V234H227Z"/>
+    <path d="M396 278C396 253.699 415.699 234 440 234H546V258H440C428.954 258 420 266.954 420 278V286H530V310H444V286H530V330H440C415.699 330 396 310.301 396 286V278Z" transform="translate(-23 0) scale(0.886)"/>
+    <path d="M345 286H429V310H345V286Z"/>
+    <path d="M361 234H385V330H361V234Z"/>
+  </g>
+</svg>
