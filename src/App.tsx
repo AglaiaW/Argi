@@ -582,12 +582,12 @@ const SideNav = ({ activeTab, setActiveTab, lang }: { activeTab: TabType, setAct
   ];
 
   return (
-    <div className="fixed top-20 left-0 bottom-0 w-24 lg:w-32 premium-glass z-40 border-r-0 border-white/5 flex flex-col items-center py-10 gap-8 transition-all">
+    <div className="fixed top-20 left-0 bottom-0 w-24 lg:w-32 premium-glass z-40 border-r-0 border-slate-200/50 flex flex-col items-center py-10 gap-8 transition-all">
       {tabs.map((tab) => (
         <button 
           key={tab.id}
           onClick={() => setActiveTab(tab.id)}
-          className={`group flex flex-col items-center gap-2 transition-all duration-500 relative ${activeTab === tab.id ? 'text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.9)]' : 'text-white/80 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]'}`}
+          className={`group flex flex-col items-center gap-2 transition-all duration-500 relative ${activeTab === tab.id ? 'text-inherit drop-shadow-[0_0_12px_rgba(255,255,255,0.9)]' : 'text-inherit/80 hover:text-inherit hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]'}`}
         >
           {activeTab === tab.id && (
             <motion.div 
@@ -604,7 +604,7 @@ const SideNav = ({ activeTab, setActiveTab, lang }: { activeTab: TabType, setAct
         </button>
       ))}
 
-      <div className="mt-auto pb-8 text-white/10">
+      <div className="mt-auto pb-8 text-inherit/10">
         <Cpu size={24} className="hover:text-primary transition-colors cursor-help" />
       </div>
     </div>
@@ -654,15 +654,15 @@ const AISecretary = ({ lang, isOpen, setIsOpen }: { lang: 'CN' | 'EN', isOpen: b
       {/* Toggle Tab */}
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="absolute -left-8 top-1/2 -translate-y-1/2 w-8 h-24 premium-glass rounded-l-2xl border-r-0 border-white/5 flex flex-col items-center justify-center text-primary hover:text-white transition-colors shadow-2xl"
+        className="absolute -left-8 top-1/2 -translate-y-1/2 w-8 h-24 premium-glass rounded-l-2xl border-r-0 border-slate-200/50 flex flex-col items-center justify-center text-primary hover:text-inherit transition-colors shadow-2xl"
       >
         <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse mb-3" />
         {isOpen ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
       </button>
 
-      <div className={`h-full premium-glass border-l-0 border-white/5 flex flex-col gap-6 overflow-hidden ${!isOpen && 'opacity-0 pointer-events-none'}`}>
+      <div className={`h-full premium-glass border-l-0 border-slate-200/50 flex flex-col gap-6 overflow-hidden ${!isOpen && 'opacity-0 pointer-events-none'}`}>
         {/* Header */}
-        <div className="p-6 pb-2 flex flex-col items-center gap-4 border-b border-white/5">
+        <div className="p-6 pb-2 flex flex-col items-center gap-4 border-b border-slate-200/50">
           <div className="relative">
             <div className="w-24 h-24 rounded-full border-2 border-azure/35 bg-linear-to-br from-primary/10 to-azure/15 p-1 shadow-[0_0_30px_rgba(0,123,255,0.14)]">
               <img 
@@ -674,7 +674,7 @@ const AISecretary = ({ lang, isOpen, setIsOpen }: { lang: 'CN' | 'EN', isOpen: b
             <div className="absolute bottom-2 right-2 w-5 h-5 bg-primary border-4 border-dark-bg rounded-full shadow-[0_0_15px_#14D1A0]" />
           </div>
           <div className="text-center">
-            <h3 className="font-mono font-bold text-white uppercase italic tracking-tighter text-lg">
+            <h3 className="font-mono font-bold text-inherit uppercase italic tracking-tighter text-lg">
               {lang === 'CN' ? '阿吉' : 'ARGI.SI'}
             </h3>
             <p className="text-[10px] font-mono text-primary/60 uppercase tracking-widest mt-1">
@@ -689,12 +689,12 @@ const AISecretary = ({ lang, isOpen, setIsOpen }: { lang: 'CN' | 'EN', isOpen: b
             <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
               <div className={`max-w-[90%] p-4 rounded-2xl text-xs font-sans leading-relaxed ${
                 msg.role === 'user' 
-                  ? 'bg-primary/20 text-white border border-primary/20 rounded-tr-none' 
-                  : 'bg-white/5 text-white/80 border border-white/10 rounded-tl-none'
+                  ? 'bg-primary/20 text-inherit border border-primary/20 rounded-tr-none' 
+                  : 'bg-slate-200/50 text-inherit/80 border border-slate-200/50 rounded-tl-none'
               }`}>
                 {msg.text}
               </div>
-              <span className="text-[8px] font-mono text-white/20 mt-2">
+              <span className="text-[8px] font-mono text-inherit/20 mt-2">
                 {msg.role === 'ai' ? (lang === 'CN' ? '秘书' : 'SEC') : (lang === 'CN' ? '用户' : 'USER')}
               </span>
             </div>
@@ -717,7 +717,7 @@ const AISecretary = ({ lang, isOpen, setIsOpen }: { lang: 'CN' | 'EN', isOpen: b
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
                 placeholder={lang === 'CN' ? "发送指令..." : "Send command..."}
-                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-4 pr-12 text-xs text-white outline-hidden focus:border-primary/50 transition-all font-mono"
+                className="w-full bg-slate-200/50 border border-slate-200/50 rounded-xl py-3 pl-4 pr-12 text-xs text-inherit outline-hidden focus:border-primary/50 transition-all font-mono"
               />
               <button 
                 onClick={sendMessage}
@@ -727,7 +727,7 @@ const AISecretary = ({ lang, isOpen, setIsOpen }: { lang: 'CN' | 'EN', isOpen: b
                 <ArrowRight size={16} />
               </button>
            </div>
-           <p className="text-[8px] font-mono text-white/10 mt-4 text-center">
+           <p className="text-[8px] font-mono text-inherit/10 mt-4 text-center">
               SEC.CORE V2.1.2024
            </p>
         </div>
@@ -763,11 +763,11 @@ const Workbench: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
           <motion.div 
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-mono text-primary/80 uppercase tracking-widest"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-200/50 border border-slate-200/50 text-[10px] font-mono text-primary/80 uppercase tracking-widest"
           >
             <Zap size={12} className="text-primary" /> {lang === 'CN' ? '系统就绪: 第 17 宇宙天' : 'System Ready: Day 17'}
           </motion.div>
-          <h1 className="text-6xl lg:text-8xl font-bold font-mono tracking-tighter leading-[0.85] text-white uppercase italic mt-4">
+          <h1 className="text-6xl lg:text-8xl font-bold font-mono tracking-tighter leading-[0.85] text-inherit uppercase italic mt-4">
             {lang === 'CN' ? '你好,' : 'HELLO,'} <br />
             <span className="text-primary text-glow">{lang === 'CN' ? '超级个体.' : 'SUPER.I'}</span>
           </h1>
@@ -777,7 +777,7 @@ const Workbench: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
       {/* Bento Layout */}
       <div className="grid grid-cols-6 grid-rows-6 gap-6 h-[900px] md:h-[650px]">
         {/* Launcher Box */}
-        <div className="bento-card col-span-6 row-span-2 group overflow-hidden bg-white/5 border-white/5">
+        <div className="bento-card col-span-6 row-span-2 group overflow-hidden bg-slate-200/50 border-slate-200/50">
           <div className="absolute inset-0 z-0">
              <video 
               autoPlay 
@@ -791,12 +791,12 @@ const Workbench: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
           </div>
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[100px] transition-all group-hover:bg-primary/40 -z-10" />
           <div className="space-y-4 relative h-full flex flex-col justify-center">
-            <h2 className="text-sm font-mono text-white/80 uppercase tracking-[0.3em] font-bold">{lang === 'CN' ? '意识投影 / 提示词入口' : 'PROJECTION CENTER'}</h2>
+            <h2 className="text-sm font-mono text-inherit/80 uppercase tracking-[0.3em] font-bold">{lang === 'CN' ? '意识投影 / 提示词入口' : 'PROJECTION CENTER'}</h2>
             <div className="relative">
               <input 
                 type="text" 
                 placeholder={lang === 'CN' ? "键入您的指令..." : "CMD YOUR VISION..."}
-                className="w-full bg-transparent border-b-2 border-white/10 py-4 text-2xl lg:text-3xl font-mono text-white placeholder:text-white/20 outline-hidden focus:border-primary transition-all pr-12"
+                className="w-full bg-transparent border-b-2 border-slate-200/50 py-4 text-2xl lg:text-3xl font-mono text-inherit placeholder:text-inherit/20 outline-hidden focus:border-primary transition-all pr-12"
               />
               <button className="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-12 bg-white text-dark-bg rounded-full flex items-center justify-center hover:bg-primary transition-all active:scale-90">
                 <ArrowRight />
@@ -809,11 +809,11 @@ const Workbench: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
         <div className="bento-card col-span-6 md:col-span-2 row-span-2 flex flex-col justify-between">
           <Trophy className="text-primary mb-4" size={32} />
           <div className="space-y-1">
-            <p className="text-[10px] font-mono text-white/80 uppercase tracking-widest">{lang === 'CN' ? '职阶进化' : 'RANK ELEVATION'}</p>
-             <p className="text-3xl font-mono font-bold text-white uppercase italic">{lang === 'CN' ? '首席构建师' : 'CHIEF.SI'}</p>
+            <p className="text-[10px] font-mono text-inherit/80 uppercase tracking-widest">{lang === 'CN' ? '职阶进化' : 'RANK ELEVATION'}</p>
+             <p className="text-3xl font-mono font-bold text-inherit uppercase italic">{lang === 'CN' ? '首席构建师' : 'CHIEF.SI'}</p>
           </div>
           <div className="flex gap-2 mt-4">
-             {[1,2,3,4,5].map(i => <div key={i} className={`h-1 flex-1 rounded-full ${i <= 3 ? 'bg-primary' : 'bg-white/10'}`} />)}
+             {[1,2,3,4,5].map(i => <div key={i} className={`h-1 flex-1 rounded-full ${i <= 3 ? 'bg-primary' : 'bg-slate-200'}`} />)}
           </div>
         </div>
 
@@ -825,10 +825,10 @@ const Workbench: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
              { icon: <Ghost />, label: lang === 'CN' ? '数字生命' : 'AVATAR' }
            ].map((tool, i) => (
              <button key={i} className="bento-card flex flex-col items-center justify-center gap-3 !p-4 group">
-                <div className="text-white group-hover:text-primary group-hover:scale-125 transition-all duration-500">
+                <div className="text-inherit group-hover:text-primary group-hover:scale-125 transition-all duration-500">
                   {React.cloneElement(tool.icon as React.ReactElement, { size: 32 })}
                 </div>
-                <span className="text-[10px] font-mono font-bold tracking-widest text-white/90">{tool.label}</span>
+                <span className="text-[10px] font-mono font-bold tracking-widest text-inherit/90">{tool.label}</span>
              </button>
            ))}
         </div>
@@ -836,11 +836,11 @@ const Workbench: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
         {/* Revenue - Wide Card */}
         <div className="bento-card col-span-6 md:col-span-3 row-span-2 bg-linear-to-tr from-white/5 to-primary/5 group">
            <div className="flex items-center justify-between mb-8">
-           <CreditCard className="text-white/70 group-hover:text-primary transition-colors" />
+           <CreditCard className="text-inherit/70 group-hover:text-primary transition-colors" />
            <TrendingUp className="text-primary" size={20} />
          </div>
-         <p className="text-[10px] font-mono text-white/80 uppercase tracking-[0.3em] mb-2">{lang === 'CN' ? '累计收益' : 'TOTAL YIELD'}</p>
-           <h3 className="text-4xl font-mono font-bold text-white italic group-hover:translate-x-2 transition-transform tracking-tighter">¥12,850.00</h3>
+         <p className="text-[10px] font-mono text-inherit/80 uppercase tracking-[0.3em] mb-2">{lang === 'CN' ? '累计收益' : 'TOTAL YIELD'}</p>
+           <h3 className="text-4xl font-mono font-bold text-inherit italic group-hover:translate-x-2 transition-transform tracking-tighter">¥12,850.00</h3>
            <button className="mt-8 px-6 py-2 bg-white text-dark-bg font-mono font-bold text-xs rounded-full hover:bg-primary transition-all">
              {lang === 'CN' ? '兑现收益' : 'REDEEM'}
            </button>
@@ -849,17 +849,17 @@ const Workbench: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
         {/* Recent Assets */}
         <div className="bento-card col-span-6 md:col-span-3 row-span-2 p-0 overflow-hidden">
         <div className="p-8 pb-4 flex justify-between items-center">
-          <p className="text-[10px] font-mono text-white/80 uppercase tracking-widest">{lang === 'CN' ? '资产库存' : 'INVENTORY'}</p>
-          <ChevronRight className="text-white/40" />
+          <p className="text-[10px] font-mono text-inherit/80 uppercase tracking-widest">{lang === 'CN' ? '资产库存' : 'INVENTORY'}</p>
+          <ChevronRight className="text-inherit/40" />
         </div>
           <div className="px-8 pb-8 space-y-4">
             {ASSETS.slice(0, 2).map((asset, i) => (
-              <div key={i} className="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/5 hover:border-white/10 transition-all cursor-pointer group/item">
+              <div key={i} className="flex items-center justify-between p-3 rounded-2xl bg-slate-200/50 border border-slate-200/50 hover:border-slate-200/50 transition-all cursor-pointer group/item">
                 <div className="flex items-center gap-3">
-                   <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center group-hover/item:text-primary transition-colors">
+                   <div className="w-8 h-8 rounded-lg bg-slate-200/50 flex items-center justify-center group-hover/item:text-primary transition-colors">
                      {asset.type === 'agent' ? <Bot size={16}/> : <Workflow size={16}/>}
                    </div>
-                   <span className="text-xs font-mono font-bold text-white/80">{asset.name}</span>
+                   <span className="text-xs font-mono font-bold text-inherit/80">{asset.name}</span>
                 </div>
                 <span className="w-1.5 h-1.5 rounded-full bg-primary/60" />
               </div>
@@ -881,15 +881,15 @@ const Growth: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
       className="pt-12 pb-40 px-6 lg:px-12 space-y-12 max-w-6xl mx-auto"
     >
       <div className="space-y-6">
-        <h1 className="text-5xl font-mono font-bold tracking-tighter text-white uppercase italic">
+        <h1 className="text-5xl font-mono font-bold tracking-tighter text-inherit uppercase italic">
           {lang === 'CN' ? '进化矩阵.' : 'EVOLUTION.'}
         </h1>
-        <div className="flex p-1.5 bg-white/5 rounded-2xl border border-white/10">
+        <div className="flex p-1.5 bg-slate-200/50 rounded-2xl border border-slate-200/50">
           {['opc', 'skill', 'interest'].map(id => (
             <button 
               key={id}
               onClick={() => setActiveRoute(id)}
-              className={`flex-1 py-3 text-[10px] font-mono font-bold tracking-widest rounded-xl transition-all uppercase ${activeRoute === id ? 'bg-primary text-dark-bg' : 'text-white/40 hover:text-white'}`}
+              className={`flex-1 py-3 text-[10px] font-mono font-bold tracking-widest rounded-xl transition-all uppercase ${activeRoute === id ? 'bg-primary text-dark-bg' : 'text-inherit/40 hover:text-inherit'}`}
             >
               {id === 'opc' ? (lang === 'CN' ? '超级个体启动' : 'SI STARTUP') : 
                id === 'skill' ? (lang === 'CN' ? '技能扩充' : 'SKILL UP') : 
@@ -902,9 +902,9 @@ const Growth: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
       <div className="grid grid-cols-6 gap-6">
         {/* Phase Map */}
         <div className="bento-card col-span-6 md:col-span-4 row-span-2">
-          <p className="text-[10px] font-mono text-white/70 uppercase tracking-widest mb-8 font-bold">{lang === 'CN' ? '航线图' : 'NAVIGATION MAP'}</p>
+          <p className="text-[10px] font-mono text-inherit/70 uppercase tracking-widest mb-8 font-bold">{lang === 'CN' ? '航线图' : 'NAVIGATION MAP'}</p>
           <div className="flex justify-between items-start relative px-4">
-            <div className="absolute top-6 left-12 right-12 h-0.5 bg-white/5" />
+            <div className="absolute top-6 left-12 right-12 h-0.5 bg-slate-200/50" />
             {[
               { label: lang === 'CN' ? '认知' : 'READY', status: 'completed' },
               { label: lang === 'CN' ? '构建' : 'BUILD', status: 'current' },
@@ -915,11 +915,11 @@ const Growth: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center font-mono font-bold border-2 transition-all ${
                   stage.status === 'completed' ? 'bg-primary border-primary text-dark-bg' :
                   stage.status === 'current' ? 'bg-dark-bg border-primary text-primary shadow-[0_0_20px_#14D1A0]' :
-                  'bg-white/5 border-white/10 text-white/20'
+                  'bg-slate-200/50 border-slate-200/50 text-inherit/20'
                 }`}>
                   {stage.status === 'completed' ? <CheckCircle2 size={24} /> : (i + 1)}
                 </div>
-                <span className={`text-[10px] font-mono font-bold ${stage.status === 'locked' ? 'text-white/20' : 'text-white'}`}>
+                <span className={`text-[10px] font-mono font-bold ${stage.status === 'locked' ? 'text-inherit/20' : 'text-inherit'}`}>
                   {stage.label}
                 </span>
               </div>
@@ -946,18 +946,18 @@ const Growth: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
 
         {/* Courses */}
         <div className="col-span-6 space-y-6 pt-6">
-          <h2 className="text-xl font-mono text-white/80 uppercase tracking-[0.3em] font-bold">{lang === 'CN' ? '模块选择' : 'MODULE SELECTION'}</h2>
+          <h2 className="text-xl font-mono text-inherit/80 uppercase tracking-[0.3em] font-bold">{lang === 'CN' ? '模块选择' : 'MODULE SELECTION'}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {COURSES.map(course => (
               <div key={course.id} className="bento-card group flex flex-col cursor-pointer transition-all active:scale-[0.98]">
                 <div className="flex justify-between items-start mb-6">
-                   <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                   <div className="w-12 h-12 rounded-2xl bg-slate-200/50 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                       <BookOpen size={24} />
                    </div>
-                   <span className="text-[8px] font-mono px-3 py-1 bg-white/10 rounded-full text-white/60 group-hover:text-primary transition-colors">{course.level}</span>
+                   <span className="text-[8px] font-mono px-3 py-1 bg-slate-200 rounded-full text-inherit/60 group-hover:text-primary transition-colors">{course.level}</span>
                 </div>
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors">{course.title}</h3>
-                <div className="flex items-center gap-4 text-[10px] font-mono text-white/40 mt-auto">
+                <h3 className="text-lg font-bold text-inherit mb-2 group-hover:text-primary transition-colors">{course.title}</h3>
+                <div className="flex items-center gap-4 text-[10px] font-mono text-inherit/40 mt-auto">
                    <span className="flex items-center gap-1"><Clock size={12}/> {course.duration}</span>
                    <span className="flex items-center gap-1"><User size={12}/> {course.students}</span>
                    <span className="ml-auto text-primary font-bold">{course.price}</span>
@@ -981,10 +981,10 @@ const Workshop: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
       className="pt-12 pb-40 px-6 lg:px-12 space-y-12 max-w-6xl mx-auto"
     >
       <div className="space-y-6">
-        <h1 className="text-5xl font-mono font-bold tracking-tighter text-white uppercase italic">
+        <h1 className="text-5xl font-mono font-bold tracking-tighter text-inherit uppercase italic">
           {lang === 'CN' ? '创作黑盒.' : 'FORGE.'}
         </h1>
-        <div className="flex gap-10 items-center justify-center border-b border-white/5 pb-4">
+        <div className="flex gap-10 items-center justify-center border-b border-slate-200/50 pb-4">
            {[
              { id: 'agent', label: lang === 'CN' ? '智能体' : 'AGENTS', icon: <Bot size={18}/> },
              { id: 'workflow', label: lang === 'CN' ? '工作流' : 'FLOWS', icon: <Workflow size={18}/> },
@@ -993,7 +993,7 @@ const Workshop: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
              <button 
                key={tab.id}
                onClick={() => setSubTab(tab.id)}
-               className={`flex items-center gap-2 text-xs font-mono font-bold tracking-widest transition-all relative ${subTab === tab.id ? 'text-primary' : 'text-white/20 hover:text-white/50'}`}
+               className={`flex items-center gap-2 text-xs font-mono font-bold tracking-widest transition-all relative ${subTab === tab.id ? 'text-primary' : 'text-inherit/20 hover:text-inherit/50'}`}
              >
                {tab.icon} {tab.label}
                {subTab === tab.id && <motion.div layoutId="forge-tab" className="absolute -bottom-4 left-0 right-0 h-1 bg-primary blur-[2px]" />}
@@ -1022,17 +1022,17 @@ const Workshop: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
             {/* Template Scroller */}
             <div className="bento-card col-span-6 md:col-span-4 overflow-hidden relative p-8 h-64">
               <div className="absolute top-0 right-0 w-32 h-32 bg-deep-blue/10 blur-[60px]" />
-              <p className="text-[10px] font-mono text-white uppercase tracking-widest mb-6">{lang === 'CN' ? '热门蓝图' : 'TRENDING BLUEPRINTS'}</p>
+              <p className="text-[10px] font-mono text-inherit uppercase tracking-widest mb-6">{lang === 'CN' ? '热门蓝图' : 'TRENDING BLUEPRINTS'}</p>
               <div className="flex gap-4 overflow-x-auto pb-2 no-scrollbar mask-edge">
                 {[
                   { name: 'AUTO.BOT', sales: 124 },
                   { name: 'POLYGLOT', sales: 88 },
                   { name: 'BRAINSTORM', sales: 210 }
                 ].map((tpl, i) => (
-                  <div key={i} className="min-w-[120px] bg-white/5 border border-white/5 p-4 rounded-3xl text-center space-y-3 hover:border-primary/50 transition-colors cursor-pointer group/item flex flex-col items-center">
-                     <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white group-hover/item:text-primary"><Bot size={20} /></div>
-                     <p className="text-[10px] font-mono font-bold truncate text-white">{tpl.name}</p>
-                     <p className="text-[8px] font-mono text-white/70 uppercase tracking-tighter">{tpl.sales} CLONES</p>
+                  <div key={i} className="min-w-[120px] bg-slate-200/50 border border-slate-200/50 p-4 rounded-3xl text-center space-y-3 hover:border-primary/50 transition-colors cursor-pointer group/item flex flex-col items-center">
+                     <div className="w-10 h-10 rounded-full bg-slate-200/50 flex items-center justify-center text-inherit group-hover/item:text-primary"><Bot size={20} /></div>
+                     <p className="text-[10px] font-mono font-bold truncate text-inherit">{tpl.name}</p>
+                     <p className="text-[8px] font-mono text-inherit/70 uppercase tracking-tighter">{tpl.sales} CLONES</p>
                   </div>
                 ))}
               </div>
@@ -1040,7 +1040,7 @@ const Workshop: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
 
             {/* Agent List */}
             <div className="col-span-6 space-y-4 pt-6">
-              <h2 className="text-[10px] font-mono text-white/70 uppercase tracking-[0.3em] font-bold">{lang === 'CN' ? '服役中智能体' : 'ACTIVE FLEET'}</h2>
+              <h2 className="text-[10px] font-mono text-inherit/70 uppercase tracking-[0.3em] font-bold">{lang === 'CN' ? '服役中智能体' : 'ACTIVE FLEET'}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
                   { name: 'COPY.MASTER', active: true, usage: 45 },
@@ -1048,12 +1048,12 @@ const Workshop: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
                 ].map((agent, i) => (
                   <div key={i} className="bento-card !p-6 flex items-center justify-between group">
                     <div className="flex items-center gap-4">
-                      <div className={`w-2 h-2 rounded-full ${agent.active ? 'bg-primary shadow-[0_0_10px_#14D1A0]' : 'bg-white/10'}`} />
-                      <span className="text-sm font-mono font-bold text-white group-hover:text-primary transition-colors uppercase italic">{agent.name}</span>
+                      <div className={`w-2 h-2 rounded-full ${agent.active ? 'bg-primary shadow-[0_0_10px_#14D1A0]' : 'bg-slate-200'}`} />
+                      <span className="text-sm font-mono font-bold text-inherit group-hover:text-primary transition-colors uppercase italic">{agent.name}</span>
                     </div>
                     <div className="flex items-center gap-6">
-                       <span className="text-[10px] font-mono text-white/20 italic">{agent.usage} HITS</span>
-                       <button className="text-white/20 hover:text-white transition-colors"><MoreVertical size={16} /></button>
+                       <span className="text-[10px] font-mono text-inherit/20 italic">{agent.usage} HITS</span>
+                       <button className="text-inherit/20 hover:text-inherit transition-colors"><MoreVertical size={16} /></button>
                     </div>
                   </div>
                 ))}
@@ -1080,7 +1080,7 @@ const Workshop: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
                  <div className="text-primary group-hover:scale-150 transition-all duration-700">{React.cloneElement(item.icon as React.ReactElement, { size: 40 })}</div>
                  <div className="text-center">
                     <p className="text-xs font-mono font-bold tracking-[0.3em] uppercase">{item.label}</p>
-                    <p className="text-[8px] font-mono text-white/20 mt-1 uppercase italic">{item.desc}</p>
+                    <p className="text-[8px] font-mono text-inherit/20 mt-1 uppercase italic">{item.desc}</p>
                  </div>
                </button>
              ))}
@@ -1114,7 +1114,7 @@ const Discovery: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = ({ lan
 
   const currentBannerItem = COMMUNITY_BANNERS[currentBanner];
   const cardShell =
-    'rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,22,39,0.96),rgba(6,16,29,0.94))] overflow-hidden transition-all duration-300 hover:border-primary/35 hover:-translate-y-0.5 hover:shadow-[0_18px_50px_rgba(0,0,0,0.32)]';
+    'rounded-[28px] border border-slate-200/50 bg-[linear-gradient(180deg,rgba(10,22,39,0.96),rgba(6,16,29,0.94))] overflow-hidden transition-all duration-300 hover:border-primary/35 hover:-translate-y-0.5 hover:shadow-[0_18px_50px_rgba(0,0,0,0.32)]';
 
   const renderTemplateIcon = (kind: TemplateCommunityItem['templateKind']) => {
     if (kind === '智能体') {
@@ -1133,7 +1133,7 @@ const Discovery: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = ({ lan
       exit={{ opacity: 0 }}
       className="pt-10 pb-32 px-4 lg:px-10 max-w-6xl mx-auto relative space-y-8"
     >
-      <section className="relative h-[420px] lg:h-[500px] rounded-[60px] overflow-hidden group shadow-[0_40px_100px_rgba(0,0,0,0.8)] border border-white/10 bg-dark-bg mt-16">
+      <section className="relative h-[420px] lg:h-[500px] rounded-[60px] overflow-hidden group shadow-[0_40px_100px_rgba(0,0,0,0.8)] border border-slate-200/50 bg-dark-bg mt-16">
         <div className="absolute inset-0 z-0 bg-[#000510]">
           <img
             src="https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=1920&q=80"
@@ -1151,20 +1151,20 @@ const Discovery: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = ({ lan
             className="space-y-6 max-w-4xl"
           >
             <div className="space-y-2">
-              <h2 className="text-4xl lg:text-[72px] font-mono font-bold text-white tracking-[-0.06em] uppercase leading-[0.8] drop-shadow-[0_10px_30px_rgba(0,0,0,1)]">
+              <h2 className="text-4xl lg:text-[72px] font-mono font-bold text-inherit tracking-[-0.06em] uppercase leading-[0.8] drop-shadow-[0_10px_30px_rgba(0,0,0,1)]">
                 <span className="block italic">{lang === 'CN' ? '蔚蓝智能' : 'AZURE AI'}</span>
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-primary via-azure to-white">{lang === 'CN' ? 'OPC 社区' : 'OPC COMMUNITY'}</span>
               </h2>
             </div>
 
-            <p className="text-white/80 font-mono text-sm leading-relaxed tracking-tight max-w-md drop-shadow-lg">
+            <p className="text-inherit/80 font-mono text-sm leading-relaxed tracking-tight max-w-md drop-shadow-lg">
               {lang === 'CN' ? '连接全球每一位超级个体的数字化身。在这里进化、协作、并构建您的个人算力帝国。' : 'Connect with every digital persona in the AAGI matrix.'}
             </p>
           </motion.div>
         </div>
       </section>
 
-      <div className="sticky top-20 z-40 flex items-center justify-between rounded-[26px] border border-white/10 bg-[rgba(5,15,27,0.88)] px-5 py-4 backdrop-blur-xl shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
+      <div className="sticky top-20 z-40 flex items-center justify-between rounded-[26px] border border-slate-200/50 bg-[rgba(5,15,27,0.88)] px-5 py-4 backdrop-blur-xl shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
         <div className="flex items-center gap-2 lg:gap-4">
           {feedTabs.map((tab) => (
             <button
@@ -1174,7 +1174,7 @@ const Discovery: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = ({ lan
               className={`relative rounded-full px-4 py-2 text-xs lg:text-sm font-medium transition-all ${
                 activeFeedTab === tab.id
                   ? 'bg-white text-dark-bg shadow-[0_8px_18px_rgba(255,255,255,0.15)]'
-                  : 'text-white/55 hover:text-white'
+                  : 'text-inherit/55 hover:text-inherit'
               }`}
             >
               {tab.label}
@@ -1192,7 +1192,7 @@ const Discovery: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = ({ lan
         </button>
       </div>
 
-      <section className="relative overflow-hidden rounded-[34px] border border-white/10 bg-[#071220] p-1">
+      <section className="relative overflow-hidden rounded-[34px] border border-slate-200/50 bg-[#071220] p-1">
         <motion.div
           key={currentBannerItem.id}
           initial={{ opacity: 0.45, scale: 1.02 }}
@@ -1205,16 +1205,16 @@ const Discovery: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = ({ lan
           <div className="absolute inset-0 bg-linear-to-t from-[#061220]/90 via-transparent to-transparent" />
 
           <div className="relative z-10 flex h-full flex-col justify-between p-6 lg:p-8">
-            <div className="inline-flex w-fit items-center rounded-full border border-white/16 bg-white/8 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-white/72">
+            <div className="inline-flex w-fit items-center rounded-full border border-slate-200/80 bg-slate-200/80 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-inherit/72">
               {currentBannerItem.kicker}
             </div>
 
             <div className="max-w-2xl space-y-4">
               <div className="space-y-3">
-                <h2 className="text-3xl lg:text-5xl font-semibold tracking-[-0.05em] leading-tight text-white">
+                <h2 className="text-3xl lg:text-5xl font-semibold tracking-[-0.05em] leading-tight text-inherit">
                   {currentBannerItem.title}
                 </h2>
-                <p className="max-w-xl text-sm lg:text-base leading-7 text-white/72">
+                <p className="max-w-xl text-sm lg:text-base leading-7 text-inherit/72">
                   {currentBannerItem.subtitle}
                 </p>
               </div>
@@ -1236,7 +1236,7 @@ const Discovery: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = ({ lan
               key={banner.id}
               type="button"
               onClick={() => setCurrentBanner(index)}
-              className={`h-2.5 rounded-full transition-all ${currentBanner === index ? 'w-8 bg-primary' : 'w-2.5 bg-white/30'}`}
+              className={`h-2.5 rounded-full transition-all ${currentBanner === index ? 'w-8 bg-primary' : 'w-2.5 bg-slate-200/300'}`}
               aria-label={banner.title}
             />
           ))}
@@ -1250,7 +1250,7 @@ const Discovery: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = ({ lan
               <button type="button" className="w-full text-left">
                 <div className="relative aspect-[16/9] overflow-hidden">
                   <img src={item.cover} alt={item.title} className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.03]" />
-                  <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-[#061220]/72 px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-white backdrop-blur-md">
+                  <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-slate-900/72 px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-inherit backdrop-blur-md">
                     <Sparkles size={12} className="text-primary" />
                     AIGC 内容
                   </div>
@@ -1259,26 +1259,26 @@ const Discovery: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = ({ lan
                 <div className="space-y-5 p-6">
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex items-center gap-3">
-                      <img src={item.author.avatar} alt={item.author.name} className="h-10 w-10 rounded-full border border-white/10 bg-white/5 object-cover" />
+                      <img src={item.author.avatar} alt={item.author.name} className="h-10 w-10 rounded-full border border-slate-200/50 bg-slate-200/50 object-cover" />
                       <div>
-                        <p className="flex items-center gap-1 text-sm font-medium text-white">
+                        <p className="flex items-center gap-1 text-sm font-medium text-inherit">
                           {item.author.name}
                           {item.author.verified && <BadgeCheck size={14} className="text-primary" />}
                         </p>
-                        <p className="text-[11px] text-white/40">{item.time}</p>
+                        <p className="text-[11px] text-inherit/40">{item.time}</p>
                       </div>
                     </div>
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] text-white/56">
+                    <span className="rounded-full border border-slate-200/50 bg-slate-200/50 px-3 py-1 text-[11px] text-inherit/56">
                       {item.source}
                     </span>
                   </div>
 
                   <div className="space-y-3">
-                    <h3 className="text-xl font-semibold leading-tight text-white line-clamp-2">{item.title}</h3>
-                    <p className="text-sm leading-7 text-white/62 line-clamp-2">{item.summary}</p>
+                    <h3 className="text-xl font-semibold leading-tight text-inherit line-clamp-2">{item.title}</h3>
+                    <p className="text-sm leading-7 text-inherit/62 line-clamp-2">{item.summary}</p>
                   </div>
 
-                  <div className="flex items-center gap-5 border-t border-white/8 pt-4 text-[12px] text-white/48">
+                  <div className="flex items-center gap-5 border-t border-slate-200/80 pt-4 text-[12px] text-inherit/48">
                     <span className="inline-flex items-center gap-2"><Heart size={14} /> {item.likes}</span>
                     <span className="inline-flex items-center gap-2"><MessageSquare size={14} /> {item.comments}</span>
                     <span className="inline-flex items-center gap-2"><Share2 size={14} /> {item.shares}</span>
@@ -1291,23 +1291,23 @@ const Discovery: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = ({ lan
               <div className="p-8 h-full flex flex-col justify-between space-y-6">
                 <div className="flex items-center gap-3 mb-2">
                   <img src={item.author.avatar} className="w-10 h-10 rounded-full border border-primary/20 p-0.5 object-cover" alt={item.author.name} />
-                  <p className="text-xs font-mono font-bold text-white/60 italic uppercase">
+                  <p className="text-xs font-mono font-bold text-inherit/60 italic uppercase">
                     {item.author.name} {lang === 'CN' ? '上架了新模板' : 'PUBLISHED NEW TEMPLATE'}
                   </p>
                 </div>
-                <div className="flex-1 bg-white/5 rounded-3xl p-6 border border-white/5 group-hover:border-primary/20 transition-all flex items-center gap-4">
+                <div className="flex-1 bg-slate-200/50 rounded-3xl p-6 border border-slate-200/50 group-hover:border-primary/20 transition-all flex items-center gap-4">
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary italic">
                     {renderTemplateIcon(item.templateKind)}
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-white uppercase italic">{item.templateName}</h4>
-                    <p className="text-xs font-mono text-white/40 uppercase tracking-widest mt-1">BLUEPRINT MODEL V1.2</p>
+                    <h4 className="text-lg font-bold text-inherit uppercase italic">{item.templateName}</h4>
+                    <p className="text-xs font-mono text-inherit/40 uppercase tracking-widest mt-1">BLUEPRINT MODEL V1.2</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-between pt-4">
                   <div>
                     <p className="text-2xl font-mono font-bold text-primary italic leading-none">{item.price}</p>
-                    <p className="text-[10px] font-mono text-white/20 uppercase italic mt-1">{item.time}</p>
+                    <p className="text-[10px] font-mono text-inherit/20 uppercase italic mt-1">{item.time}</p>
                   </div>
                   <button className="px-8 py-3 bg-white text-dark-bg font-mono font-bold text-[10px] rounded-full uppercase hover:bg-primary transition-all shadow-xl">
                     {lang === 'CN' ? '立即获取' : 'ACQUIRE'}
@@ -1324,8 +1324,8 @@ const Discovery: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = ({ lan
                       <Trophy size={12} />
                       赛事战报
                     </span>
-                    <h3 className="text-2xl font-semibold tracking-[-0.04em] text-white">{item.title}</h3>
-                    <p className="text-sm leading-7 text-white/60">{item.summary}</p>
+                    <h3 className="text-2xl font-semibold tracking-[-0.04em] text-inherit">{item.title}</h3>
+                    <p className="text-sm leading-7 text-inherit/60">{item.summary}</p>
                   </div>
 
                   <div className="rounded-[20px] border border-primary/20 bg-primary/10 px-4 py-3 text-right">
@@ -1334,25 +1334,25 @@ const Discovery: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = ({ lan
                   </div>
                 </div>
 
-                <div className="mt-6 rounded-[24px] border border-white/8 bg-white/4 p-5">
+                <div className="mt-6 rounded-[24px] border border-slate-200/80 bg-slate-200/40 p-5">
                   <div className="mb-4 flex items-center justify-between">
-                    <p className="text-[11px] uppercase tracking-[0.28em] text-white/44">
+                    <p className="text-[11px] uppercase tracking-[0.28em] text-inherit/44">
                       {lang === 'CN' ? '排行榜快照' : 'Ranking snapshot'}
                     </p>
-                    <p className="text-[11px] text-white/34">{lang === 'CN' ? '点击进入赛事详情' : 'Open tournament details'}</p>
+                    <p className="text-[11px] text-inherit/34">{lang === 'CN' ? '点击进入赛事详情' : 'Open tournament details'}</p>
                   </div>
 
                   <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                     {item.rankings.map((ranking) => (
-                      <div key={ranking.id} className="rounded-[20px] border border-white/8 bg-[#081728] p-4">
+                      <div key={ranking.id} className="rounded-[20px] border border-slate-200/80 bg-[#081728] p-4">
                         <div className="flex items-center gap-3">
-                          <img src={ranking.avatar} alt={ranking.name} className="h-11 w-11 rounded-full border border-white/8 bg-white/5" />
+                          <img src={ranking.avatar} alt={ranking.name} className="h-11 w-11 rounded-full border border-slate-200/80 bg-slate-200/50" />
                           <div>
-                            <p className="text-sm font-medium text-white">{ranking.name}</p>
-                            <p className="text-[11px] text-white/42">No.{ranking.id}</p>
+                            <p className="text-sm font-medium text-inherit">{ranking.name}</p>
+                            <p className="text-[11px] text-inherit/42">No.{ranking.id}</p>
                           </div>
                         </div>
-                        <p className="mt-3 text-sm leading-6 text-white/62">{ranking.work}</p>
+                        <p className="mt-3 text-sm leading-6 text-inherit/62">{ranking.work}</p>
                       </div>
                     ))}
                   </div>
@@ -1364,9 +1364,9 @@ const Discovery: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = ({ lan
               <button type="button" className="flex h-full w-full flex-col justify-between p-6 text-left">
                 <div className="space-y-5">
                   <div className="flex items-center gap-4">
-                    <img src={item.avatar} alt={item.name} className="h-16 w-16 rounded-[22px] border border-white/10 object-cover" />
+                    <img src={item.avatar} alt={item.name} className="h-16 w-16 rounded-[22px] border border-slate-200/50 object-cover" />
                     <div className="space-y-2">
-                      <h3 className="text-2xl font-semibold tracking-[-0.04em] text-white">{item.name}</h3>
+                      <h3 className="text-2xl font-semibold tracking-[-0.04em] text-inherit">{item.name}</h3>
                       <p className="inline-flex items-center gap-2 text-sm text-primary">
                         <Users size={15} />
                         {lang === 'CN' ? `已有 ${item.members} 人加入` : `${item.members} members joined`}
@@ -1374,22 +1374,22 @@ const Discovery: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = ({ lan
                     </div>
                   </div>
 
-                  <div className="rounded-[24px] border border-white/8 bg-white/4 p-5">
-                    <p className="text-sm font-medium leading-7 text-white">{item.pitch}</p>
-                    <p className="mt-3 text-sm leading-7 text-white/58">{item.description}</p>
+                  <div className="rounded-[24px] border border-slate-200/80 bg-slate-200/40 p-5">
+                    <p className="text-sm font-medium leading-7 text-inherit">{item.pitch}</p>
+                    <p className="mt-3 text-sm leading-7 text-inherit/58">{item.description}</p>
                   </div>
 
                   <div className="flex flex-wrap gap-2">
                     {item.tags.map((tag) => (
-                      <span key={tag} className="rounded-full border border-white/10 bg-white/4 px-3 py-1 text-[11px] text-white/52">
+                      <span key={tag} className="rounded-full border border-slate-200/50 bg-slate-200/40 px-3 py-1 text-[11px] text-inherit/52">
                         #{tag}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="mt-6 flex items-center justify-between border-t border-white/8 pt-4">
-                  <span className="text-[11px] text-white/40">{lang === 'CN' ? '点击进入门派主页' : 'Open sect homepage'}</span>
+                <div className="mt-6 flex items-center justify-between border-t border-slate-200/80 pt-4">
+                  <span className="text-[11px] text-inherit/40">{lang === 'CN' ? '点击进入门派主页' : 'Open sect homepage'}</span>
                   <span className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-dark-bg">
                     {lang === 'CN' ? '一键申请加入' : 'Apply to join'}
                   </span>
@@ -1456,7 +1456,7 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
 
   const currentBannerItem = COMMUNITY_BANNERS[currentBanner];
   const cardShell =
-    'rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,22,39,0.96),rgba(6,16,29,0.94))] overflow-hidden transition-all duration-300 hover:border-primary/35 hover:-translate-y-0.5 hover:shadow-[0_18px_50px_rgba(0,0,0,0.32)]';
+    'rounded-[28px] border border-slate-200/50 bg-[linear-gradient(180deg,rgba(10,22,39,0.96),rgba(6,16,29,0.94))] overflow-hidden transition-all duration-300 hover:border-primary/35 hover:-translate-y-0.5 hover:shadow-[0_18px_50px_rgba(0,0,0,0.32)]';
 
   const renderTemplateIcon = (kind: TemplateCommunityItem['templateKind']) => {
     if (kind === '智能体') return <Bot size={22} />;
@@ -1466,7 +1466,7 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
 
   const renderDiscoverSection = () => (
     <div className="space-y-8">
-      <div className="sticky top-36 z-30 flex items-center justify-between rounded-[26px] border border-white/10 bg-[rgba(5,15,27,0.88)] px-5 py-4 backdrop-blur-xl shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
+      <div className="sticky top-36 z-30 flex items-center justify-between rounded-[26px] border border-slate-200/50 bg-[rgba(5,15,27,0.88)] px-5 py-4 backdrop-blur-xl shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
         <div className="flex items-center gap-2 lg:gap-4">
           {feedTabs.map((tab) => (
             <button
@@ -1476,7 +1476,7 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
               className={`relative rounded-full px-4 py-2 text-xs lg:text-sm font-medium transition-all ${
                 activeFeedTab === tab.id
                   ? 'bg-white text-dark-bg shadow-[0_8px_18px_rgba(255,255,255,0.15)]'
-                  : 'text-white/55 hover:text-white'
+                  : 'text-inherit/55 hover:text-inherit'
               }`}
             >
               {tab.label}
@@ -1493,7 +1493,7 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
         </button>
       </div>
 
-      <section className="relative overflow-hidden rounded-[34px] border border-white/10 bg-[#071220] p-1">
+      <section className="relative overflow-hidden rounded-[34px] border border-slate-200/50 bg-[#071220] p-1">
         <motion.div
           key={currentBannerItem.id}
           initial={{ opacity: 0.45, scale: 1.02 }}
@@ -1505,13 +1505,13 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
           <div className="absolute inset-0 bg-linear-to-r from-[#061220] via-[#061220]/58 to-[#061220]/20" />
           <div className="absolute inset-0 bg-linear-to-t from-[#061220]/90 via-transparent to-transparent" />
           <div className="relative z-10 flex h-full flex-col justify-between p-6 lg:p-8">
-            <div className="inline-flex w-fit items-center rounded-full border border-white/16 bg-white/8 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-white/72">
+            <div className="inline-flex w-fit items-center rounded-full border border-slate-200/80 bg-slate-200/80 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-inherit/72">
               {currentBannerItem.kicker}
             </div>
             <div className="max-w-2xl space-y-4">
               <div className="space-y-3">
-                <h2 className="text-3xl lg:text-5xl font-semibold tracking-[-0.05em] leading-tight text-white">{currentBannerItem.title}</h2>
-                <p className="max-w-xl text-sm lg:text-base leading-7 text-white/72">{currentBannerItem.subtitle}</p>
+                <h2 className="text-3xl lg:text-5xl font-semibold tracking-[-0.05em] leading-tight text-inherit">{currentBannerItem.title}</h2>
+                <p className="max-w-xl text-sm lg:text-base leading-7 text-inherit/72">{currentBannerItem.subtitle}</p>
               </div>
               <button type="button" className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-dark-bg transition-all hover:bg-primary">
                 {currentBannerItem.cta}
@@ -1526,7 +1526,7 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
               key={banner.id}
               type="button"
               onClick={() => setCurrentBanner(index)}
-              className={`h-2.5 rounded-full transition-all ${currentBanner === index ? 'w-8 bg-primary' : 'w-2.5 bg-white/30'}`}
+              className={`h-2.5 rounded-full transition-all ${currentBanner === index ? 'w-8 bg-primary' : 'w-2.5 bg-slate-200/300'}`}
               aria-label={banner.title}
             />
           ))}
@@ -1541,7 +1541,7 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
               <button type="button" className="w-full text-left">
                 <div className={`relative overflow-hidden ${item.id % 2 === 0 ? 'aspect-[4/5]' : 'aspect-[16/10]'}`}>
                   <img src={item.cover} alt={item.title} className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.03]" />
-                  <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-[#061220]/72 px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-white backdrop-blur-md">
+                  <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-slate-900/72 px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-inherit backdrop-blur-md">
                     <Sparkles size={12} className="text-primary" />
                     作品内容
                   </div>
@@ -1549,22 +1549,22 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
                 <div className="space-y-5 p-6">
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex items-center gap-3">
-                      <img src={item.author.avatar} alt={item.author.name} className="h-10 w-10 rounded-full border border-white/10 bg-white/5 object-cover" />
+                      <img src={item.author.avatar} alt={item.author.name} className="h-10 w-10 rounded-full border border-slate-200/50 bg-slate-200/50 object-cover" />
                       <div>
-                        <p className="flex items-center gap-1 text-sm font-medium text-white">
+                        <p className="flex items-center gap-1 text-sm font-medium text-inherit">
                           {item.author.name}
                           {item.author.verified && <BadgeCheck size={14} className="text-primary" />}
                         </p>
-                        <p className="text-[11px] text-white/40">{item.time}</p>
+                        <p className="text-[11px] text-inherit/40">{item.time}</p>
                       </div>
                     </div>
-                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] text-white/56">{item.source}</span>
+                    <span className="rounded-full border border-slate-200/50 bg-slate-200/50 px-3 py-1 text-[11px] text-inherit/56">{item.source}</span>
                   </div>
                   <div className="space-y-3">
-                    <h3 className="text-xl font-semibold leading-tight text-white line-clamp-2">{item.title}</h3>
-                    <p className="text-sm leading-7 text-white/62 line-clamp-2">{item.summary}</p>
+                    <h3 className="text-xl font-semibold leading-tight text-inherit line-clamp-2">{item.title}</h3>
+                    <p className="text-sm leading-7 text-inherit/62 line-clamp-2">{item.summary}</p>
                   </div>
-                  <div className="flex items-center gap-5 border-t border-white/8 pt-4 text-[12px] text-white/48">
+                  <div className="flex items-center gap-5 border-t border-slate-200/80 pt-4 text-[12px] text-inherit/48">
                     <span className="inline-flex items-center gap-2"><Heart size={14} /> {item.likes}</span>
                     <span className="inline-flex items-center gap-2"><MessageSquare size={14} /> {item.comments}</span>
                     <span className="inline-flex items-center gap-2"><Share2 size={14} /> {item.shares}</span>
@@ -1577,23 +1577,23 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
               <div className="p-8 h-full flex flex-col justify-between space-y-6">
                 <div className="flex items-center gap-3 mb-2">
                   <img src={item.author.avatar} className="w-10 h-10 rounded-full border border-primary/20 p-0.5 object-cover" alt={item.author.name} />
-                  <p className="text-xs font-mono font-bold text-white/60 italic uppercase">
+                  <p className="text-xs font-mono font-bold text-inherit/60 italic uppercase">
                     {item.author.name} {lang === 'CN' ? '上架了新模板' : 'PUBLISHED NEW TEMPLATE'}
                   </p>
                 </div>
-                <div className="flex-1 bg-white/5 rounded-3xl p-6 border border-white/5 group-hover:border-primary/20 transition-all flex items-center gap-4">
+                <div className="flex-1 bg-slate-200/50 rounded-3xl p-6 border border-slate-200/50 group-hover:border-primary/20 transition-all flex items-center gap-4">
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary italic">
                     {renderTemplateIcon(item.templateKind)}
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-white uppercase italic">{item.templateName}</h4>
-                    <p className="text-xs font-mono text-white/40 uppercase tracking-widest mt-1">MARKET TEMPLATE</p>
+                    <h4 className="text-lg font-bold text-inherit uppercase italic">{item.templateName}</h4>
+                    <p className="text-xs font-mono text-inherit/40 uppercase tracking-widest mt-1">MARKET TEMPLATE</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-between pt-4">
                   <div>
                     <p className="text-2xl font-mono font-bold text-primary italic leading-none">{item.price}</p>
-                    <p className="text-[10px] font-mono text-white/20 uppercase italic mt-1">{item.time}</p>
+                    <p className="text-[10px] font-mono text-inherit/20 uppercase italic mt-1">{item.time}</p>
                   </div>
                   <button className="px-8 py-3 bg-white text-dark-bg font-mono font-bold text-[10px] rounded-full uppercase hover:bg-primary transition-all shadow-xl">
                     {lang === 'CN' ? '进入市场详情' : 'OPEN MARKET'}
@@ -1610,30 +1610,30 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
                       <Trophy size={12} />
                       赛事动态
                     </span>
-                    <h3 className="text-2xl font-semibold tracking-[-0.04em] text-white">{item.title}</h3>
-                    <p className="text-sm leading-7 text-white/60">{item.summary}</p>
+                    <h3 className="text-2xl font-semibold tracking-[-0.04em] text-inherit">{item.title}</h3>
+                    <p className="text-sm leading-7 text-inherit/60">{item.summary}</p>
                   </div>
                   <div className="rounded-[20px] border border-primary/20 bg-primary/10 px-4 py-3 text-right">
                     <p className="text-[10px] uppercase tracking-[0.22em] text-primary/72">{item.stage}</p>
                     <p className="mt-2 text-sm font-semibold text-primary">{item.countdown}</p>
                   </div>
                 </div>
-                <div className="mt-6 rounded-[24px] border border-white/8 bg-white/4 p-5">
+                <div className="mt-6 rounded-[24px] border border-slate-200/80 bg-slate-200/40 p-5">
                   <div className="mb-4 flex items-center justify-between">
-                    <p className="text-[11px] uppercase tracking-[0.28em] text-white/44">{lang === 'CN' ? '排行榜快照' : 'Ranking snapshot'}</p>
-                    <p className="text-[11px] text-white/34">{lang === 'CN' ? '点击进入赛事详情' : 'Open tournament details'}</p>
+                    <p className="text-[11px] uppercase tracking-[0.28em] text-inherit/44">{lang === 'CN' ? '排行榜快照' : 'Ranking snapshot'}</p>
+                    <p className="text-[11px] text-inherit/34">{lang === 'CN' ? '点击进入赛事详情' : 'Open tournament details'}</p>
                   </div>
                   <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                     {item.rankings.map((ranking) => (
-                      <div key={ranking.id} className="rounded-[20px] border border-white/8 bg-[#081728] p-4">
+                      <div key={ranking.id} className="rounded-[20px] border border-slate-200/80 bg-[#081728] p-4">
                         <div className="flex items-center gap-3">
-                          <img src={ranking.avatar} alt={ranking.name} className="h-11 w-11 rounded-full border border-white/8 bg-white/5" />
+                          <img src={ranking.avatar} alt={ranking.name} className="h-11 w-11 rounded-full border border-slate-200/80 bg-slate-200/50" />
                           <div>
-                            <p className="text-sm font-medium text-white">{ranking.name}</p>
-                            <p className="text-[11px] text-white/42">No.{ranking.id}</p>
+                            <p className="text-sm font-medium text-inherit">{ranking.name}</p>
+                            <p className="text-[11px] text-inherit/42">No.{ranking.id}</p>
                           </div>
                         </div>
-                        <p className="mt-3 text-sm leading-6 text-white/62">{ranking.work}</p>
+                        <p className="mt-3 text-sm leading-6 text-inherit/62">{ranking.work}</p>
                       </div>
                     ))}
                   </div>
@@ -1645,27 +1645,27 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
               <button type="button" className="flex h-full w-full flex-col justify-between p-6 text-left">
                 <div className="space-y-5">
                   <div className="flex items-center gap-4">
-                    <img src={item.avatar} alt={item.name} className="h-16 w-16 rounded-[22px] border border-white/10 object-cover" />
+                    <img src={item.avatar} alt={item.name} className="h-16 w-16 rounded-[22px] border border-slate-200/50 object-cover" />
                     <div className="space-y-2">
-                      <h3 className="text-2xl font-semibold tracking-[-0.04em] text-white">{item.name}</h3>
+                      <h3 className="text-2xl font-semibold tracking-[-0.04em] text-inherit">{item.name}</h3>
                       <p className="inline-flex items-center gap-2 text-sm text-primary">
                         <Users size={15} />
                         {lang === 'CN' ? `已有 ${item.members} 人加入` : `${item.members} members joined`}
                       </p>
                     </div>
                   </div>
-                  <div className="rounded-[24px] border border-white/8 bg-white/4 p-5">
-                    <p className="text-sm font-medium leading-7 text-white">{item.pitch}</p>
-                    <p className="mt-3 text-sm leading-7 text-white/58">{item.description}</p>
+                  <div className="rounded-[24px] border border-slate-200/80 bg-slate-200/40 p-5">
+                    <p className="text-sm font-medium leading-7 text-inherit">{item.pitch}</p>
+                    <p className="mt-3 text-sm leading-7 text-inherit/58">{item.description}</p>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {item.tags.map((tag) => (
-                      <span key={tag} className="rounded-full border border-white/10 bg-white/4 px-3 py-1 text-[11px] text-white/52">#{tag}</span>
+                      <span key={tag} className="rounded-full border border-slate-200/50 bg-slate-200/40 px-3 py-1 text-[11px] text-inherit/52">#{tag}</span>
                     ))}
                   </div>
                 </div>
-                <div className="mt-6 flex items-center justify-between border-t border-white/8 pt-4">
-                  <span className="text-[11px] text-white/40">{lang === 'CN' ? '点击进入圈子主页' : 'Open circle page'}</span>
+                <div className="mt-6 flex items-center justify-between border-t border-slate-200/80 pt-4">
+                  <span className="text-[11px] text-inherit/40">{lang === 'CN' ? '点击进入圈子主页' : 'Open circle page'}</span>
                   <span className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-dark-bg">{lang === 'CN' ? '立即加入' : 'JOIN NOW'}</span>
                 </div>
               </button>
@@ -1679,16 +1679,16 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
 
   const renderMarketSection = () => (
     <div className="space-y-6">
-      <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,22,38,0.98),rgba(6,16,29,0.94))] p-6 lg:p-8">
+      <section className="rounded-[30px] border border-slate-200/50 bg-[linear-gradient(180deg,rgba(8,22,38,0.98),rgba(6,16,29,0.94))] p-6 lg:p-8">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div className="space-y-2">
             <p className="text-[11px] uppercase tracking-[0.32em] text-primary">市场 / 能力交易层</p>
-            <h3 className="text-3xl font-semibold tracking-[-0.05em] text-white">{lang === 'CN' ? '把可复用的能力，卖成真正的生产工具。' : 'Turn reusable capabilities into tradable tools.'}</h3>
+            <h3 className="text-3xl font-semibold tracking-[-0.05em] text-inherit">{lang === 'CN' ? '把可复用的能力，卖成真正的生产工具。' : 'Turn reusable capabilities into tradable tools.'}</h3>
           </div>
-          <div className="flex w-full max-w-xl items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-3">
-            <Search size={18} className="text-white/40" />
-            <input type="text" placeholder={lang === 'CN' ? '搜索智能体、工作流、AIGC 模板...' : 'Search agents, workflows, templates...'} className="w-full bg-transparent text-sm text-white placeholder:text-white/35 outline-hidden" />
-            <button className="rounded-full border border-white/12 px-4 py-2 text-[11px] text-white/65">{lang === 'CN' ? '筛选' : 'Filter'}</button>
+          <div className="flex w-full max-w-xl items-center gap-3 rounded-full border border-slate-200/50 bg-slate-200/50 px-4 py-3">
+            <Search size={18} className="text-inherit/40" />
+            <input type="text" placeholder={lang === 'CN' ? '搜索智能体、工作流、AIGC 模板...' : 'Search agents, workflows, templates...'} className="w-full bg-transparent text-sm text-inherit placeholder:text-inherit/35 outline-hidden" />
+            <button className="rounded-full border border-slate-200/60 px-4 py-2 text-[11px] text-inherit/65">{lang === 'CN' ? '筛选' : 'Filter'}</button>
           </div>
         </div>
         <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
@@ -1698,9 +1698,9 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
             { label: '场景', value: '电商带货 / 客服 / 内容创作 / 教育 / 品牌营销 / 政务' },
             { label: '评分', value: '4.5+ / 4.0+ / 3.0+' },
           ].map((item) => (
-            <div key={item.label} className="rounded-[22px] border border-white/8 bg-white/4 p-4">
-              <p className="text-[10px] uppercase tracking-[0.24em] text-white/40">{item.label}</p>
-              <p className="mt-2 text-sm leading-6 text-white/70">{item.value}</p>
+            <div key={item.label} className="rounded-[22px] border border-slate-200/80 bg-slate-200/40 p-4">
+              <p className="text-[10px] uppercase tracking-[0.24em] text-inherit/40">{item.label}</p>
+              <p className="mt-2 text-sm leading-6 text-inherit/70">{item.value}</p>
             </div>
           ))}
         </div>
@@ -1713,7 +1713,7 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
             type="button"
             onClick={() => setActiveMarketCategory(category)}
             className={`rounded-full px-4 py-2 text-sm transition-all ${
-              activeMarketCategory === category ? 'bg-white text-dark-bg' : 'border border-white/10 bg-white/5 text-white/58'
+              activeMarketCategory === category ? 'bg-white text-dark-bg' : 'border border-slate-200/50 bg-slate-200/50 text-inherit/58'
             }`}
           >
             {category}
@@ -1722,14 +1722,14 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
-        <p className="text-[11px] uppercase tracking-[0.28em] text-white/38">{lang === 'CN' ? '排序' : 'Sort'}</p>
+        <p className="text-[11px] uppercase tracking-[0.28em] text-inherit/38">{lang === 'CN' ? '排序' : 'Sort'}</p>
         {MARKET_SORT_OPTIONS.map((sort) => (
           <button
             key={sort}
             type="button"
             onClick={() => setActiveMarketSort(sort)}
             className={`rounded-full px-4 py-2 text-sm transition-all ${
-              activeMarketSort === sort ? 'bg-primary text-dark-bg' : 'border border-white/10 bg-white/5 text-white/58'
+              activeMarketSort === sort ? 'bg-primary text-dark-bg' : 'border border-slate-200/50 bg-slate-200/50 text-inherit/58'
             }`}
           >
             {sort}
@@ -1747,23 +1747,23 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
             <div className="space-y-5 p-6">
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <img src={item.authorAvatar} alt={item.author} className="h-10 w-10 rounded-full border border-white/10 object-cover bg-white/5" />
+                  <img src={item.authorAvatar} alt={item.author} className="h-10 w-10 rounded-full border border-slate-200/50 object-cover bg-slate-200/50" />
                   <div>
-                    <p className="text-sm font-medium text-white">{item.author}</p>
-                    <p className="text-[11px] text-white/42">{item.scene}</p>
+                    <p className="text-sm font-medium text-inherit">{item.author}</p>
+                    <p className="text-[11px] text-inherit/42">{item.scene}</p>
                   </div>
                 </div>
                 <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-[11px] text-primary">{item.kind}</span>
               </div>
               <div className="space-y-2">
-                <h4 className="text-xl font-semibold text-white">{item.title}</h4>
-                <div className="flex flex-wrap gap-4 text-[12px] text-white/50">
+                <h4 className="text-xl font-semibold text-inherit">{item.title}</h4>
+                <div className="flex flex-wrap gap-4 text-[12px] text-inherit/50">
                   <span>{lang === 'CN' ? `已售 ${item.sold}` : `Sold ${item.sold}`}</span>
                   <span>{lang === 'CN' ? `评分 ${item.rating}` : `Rating ${item.rating}`}</span>
                   <span>{lang === 'CN' ? `作者赚了 ${item.authorYield}` : `Author earned ${item.authorYield}`}</span>
                 </div>
               </div>
-              <div className="flex items-center justify-between border-t border-white/8 pt-4">
+              <div className="flex items-center justify-between border-t border-slate-200/80 pt-4">
                 <p className="text-2xl font-semibold tracking-[-0.04em] text-primary">{item.price}</p>
                 <button className="rounded-full bg-white px-5 py-2 text-sm font-medium text-dark-bg transition-all hover:bg-primary">{lang === 'CN' ? '查看模板详情' : 'View template'}</button>
               </div>
@@ -1775,10 +1775,10 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
         <div className="community-masonry-item">
           <div className="rounded-[28px] border border-primary/18 bg-[linear-gradient(165deg,rgba(17,49,79,0.96),rgba(8,22,38,0.94))] p-6 shadow-[0_16px_38px_rgba(0,0,0,0.24)]">
             <p className="text-[11px] uppercase tracking-[0.3em] text-primary">我的交易</p>
-            <h4 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-white">{lang === 'CN' ? '购买、上架、收益，一处回看。' : 'Track purchases, listings, and earnings in one place.'}</h4>
-            <p className="mt-3 text-sm leading-7 text-white/68">{lang === 'CN' ? '快速进入我购买的模板和我上架的成果。' : 'Quick access to purchased and listed assets.'}</p>
+            <h4 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-inherit">{lang === 'CN' ? '购买、上架、收益，一处回看。' : 'Track purchases, listings, and earnings in one place.'}</h4>
+            <p className="mt-3 text-sm leading-7 text-inherit/68">{lang === 'CN' ? '快速进入我购买的模板和我上架的成果。' : 'Quick access to purchased and listed assets.'}</p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <button className="rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm text-white">我购买的</button>
+              <button className="rounded-full border border-slate-200/50 bg-slate-200/50 px-5 py-2 text-sm text-inherit">我购买的</button>
               <button className="rounded-full bg-primary px-5 py-2 text-sm font-medium text-dark-bg">我上架的</button>
             </div>
           </div>
@@ -1789,14 +1789,14 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
 
   const renderEventsSection = () => (
     <div className="space-y-6">
-      <section className="relative overflow-hidden rounded-[34px] border border-white/10">
+      <section className="relative overflow-hidden rounded-[34px] border border-slate-200/50">
         <img src={COMMUNITY_EVENTS[0].image} alt={COMMUNITY_EVENTS[0].title} className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-linear-to-r from-[#061220] via-[#061220]/55 to-[#061220]/25" />
         <div className="relative z-10 space-y-5 p-7 lg:p-9">
-          <span className="inline-flex rounded-full border border-white/16 bg-white/8 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-white/72">当前主推赛事</span>
+          <span className="inline-flex rounded-full border border-slate-200/80 bg-slate-200/80 px-3 py-1 text-[11px] uppercase tracking-[0.28em] text-inherit/72">当前主推赛事</span>
           <div className="space-y-3">
-            <h3 className="max-w-2xl text-3xl lg:text-5xl font-semibold tracking-[-0.05em] text-white">{COMMUNITY_EVENTS[0].title}</h3>
-            <p className="text-base text-white/72">{COMMUNITY_EVENTS[0].prize}</p>
+            <h3 className="max-w-2xl text-3xl lg:text-5xl font-semibold tracking-[-0.05em] text-inherit">{COMMUNITY_EVENTS[0].title}</h3>
+            <p className="text-base text-inherit/72">{COMMUNITY_EVENTS[0].prize}</p>
             <p className="text-sm text-primary">{lang === 'CN' ? '报名倒计时 2天 14:24:10' : 'Registration ends in 2d 14:24:10'}</p>
           </div>
           <button className="rounded-full bg-white px-5 py-2.5 text-sm font-medium text-dark-bg transition-all hover:bg-primary">{lang === 'CN' ? '立即报名' : 'Register now'}</button>
@@ -1810,7 +1810,7 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
             type="button"
             onClick={() => setActiveEventStatus(item.id)}
             className={`rounded-full px-4 py-2 text-sm transition-all ${
-              activeEventStatus === item.id ? 'bg-white text-dark-bg' : 'border border-white/10 bg-white/5 text-white/58'
+              activeEventStatus === item.id ? 'bg-white text-dark-bg' : 'border border-slate-200/50 bg-slate-200/50 text-inherit/58'
             }`}
           >
             {item.label}
@@ -1834,15 +1834,15 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
                       ? 'bg-sky-400/12 text-sky-200'
                       : item.status === 'review'
                         ? 'bg-amber-400/12 text-amber-200'
-                        : 'bg-white/10 text-white/55'
+                        : 'bg-slate-200 text-inherit/55'
                 }`}>{item.statusLabel}</span>
-                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] text-white/55">{item.type}</span>
+                <span className="rounded-full border border-slate-200/50 bg-slate-200/50 px-3 py-1 text-[11px] text-inherit/55">{item.type}</span>
               </div>
               <div className="space-y-2">
-                <h4 className="text-2xl font-semibold tracking-[-0.04em] text-white">{item.title}</h4>
-                <p className="text-sm text-white/66">{item.prize}</p>
+                <h4 className="text-2xl font-semibold tracking-[-0.04em] text-inherit">{item.title}</h4>
+                <p className="text-sm text-inherit/66">{item.prize}</p>
               </div>
-              <div className="flex flex-wrap gap-4 text-[12px] text-white/46">
+              <div className="flex flex-wrap gap-4 text-[12px] text-inherit/46">
                 <span>{lang === 'CN' ? `报名人数 ${item.participants}` : `Signups ${item.participants}`}</span>
                 <span>{item.range}</span>
               </div>
@@ -1853,10 +1853,10 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
 
         {EVENT_TYPE_LIBRARY.map((item, index) => (
           <div key={item.name} className="community-masonry-item">
-            <div className={`rounded-[28px] border p-6 ${index === 0 ? 'border-primary/18 bg-[linear-gradient(165deg,rgba(17,49,79,0.96),rgba(8,22,38,0.94))]' : 'border-white/10 bg-[linear-gradient(180deg,rgba(8,22,38,0.98),rgba(6,16,29,0.94))]'}`}>
+            <div className={`rounded-[28px] border p-6 ${index === 0 ? 'border-primary/18 bg-[linear-gradient(165deg,rgba(17,49,79,0.96),rgba(8,22,38,0.94))]' : 'border-slate-200/50 bg-[linear-gradient(180deg,rgba(8,22,38,0.98),rgba(6,16,29,0.94))]'}`}>
               <p className="text-[11px] uppercase tracking-[0.3em] text-primary">赛事类型</p>
-              <h4 className="mt-3 text-xl font-semibold tracking-[-0.03em] text-white">{item.name}</h4>
-              <p className="mt-3 text-sm leading-7 text-white/60">{item.description}</p>
+              <h4 className="mt-3 text-xl font-semibold tracking-[-0.03em] text-inherit">{item.name}</h4>
+              <p className="mt-3 text-sm leading-7 text-inherit/60">{item.description}</p>
             </div>
           </div>
         ))}
@@ -1866,15 +1866,15 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
 
   const renderCirclesSection = () => (
     <div className="space-y-6 pb-16">
-      <section className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,22,38,0.98),rgba(6,16,29,0.94))] p-6 lg:p-8">
+      <section className="rounded-[30px] border border-slate-200/50 bg-[linear-gradient(180deg,rgba(8,22,38,0.98),rgba(6,16,29,0.94))] p-6 lg:p-8">
         <div className="space-y-4">
           <p className="text-[11px] uppercase tracking-[0.3em] text-primary">我的圈子</p>
-          <h4 className="text-2xl font-semibold tracking-[-0.04em] text-white">和谁一起做事，比做什么更重要。</h4>
+          <h4 className="text-2xl font-semibold tracking-[-0.04em] text-inherit">和谁一起做事，比做什么更重要。</h4>
           <div className="flex gap-4 overflow-x-auto pb-2">
             {MY_CIRCLES.map((circle) => (
-              <button key={circle.id} className="min-w-[120px] rounded-[22px] border border-white/10 bg-white/5 p-4 text-left">
+              <button key={circle.id} className="min-w-[120px] rounded-[22px] border border-slate-200/50 bg-slate-200/50 p-4 text-left">
                 <img src={circle.avatar} alt={circle.name} className="h-14 w-14 rounded-2xl object-cover" />
-                <p className="mt-3 text-sm font-medium text-white">{circle.name}</p>
+                <p className="mt-3 text-sm font-medium text-inherit">{circle.name}</p>
               </button>
             ))}
           </div>
@@ -1888,7 +1888,7 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
             type="button"
             onClick={() => setActiveCircleCategory(category)}
             className={`rounded-full px-4 py-2 text-sm transition-all ${
-              activeCircleCategory === category ? 'bg-white text-dark-bg' : 'border border-white/10 bg-white/5 text-white/58'
+              activeCircleCategory === category ? 'bg-white text-dark-bg' : 'border border-slate-200/50 bg-slate-200/50 text-inherit/58'
             }`}
           >
             {category}
@@ -1905,19 +1905,19 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
                   <img src={item.avatar} alt={item.name} className="h-24 w-24 rounded-[26px] object-cover" />
                   <div className="space-y-2">
                     <div className="flex flex-wrap items-center gap-3">
-                      <h4 className="text-2xl font-semibold tracking-[-0.04em] text-white">{item.name}</h4>
-                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] text-white/58">{item.joinMode}</span>
+                      <h4 className="text-2xl font-semibold tracking-[-0.04em] text-inherit">{item.name}</h4>
+                      <span className="rounded-full border border-slate-200/50 bg-slate-200/50 px-3 py-1 text-[11px] text-inherit/58">{item.joinMode}</span>
                     </div>
-                    <div className="flex flex-wrap gap-4 text-[12px] text-white/46">
+                    <div className="flex flex-wrap gap-4 text-[12px] text-inherit/46">
                       <span>{lang === 'CN' ? `成员 ${item.members}` : `Members ${item.members}`}</span>
                       <span>{lang === 'CN' ? `本周动态 ${item.weeklyPosts}` : `Weekly posts ${item.weeklyPosts}`}</span>
                     </div>
                   </div>
                 </div>
-                <p className="text-sm leading-7 text-white/62">{item.description}</p>
+                <p className="text-sm leading-7 text-inherit/62">{item.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {item.tags.map((tag) => (
-                    <span key={tag} className="rounded-full border border-white/10 bg-white/4 px-3 py-1 text-[11px] text-white/54">#{tag}</span>
+                    <span key={tag} className="rounded-full border border-slate-200/50 bg-slate-200/40 px-3 py-1 text-[11px] text-inherit/54">#{tag}</span>
                   ))}
                 </div>
               </div>
@@ -1928,13 +1928,13 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
         <div className="community-masonry-item">
           <div className="rounded-[28px] border border-primary/18 bg-[linear-gradient(165deg,rgba(17,49,79,0.96),rgba(8,22,38,0.94))] p-6 shadow-[0_16px_38px_rgba(0,0,0,0.24)]">
             <p className="text-[11px] uppercase tracking-[0.28em] text-primary">活跃榜</p>
-            <h4 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-white">本周活跃度 Top 20</h4>
+            <h4 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-inherit">本周活跃度 Top 20</h4>
             <div className="mt-5 space-y-3">
               {ACTIVE_CIRCLE_RANKING.map((item) => (
-                <div key={item.id} className="flex items-center justify-between rounded-[18px] border border-white/8 bg-white/4 px-4 py-3">
+                <div key={item.id} className="flex items-center justify-between rounded-[18px] border border-slate-200/80 bg-slate-200/40 px-4 py-3">
                   <div>
-                    <p className="text-sm font-medium text-white">No.{item.id} {item.name}</p>
-                    <p className="text-[11px] text-white/42">{lang === 'CN' ? `活跃度 ${item.score}` : `Score ${item.score}`}</p>
+                    <p className="text-sm font-medium text-inherit">No.{item.id} {item.name}</p>
+                    <p className="text-[11px] text-inherit/42">{lang === 'CN' ? `活跃度 ${item.score}` : `Score ${item.score}`}</p>
                   </div>
                   <span className="text-sm text-primary">{item.trend}</span>
                 </div>
@@ -1944,18 +1944,18 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
         </div>
 
         <div className="community-masonry-item">
-          <div className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,22,38,0.98),rgba(6,16,29,0.94))] p-6">
+          <div className="rounded-[28px] border border-slate-200/50 bg-[linear-gradient(180deg,rgba(8,22,38,0.98),rgba(6,16,29,0.94))] p-6">
             <p className="text-[11px] uppercase tracking-[0.28em] text-primary">圈子内部结构</p>
-            <h4 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-white">已加入后看到的三个核心空间</h4>
+            <h4 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-inherit">已加入后看到的三个核心空间</h4>
             <div className="mt-5 space-y-3">
               {[
                 { name: '动态', desc: '成员发帖、最新 / 最热排序、圈主置顶。' },
                 { name: '资产', desc: '共享 Prompt、工作流片段、数字人形象和课程笔记。' },
                 { name: '活动', desc: '线上分享、作品互评、内部挑战、线下聚会。' },
               ].map((item) => (
-                <div key={item.name} className="rounded-[18px] border border-white/8 bg-white/4 p-4">
-                  <p className="text-sm font-medium text-white">{item.name}</p>
-                  <p className="mt-2 text-sm leading-6 text-white/58">{item.desc}</p>
+                <div key={item.name} className="rounded-[18px] border border-slate-200/80 bg-slate-200/40 p-4">
+                  <p className="text-sm font-medium text-inherit">{item.name}</p>
+                  <p className="mt-2 text-sm leading-6 text-inherit/58">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -1976,7 +1976,7 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
       exit={{ opacity: 0 }}
       className="pt-10 pb-32 px-4 lg:px-10 max-w-6xl mx-auto relative space-y-8"
     >
-      <section className="relative h-[360px] lg:h-[420px] rounded-[54px] overflow-hidden group shadow-[0_36px_90px_rgba(0,0,0,0.78)] border border-white/10 bg-dark-bg mt-16">
+      <section className="relative h-[360px] lg:h-[420px] rounded-[54px] overflow-hidden group shadow-[0_36px_90px_rgba(0,0,0,0.78)] border border-slate-200/50 bg-dark-bg mt-16">
         <div className="absolute inset-0 z-0 bg-[#000510]">
           <img
             src="https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=1920&q=80"
@@ -1993,19 +1993,19 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
             className="space-y-6 max-w-5xl"
           >
             <div className="space-y-2">
-              <h2 className="text-4xl lg:text-[72px] font-mono font-bold text-white tracking-[-0.06em] uppercase leading-[0.8] drop-shadow-[0_10px_30px_rgba(0,0,0,1)]">
+              <h2 className="text-4xl lg:text-[72px] font-mono font-bold text-inherit tracking-[-0.06em] uppercase leading-[0.8] drop-shadow-[0_10px_30px_rgba(0,0,0,1)]">
                 <span className="block italic">{lang === 'CN' ? '蔚蓝智能' : 'AZURE AI'}</span>
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-primary via-azure to-white">{lang === 'CN' ? 'OPC 社区' : 'OPC COMMUNITY'}</span>
               </h2>
             </div>
-            <p className="text-white/80 font-mono text-sm leading-relaxed tracking-tight max-w-md drop-shadow-lg">
+            <p className="text-inherit/80 font-mono text-sm leading-relaxed tracking-tight max-w-md drop-shadow-lg">
               {lang === 'CN' ? '连接全球每一位超级个体的数字化身。在这里进化、协作、并构建您的个人算力帝国。' : 'Connect with every digital persona in the AAGI matrix.'}
             </p>
           </motion.div>
         </div>
       </section>
 
-      <div className="sticky top-20 z-40 rounded-[28px] border border-white/10 bg-[rgba(5,15,27,0.92)] px-3 py-3 backdrop-blur-xl shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
+      <div className="sticky top-20 z-40 rounded-[28px] border border-slate-200/50 bg-[rgba(5,15,27,0.92)] px-3 py-3 backdrop-blur-xl shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {COMMUNITY_SECTION_TABS.map((tab) => (
             <button
@@ -2015,11 +2015,11 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
               className={`rounded-[22px] border px-4 py-3 text-left transition-all ${
                 activeCommunityTab === tab.id
                   ? 'border-primary/30 bg-white text-dark-bg shadow-[0_8px_18px_rgba(255,255,255,0.16)]'
-                  : 'border-white/8 bg-white/3 text-white/68 hover:border-white/16 hover:bg-white/7 hover:text-white'
+                  : 'border-slate-200/80 bg-slate-200/30 text-inherit/68 hover:border-slate-200/80 hover:bg-slate-200/70 hover:text-inherit'
               }`}
             >
               <p className="text-[15px] font-semibold tracking-[-0.02em]">{tab.label}</p>
-              <p className={`mt-1 text-[11px] leading-5 ${activeCommunityTab === tab.id ? 'text-slate-500' : 'text-white/42'}`}>{tab.description}</p>
+              <p className={`mt-1 text-[11px] leading-5 ${activeCommunityTab === tab.id ? 'text-slate-500' : 'text-inherit/42'}`}>{tab.description}</p>
             </button>
           ))}
         </div>
@@ -2055,15 +2055,15 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 280 }}
-              className="fixed inset-x-0 bottom-0 rounded-t-[40px] border-t border-white/10 bg-[#071220] z-[80] p-8 lg:p-12 shadow-[0_-24px_80px_rgba(0,0,0,0.5)]"
+              className="fixed inset-x-0 bottom-0 rounded-t-[40px] border-t border-slate-200/50 bg-[#071220] z-[80] p-8 lg:p-12 shadow-[0_-24px_80px_rgba(0,0,0,0.5)]"
             >
               <div className="mx-auto max-w-5xl space-y-8">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-[11px] uppercase tracking-[0.32em] text-primary">发布面板</p>
-                    <h4 className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-white">把创作投向社区、市场、圈子和赛事。</h4>
+                    <h4 className="mt-2 text-3xl font-semibold tracking-[-0.04em] text-inherit">把创作投向社区、市场、圈子和赛事。</h4>
                   </div>
-                  <button onClick={() => setIsPublishing(false)} className="h-11 w-11 rounded-full border border-white/10 bg-white/5 text-white/55">
+                  <button onClick={() => setIsPublishing(false)} className="h-11 w-11 rounded-full border border-slate-200/50 bg-slate-200/50 text-inherit/55">
                     <Plus className="mx-auto rotate-45" size={20} />
                   </button>
                 </div>
@@ -2080,10 +2080,10 @@ const SuperCommunity: React.FC<{ lang: 'CN' | 'EN'; onPublish: () => void }> = (
                         setIsPublishing(false);
                         onPublish();
                       }}
-                      className="rounded-[24px] border border-white/10 bg-white/4 p-5 text-left transition-all hover:border-primary/30 hover:bg-primary/10"
+                      className="rounded-[24px] border border-slate-200/50 bg-slate-200/40 p-5 text-left transition-all hover:border-primary/30 hover:bg-primary/10"
                     >
-                      <p className="text-lg font-medium text-white">{item.title}</p>
-                      <p className="mt-3 text-sm leading-6 text-white/58">{item.desc}</p>
+                      <p className="text-lg font-medium text-inherit">{item.title}</p>
+                      <p className="mt-3 text-sm leading-6 text-inherit/58">{item.desc}</p>
                     </button>
                   ))}
                 </div>
@@ -2125,8 +2125,8 @@ const Profile: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
         
         <div className="space-y-6 flex-1">
           <div>
-            <h2 className="text-4xl font-mono font-bold tracking-tighter text-white italic">Argi.THE.SI <BadgeCheck className="inline ml-2 text-primary" size={32} /></h2>
-            <p className="text-sm font-mono text-white/80 mt-2 uppercase tracking-widest">{lang === 'CN' ? '数字化架构师 & 超级个体' : 'Digital Architect & Super Individual'}</p>
+            <h2 className="text-4xl font-mono font-bold tracking-tighter text-inherit italic">Argi.THE.SI <BadgeCheck className="inline ml-2 text-primary" size={32} /></h2>
+            <p className="text-sm font-mono text-inherit/80 mt-2 uppercase tracking-widest">{lang === 'CN' ? '数字化架构师 & 超级个体' : 'Digital Architect & Super Individual'}</p>
           </div>
           <div className="flex gap-10 justify-center md:justify-start">
             {[
@@ -2135,8 +2135,8 @@ const Profile: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
               { label: lang === 'CN' ? '算力值' : 'YIELD', val: '12w' }
             ].map((stat, i) => (
              <div key={i} className="flex flex-col">
-               <span className="font-mono font-bold text-3xl text-white italic tracking-tighter">{stat.val}</span>
-               <span className="text-[8px] font-mono text-white/60 tracking-[0.3em] font-bold mt-1 uppercase">{stat.label}</span>
+               <span className="font-mono font-bold text-3xl text-inherit italic tracking-tighter">{stat.val}</span>
+               <span className="text-[8px] font-mono text-inherit/60 tracking-[0.3em] font-bold mt-1 uppercase">{stat.label}</span>
              </div>
             ))}
           </div>
@@ -2146,7 +2146,7 @@ const Profile: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
       {/* Asset Grid */}
       <div className="grid grid-cols-6 gap-6">
         <div className="bento-card col-span-6 md:col-span-4 grid grid-cols-3 gap-6 !p-8">
-           <h2 className="col-span-3 text-[10px] font-mono text-white uppercase tracking-widest mb-2">{lang === 'CN' ? '保险库权限' : 'VAULT ACCESS'}</h2>
+           <h2 className="col-span-3 text-[10px] font-mono text-inherit uppercase tracking-widest mb-2">{lang === 'CN' ? '保险库权限' : 'VAULT ACCESS'}</h2>
            {[
              { icon: <BadgeCheck />, label: lang === 'CN' ? '认证' : 'CERTS' },
              { icon: <Trophy />, label: lang === 'CN' ? '荣誉' : 'BADGES' },
@@ -2156,8 +2156,8 @@ const Profile: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
              { icon: <Layout />, label: lang === 'CN' ? '元数据' : 'METADATA' }
            ].map((item, i) => (
              <button key={i} className="flex flex-col items-center gap-3 group">
-               <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white/40 group-hover:bg-primary group-hover:text-dark-bg transition-all duration-500">{item.icon}</div>
-               <span className="text-[8px] font-mono font-bold tracking-widest text-white/80 group-hover:text-primary transition-colors uppercase">{item.label}</span>
+               <div className="w-12 h-12 rounded-2xl bg-slate-200/50 flex items-center justify-center text-inherit/40 group-hover:bg-primary group-hover:text-dark-bg transition-all duration-500">{item.icon}</div>
+               <span className="text-[8px] font-mono font-bold tracking-widest text-inherit/80 group-hover:text-primary transition-colors uppercase">{item.label}</span>
              </button>
            ))}
         </div>
@@ -2186,7 +2186,7 @@ export default function App() {
   const [isAssistantOpen, setIsAssistantOpen] = useState(true);
 
   return (
-    <div className={`min-h-screen font-sans select-none overflow-x-hidden${theme === 'dark' ? ' bg-[#010409] text-white' : ' bg-slate-50 text-slate-900'}`}>
+    <div className={`min-h-screen font-sans select-none overflow-x-hidden${theme === 'dark' ? ' bg-[#010409] text-inherit' : ' bg-slate-50 text-slate-900'}`}>
       {/* Video background only in dark mode */}
       {theme === 'dark' && (
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none -z-10">
