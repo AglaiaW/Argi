@@ -503,7 +503,7 @@ const ACTIVE_CIRCLE_RANKING = [
 
 // --- Components ---
 
-const GlobalTopBar = ({ lang, setLang }: { lang: 'CN' | 'EN', setLang: (l: 'CN' | 'EN') => void }) => {
+const GlobalTopBar = ({ lang, setLang, theme, setTheme }: { lang: 'CN' | 'EN', setLang: (l: 'CN' | 'EN') => void, theme: 'dark' | 'light', setTheme: (t: 'dark' | 'light') => void }) => {
   return (
     <>
       <div className="noise-overlay" />
@@ -2204,7 +2204,7 @@ export default function App() {
       </div>
       )}
 
-      <GlobalTopBar lang={lang} setLang={setLang} />
+      <GlobalTopBar lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} />
       
       <SideNav activeTab={activeTab} setActiveTab={setActiveTab} lang={lang} />
       <AISecretary lang={lang} isOpen={isAssistantOpen} setIsOpen={setIsAssistantOpen} />
