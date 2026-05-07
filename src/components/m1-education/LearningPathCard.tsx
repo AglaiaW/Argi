@@ -83,22 +83,22 @@ export default function LearningPathCard({ path = DEFAULT_PATH, className = '' }
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent" />
         <div className="absolute top-3 left-3 flex items-center gap-2">
           <span className={`px-2 py-0.5 rounded border text-[9px] font-medium ${DIFFICULTY_COLORS[path.difficulty]}`}>{path.difficulty}</span>
-          <span className="text-[9px] text-white/50">{path.category}</span>
+          <span className="text-[9px] text-slate-900/50">{path.category}</span>
         </div>
         <div className="absolute bottom-3 left-3 right-3">
-          <h3 className="text-sm font-bold text-white leading-tight">{path.title}</h3>
-          <p className="text-xs text-white/50 mt-0.5">{path.instructor}</p>
+          <h3 className="text-sm font-bold text-slate-900 leading-tight">{path.title}</h3>
+          <p className="text-xs text-slate-900/50 mt-0.5">{path.instructor}</p>
         </div>
       </div>
 
       {/* Progress bar */}
       <div className="px-4 pt-3 pb-1">
         <div className="flex items-center justify-between mb-1.5">
-          <div className="flex items-center gap-1.5 text-xs text-white/60">
+          <div className="flex items-center gap-1.5 text-xs text-slate-900/60">
             <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
             <span>{path.progress}% complete</span>
           </div>
-          <div className="flex items-center gap-1 text-xs text-white/40">
+          <div className="flex items-center gap-1 text-xs text-slate-900/40">
             <Clock className="w-3.5 h-3.5" />
             <span>{path.totalDuration}</span>
           </div>
@@ -114,12 +114,12 @@ export default function LearningPathCard({ path = DEFAULT_PATH, className = '' }
           const Icon = STEP_ICONS[step.type]
           return (
             <div key={step.id} className={`flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all ${step.isLocked ? 'opacity-40' : step.isCompleted ? 'bg-emerald-500/10' : 'bg-white/5 hover:bg-white/8'}`}>
-              <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${step.isCompleted ? 'bg-emerald-500 text-white' : step.isLocked ? 'bg-white/10 text-white/30' : 'bg-white/15 text-white/60'}`}>
+              <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${step.isCompleted ? 'bg-emerald-500 text-slate-900' : step.isLocked ? 'bg-white/10 text-slate-900/30' : 'bg-white/15 text-slate-900/60'}`}>
                 {step.isLocked ? <Lock className="w-3 h-3" /> : step.isCompleted ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Icon className="w-3.5 h-3.5" />}
               </div>
               <div className="flex-1 min-w-0">
-                <span className={`text-xs font-medium ${step.isCompleted ? 'text-emerald-300' : step.isLocked ? 'text-white/30' : 'text-white/80'}`}>{step.title}</span>
-                <span className="text-[10px] text-white/40 ml-2">{step.duration}</span>
+                <span className={`text-xs font-medium ${step.isCompleted ? 'text-emerald-300' : step.isLocked ? 'text-slate-900/30' : 'text-slate-900/80'}`}>{step.title}</span>
+                <span className="text-[10px] text-slate-900/40 ml-2">{step.duration}</span>
               </div>
               {idx === 2 && !step.isCompleted && (
                 <span className="flex-shrink-0 text-[9px] font-semibold text-emerald-400 bg-emerald-500/15 px-1.5 py-0.5 rounded">In Progress</span>
@@ -131,11 +131,11 @@ export default function LearningPathCard({ path = DEFAULT_PATH, className = '' }
 
       {/* Footer */}
       <div className="px-4 pb-4 flex items-center justify-between">
-        <div className="flex items-center gap-1 text-xs text-white/40">
+        <div className="flex items-center gap-1 text-xs text-slate-900/40">
           <Users className="w-3.5 h-3.5" />
           <span>{(path.enrolledCount / 1000).toFixed(1)}k enrolled</span>
         </div>
-        <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 hover:bg-emerald-400 text-white transition-colors">
+        <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 hover:bg-emerald-400 text-slate-900 transition-colors">
           <Play className="w-3 h-3" />
           Continue
         </button>

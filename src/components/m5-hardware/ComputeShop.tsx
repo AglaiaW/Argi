@@ -296,10 +296,10 @@ function ShopOfferCard({ offer, onAdd }: { offer: ComputeOffer; onAdd: () => voi
         <span className="text-3xl">{offer.providerLogo}</span>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap mb-0.5">
-            <h3 className="text-sm font-semibold text-white/90">{offer.provider}</h3>
+            <h3 className="text-sm font-semibold text-slate-900/90">{offer.provider}</h3>
             <SellerLevelBadge level={offer.level} size="sm" />
           </div>
-          <p className="text-xs text-white/40">{offer.modelName} · {offer.location}</p>
+          <p className="text-xs text-slate-900/40">{offer.modelName} · {offer.location}</p>
           {offer.badge && (
             <span className="inline-flex items-center gap-1 mt-1 rounded-full bg-amber-500/15 border border-amber-500/30 px-2 py-0.5 text-[10px] text-amber-400 font-medium">
               <Percent className="h-2.5 w-2.5" />{offer.badge}
@@ -308,10 +308,10 @@ function ShopOfferCard({ offer, onAdd }: { offer: ComputeOffer; onAdd: () => voi
         </div>
         <div className="text-right shrink-0">
           {offer.priceOriginal && (
-            <span className="text-[10px] text-white/30 line-through">${offer.priceOriginal}</span>
+            <span className="text-[10px] text-slate-900/30 line-through">${offer.priceOriginal}</span>
           )}
           <div className="text-base font-bold text-emerald-400">${offer.pricePerUnit}</div>
-          <div className="text-[10px] text-white/40">{offer.priceUnit}</div>
+          <div className="text-[10px] text-slate-900/40">{offer.priceUnit}</div>
         </div>
       </div>
 
@@ -319,14 +319,14 @@ function ShopOfferCard({ offer, onAdd }: { offer: ComputeOffer; onAdd: () => voi
       <div className="rounded-xl bg-white/[0.04] border border-white/8 px-3 space-y-1">
         {offer.specs.slice(0, 3).map(s => (
           <div key={s.label} className="flex justify-between items-center py-1.5 border-b border-white/5 last:border-0">
-            <span className="text-[11px] text-white/40">{s.label}</span>
-            <span className="text-[11px] text-white/70 font-medium">{s.value}</span>
+            <span className="text-[11px] text-slate-900/40">{s.label}</span>
+            <span className="text-[11px] text-slate-900/70 font-medium">{s.value}</span>
           </div>
         ))}
       </div>
 
       {/* Stats row */}
-      <div className="flex items-center gap-4 text-[10px] text-white/50">
+      <div className="flex items-center gap-4 text-[10px] text-slate-900/50">
         <span className="inline-flex items-center gap-1"><Star className="h-3 w-3 text-amber-400 fill-amber-400" />{offer.rating}</span>
         <span>{offer.reviews.toLocaleString()} reviews</span>
         <span className={`inline-flex items-center gap-1 ${offer.inStock ? 'text-emerald-400' : 'text-amber-400/80'}`}>
@@ -339,7 +339,7 @@ function ShopOfferCard({ offer, onAdd }: { offer: ComputeOffer; onAdd: () => voi
       {/* Availability bar */}
       {offer.utilizationRate !== undefined && (
         <div className="space-y-1">
-          <div className="flex items-center justify-between text-[10px] text-white/40">
+          <div className="flex items-center justify-between text-[10px] text-slate-900/40">
             <span>Cluster Load</span>
             <span>{offer.utilizationRate}% utilized · {(offer.availableUnits ?? 0).toLocaleString()} units free</span>
           </div>
@@ -360,7 +360,7 @@ function ShopOfferCard({ offer, onAdd }: { offer: ComputeOffer; onAdd: () => voi
         >
           <ShoppingCart className="h-4 w-4" />Add to Cart
         </button>
-        <button className="flex items-center justify-center gap-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-white/60 px-3 py-2 transition-colors">
+        <button className="flex items-center justify-center gap-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-900/60 px-3 py-2 transition-colors">
           <Eye className="h-4 w-4" />
         </button>
       </div>
@@ -376,34 +376,34 @@ function CartSummary({ items, onRemove }: { items: CartItem[]; onRemove: (id: st
 
   if (items.length === 0) return (
     <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-6 text-center">
-      <ShoppingCart className="h-8 w-8 text-white/20 mx-auto mb-2" />
-      <p className="text-sm text-white/40">Cart is empty</p>
-      <p className="text-[10px] text-white/30 mt-1">Add compute offers to provision them</p>
+      <ShoppingCart className="h-8 w-8 text-slate-900/20 mx-auto mb-2" />
+      <p className="text-sm text-slate-900/40">Cart is empty</p>
+      <p className="text-[10px] text-slate-900/30 mt-1">Add compute offers to provision them</p>
     </div>
   )
 
   return (
     <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-4 space-y-3">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-semibold text-white/80 flex items-center gap-2">
+        <h3 className="text-sm font-semibold text-slate-900/80 flex items-center gap-2">
           <ShoppingCart className="h-4 w-4" />Cart ({items.length})
         </h3>
-        <span className="text-xs text-white/40">Est. ${estimated.toFixed(2)}/mo</span>
+        <span className="text-xs text-slate-900/40">Est. ${estimated.toFixed(2)}/mo</span>
       </div>
       {items.map(item => (
         <div key={item.offer.id} className="flex items-center gap-3 rounded-xl bg-white/[0.03] border border-white/8 p-3">
           <span className="text-lg">{item.offer.providerLogo}</span>
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-medium text-white/80 truncate">{item.offer.name}</p>
-            <p className="text-[10px] text-white/40">{item.quantity}x · {item.hours}h · ${(item.offer.pricePerUnit * item.quantity * item.hours).toFixed(2)}</p>
+            <p className="text-xs font-medium text-slate-900/80 truncate">{item.offer.name}</p>
+            <p className="text-[10px] text-slate-900/40">{item.quantity}x · {item.hours}h · ${(item.offer.pricePerUnit * item.quantity * item.hours).toFixed(2)}</p>
           </div>
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1 rounded-lg bg-white/5 border border-white/10">
-              <button className="p-1 text-white/40 hover:text-white/70"><Minus className="h-3 w-3" /></button>
-              <span className="text-xs text-white/70 px-1 tabular-nums">{item.quantity}</span>
-              <button className="p-1 text-white/40 hover:text-white/70"><Plus className="h-3 w-3" /></button>
+              <button className="p-1 text-slate-900/40 hover:text-slate-900/70"><Minus className="h-3 w-3" /></button>
+              <span className="text-xs text-slate-900/70 px-1 tabular-nums">{item.quantity}</span>
+              <button className="p-1 text-slate-900/40 hover:text-slate-900/70"><Plus className="h-3 w-3" /></button>
             </div>
-            <button onClick={() => onRemove(item.offer.id)} className="text-white/30 hover:text-rose-400/70 transition-colors">
+            <button onClick={() => onRemove(item.offer.id)} className="text-slate-900/30 hover:text-rose-400/70 transition-colors">
               <X className="h-3.5 w-3.5" />
             </button>
           </div>
@@ -411,8 +411,8 @@ function CartSummary({ items, onRemove }: { items: CartItem[]; onRemove: (id: st
       ))}
       <div className="pt-2 border-t border-white/10 flex items-center justify-between">
         <div>
-          <p className="text-xs text-white/40">Subtotal</p>
-          <p className="text-lg font-bold text-emerald-400">${subtotal.toFixed(4)}<span className="text-[10px] text-white/40 font-normal">/hr</span></p>
+          <p className="text-xs text-slate-900/40">Subtotal</p>
+          <p className="text-lg font-bold text-emerald-400">${subtotal.toFixed(4)}<span className="text-[10px] text-slate-900/40 font-normal">/hr</span></p>
         </div>
         <button className="rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 text-emerald-400 text-xs font-medium px-5 py-2.5 transition-colors">
           Proceed to Checkout
@@ -465,16 +465,16 @@ export function ComputeShop() {
       {/* ── Toolbar ─────────────────────────────────────────── */}
       <div className="flex items-center gap-3 flex-wrap">
         <div className="relative flex-1 min-w-[200px]">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-900/30" />
           <input
             type="text"
             placeholder="Search compute offers..."
             value={search}
             onChange={e => setSearch(e.target.value)}
-            className="w-full rounded-xl bg-white/[0.04] border border-white/10 text-xs text-white/80 placeholder:text-white/30 pl-9 pr-4 py-2.5 focus:outline-none focus:border-white/25 transition-all"
+            className="w-full rounded-xl bg-white/[0.04] border border-white/10 text-xs text-slate-900/80 placeholder:text-slate-900/30 pl-9 pr-4 py-2.5 focus:outline-none focus:border-white/25 transition-all"
           />
           {search && (
-            <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60">
+            <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-900/30 hover:text-slate-900/60">
               <X className="h-3.5 w-3.5" />
             </button>
           )}
@@ -486,8 +486,8 @@ export function ComputeShop() {
             onClick={() => setCategoryFilter('all')}
             className={['inline-flex items-center gap-1 rounded-lg text-[10px] px-2.5 py-1.5 border transition-all',
               categoryFilter === 'all'
-                ? 'bg-white/15 border-white/25 text-white/80 font-medium'
-                : 'bg-white/[0.04] border-white/10 text-white/40 hover:bg-white/[0.08]'].join(' ')}
+                ? 'bg-white/15 border-white/25 text-slate-900/80 font-medium'
+                : 'bg-white/[0.04] border-white/10 text-slate-900/40 hover:bg-white/[0.08]'].join(' ')}
           >
             All
           </button>
@@ -498,7 +498,7 @@ export function ComputeShop() {
               className={['inline-flex items-center gap-1 rounded-lg text-[10px] px-2.5 py-1.5 border transition-all',
                 categoryFilter === cat
                   ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400 font-medium'
-                  : 'bg-white/[0.04] border-white/10 text-white/40 hover:bg-white/[0.08]'].join(' ')}
+                  : 'bg-white/[0.04] border-white/10 text-slate-900/40 hover:bg-white/[0.08]'].join(' ')}
             >
               {CATEGORY_ICONS[cat]}{CATEGORY_LABELS[cat]}
             </button>
@@ -511,18 +511,18 @@ export function ComputeShop() {
           className={['flex items-center gap-1.5 rounded-xl text-xs px-3 py-2 border transition-colors',
             showOnlyDiscounted
               ? 'bg-amber-500/15 border-amber-500/30 text-amber-400'
-              : 'bg-white/[0.04] border-white/10 text-white/40 hover:bg-white/[0.08]'].join(' ')}
+              : 'bg-white/[0.04] border-white/10 text-slate-900/40 hover:bg-white/[0.08]'].join(' ')}
         >
           <Percent className="h-4 w-4" />Discounted Only
         </button>
 
         {/* Sort */}
         <div className="flex items-center gap-1">
-          <ArrowUpDown className="h-3.5 w-3.5 text-white/30 shrink-0" />
+          <ArrowUpDown className="h-3.5 w-3.5 text-slate-900/30 shrink-0" />
           <select
             value={sortKey}
             onChange={e => setSortKey(e.target.value as typeof sortKey)}
-            className="rounded-lg bg-white/[0.04] border border-white/10 text-xs text-white/60 px-2 py-1.5 focus:outline-none cursor-pointer"
+            className="rounded-lg bg-white/[0.04] border border-white/10 text-xs text-slate-900/60 px-2 py-1.5 focus:outline-none cursor-pointer"
           >
             <option value="rating">Top Rated</option>
             <option value="price">Lowest Price</option>
@@ -534,7 +534,7 @@ export function ComputeShop() {
         <button
           onClick={() => setShowCart(f => !f)}
           className={['relative flex items-center gap-2 rounded-xl text-xs px-3 py-2 border transition-colors ml-auto',
-            showCart ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400' : 'bg-white/[0.04] border-white/10 text-white/40 hover:bg-white/[0.08]'].join(' ')}
+            showCart ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400' : 'bg-white/[0.04] border-white/10 text-slate-900/40 hover:bg-white/[0.08]'].join(' ')}
         >
           <ShoppingCart className="h-4 w-4" />
           <span className="hidden sm:inline">Cart</span>
@@ -551,13 +551,13 @@ export function ComputeShop() {
         {/* Grid */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-base font-semibold text-white/90">
+            <h2 className="text-base font-semibold text-slate-900/90">
               Compute Shop
-              <span className="text-xs text-white/40 font-normal ml-2">{filtered.length} offers</span>
+              <span className="text-xs text-slate-900/40 font-normal ml-2">{filtered.length} offers</span>
             </h2>
           </div>
           {filtered.length === 0 ? (
-            <div className="text-center py-20 text-white/30 text-sm">No compute offers match your filters.</div>
+            <div className="text-center py-20 text-slate-900/30 text-sm">No compute offers match your filters.</div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
               {filtered.map(offer => (

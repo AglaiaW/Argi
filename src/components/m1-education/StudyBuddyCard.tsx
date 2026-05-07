@@ -60,12 +60,12 @@ export default function StudyBuddyCard({ buddy = DEFAULT_BUDDY, className = '', 
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
-              <h3 className="text-sm font-bold text-white truncate">{buddy.name}</h3>
+              <h3 className="text-sm font-bold text-slate-900 truncate">{buddy.name}</h3>
               {buddy.isVerified && <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />}
             </div>
-            <p className="text-xs text-white/50 truncate">{buddy.title}</p>
+            <p className="text-xs text-slate-900/50 truncate">{buddy.title}</p>
             <div className="flex items-center gap-2 mt-1">
-              <span className="text-[9px] text-white/40 flex items-center gap-0.5"><Clock className="w-2.5 h-2.5" />{buddy.timezone}</span>
+              <span className="text-[9px] text-slate-900/40 flex items-center gap-0.5"><Clock className="w-2.5 h-2.5" />{buddy.timezone}</span>
               <span className="text-[9px] text-emerald-400 font-semibold bg-emerald-500/15 px-1.5 py-0.5 rounded">{buddy.matchScore}% Match</span>
             </div>
           </div>
@@ -76,26 +76,26 @@ export default function StudyBuddyCard({ buddy = DEFAULT_BUDDY, className = '', 
       {buddy.currentCourse && (
         <div className="mx-4 mb-3 p-2.5 rounded-lg bg-blue-500/10 border border-blue-500/20">
           <p className="text-[9px] text-blue-400 font-semibold uppercase mb-0.5">Currently Learning</p>
-          <p className="text-xs text-white/80 font-medium truncate">{buddy.currentCourse}</p>
+          <p className="text-xs text-slate-900/80 font-medium truncate">{buddy.currentCourse}</p>
         </div>
       )}
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-2 mx-4 mb-3">
         <div className="flex flex-col items-center p-2 rounded-lg bg-white/5">
-          <BookOpen className="w-3.5 h-3.5 text-white/40 mb-1" />
-          <span className="text-xs font-bold text-white">{buddy.completedCourses}</span>
-          <span className="text-[9px] text-white/40">Courses</span>
+          <BookOpen className="w-3.5 h-3.5 text-slate-900/40 mb-1" />
+          <span className="text-xs font-bold text-slate-900">{buddy.completedCourses}</span>
+          <span className="text-[9px] text-slate-900/40">Courses</span>
         </div>
         <div className="flex flex-col items-center p-2 rounded-lg bg-white/5">
-          <Users className="w-3.5 h-3.5 text-white/40 mb-1" />
-          <span className="text-xs font-bold text-white">{buddy.sessionsCompleted}</span>
-          <span className="text-[9px] text-white/40">Sessions</span>
+          <Users className="w-3.5 h-3.5 text-slate-900/40 mb-1" />
+          <span className="text-xs font-bold text-slate-900">{buddy.sessionsCompleted}</span>
+          <span className="text-[9px] text-slate-900/40">Sessions</span>
         </div>
         <div className="flex flex-col items-center p-2 rounded-lg bg-white/5">
           <Star className="w-3.5 h-3.5 text-amber-400 mb-1" />
-          <span className="text-xs font-bold text-white">{buddy.rating}</span>
-          <span className="text-[9px] text-white/40">Rating</span>
+          <span className="text-xs font-bold text-slate-900">{buddy.rating}</span>
+          <span className="text-[9px] text-slate-900/40">Rating</span>
         </div>
       </div>
 
@@ -109,17 +109,17 @@ export default function StudyBuddyCard({ buddy = DEFAULT_BUDDY, className = '', 
 
       {/* Languages */}
       <div className="mx-4 mb-3">
-        <p className="text-[9px] text-white/30 uppercase tracking-wider mb-1.5">Languages</p>
+        <p className="text-[9px] text-slate-900/30 uppercase tracking-wider mb-1.5">Languages</p>
         <div className="flex flex-wrap gap-1">
           {buddy.languages.map((lang) => (
-            <span key={lang} className="px-2 py-0.5 rounded text-[9px] bg-white/5 border border-white/8 text-white/60">{lang}</span>
+            <span key={lang} className="px-2 py-0.5 rounded text-[9px] bg-white/5 border border-white/8 text-slate-900/60">{lang}</span>
           ))}
         </div>
       </div>
 
       {/* Interests */}
       <div className="mx-4 mb-4">
-        <p className="text-[9px] text-white/30 uppercase tracking-wider mb-1.5">Interests</p>
+        <p className="text-[9px] text-slate-900/30 uppercase tracking-wider mb-1.5">Interests</p>
         <div className="flex flex-wrap gap-1">
           {buddy.interests.map((interest) => (
             <span key={interest} className="px-2 py-0.5 rounded text-[9px] bg-blue-500/15 border border-blue-500/25 text-blue-300">{interest}</span>
@@ -131,7 +131,7 @@ export default function StudyBuddyCard({ buddy = DEFAULT_BUDDY, className = '', 
       <div className="mx-4 mb-4">
         <button
           onClick={() => onConnect?.(buddy.id)}
-          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl font-semibold text-sm bg-blue-500 hover:bg-blue-400 text-white transition-colors"
+          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl font-semibold text-sm bg-blue-500 hover:bg-blue-400 text-slate-900 transition-colors"
         >
           <MessageCircle className="w-4 h-4" />
           Connect

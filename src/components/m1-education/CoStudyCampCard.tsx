@@ -80,7 +80,7 @@ const DIFFICULTY_COLORS = {
 const ROLE_LABELS = {
   leader: { label: 'Leader', color: 'bg-amber-500/20 text-amber-300 border-amber-500/30' },
   mentor: { label: 'Mentor', color: 'bg-purple-500/20 text-purple-300 border-purple-500/30' },
-  member: { label: 'Member', color: 'bg-white/10 text-white/60 border-white/20' },
+  member: { label: 'Member', color: 'bg-white/10 text-slate-900/60 border-white/20' },
 }
 
 export default function CoStudyCampCard({ camp = DEFAULT_CAMP, className = '' }: CoStudyCampCardProps) {
@@ -93,9 +93,9 @@ export default function CoStudyCampCard({ camp = DEFAULT_CAMP, className = '' }:
         <div className="absolute top-3 left-3 flex items-center gap-2">
           <span className={`px-2 py-0.5 rounded border text-[9px] font-medium ${DIFFICULTY_COLORS[camp.difficulty]}`}>{camp.difficulty}</span>
           {camp.isPublic ? (
-            <span className="flex items-center gap-1 text-[9px] text-white/50"><Globe className="w-3 h-3" />Public</span>
+            <span className="flex items-center gap-1 text-[9px] text-slate-900/50"><Globe className="w-3 h-3" />Public</span>
           ) : (
-            <span className="text-[9px] text-white/50">Private</span>
+            <span className="text-[9px] text-slate-900/50">Private</span>
           )}
         </div>
         <div className="absolute top-3 right-3">
@@ -110,7 +110,7 @@ export default function CoStudyCampCard({ camp = DEFAULT_CAMP, className = '' }:
           )}
         </div>
         <div className="absolute bottom-3 left-3 right-3">
-          <h3 className="text-sm font-bold text-white leading-tight">{camp.name}</h3>
+          <h3 className="text-sm font-bold text-slate-900 leading-tight">{camp.name}</h3>
           <p className="text-xs text-purple-300 mt-0.5">{camp.tagline}</p>
         </div>
       </div>
@@ -119,28 +119,28 @@ export default function CoStudyCampCard({ camp = DEFAULT_CAMP, className = '' }:
       {camp.currentTopic && (
         <div className="mx-4 mt-3 p-2.5 rounded-lg bg-purple-500/10 border border-purple-500/20">
           <p className="text-[9px] text-purple-400 font-semibold uppercase mb-0.5">Current Topic</p>
-          <p className="text-xs text-white/80 font-medium">{camp.currentTopic}</p>
+          <p className="text-xs text-slate-900/80 font-medium">{camp.currentTopic}</p>
         </div>
       )}
 
       {/* Description */}
-      <p className="mx-4 mt-3 text-xs text-white/60 leading-relaxed line-clamp-2">{camp.description}</p>
+      <p className="mx-4 mt-3 text-xs text-slate-900/60 leading-relaxed line-clamp-2">{camp.description}</p>
 
       {/* Schedule info */}
       <div className="mx-4 mt-3 grid grid-cols-2 gap-2">
-        <div className="flex items-center gap-1.5 text-xs text-white/50">
+        <div className="flex items-center gap-1.5 text-xs text-slate-900/50">
           <Calendar className="w-3.5 h-3.5 text-purple-400" />
           <span>Starts {camp.startDate}</span>
         </div>
-        <div className="flex items-center gap-1.5 text-xs text-white/50">
+        <div className="flex items-center gap-1.5 text-xs text-slate-900/50">
           <Clock className="w-3.5 h-3.5 text-purple-400" />
           <span>{camp.schedule}</span>
         </div>
-        <div className="flex items-center gap-1.5 text-xs text-white/50">
+        <div className="flex items-center gap-1.5 text-xs text-slate-900/50">
           <Globe className="w-3.5 h-3.5 text-purple-400" />
           <span>{camp.timezone}</span>
         </div>
-        <div className="flex items-center gap-1.5 text-xs text-white/50">
+        <div className="flex items-center gap-1.5 text-xs text-slate-900/50">
           <BookOpen className="w-3.5 h-3.5 text-purple-400" />
           <span>{camp.duration}</span>
         </div>
@@ -150,7 +150,7 @@ export default function CoStudyCampCard({ camp = DEFAULT_CAMP, className = '' }:
       {camp.isJoined && camp.progress > 0 && (
         <div className="mx-4 mt-3">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-[10px] text-white/40">Progress</span>
+            <span className="text-[10px] text-slate-900/40">Progress</span>
             <span className="text-[10px] font-semibold text-purple-300">{camp.progress}%</span>
           </div>
           <div className="h-1 bg-white/10 rounded-full overflow-hidden">
@@ -163,8 +163,8 @@ export default function CoStudyCampCard({ camp = DEFAULT_CAMP, className = '' }:
       <div className="mx-4 mt-3">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-1">
-            <Users className="w-3.5 h-3.5 text-white/40" />
-            <span className="text-xs text-white/60">{camp.memberCount}/{camp.maxMembers} members</span>
+            <Users className="w-3.5 h-3.5 text-slate-900/40" />
+            <span className="text-xs text-slate-900/60">{camp.memberCount}/{camp.maxMembers} members</span>
           </div>
           <div className="flex -space-x-2">
             {camp.members.slice(0, 5).map((member) => (
@@ -175,7 +175,7 @@ export default function CoStudyCampCard({ camp = DEFAULT_CAMP, className = '' }:
             ))}
             {camp.memberCount > 5 && (
               <div className="w-6 h-6 rounded-full bg-white/20 border-2 border-slate-800 flex items-center justify-center">
-                <span className="text-[8px] text-white">+{camp.memberCount - 5}</span>
+                <span className="text-[8px] text-slate-900">+{camp.memberCount - 5}</span>
               </div>
             )}
           </div>
@@ -197,7 +197,7 @@ export default function CoStudyCampCard({ camp = DEFAULT_CAMP, className = '' }:
       {/* Tags */}
       <div className="mx-4 mt-3 flex flex-wrap gap-1">
         {camp.tags.map((tag) => (
-          <span key={tag} className="px-2 py-0.5 rounded text-[9px] bg-white/5 border border-white/8 text-white/50">{tag}</span>
+          <span key={tag} className="px-2 py-0.5 rounded text-[9px] bg-white/5 border border-white/8 text-slate-900/50">{tag}</span>
         ))}
       </div>
 
@@ -205,16 +205,16 @@ export default function CoStudyCampCard({ camp = DEFAULT_CAMP, className = '' }:
       <div className="mx-4 mt-4 mb-4 flex items-center justify-between">
         <div className="flex items-center gap-1">
           <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-          <span className="text-xs font-semibold text-white">{camp.rating}</span>
-          <span className="text-[10px] text-white/40">({camp.reviewCount})</span>
+          <span className="text-xs font-semibold text-slate-900">{camp.rating}</span>
+          <span className="text-[10px] text-slate-900/40">({camp.reviewCount})</span>
         </div>
         {camp.isJoined ? (
-          <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-purple-500 hover:bg-purple-400 text-white transition-colors">
+          <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-purple-500 hover:bg-purple-400 text-slate-900 transition-colors">
             <MessageSquare className="w-3.5 h-3.5" />
             Open Chat
           </button>
         ) : (
-          <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-400 hover:to-indigo-400 text-white transition-all">
+          <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-400 hover:to-indigo-400 text-slate-900 transition-all">
             <Zap className="w-3.5 h-3.5" />
             Join Camp
           </button>

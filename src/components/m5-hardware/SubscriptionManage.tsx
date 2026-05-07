@@ -221,7 +221,7 @@ export const MOCK_INVOICES: Invoice[] = [
 // ── Sub-components ─────────────────────────────────────────────────────────────
 
 const TIER_CONFIG = {
-  free: { label: 'Free', color: 'text-white/40 bg-white/5 border-white/10' },
+  free: { label: 'Free', color: 'text-slate-900/40 bg-white/5 border-white/10' },
   starter: { label: 'Starter', color: 'text-blue-400 bg-blue-500/15 border-blue-500/30' },
   pro: { label: 'Pro', color: 'text-emerald-400 bg-emerald-500/15 border-emerald-500/30' },
   enterprise: { label: 'Enterprise', color: 'text-amber-400 bg-amber-500/15 border-amber-500/30' },
@@ -230,19 +230,19 @@ const TIER_CONFIG = {
 const STATUS_CONFIG = {
   active: { label: 'Active', color: 'text-emerald-400 bg-emerald-500/15 border-emerald-500/30' },
   paused: { label: 'Paused', color: 'text-amber-400 bg-amber-500/15 border-amber-500/30' },
-  cancelled: { label: 'Cancelled', color: 'text-white/30 bg-white/5 border-white/10' },
+  cancelled: { label: 'Cancelled', color: 'text-slate-900/30 bg-white/5 border-white/10' },
   pending: { label: 'Pending', color: 'text-blue-400 bg-blue-500/15 border-blue-500/30' },
 }
 
 function UsageBar({ used, limit, label }: { used: number; limit: number; label: string }) {
-  if (limit >= 99999) return <p className="text-xs text-white/40">Unlimited</p>
+  if (limit >= 99999) return <p className="text-xs text-slate-900/40">Unlimited</p>
   const pct = Math.min((used / limit) * 100, 100)
   const color = pct > 90 ? 'bg-rose-500' : pct > 70 ? 'bg-amber-500' : 'bg-emerald-500'
   return (
     <div className="space-y-1">
       <div className="flex items-center justify-between text-[10px]">
-        <span className="text-white/40">{label}</span>
-        <span className={pct > 90 ? 'text-rose-400' : 'text-white/50'}>{used.toLocaleString()} / {limit.toLocaleString()}</span>
+        <span className="text-slate-900/40">{label}</span>
+        <span className={pct > 90 ? 'text-rose-400' : 'text-slate-900/50'}>{used.toLocaleString()} / {limit.toLocaleString()}</span>
       </div>
       <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
         <div className={`h-full rounded-full ${color}`} style={{ width: `${pct}%` }} />
@@ -263,21 +263,21 @@ function SubscriptionCard({ sub }: { sub: Subscription }) {
         <span className="text-2xl shrink-0">{sub.providerLogo}</span>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="text-sm font-semibold text-white/90">{sub.name}</h3>
+            <h3 className="text-sm font-semibold text-slate-900/90">{sub.name}</h3>
             <span className={`inline-flex items-center rounded-full text-[10px] px-2 py-0.5 border font-medium ${tierCfg.color}`}>{tierCfg.label}</span>
             <span className={`inline-flex items-center rounded-full text-[10px] px-2 py-0.5 border font-medium ${statusCfg.color}`}>{statusCfg.label}</span>
           </div>
-          <p className="text-[11px] text-white/40 mt-0.5">{sub.provider} · {sub.modelName}</p>
+          <p className="text-[11px] text-slate-900/40 mt-0.5">{sub.provider} · {sub.modelName}</p>
         </div>
         <div className="text-right shrink-0 hidden sm:block">
-          <p className="text-sm font-bold text-white/80">${sub.pricePerMonth.toLocaleString()}</p>
-          <p className="text-[10px] text-white/40">/{sub.priceUnit}</p>
+          <p className="text-sm font-bold text-slate-900/80">${sub.pricePerMonth.toLocaleString()}</p>
+          <p className="text-[10px] text-slate-900/40">/{sub.priceUnit}</p>
         </div>
         <div className="text-right shrink-0 hidden md:block">
-          <p className="text-xs text-white/50">Next billing</p>
-          <p className="text-[11px] text-white/70">{sub.nextBillingDate}</p>
+          <p className="text-xs text-slate-900/50">Next billing</p>
+          <p className="text-[11px] text-slate-900/70">{sub.nextBillingDate}</p>
         </div>
-        <button onClick={() => setExpanded(e => !e)} className="shrink-0 text-white/30 hover:text-white/60 transition-colors">
+        <button onClick={() => setExpanded(e => !e)} className="shrink-0 text-slate-900/30 hover:text-slate-900/60 transition-colors">
           <ChevronRight className={`h-4 w-4 transition-transform ${expanded ? 'rotate-90' : ''}`} />
         </button>
       </div>
@@ -301,8 +301,8 @@ function SubscriptionCard({ sub }: { sub: Subscription }) {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {sub.specs.map(s => (
               <div key={s.label} className="rounded-lg bg-white/[0.03] border border-white/8 p-2.5">
-                <p className="text-[10px] text-white/40">{s.label}</p>
-                <p className="text-xs text-white/70 font-medium mt-0.5">{s.value}</p>
+                <p className="text-[10px] text-slate-900/40">{s.label}</p>
+                <p className="text-xs text-slate-900/70 font-medium mt-0.5">{s.value}</p>
               </div>
             ))}
           </div>
@@ -310,12 +310,12 @@ function SubscriptionCard({ sub }: { sub: Subscription }) {
           {/* Usage */}
           {sub.usageThisMonth && (
             <div className="rounded-xl bg-white/[0.03] border border-white/8 p-4 space-y-2">
-              <p className="text-[10px] text-white/40 uppercase tracking-wider">This Month&apos;s Usage</p>
+              <p className="text-[10px] text-slate-900/40 uppercase tracking-wider">This Month&apos;s Usage</p>
               <UsageBar used={sub.usageThisMonth.hours} limit={sub.usageThisMonth.limit} label="Hours Used" />
               {sub.totalSpend !== undefined && (
                 <div className="flex justify-between text-xs pt-1 border-t border-white/5">
-                  <span className="text-white/40">Total Spend</span>
-                  <span className="text-white/70 font-medium">${sub.totalSpend.toLocaleString()}</span>
+                  <span className="text-slate-900/40">Total Spend</span>
+                  <span className="text-slate-900/70 font-medium">${sub.totalSpend.toLocaleString()}</span>
                 </div>
               )}
             </div>
@@ -325,7 +325,7 @@ function SubscriptionCard({ sub }: { sub: Subscription }) {
           <div className="flex items-center gap-2 flex-wrap">
             {sub.status === 'active' && (
               <>
-                <button className="flex items-center gap-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-white/60 px-3 py-1.5 transition-colors">
+                <button className="flex items-center gap-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-900/60 px-3 py-1.5 transition-colors">
                   <Settings className="h-3.5 w-3.5" />Manage
                 </button>
                 <button className="flex items-center gap-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 text-xs text-amber-400 px-3 py-1.5 transition-colors">
@@ -338,7 +338,7 @@ function SubscriptionCard({ sub }: { sub: Subscription }) {
                 <Play className="h-3.5 w-3.5" />Reactivate
               </button>
             )}
-            <button className="flex items-center gap-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-white/60 px-3 py-1.5 transition-colors">
+            <button className="flex items-center gap-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-900/60 px-3 py-1.5 transition-colors">
               <RefreshCw className="h-3.5 w-3.5" />Renew
             </button>
             <button className="flex items-center gap-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 text-xs text-rose-400/80 px-3 py-1.5 transition-colors ml-auto">
@@ -357,11 +357,11 @@ function InvoiceRow({ inv }: { inv: Invoice }) {
   return (
     <div className="flex items-center gap-4 rounded-xl bg-white/[0.03] border border-white/10 px-4 py-3 hover:bg-white/[0.05] transition-colors">
       <div className="flex-1 min-w-0">
-        <p className="text-xs font-medium text-white/80">{inv.id}</p>
-        <p className="text-[10px] text-white/40">{inv.date} · {inv.items.join(', ')}</p>
+        <p className="text-xs font-medium text-slate-900/80">{inv.id}</p>
+        <p className="text-[10px] text-slate-900/40">{inv.date} · {inv.items.join(', ')}</p>
       </div>
       <div className="text-right">
-        <p className="text-sm font-bold text-white/80">${inv.amount.toLocaleString()}</p>
+        <p className="text-sm font-bold text-slate-900/80">${inv.amount.toLocaleString()}</p>
         <span className={`inline-flex items-center gap-1 text-[10px] ${
           inv.status === 'paid' ? 'text-emerald-400' :
           inv.status === 'pending' ? 'text-amber-400' : 'text-rose-400'
@@ -407,20 +407,20 @@ export function SubscriptionManage() {
       {/* ── Summary Cards ─────────────────────────────────── */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="rounded-xl bg-white/[0.03] border border-white/10 p-4 text-center">
-          <p className="text-lg font-bold text-white/90 tabular-nums">{activeSubscriptions.length}</p>
-          <p className="text-[10px] text-white/40 mt-0.5">Active Subscriptions</p>
+          <p className="text-lg font-bold text-slate-900/90 tabular-nums">{activeSubscriptions.length}</p>
+          <p className="text-[10px] text-slate-900/40 mt-0.5">Active Subscriptions</p>
         </div>
         <div className="rounded-xl bg-white/[0.03] border border-white/10 p-4 text-center">
           <p className="text-lg font-bold text-emerald-400 tabular-nums">${totalMonthly.toLocaleString()}</p>
-          <p className="text-[10px] text-white/40 mt-0.5">Monthly Cost</p>
+          <p className="text-[10px] text-slate-900/40 mt-0.5">Monthly Cost</p>
         </div>
         <div className="rounded-xl bg-white/[0.03] border border-white/10 p-4 text-center">
-          <p className="text-lg font-bold text-white/90 tabular-nums">${totalSpendAll.toLocaleString()}</p>
-          <p className="text-[10px] text-white/40 mt-0.5">Total Spend</p>
+          <p className="text-lg font-bold text-slate-900/90 tabular-nums">${totalSpendAll.toLocaleString()}</p>
+          <p className="text-[10px] text-slate-900/40 mt-0.5">Total Spend</p>
         </div>
         <div className="rounded-xl bg-white/[0.03] border border-white/10 p-4 text-center">
           <p className="text-lg font-bold text-amber-400 tabular-nums">{pendingInvoices.length}</p>
-          <p className="text-[10px] text-white/40 mt-0.5">Pending Invoices</p>
+          <p className="text-[10px] text-slate-900/40 mt-0.5">Pending Invoices</p>
           {pendingInvoices.length > 0 && (
             <p className="text-[10px] text-amber-400 mt-0.5">
               ${pendingInvoices.reduce((s, i) => s + i.amount, 0).toLocaleString()} due
@@ -441,12 +441,12 @@ export function SubscriptionManage() {
             onClick={() => setTab(t.key)}
             className={[
               'relative flex items-center gap-2 px-4 py-2.5 text-xs font-medium transition-colors',
-              tab === t.key ? 'text-white' : 'text-white/40 hover:text-white/70',
+              tab === t.key ? 'text-slate-900' : 'text-slate-900/40 hover:text-slate-900/70',
             ].join(' ')}
           >
             {t.label}
             {t.count > 0 && (
-              <span className={`inline-flex items-center justify-center rounded-full text-[10px] min-w-[18px] h-4 px-1 ${tab === t.key ? 'bg-white/20 text-white/80' : 'bg-white/10 text-white/40'}`}>
+              <span className={`inline-flex items-center justify-center rounded-full text-[10px] min-w-[18px] h-4 px-1 ${tab === t.key ? 'bg-white/20 text-slate-900/80' : 'bg-white/10 text-slate-900/40'}`}>
                 {t.count}
               </span>
             )}
@@ -460,16 +460,16 @@ export function SubscriptionManage() {
         <>
           {/* Search */}
           <div className="relative max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-900/30" />
             <input
               type="text"
               placeholder="Search subscriptions..."
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full rounded-xl bg-white/[0.04] border border-white/10 text-xs text-white/80 placeholder:text-white/30 pl-9 pr-4 py-2.5 focus:outline-none focus:border-white/25 transition-all"
+              className="w-full rounded-xl bg-white/[0.04] border border-white/10 text-xs text-slate-900/80 placeholder:text-slate-900/30 pl-9 pr-4 py-2.5 focus:outline-none focus:border-white/25 transition-all"
             />
             {search && (
-              <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60">
+              <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-900/30 hover:text-slate-900/60">
                 <X className="h-3.5 w-3.5" />
               </button>
             )}
@@ -478,7 +478,7 @@ export function SubscriptionManage() {
           {/* Subscription list */}
           <div className="space-y-3">
             {filtered.length === 0 ? (
-              <div className="text-center py-16 text-white/30 text-sm">No subscriptions found.</div>
+              <div className="text-center py-16 text-slate-900/30 text-sm">No subscriptions found.</div>
             ) : (
               filtered.map(sub => <SubscriptionCard key={sub.id} sub={sub} />)
             )}
@@ -489,8 +489,8 @@ export function SubscriptionManage() {
       {tab === 'invoices' && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-white/80">Invoice History</h3>
-            <button className="flex items-center gap-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-white/60 px-3 py-1.5 transition-colors">
+            <h3 className="text-sm font-semibold text-slate-900/80">Invoice History</h3>
+            <button className="flex items-center gap-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-900/60 px-3 py-1.5 transition-colors">
               <Download className="h-3.5 w-3.5" />Export All
             </button>
           </div>
@@ -500,7 +500,7 @@ export function SubscriptionManage() {
 
           {/* Billing summary */}
           <div className="rounded-2xl bg-white/[0.03] border border-white/10 p-5 space-y-3">
-            <h4 className="text-sm font-semibold text-white/80">Billing Summary</h4>
+            <h4 className="text-sm font-semibold text-slate-900/80">Billing Summary</h4>
             <div className="space-y-2">
               {([
                 { label: 'NeuralCore NGC-4090 Pro', amount: 2890 },
@@ -508,13 +508,13 @@ export function SubscriptionManage() {
                 { label: 'EdgeFlow A6000 Pool', amount: 980 },
               ]).map(item => (
                 <div key={item.label} className="flex justify-between items-center py-2 border-b border-white/5 last:border-0 text-xs">
-                  <span className="text-white/50">{item.label}</span>
-                  <span className="text-white/70 font-medium">${item.amount.toLocaleString()}/mo</span>
+                  <span className="text-slate-900/50">{item.label}</span>
+                  <span className="text-slate-900/70 font-medium">${item.amount.toLocaleString()}/mo</span>
                 </div>
               ))}
               <div className="flex justify-between items-center pt-2">
-                <span className="text-sm font-semibold text-white/80">Total</span>
-                <span className="text-lg font-bold text-emerald-400">$8,370<span className="text-xs text-white/40 font-normal">/mo</span></span>
+                <span className="text-sm font-semibold text-slate-900/80">Total</span>
+                <span className="text-lg font-bold text-emerald-400">$8,370<span className="text-xs text-slate-900/40 font-normal">/mo</span></span>
               </div>
             </div>
             <button className="w-full flex items-center justify-center gap-2 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 text-emerald-400 text-xs font-medium py-2.5 transition-colors">

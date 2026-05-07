@@ -124,10 +124,10 @@ const PROMO = {
 function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; onClose: () => void }) {
   if (!item) return null
   return (
-    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-[#0a1628] shadow-2xl w-[340px]">
+    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-white shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-[rgba(255,255,255,0.06)] px-5 py-4">
         <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>详情</span>
-        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[rgba(255,255,255,0.06)]">
+        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100">
           <X className="h-4 w-4" />
         </button>
       </div>
@@ -140,7 +140,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
             <Server className="h-3 w-3" />{item.tier as string}
           </span>
         )}
-        <h2 className="mb-2 text-lg font-bold text-white leading-snug" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+        <h2 className="mb-2 text-lg font-bold text-slate-900 leading-snug" style={{ fontFamily: 'Space Grotesk, monospace' }}>
           {item.name as string}
         </h2>
         {item.vendor && (
@@ -149,7 +149,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         {item.tags && Array.isArray(item.tags) && (
           <div className="flex flex-wrap gap-2 mb-4">
             {(item.tags as string[]).map((tag) => (
-              <span key={tag} className="rounded-full border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-2.5 py-1 text-[10px] text-slate-400">#{tag}</span>
+              <span key={tag} className="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[10px] text-slate-400">#{tag}</span>
             ))}
           </div>
         )}
@@ -171,18 +171,18 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
           )}
           {item.pricePerHour !== undefined && (
             <div className="flex items-center gap-2 pt-1">
-              <span className="text-2xl font-bold text-[#14D1A0]">¥{item.pricePerHour as number}/小时</span>
+              <span className="text-2xl font-bold text-emerald-600">¥{item.pricePerHour as number}/小时</span>
             </div>
           )}
           {item.price !== undefined && item.price > 0 && (
             <div className="flex items-center gap-2 pt-1">
-              <span className="text-2xl font-bold text-[#14D1A0]">¥{item.price.toLocaleString()}</span>
+              <span className="text-2xl font-bold text-emerald-600">¥{item.price.toLocaleString()}</span>
               <span className="text-sm text-slate-500">/月</span>
             </div>
           )}
           {item.tokens && (
             <div className="flex items-center gap-2 text-sm text-slate-400">
-              <Zap className="h-4 w-4 text-[#14D1A0]" />{item.tokens as string}
+              <Zap className="h-4 w-4 text-emerald-600" />{item.tokens as string}
             </div>
           )}
           {item.models && (
@@ -196,7 +196,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
             <button className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90">
               <Play className="h-4 w-4" /> 立即租用
             </button>
-            <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[rgba(255,255,255,0.08)] py-2.5 text-sm text-slate-400 transition-all">
+            <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 py-2.5 text-sm text-slate-400 transition-all">
               <Shield className="h-4 w-4" /> 申请试用
             </button>
           </>
@@ -220,26 +220,26 @@ function StatsBlock() {
   ]
   return (
     <div
-      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-gradient-to-br from-[#0f2744] to-[#0a1628] p-5"
+      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-100 to-slate-50 p-5"
       style={{ gridColumn: 'span 2', gridRow: 'span 1' }}
     >
       <div className="mb-4 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#2B59C3]/15">
-          <HardDrive className="h-4 w-4 text-[#2B59C3]" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50">
+          <HardDrive className="h-4 w-4 text-blue-600" />
         </div>
         <span className="text-xs font-bold text-slate-400" style={{ fontFamily: 'monospace' }}>算力数据</span>
       </div>
       <div className="grid grid-cols-2 gap-3">
         {stats.map((s) => (
-          <div key={s.label} className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-3">
-            <p className="text-xl font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
+          <div key={s.label} className="rounded-xl border border-slate-200 bg-slate-100 p-3">
+            <p className="text-xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
             <p className="text-[10px] text-slate-500">{s.label}</p>
           </div>
         ))}
       </div>
-      <div className="mt-3 flex items-center gap-2 rounded-xl bg-[#2B59C3]/10 px-3 py-2">
-        <Shield className="h-4 w-4 text-[#2B59C3]" />
-        <span className="text-xs text-[#2B59C3]">企业级安全保障 · 7×24运维</span>
+      <div className="mt-3 flex items-center gap-2 rounded-xl bg-blue-50 px-3 py-2">
+        <Shield className="h-4 w-4 text-blue-600" />
+        <span className="text-xs text-blue-600">企业级安全保障 · 7×24运维</span>
       </div>
     </div>
   )
@@ -250,7 +250,7 @@ function FeaturedBlock({ item, onClick }: { item: typeof GPU_CLUSTERS[0]; onClic
   return (
     <button
       onClick={onClick}
-      className="group relative flex overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.15)] active:scale-[0.99]"
+      className="group relative flex overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.15)] active:scale-[0.99]"
       style={{ gridColumn: 'span 4', gridRow: 'span 2' }}
     >
       <div className="relative w-3/5 shrink-0 overflow-hidden">
@@ -262,7 +262,7 @@ function FeaturedBlock({ item, onClick }: { item: typeof GPU_CLUSTERS[0]; onClic
         {item.available && (
           <div className="absolute bottom-4 left-4 flex items-center gap-1 rounded-full bg-[#14D1A0]/20 backdrop-blur-sm px-3 py-1">
             <div className="h-2 w-2 rounded-full bg-[#14D1A0]" />
-            <span className="text-[10px] font-bold text-[#14D1A0]">可用</span>
+            <span className="text-[10px] font-bold text-emerald-600">可用</span>
           </div>
         )}
       </div>
@@ -270,45 +270,45 @@ function FeaturedBlock({ item, onClick }: { item: typeof GPU_CLUSTERS[0]; onClic
       <div className="flex w-2/5 flex-col justify-between p-6 text-left">
         <div>
           <div className="mb-3 flex items-center gap-2">
-            <span className="rounded-full bg-[#2B59C3]/15 px-3 py-1 text-[10px] font-bold text-[#2B59C3]">{item.vendor}</span>
-            <span className="rounded-full bg-[rgba(255,255,255,0.04)] px-2.5 py-1 text-[10px] text-slate-400">{item.location}</span>
+            <span className="rounded-full bg-blue-50 px-3 py-1 text-[10px] font-bold text-blue-600">{item.vendor}</span>
+            <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] text-slate-400">{item.location}</span>
           </div>
-          <h3 className="mb-2 text-xl font-bold leading-snug text-white transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+          <h3 className="mb-2 text-xl font-bold leading-snug text-slate-900 transition-colors group-hover:text-emerald-600" style={{ fontFamily: 'Space Grotesk, monospace' }}>
             {item.name}
           </h3>
 
           <div className="mb-4 grid grid-cols-2 gap-2">
-            <div className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-2.5">
+            <div className="rounded-xl border border-slate-200 bg-slate-100 p-2.5">
               <p className="text-[10px] text-slate-500">显存</p>
-              <p className="text-xs font-bold text-white">{item.hbm}</p>
+              <p className="text-xs font-bold text-slate-900">{item.hbm}</p>
             </div>
-            <div className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-2.5">
+            <div className="rounded-xl border border-slate-200 bg-slate-100 p-2.5">
               <p className="text-[10px] text-slate-500">带宽</p>
-              <p className="text-xs font-bold text-white">{item.bandwidth}</p>
+              <p className="text-xs font-bold text-slate-900">{item.bandwidth}</p>
             </div>
-            <div className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-2.5">
+            <div className="rounded-xl border border-slate-200 bg-slate-100 p-2.5">
               <p className="text-[10px] text-slate-500">可用率</p>
-              <p className="text-xs font-bold text-[#14D1A0]">{item.uptime}</p>
+              <p className="text-xs font-bold text-emerald-600">{item.uptime}</p>
             </div>
-            <div className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-2.5">
+            <div className="rounded-xl border border-slate-200 bg-slate-100 p-2.5">
               <p className="text-[10px] text-slate-500">计费</p>
-              <p className="text-xs font-bold text-white">¥{item.pricePerHour}/h</p>
+              <p className="text-xs font-bold text-slate-900">¥{item.pricePerHour}/h</p>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-1.5">
             {item.tags.map((tag) => (
-              <span key={tag} className="rounded-full bg-[rgba(255,255,255,0.04)] px-2.5 py-1 text-[10px] text-slate-400">#{tag}</span>
+              <span key={tag} className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] text-slate-400">#{tag}</span>
             ))}
           </div>
         </div>
 
         <div className="flex items-center justify-between">
           <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-bold text-[#14D1A0]">¥{item.pricePerHour}</span>
+            <span className="text-2xl font-bold text-emerald-600">¥{item.pricePerHour}</span>
             <span className="text-sm text-slate-500">/小时</span>
           </div>
-          <div className="flex items-center gap-1 text-[#14D1A0] opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1">
+          <div className="flex items-center gap-1 text-emerald-600 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1">
             <span className="text-sm font-bold">租用</span>
             <ChevronRight className="h-4 w-4" />
           </div>
@@ -323,7 +323,7 @@ function GPUBlock({ item, size, onClick }: { item: typeof GPU_CLUSTERS[0]; size:
   return (
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: size === 'md' ? 'span 2' : 'span 1' }}
     >
       <div className="relative overflow-hidden" style={{ height: size === 'md' ? '90px' : '60px' }}>
@@ -335,7 +335,7 @@ function GPUBlock({ item, size, onClick }: { item: typeof GPU_CLUSTERS[0]; size:
       </div>
 
       <div className="flex flex-1 flex-col p-3">
-        <h4 className="mb-1 line-clamp-1 text-sm font-bold text-white transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+        <h4 className="mb-1 line-clamp-1 text-sm font-bold text-slate-900 transition-colors group-hover:text-emerald-600" style={{ fontFamily: 'Space Grotesk, monospace' }}>
           {item.name}
         </h4>
         <p className="mb-2 text-[10px] text-slate-500">{item.vendor} · {item.location}</p>
@@ -344,7 +344,7 @@ function GPUBlock({ item, size, onClick }: { item: typeof GPU_CLUSTERS[0]; size:
           <div className="flex items-center gap-2">
             <span className="text-[10px] text-slate-500">{item.hbm}</span>
           </div>
-          <span className="text-sm font-bold text-[#14D1A0]">¥{item.pricePerHour}/h</span>
+          <span className="text-sm font-bold text-emerald-600">¥{item.pricePerHour}/h</span>
         </div>
       </div>
     </button>
@@ -356,7 +356,7 @@ function PackageBlock({ item, size, onClick }: { item: typeof PACKAGES[0]; size:
   return (
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.06)] bg-gradient-to-br from-[#0f2744] to-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-100 to-slate-50 transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: 'span 2' }}
     >
       <div className="relative overflow-hidden" style={{ height: '80px' }}>
@@ -370,21 +370,21 @@ function PackageBlock({ item, size, onClick }: { item: typeof PACKAGES[0]; size:
       </div>
 
       <div className="flex flex-1 flex-col p-3">
-        <h4 className="mb-1 text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>{item.name}</h4>
+        <h4 className="mb-1 text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>{item.name}</h4>
         <p className="mb-2 text-[10px] text-slate-400">{item.tokens} · {item.models}</p>
 
         <div className="mb-2 flex flex-wrap gap-1">
           {item.features.slice(0, 2).map((f) => (
-            <span key={f} className="rounded-full bg-[rgba(255,255,255,0.04)] px-2 py-0.5 text-[9px] text-slate-400">{f}</span>
+            <span key={f} className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] text-slate-400">{f}</span>
           ))}
         </div>
 
         <div className="mt-auto flex items-center justify-between border-t border-[rgba(255,255,255,0.04)] pt-2.5">
           <div className="flex items-baseline gap-1">
-            <span className="text-xl font-bold text-[#14D1A0]">¥{item.price}</span>
+            <span className="text-xl font-bold text-emerald-600">¥{item.price}</span>
             <span className="text-[10px] text-slate-500">/月</span>
           </div>
-          <span className="rounded-full bg-[#14D1A0]/15 px-2.5 py-1 text-[10px] font-bold text-[#14D1A0]">立即订阅</span>
+          <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-600">立即订阅</span>
         </div>
       </div>
     </button>
@@ -396,17 +396,17 @@ function MyDeviceBlock() {
   const pct = MY_DEVICE.usagePercent
   return (
     <div
-      className="flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-gradient-to-br from-[#0f2744] to-[#0a1628] p-4"
+      className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-100 to-slate-50 p-4"
       style={{ gridColumn: 'span 2', gridRow: 'span 1' }}
     >
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#14D1A0]/15">
-            <Database className="h-4 w-4 text-[#14D1A0]" />
+          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50">
+            <Database className="h-4 w-4 text-emerald-600" />
           </div>
-          <span className="text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>我的算力</span>
+          <span className="text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>我的算力</span>
         </div>
-        <span className="rounded-full bg-[#2B59C3]/15 px-2.5 py-1 text-[10px] font-bold text-[#2B59C3]">
+        <span className="rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-bold text-blue-600">
           {MY_DEVICE.currentPlan}
         </span>
       </div>
@@ -424,23 +424,23 @@ function MyDeviceBlock() {
           />
         </div>
         {pct > 80 && (
-          <div className="mt-1 flex items-center gap-1 text-[9px] text-[#FF6B6B]">
+          <div className="mt-1 flex items-center gap-1 text-[9px] text-red-500">
             <AlertTriangle className="h-3 w-3" />用量即将达上限，建议升级套餐
           </div>
         )}
       </div>
 
       <div className="grid grid-cols-3 gap-2">
-        <div className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-2.5 text-center">
-          <p className="text-sm font-bold text-white" style={{ fontFamily: 'monospace' }}>{MY_DEVICE.daysLeft}</p>
+        <div className="rounded-xl border border-slate-200 bg-slate-100 p-2.5 text-center">
+          <p className="text-sm font-bold text-slate-900" style={{ fontFamily: 'monospace' }}>{MY_DEVICE.daysLeft}</p>
           <p className="text-[9px] text-slate-500">剩余天数</p>
         </div>
-        <div className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-2.5 text-center">
-          <p className="text-sm font-bold text-white" style={{ fontFamily: 'monospace' }}>{MY_DEVICE.activeAgents}</p>
+        <div className="rounded-xl border border-slate-200 bg-slate-100 p-2.5 text-center">
+          <p className="text-sm font-bold text-slate-900" style={{ fontFamily: 'monospace' }}>{MY_DEVICE.activeAgents}</p>
           <p className="text-[9px] text-slate-500">在线Agent</p>
         </div>
-        <div className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-2.5 text-center">
-          <p className="text-xs font-bold text-white" style={{ fontFamily: 'monospace' }}>{MY_DEVICE.nextBilling}</p>
+        <div className="rounded-xl border border-slate-200 bg-slate-100 p-2.5 text-center">
+          <p className="text-xs font-bold text-slate-900" style={{ fontFamily: 'monospace' }}>{MY_DEVICE.nextBilling}</p>
           <p className="text-[9px] text-slate-500">下次账单日</p>
         </div>
       </div>
@@ -452,7 +452,7 @@ function MyDeviceBlock() {
 function PromoBlock() {
   return (
     <button
-      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-gradient-to-br from-[#0f2744] to-[#0a1628] p-4 transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-100 to-slate-50 p-4 transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: 'span 2', gridRow: 'span 1' }}
     >
       <div className="absolute right-3 top-3">
@@ -461,7 +461,7 @@ function PromoBlock() {
         </div>
       </div>
       <div className="flex-1">
-        <h4 className="mb-1 text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>{PROMO.title}</h4>
+        <h4 className="mb-1 text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>{PROMO.title}</h4>
         <p className="line-clamp-2 text-xs text-slate-400">{PROMO.desc}</p>
       </div>
       <div className="mt-3 flex items-center gap-1 text-sm font-bold" style={{ color: PROMO.color }}>
@@ -522,31 +522,31 @@ export default function HardwareModule() {
   }
 
   return (
-    <div className="relative flex h-full flex-col gap-0 overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(10,22,40,0.95)]">
+    <div className="relative flex h-full flex-col gap-0 overflow-hidden rounded-2xl border border-slate-200 bg-white">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-[rgba(255,255,255,0.06)] px-6 py-4 shrink-0">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#2B59C3]/15">
-            <Server className="h-5 w-5 text-[#2B59C3]" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50">
+            <Server className="h-5 w-5 text-blue-600" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>M5 · 硬件生态</h1>
+            <h1 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>M5 · 硬件生态</h1>
             <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>GPU集群 · 算力商店 · 订阅管理</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
           <div className="text-center">
-            <p className="text-sm font-bold tabular-nums text-white" style={{ fontFamily: 'monospace' }}>3,847</p>
+            <p className="text-sm font-bold tabular-nums text-slate-900" style={{ fontFamily: 'monospace' }}>3,847</p>
             <p className="text-[10px] text-slate-500">活跃节点</p>
           </div>
           <div className="h-5 w-px bg-[rgba(255,255,255,0.08)]" />
           <div className="text-center">
-            <p className="text-sm font-bold tabular-nums text-[#2B59C3]" style={{ fontFamily: 'monospace' }}>1,204</p>
+            <p className="text-sm font-bold tabular-nums text-blue-600" style={{ fontFamily: 'monospace' }}>1,204</p>
             <p className="text-[10px] text-slate-500">GPU集群</p>
           </div>
           <div className="h-5 w-px bg-[rgba(255,255,255,0.08)]" />
           <div className="text-center">
-            <p className="text-sm font-bold tabular-nums text-[#FFD23F]" style={{ fontFamily: 'monospace' }}>99.97%</p>
+            <p className="text-sm font-bold tabular-nums text-amber-500" style={{ fontFamily: 'monospace' }}>99.97%</p>
             <p className="text-[10px] text-slate-500">可用率</p>
           </div>
         </div>

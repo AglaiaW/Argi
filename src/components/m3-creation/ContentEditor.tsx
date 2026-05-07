@@ -65,24 +65,24 @@ export default function ContentEditor({ drafts = MOCK_DRAFTS, onPublish, onPrevi
   }
 
   return (
-    <div className="flex h-full flex-col gap-4 rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(15,23,42,0.85)] p-5 backdrop-blur-xl">
+    <div className="flex h-full flex-col gap-4 rounded-2xl border border-slate-200 bg-[rgba(15,23,42,0.85)] p-5 backdrop-blur-xl">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <FileText className="h-5 w-5 text-[#14D1A0]" />
-          <h2 className="text-base font-semibold text-white" style={{ fontFamily: 'monospace' }}>
+          <FileText className="h-5 w-5 text-emerald-600" />
+          <h2 className="text-base font-semibold text-slate-900" style={{ fontFamily: 'monospace' }}>
             内容编辑器
           </h2>
         </div>
-        <div className="flex items-center gap-1 rounded-lg bg-[rgba(255,255,255,0.05)] p-1">
+        <div className="flex items-center gap-1 rounded-lg bg-slate-100 p-1">
           {(['all', 'article', 'social', 'email', 'video_script', 'product_description'] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`rounded-md px-2.5 py-1 text-xs font-medium transition ${
                 activeTab === tab
-                  ? 'bg-[#14D1A0]/20 text-[#14D1A0]'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-[#14D1A0]/20 text-emerald-600'
+                  : 'text-slate-400 hover:text-slate-900'
               }`}
               style={{ fontFamily: 'monospace' }}
             >
@@ -99,7 +99,7 @@ export default function ContentEditor({ drafts = MOCK_DRAFTS, onPublish, onPrevi
           placeholder="搜索标题或标签..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full rounded-xl border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.05)] px-4 py-2.5 text-sm text-white placeholder-slate-500 outline-none focus:border-[#14D1A0]/50"
+          className="w-full rounded-xl border border-[rgba(255,255,255,0.1)] bg-slate-100 px-4 py-2.5 text-sm text-slate-900 placeholder-slate-500 outline-none focus:border-[#14D1A0]/50"
           style={{ fontFamily: 'monospace' }}
         />
       </div>
@@ -116,7 +116,7 @@ export default function ContentEditor({ drafts = MOCK_DRAFTS, onPublish, onPrevi
                 className={`group cursor-pointer rounded-xl border p-4 transition ${
                   selected?.id === draft.id
                     ? 'border-[#14D1A0]/60 bg-[#14D1A0]/5'
-                    : 'border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] hover:border-[rgba(255,255,255,0.16)]'
+                    : 'border-[rgba(255,255,255,0.08)] bg-slate-100 hover:border-[rgba(255,255,255,0.16)]'
                 }`}
               >
                 <div className="flex items-start gap-3">
@@ -126,7 +126,7 @@ export default function ContentEditor({ drafts = MOCK_DRAFTS, onPublish, onPrevi
                       <img src={draft.thumbnail} alt={draft.title} className="h-full w-full object-cover opacity-80" />
                     </div>
                   ) : (
-                    <div className="flex h-14 w-24 flex-shrink-0 items-center justify-center rounded-lg bg-[rgba(255,255,255,0.05)]">
+                    <div className="flex h-14 w-24 flex-shrink-0 items-center justify-center rounded-lg bg-slate-100">
                       {TYPE_ICONS[draft.type]}
                     </div>
                   )}
@@ -138,12 +138,12 @@ export default function ContentEditor({ drafts = MOCK_DRAFTS, onPublish, onPrevi
                         {status.icon}
                         {status.label}
                       </span>
-                      <span className="inline-flex items-center gap-1 rounded-md bg-[rgba(255,255,255,0.06)] px-1.5 py-0.5 text-[10px] text-slate-400">
+                      <span className="inline-flex items-center gap-1 rounded-md bg-slate-100 px-1.5 py-0.5 text-[10px] text-slate-400">
                         {TYPE_ICONS[draft.type]}
                         {TYPE_LABELS[draft.type]}
                       </span>
                     </div>
-                    <p className="mt-1.5 truncate text-sm font-medium text-white" style={{ fontFamily: 'monospace' }}>
+                    <p className="mt-1.5 truncate text-sm font-medium text-slate-900" style={{ fontFamily: 'monospace' }}>
                       {draft.title}
                     </p>
                     <div className="mt-1.5 flex items-center gap-3 text-[10px] text-slate-500">
@@ -160,7 +160,7 @@ export default function ContentEditor({ drafts = MOCK_DRAFTS, onPublish, onPrevi
                   <div className="flex flex-col items-end gap-1">
                     <div className={`flex h-9 w-9 items-center justify-center rounded-lg text-sm font-bold ${
                       draft.performanceScore >= 90 ? 'bg-emerald-900/50 text-emerald-400' :
-                      draft.performanceScore >= 80 ? 'bg-[#2B59C3]/20 text-[#2B59C3]' :
+                      draft.performanceScore >= 80 ? 'bg-[#2B59C3]/20 text-blue-600' :
                       'bg-slate-800 text-slate-400'
                     }`}>
                       {draft.performanceScore}
@@ -172,7 +172,7 @@ export default function ContentEditor({ drafts = MOCK_DRAFTS, onPublish, onPrevi
                 {/* Tags */}
                 <div className="mt-2.5 flex flex-wrap gap-1">
                   {draft.tags.map((tag) => (
-                    <span key={tag} className="rounded bg-[rgba(255,255,255,0.06)] px-1.5 py-0.5 text-[10px] text-slate-400">
+                    <span key={tag} className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] text-slate-400">
                       #{tag}
                     </span>
                   ))}
@@ -183,21 +183,21 @@ export default function ContentEditor({ drafts = MOCK_DRAFTS, onPublish, onPrevi
                   <div className="mt-3 flex gap-2">
                     <button
                       onClick={(e) => { e.stopPropagation(); onPreview?.(draft.id) }}
-                      className="flex items-center gap-1.5 rounded-lg bg-[rgba(43,89,195,0.25)] px-3 py-1.5 text-xs font-medium text-[#2B59C3] hover:bg-[rgba(43,89,195,0.35)]"
+                      className="flex items-center gap-1.5 rounded-lg bg-[rgba(43,89,195,0.25)] px-3 py-1.5 text-xs font-medium text-blue-600 hover:bg-[rgba(43,89,195,0.35)]"
                       style={{ fontFamily: 'monospace' }}
                     >
                       <Eye className="h-3 w-3" /> 预览
                     </button>
                     <button
                       onClick={(e) => { e.stopPropagation(); onPublish?.(draft.id) }}
-                      className="flex items-center gap-1.5 rounded-lg bg-[#14D1A0]/20 px-3 py-1.5 text-xs font-medium text-[#14D1A0] hover:bg-[#14D1A0]/30"
+                      className="flex items-center gap-1.5 rounded-lg bg-[#14D1A0]/20 px-3 py-1.5 text-xs font-medium text-emerald-600 hover:bg-[#14D1A0]/30"
                       style={{ fontFamily: 'monospace' }}
                     >
                       <Send className="h-3 w-3" /> 发布
                     </button>
                     <button
                       onClick={(e) => { e.stopPropagation() }}
-                      className="flex items-center gap-1.5 rounded-lg bg-[rgba(255,255,255,0.06)] px-3 py-1.5 text-xs font-medium text-slate-400 hover:bg-[rgba(255,255,255,0.1)] hover:text-white"
+                      className="flex items-center gap-1.5 rounded-lg bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-400 hover:bg-[rgba(255,255,255,0.1)] hover:text-slate-900"
                       style={{ fontFamily: 'monospace' }}
                     >
                       <Sparkles className="h-3 w-3" /> AI 优化
@@ -211,17 +211,17 @@ export default function ContentEditor({ drafts = MOCK_DRAFTS, onPublish, onPrevi
       </div>
 
       {/* Stats Bar */}
-      <div className="flex items-center justify-between rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] px-4 py-3">
+      <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-100 px-4 py-3">
         <div className="flex items-center gap-6">
           <div className="text-center">
-            <p className="text-lg font-bold tabular-nums text-white" style={{ fontFamily: 'monospace' }}>
+            <p className="text-lg font-bold tabular-nums text-slate-900" style={{ fontFamily: 'monospace' }}>
               {drafts.length}
             </p>
             <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>总内容</p>
           </div>
           <div className="h-8 w-px bg-[rgba(255,255,255,0.08)]" />
           <div className="text-center">
-            <p className="text-lg font-bold tabular-nums text-[#14D1A0]" style={{ fontFamily: 'monospace' }}>
+            <p className="text-lg font-bold tabular-nums text-emerald-600" style={{ fontFamily: 'monospace' }}>
               {drafts.filter((d) => d.status === 'draft').length}
             </p>
             <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>草稿</p>
@@ -235,14 +235,14 @@ export default function ContentEditor({ drafts = MOCK_DRAFTS, onPublish, onPrevi
           </div>
           <div className="h-8 w-px bg-[rgba(255,255,255,0.08)]" />
           <div className="text-center">
-            <p className="text-lg font-bold tabular-nums text-white" style={{ fontFamily: 'monospace' }}>
+            <p className="text-lg font-bold tabular-nums text-slate-900" style={{ fontFamily: 'monospace' }}>
               {drafts.filter((d) => d.status === 'published').length}
             </p>
             <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>已发布</p>
           </div>
         </div>
         <button
-          className="flex items-center gap-2 rounded-xl bg-[#14D1A0]/20 px-4 py-2 text-xs font-semibold text-[#14D1A0] hover:bg-[#14D1A0]/30"
+          className="flex items-center gap-2 rounded-xl bg-[#14D1A0]/20 px-4 py-2 text-xs font-semibold text-emerald-600 hover:bg-[#14D1A0]/30"
           style={{ fontFamily: 'monospace' }}
         >
           <Sparkles className="h-4 w-4" /> 新建内容

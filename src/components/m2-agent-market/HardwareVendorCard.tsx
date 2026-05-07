@@ -196,8 +196,8 @@ interface SpecRowProps {
 function SpecRow({ label, value }: SpecRowProps) {
   return (
     <div className="flex justify-between items-center py-1.5 border-b border-white/5 last:border-0">
-      <span className="text-[11px] text-white/40">{label}</span>
-      <span className="text-[11px] text-white/70 font-medium">{value}</span>
+      <span className="text-[11px] text-slate-900/40">{label}</span>
+      <span className="text-[11px] text-slate-900/70 font-medium">{value}</span>
     </div>
   )
 }
@@ -216,13 +216,13 @@ export function HardwareVendorCard({ vendor: v, compact = false }: HardwareVendo
         <span className="text-2xl shrink-0">{v.logo}</span>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <h3 className="text-sm font-medium text-white/80 truncate">{v.name}</h3>
+            <h3 className="text-sm font-medium text-slate-900/80 truncate">{v.name}</h3>
             <SellerLevelBadge level={v.level} size="sm" showLabel={false} />
           </div>
-          <p className="text-[11px] text-white/40 mt-0.5 truncate">{v.modelName}</p>
+          <p className="text-[11px] text-slate-900/40 mt-0.5 truncate">{v.modelName}</p>
           <div className="flex items-center gap-3 mt-2">
             <span className="text-sm font-bold text-emerald-400">${v.pricePerUnit}</span>
-            <span className="text-[10px] text-white/40">{v.priceUnit}</span>
+            <span className="text-[10px] text-slate-900/40">{v.priceUnit}</span>
             {!v.inStock && (
               <span className="text-[10px] text-amber-400/80 bg-amber-500/10 rounded px-1.5 py-0.5">Out of stock</span>
             )}
@@ -239,11 +239,11 @@ export function HardwareVendorCard({ vendor: v, compact = false }: HardwareVendo
         <span className="text-3xl">{v.logo}</span>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap mb-0.5">
-            <h3 className="text-sm font-semibold text-white/90">{v.name}</h3>
+            <h3 className="text-sm font-semibold text-slate-900/90">{v.name}</h3>
             <SellerLevelBadge level={v.level} size="sm" />
           </div>
-          <div className="flex items-center gap-2 text-[11px] text-white/50">
-            <span className={['inline-flex items-center gap-1 rounded-full px-2 py-0.5 border border-white/10 bg-white/5 text-white/60',].join(' ')}>
+          <div className="flex items-center gap-2 text-[11px] text-slate-900/50">
+            <span className={['inline-flex items-center gap-1 rounded-full px-2 py-0.5 border border-white/10 bg-white/5 text-slate-900/60',].join(' ')}>
               {catIcon}
               {CATEGORY_LABELS[v.category]}
             </span>
@@ -252,7 +252,7 @@ export function HardwareVendorCard({ vendor: v, compact = false }: HardwareVendo
         </div>
         <div className="text-right shrink-0">
           <div className="text-base font-bold text-emerald-400">${v.pricePerUnit}</div>
-          <div className="text-[10px] text-white/40">{v.priceUnit}</div>
+          <div className="text-[10px] text-slate-900/40">{v.priceUnit}</div>
         </div>
       </div>
 
@@ -260,8 +260,8 @@ export function HardwareVendorCard({ vendor: v, compact = false }: HardwareVendo
       <div className="rounded-xl bg-white/5 border border-white/10 p-3">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-xs font-semibold text-white/80">{v.modelName}</p>
-            <p className="text-[10px] text-white/40 mt-0.5">
+            <p className="text-xs font-semibold text-slate-900/80">{v.modelName}</p>
+            <p className="text-[10px] text-slate-900/40 mt-0.5">
               ★ {v.rating} · {v.reviews.toLocaleString()} reviews
             </p>
           </div>
@@ -269,7 +269,7 @@ export function HardwareVendorCard({ vendor: v, compact = false }: HardwareVendo
             <p className={['text-xs font-medium', v.inStock ? 'text-emerald-400' : 'text-amber-400/80'].join(' ')}>
               {v.inStock ? '● In Stock' : '○ Pre-order'}
             </p>
-            <p className="text-[10px] text-white/40">{v.leadTime}</p>
+            <p className="text-[10px] text-slate-900/40">{v.leadTime}</p>
           </div>
         </div>
       </div>
@@ -291,7 +291,7 @@ export function HardwareVendorCard({ vendor: v, compact = false }: HardwareVendo
         </div>
         <div className="flex flex-wrap gap-1.5">
           {v.highlights.map(h => (
-            <span key={h} className="inline-flex items-center rounded-full bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] text-white/50">
+            <span key={h} className="inline-flex items-center rounded-full bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] text-slate-900/50">
               {h}
             </span>
           ))}
@@ -299,7 +299,7 @@ export function HardwareVendorCard({ vendor: v, compact = false }: HardwareVendo
       </div>
 
       {/* CTA */}
-      <button className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-xs text-white/70 font-medium py-2 transition-colors group/btn">
+      <button className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-xs text-slate-900/70 font-medium py-2 transition-colors group/btn">
         Contact Vendor
         <ChevronRight className="h-3.5 w-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
       </button>

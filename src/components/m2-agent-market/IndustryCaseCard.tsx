@@ -156,8 +156,8 @@ interface MetricPillProps {
 function MetricPill({ label, value, delta, positive }: MetricPillProps) {
   return (
     <div className="flex flex-col rounded-xl bg-white/5 border border-white/10 p-2.5 min-w-[90px]">
-      <div className="text-sm font-bold text-white/90">{value}</div>
-      <div className="text-[10px] text-white/40 mt-0.5">{label}</div>
+      <div className="text-sm font-bold text-slate-900/90">{value}</div>
+      <div className="text-[10px] text-slate-900/40 mt-0.5">{label}</div>
       {delta && (
         <div className={[
           'text-[10px] font-medium mt-1 flex items-center gap-0.5',
@@ -185,10 +185,10 @@ export function IndustryCaseCard({ caseData: c, compact = false }: IndustryCaseC
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              <h3 className="text-sm font-semibold text-white/90 truncate">{c.title}</h3>
+              <h3 className="text-sm font-semibold text-slate-900/90 truncate">{c.title}</h3>
               <SellerLevelBadge level={c.sellerLevel} size="sm" showLabel={false} />
             </div>
-            <p className="text-xs text-white/40 mt-0.5">{c.company}</p>
+            <p className="text-xs text-slate-900/40 mt-0.5">{c.company}</p>
           </div>
           <span className={['shrink-0 rounded-full border text-[10px] font-medium px-2 py-0.5', catColor].join(' ')}>
             {CATEGORY_LABELS[c.category]}
@@ -197,8 +197,8 @@ export function IndustryCaseCard({ caseData: c, compact = false }: IndustryCaseC
         <div className="flex gap-2 mt-3 overflow-x-auto">
           {c.metrics.slice(0, 2).map(m => (
             <div key={m.label} className="rounded-lg bg-white/5 px-2 py-1.5">
-              <div className="text-xs font-semibold text-white/80">{m.value}</div>
-              <div className="text-[10px] text-white/40">{m.label}</div>
+              <div className="text-xs font-semibold text-slate-900/80">{m.value}</div>
+              <div className="text-[10px] text-slate-900/40">{m.label}</div>
             </div>
           ))}
         </div>
@@ -217,17 +217,17 @@ export function IndustryCaseCard({ caseData: c, compact = false }: IndustryCaseC
             </span>
             <SellerLevelBadge level={c.sellerLevel} size="sm" />
           </div>
-          <h3 className="text-sm font-semibold text-white/90 leading-snug">{c.title}</h3>
-          <p className="text-xs text-white/40 mt-0.5">{c.company} · {c.agentType}</p>
+          <h3 className="text-sm font-semibold text-slate-900/90 leading-snug">{c.title}</h3>
+          <p className="text-xs text-slate-900/40 mt-0.5">{c.company} · {c.agentType}</p>
         </div>
         <div className="shrink-0 text-right">
-          <div className="text-[10px] text-white/30">Deployed</div>
-          <div className="text-xs text-white/50">{c.deployedAt}</div>
+          <div className="text-[10px] text-slate-900/30">Deployed</div>
+          <div className="text-xs text-slate-900/50">{c.deployedAt}</div>
         </div>
       </div>
 
       {/* Summary */}
-      <p className="text-xs text-white/60 leading-relaxed line-clamp-2">{c.summary}</p>
+      <p className="text-xs text-slate-900/60 leading-relaxed line-clamp-2">{c.summary}</p>
 
       {/* Metrics */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -237,8 +237,8 @@ export function IndustryCaseCard({ caseData: c, compact = false }: IndustryCaseC
       {/* Tags */}
       <div className="flex flex-wrap gap-1.5">
         {c.tags.map(tag => (
-          <span key={tag} className="inline-flex items-center gap-1 rounded-full bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] text-white/50">
-            <BarChart2 className="h-2.5 w-2.5 text-white/30" />
+          <span key={tag} className="inline-flex items-center gap-1 rounded-full bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] text-slate-900/50">
+            <BarChart2 className="h-2.5 w-2.5 text-slate-900/30" />
             {tag}
           </span>
         ))}

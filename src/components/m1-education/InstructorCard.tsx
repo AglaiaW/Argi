@@ -57,32 +57,32 @@ export default function InstructorCard({ instructor = DEFAULT_INSTRUCTOR, classN
             className="w-16 h-16 rounded-xl object-cover border-2 border-white/20"
           />
           <div className="flex-1 min-w-0">
-            <h3 className="text-base font-bold text-white truncate">{instructor.name}</h3>
-            <p className="text-xs text-white/60 mt-0.5">{instructor.title}</p>
+            <h3 className="text-base font-bold text-slate-900 truncate">{instructor.name}</h3>
+            <p className="text-xs text-slate-900/60 mt-0.5">{instructor.title}</p>
             <div className="flex items-center gap-1 mt-1.5">
               <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
               <span className="text-sm font-semibold text-amber-400">{instructor.rating}</span>
-              <span className="text-xs text-white/40">({instructor.reviewCount.toLocaleString()} reviews)</span>
+              <span className="text-xs text-slate-900/40">({instructor.reviewCount.toLocaleString()} reviews)</span>
             </div>
           </div>
         </div>
 
         {/* Bio */}
-        <p className="text-xs text-white/70 leading-relaxed mb-4 line-clamp-3">{instructor.bio}</p>
+        <p className="text-xs text-slate-900/70 leading-relaxed mb-4 line-clamp-3">{instructor.bio}</p>
 
         {/* Stats */}
         <div className="grid grid-cols-3 gap-2 mb-4">
           <div className="flex flex-col items-center p-2 rounded-lg bg-white/5">
-            <span className="text-sm font-bold text-white">{instructor.studentCount > 999 ? `${(instructor.studentCount / 1000).toFixed(1)}k` : instructor.studentCount}</span>
-            <span className="text-[10px] text-white/40 flex items-center gap-1"><Users className="w-2.5 h-2.5" /> Students</span>
+            <span className="text-sm font-bold text-slate-900">{instructor.studentCount > 999 ? `${(instructor.studentCount / 1000).toFixed(1)}k` : instructor.studentCount}</span>
+            <span className="text-[10px] text-slate-900/40 flex items-center gap-1"><Users className="w-2.5 h-2.5" /> Students</span>
           </div>
           <div className="flex flex-col items-center p-2 rounded-lg bg-white/5">
-            <span className="text-sm font-bold text-white">{instructor.courseCount}</span>
-            <span className="text-[10px] text-white/40 flex items-center gap-1"><BookOpen className="w-2.5 h-2.5" /> Courses</span>
+            <span className="text-sm font-bold text-slate-900">{instructor.courseCount}</span>
+            <span className="text-[10px] text-slate-900/40 flex items-center gap-1"><BookOpen className="w-2.5 h-2.5" /> Courses</span>
           </div>
           <div className="flex flex-col items-center p-2 rounded-lg bg-white/5">
-            <span className="text-sm font-bold text-white">{instructor.reviewCount > 999 ? `${(instructor.reviewCount / 1000).toFixed(1)}k` : instructor.reviewCount}</span>
-            <span className="text-[10px] text-white/40 flex items-center gap-1"><Star className="w-2.5 h-2.5" /> Reviews</span>
+            <span className="text-sm font-bold text-slate-900">{instructor.reviewCount > 999 ? `${(instructor.reviewCount / 1000).toFixed(1)}k` : instructor.reviewCount}</span>
+            <span className="text-[10px] text-slate-900/40 flex items-center gap-1"><Star className="w-2.5 h-2.5" /> Reviews</span>
           </div>
         </div>
 
@@ -107,7 +107,7 @@ export default function InstructorCard({ instructor = DEFAULT_INSTRUCTOR, classN
 
       {/* CTA */}
       <div className="px-5 pb-4">
-        <button className="w-full py-2 rounded-xl font-semibold text-sm bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white transition-all">
+        <button className="w-full py-2 rounded-xl font-semibold text-sm bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-900 transition-all">
           View Profile
         </button>
       </div>

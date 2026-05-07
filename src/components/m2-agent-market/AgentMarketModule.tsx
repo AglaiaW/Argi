@@ -128,10 +128,10 @@ const COMPUTE_PACKAGES = [
 function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; onClose: () => void }) {
   if (!item) return null
   return (
-    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-[#0a1628] shadow-2xl w-[340px]">
+    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-white shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-[rgba(255,255,255,0.06)] px-5 py-4">
         <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>商品详情</span>
-        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[rgba(255,255,255,0.06)] hover:text-white transition-colors">
+        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-colors">
           <X className="h-4 w-4" />
         </button>
       </div>
@@ -141,14 +141,14 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         )}
         <div className="flex items-center gap-2 mb-2">
           {item.category && (
-            <span className="rounded-full bg-[#2B59C3]/15 px-2.5 py-1 text-[10px] font-bold text-[#2B59C3]">
+            <span className="rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-bold text-blue-600">
               {item.category as string}
             </span>
           )}
-          {item.isHot && <span className="rounded-full bg-[#FF6B6B]/15 px-2.5 py-1 text-[10px] font-bold text-[#FF6B6B]">热门</span>}
-          {item.isNew && <span className="rounded-full bg-[#14D1A0]/15 px-2.5 py-1 text-[10px] font-bold text-[#14D1A0]">新品</span>}
+          {item.isHot && <span className="rounded-full bg-red-50 px-2.5 py-1 text-[10px] font-bold text-red-500">热门</span>}
+          {item.isNew && <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-600">新品</span>}
         </div>
-        <h2 className="mb-2 text-lg font-bold text-white leading-snug" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+        <h2 className="mb-2 text-lg font-bold text-slate-900 leading-snug" style={{ fontFamily: 'Space Grotesk, monospace' }}>
           {item.name as string}
         </h2>
         {item.description && (
@@ -157,7 +157,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         {item.tags && Array.isArray(item.tags) && (
           <div className="flex flex-wrap gap-2 mb-4">
             {(item.tags as string[]).map((tag) => (
-              <span key={tag} className="rounded-full border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-2.5 py-1 text-[10px] text-slate-400">
+              <span key={tag} className="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[10px] text-slate-400">
                 #{tag}
               </span>
             ))}
@@ -166,8 +166,8 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         <div className="space-y-3">
           {item.rating && (
             <div className="flex items-center gap-2">
-              <Star className="h-4 w-4 fill-[#FFD23F] text-[#FFD23F]" />
-              <span className="text-sm font-bold text-[#FFD23F]">{(item.rating as number).toFixed(1)}</span>
+              <Star className="h-4 w-4 fill-[#FFD23F] text-amber-500" />
+              <span className="text-sm font-bold text-amber-500">{(item.rating as number).toFixed(1)}</span>
               {item.sales && <span className="text-xs text-slate-500">已售 {item.sales as number} 件</span>}
             </div>
           )}
@@ -184,14 +184,14 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
             </div>
           )}
           {item.effect && (
-            <div className="flex items-start gap-2 rounded-xl bg-[#14D1A0]/10 p-3">
-              <TrendingUp className="h-4 w-4 shrink-0 text-[#14D1A0] mt-0.5" />
-              <p className="text-sm text-[#14D1A0]">{item.effect as string}</p>
+            <div className="flex items-start gap-2 rounded-xl bg-emerald-50 p-3">
+              <TrendingUp className="h-4 w-4 shrink-0 text-emerald-600 mt-0.5" />
+              <p className="text-sm text-emerald-600">{item.effect as string}</p>
             </div>
           )}
           {item.price !== undefined && item.price > 0 && (
             <div className="flex items-center gap-2 pt-1">
-              <span className="text-2xl font-bold text-[#14D1A0]">¥{item.price.toLocaleString()}</span>
+              <span className="text-2xl font-bold text-emerald-600">¥{item.price.toLocaleString()}</span>
               {item.originalPrice && item.originalPrice > 0 && (
                 <span className="text-sm text-slate-500 line-through">¥{item.originalPrice as number}</span>
               )}
@@ -205,7 +205,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
             <button className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90 active:scale-[0.98]">
               <ShoppingCart className="h-4 w-4" /> 立即购买
             </button>
-            <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[rgba(255,255,255,0.08)] py-2.5 text-sm text-slate-400 transition-all hover:border-[rgba(255,255,255,0.15)]">
+            <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 py-2.5 text-sm text-slate-400 transition-all hover:border-[rgba(255,255,255,0.15)]">
               <Play className="h-4 w-4" /> {item.试用次数 as string || '免费试用3次'}
             </button>
           </>
@@ -229,26 +229,26 @@ function StatsBlock() {
   ]
   return (
     <div
-      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-gradient-to-br from-[#0f2744] to-[#0a1628] p-4"
+      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4"
       style={{ gridColumn: 'span 1' }}
     >
       <div className="mb-4 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#2B59C3]/15">
-          <Store className="h-4 w-4 text-[#2B59C3]" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50">
+          <Store className="h-4 w-4 text-blue-600" />
         </div>
         <span className="text-xs font-bold text-slate-400" style={{ fontFamily: 'monospace' }}>市场数据</span>
       </div>
       <div className="grid grid-cols-2 gap-3">
         {stats.map((s) => (
-          <div key={s.label} className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-3">
-            <p className="text-xl font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
+          <div key={s.label} className="rounded-xl border border-slate-200 bg-slate-100 p-3">
+            <p className="text-xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
             <p className="text-[10px] text-slate-500">{s.label}</p>
           </div>
         ))}
       </div>
-      <div className="mt-3 flex items-center gap-2 rounded-xl bg-[#2B59C3]/10 px-3 py-2">
-        <Shield className="h-4 w-4 text-[#2B59C3]" />
-        <span className="text-xs text-[#2B59C3]">7天无理由退款 · 交易保障</span>
+      <div className="mt-3 flex items-center gap-2 rounded-xl bg-blue-50 px-3 py-2">
+        <Shield className="h-4 w-4 text-blue-600" />
+        <span className="text-xs text-blue-600">7天无理由退款 · 交易保障</span>
       </div>
     </div>
   )
@@ -259,21 +259,21 @@ function FeaturedBlock({ agent, onClick }: { agent: typeof DIGITAL_HUMANS[0]; on
   return (
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.15)] active:scale-[0.98]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.15)] active:scale-[0.98]"
       style={{ gridColumn: 'span 4', gridRow: 'span 2' }}
     >
       {/* 全宽图片背景 */}
       <div className="relative flex-1 overflow-hidden">
         <img
-          src={agent.cover}
+          src={agent.avatar}
           alt={agent.name}
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-[#0a1628]/40 to-transparent" />
         {agent.isHot && (
           <div className="absolute left-4 top-4 flex items-center gap-1 rounded-full bg-[#FF6B6B] px-3 py-1">
-            <Zap className="h-3 w-3 text-white" />
-            <span className="text-[10px] font-bold text-white">热门爆款</span>
+            <Zap className="h-3 w-3 text-slate-900" />
+            <span className="text-[10px] font-bold text-slate-900">热门爆款</span>
           </div>
         )}
       </div>
@@ -281,25 +281,25 @@ function FeaturedBlock({ agent, onClick }: { agent: typeof DIGITAL_HUMANS[0]; on
       {/* Content overlay bottom */}
       <div className="absolute inset-x-0 bottom-0 flex flex-col justify-between p-5">
         <div className="mb-3 flex items-center gap-2">
-          <span className="rounded-full bg-[#2B59C3]/15 px-3 py-1 text-[10px] font-bold text-[#2B59C3]">{agent.category}</span>
-          <span className="rounded-full border border-[rgba(255,255,255,0.15)] bg-[rgba(0,0,0,0.3)] backdrop-blur-sm px-2.5 py-1 text-[10px] text-white">数字人</span>
+          <span className="rounded-full bg-blue-50 px-3 py-1 text-[10px] font-bold text-blue-600">{agent.category}</span>
+          <span className="rounded-full border border-slate-100 bg-slate-100 backdrop-blur-sm px-2.5 py-1 text-[10px] text-slate-900">数字人</span>
         </div>
         <div>
-          <h3 className="mb-1 text-xl font-bold leading-snug text-white drop-shadow-lg" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+          <h3 className="mb-1 text-xl font-bold leading-snug text-slate-900 drop-shadow-lg" style={{ fontFamily: 'Space Grotesk, monospace' }}>
             {agent.name}
           </h3>
-          <p className="mb-3 line-clamp-1 text-xs text-white/70">{agent.description}</p>
+          <p className="mb-3 line-clamp-1 text-xs text-slate-900/70">{agent.description}</p>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1">
-                <Star className="h-4 w-4 fill-[#FFD23F] text-[#FFD23F]" />
-                <span className="text-sm font-bold text-[#FFD23F]">{agent.rating}</span>
+                <Star className="h-4 w-4 fill-[#FFD23F] text-amber-500" />
+                <span className="text-sm font-bold text-amber-500">{agent.rating}</span>
               </div>
-              <span className="text-xs text-white/60">已售 {agent.sales.toLocaleString()}</span>
+              <span className="text-xs text-slate-900/60">已售 {agent.sales.toLocaleString()}</span>
             </div>
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-[#14D1A0]">¥{agent.price.toLocaleString()}</span>
-              {agent.originalPrice > 0 && <span className="text-sm text-white/50 line-through">¥{agent.originalPrice}</span>}
+              <span className="text-2xl font-bold text-emerald-600">¥{agent.price.toLocaleString()}</span>
+              {agent.originalPrice > 0 && <span className="text-sm text-slate-900/50 line-through">¥{agent.originalPrice}</span>}
             </div>
           </div>
         </div>
@@ -313,7 +313,7 @@ function DigitalHumanBlock({ agent, size, onClick }: { agent: typeof DIGITAL_HUM
   return (
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: 'span 2' }}
     >
       <div className="relative overflow-hidden" style={{ height: size === 'md' ? '110px' : '70px' }}>
@@ -321,8 +321,8 @@ function DigitalHumanBlock({ agent, size, onClick }: { agent: typeof DIGITAL_HUM
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628]/60 to-transparent" />
         {item.isHot && (
           <div className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-[#FF6B6B] px-2 py-0.5">
-            <Zap className="h-2.5 w-2.5 text-white" />
-            <span className="text-[9px] font-bold text-white">热门</span>
+            <Zap className="h-2.5 w-2.5 text-slate-900" />
+            <span className="text-[9px] font-bold text-slate-900">热门</span>
           </div>
         )}
         {item.isNew && (
@@ -334,19 +334,19 @@ function DigitalHumanBlock({ agent, size, onClick }: { agent: typeof DIGITAL_HUM
 
       <div className="flex flex-1 flex-col p-3">
         <div className="mb-1 flex items-center gap-1.5">
-          <span className="rounded-full bg-[#2B59C3]/15 px-2 py-0.5 text-[9px] font-medium text-[#2B59C3]">{item.category}</span>
+          <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[9px] font-medium text-blue-600">{item.category}</span>
         </div>
-        <h4 className="mb-1 line-clamp-1 text-sm font-bold leading-snug text-white transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+        <h4 className="mb-1 line-clamp-1 text-sm font-bold leading-snug text-slate-900 transition-colors group-hover:text-emerald-600" style={{ fontFamily: 'Space Grotesk, monospace' }}>
           {item.name}
         </h4>
         <p className="mb-2 line-clamp-2 text-[10px] text-slate-500">{item.description}</p>
 
         <div className="mt-auto flex items-center justify-between border-t border-[rgba(255,255,255,0.04)] pt-2.5">
           <div className="flex items-center gap-1">
-            <Star className="h-3 w-3 fill-[#FFD23F] text-[#FFD23F]" />
-            <span className="text-[10px] font-bold text-[#FFD23F]">{item.rating}</span>
+            <Star className="h-3 w-3 fill-[#FFD23F] text-amber-500" />
+            <span className="text-[10px] font-bold text-amber-500">{item.rating}</span>
           </div>
-          <span className="text-sm font-bold text-[#14D1A0]">¥{item.price.toLocaleString()}</span>
+          <span className="text-sm font-bold text-emerald-600">¥{item.price.toLocaleString()}</span>
         </div>
       </div>
     </button>
@@ -358,28 +358,28 @@ function CaseBlock({ item, size, onClick }: { item: typeof CASES[0]; size: 'md' 
   return (
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: size === 'lg' ? 'span 3' : 'span 1' }}
     >
       <div className="relative overflow-hidden" style={{ height: size === 'lg' ? '100px' : '70px' }}>
         <img src={item.thumbnail} alt={item.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-[#0a1628]/30 to-transparent" />
         <div className="absolute bottom-2 left-3">
-          <span className="rounded-full bg-[#2B59C3]/20 backdrop-blur-sm px-2.5 py-1 text-[10px] font-bold text-[#2B59C3]">
+          <span className="rounded-full bg-[#2B59C3]/20 backdrop-blur-sm px-2.5 py-1 text-[10px] font-bold text-blue-600">
             {item.industry} · {item.scenario}
           </span>
         </div>
       </div>
 
       <div className="flex flex-1 flex-col p-3">
-        <h4 className="mb-1 text-sm font-bold leading-snug text-white transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+        <h4 className="mb-1 text-sm font-bold leading-snug text-slate-900 transition-colors group-hover:text-emerald-600" style={{ fontFamily: 'Space Grotesk, monospace' }}>
           {item.title}
         </h4>
         <p className="mb-2 line-clamp-1 text-[10px] text-slate-400">{item.company} · {item.description}</p>
 
-        <div className="mt-auto flex items-start gap-2 rounded-xl bg-[#14D1A0]/10 p-2.5">
-          <TrendingUp className="h-3.5 w-3.5 shrink-0 text-[#14D1A0] mt-0.5" />
-          <p className="text-[10px] text-[#14D1A0]">{item.effect}</p>
+        <div className="mt-auto flex items-start gap-2 rounded-xl bg-emerald-50 p-2.5">
+          <TrendingUp className="h-3.5 w-3.5 shrink-0 text-emerald-600 mt-0.5" />
+          <p className="text-[10px] text-emerald-600">{item.effect}</p>
         </div>
 
         <div className="mt-2 flex items-center justify-between border-t border-[rgba(255,255,255,0.04)] pt-2">
@@ -387,7 +387,7 @@ function CaseBlock({ item, size, onClick }: { item: typeof CASES[0]; size: 'md' 
             <span className="flex items-center gap-1"><Eye className="h-3 w-3" />{item.views}</span>
             <span className="flex items-center gap-1"><Heart className="h-3 w-3" />{item.likes}</span>
           </div>
-          <span className="rounded-full bg-[#2B59C3]/15 px-2.5 py-1 text-[10px] font-bold text-[#2B59C3]">查看方案</span>
+          <span className="rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-bold text-blue-600">查看方案</span>
         </div>
       </div>
     </button>
@@ -399,7 +399,7 @@ function HardwareBlock({ item, size, onClick }: { item: typeof HARDWARE[0]; size
   return (
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: 'span 3' }}
     >
       <div className="relative overflow-hidden" style={{ height: '80px' }}>
@@ -413,14 +413,14 @@ function HardwareBlock({ item, size, onClick }: { item: typeof HARDWARE[0]; size
       </div>
 
       <div className="flex flex-1 flex-col p-3">
-        <h4 className="mb-1 line-clamp-1 text-sm font-bold text-white transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+        <h4 className="mb-1 line-clamp-1 text-sm font-bold text-slate-900 transition-colors group-hover:text-emerald-600" style={{ fontFamily: 'Space Grotesk, monospace' }}>
           {item.name}
         </h4>
         <p className="mb-2 text-[10px] text-slate-500">{item.vendor} · {item.tops}</p>
 
         <div className="mt-auto flex items-center justify-between">
-          <span className="rounded-full bg-[rgba(255,255,255,0.04)] px-2 py-0.5 text-[9px] text-slate-400">{item.category}</span>
-          <span className="text-xs font-bold text-[#14D1A0]">{item.priceRange}</span>
+          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] text-slate-400">{item.category}</span>
+          <span className="text-xs font-bold text-emerald-600">{item.priceRange}</span>
         </div>
       </div>
     </button>
@@ -432,7 +432,7 @@ function ComputeBlock({ item, onClick }: { item: typeof COMPUTE_PACKAGES[0]; onC
   return (
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.06)] bg-gradient-to-br from-[#0f2744] to-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: 'span 3' }}
     >
       <div className="relative overflow-hidden" style={{ height: '80px' }}>
@@ -447,21 +447,21 @@ function ComputeBlock({ item, onClick }: { item: typeof COMPUTE_PACKAGES[0]; onC
       </div>
 
       <div className="flex flex-1 flex-col p-3">
-        <h4 className="mb-1 text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>{item.name}</h4>
+        <h4 className="mb-1 text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>{item.name}</h4>
         <p className="mb-2 text-[10px] text-slate-400">{item.tokens} · {item.models.split('/')[0]}</p>
 
         <div className="mb-2 flex flex-wrap gap-1">
           {item.features.map((f) => (
-            <span key={f} className="rounded-full bg-[rgba(255,255,255,0.04)] px-2 py-0.5 text-[9px] text-slate-400">{f}</span>
+            <span key={f} className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] text-slate-400">{f}</span>
           ))}
         </div>
 
         <div className="mt-auto flex items-center justify-between border-t border-[rgba(255,255,255,0.04)] pt-2.5">
           <div className="flex items-baseline gap-1">
-            <span className="text-xl font-bold text-[#14D1A0]">¥{item.price}</span>
+            <span className="text-xl font-bold text-emerald-600">¥{item.price}</span>
             <span className="text-[10px] text-slate-500">/月</span>
           </div>
-          <span className="rounded-full bg-[#14D1A0]/15 px-2.5 py-1 text-[10px] font-bold text-[#14D1A0]">立即订阅</span>
+          <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-600">立即订阅</span>
         </div>
       </div>
     </button>
@@ -535,31 +535,31 @@ export default function AgentMarketModule() {
   }
 
   return (
-    <div className="relative flex h-full flex-col gap-0 overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(10,22,40,0.95)]">
+    <div className="relative flex h-full flex-col gap-0 overflow-hidden rounded-2xl border border-slate-200 bg-white">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-[rgba(255,255,255,0.06)] px-6 py-4 shrink-0">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#2B59C3]/15">
-            <Store className="h-5 w-5 text-[#2B59C3]" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50">
+            <Store className="h-5 w-5 text-blue-600" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>M2 · AGENT 市场</h1>
+            <h1 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>M2 · AGENT 市场</h1>
             <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>数字人 · 案例 · 硬件 · 算力通证</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
           <div className="text-center">
-            <p className="text-sm font-bold tabular-nums text-white" style={{ fontFamily: 'monospace' }}>2,847</p>
+            <p className="text-sm font-bold tabular-nums text-slate-900" style={{ fontFamily: 'monospace' }}>2,847</p>
             <p className="text-[10px] text-slate-500">Agent</p>
           </div>
           <div className="h-5 w-px bg-[rgba(255,255,255,0.08)]" />
           <div className="text-center">
-            <p className="text-sm font-bold tabular-nums text-[#2B59C3]" style={{ fontFamily: 'monospace' }}>1,204</p>
+            <p className="text-sm font-bold tabular-nums text-blue-600" style={{ fontFamily: 'monospace' }}>1,204</p>
             <p className="text-[10px] text-slate-500">数字人</p>
           </div>
           <div className="h-5 w-px bg-[rgba(255,255,255,0.08)]" />
           <div className="text-center">
-            <p className="text-sm font-bold tabular-nums text-[#FFD23F]" style={{ fontFamily: 'monospace' }}>156</p>
+            <p className="text-sm font-bold tabular-nums text-amber-500" style={{ fontFamily: 'monospace' }}>156</p>
             <p className="text-[10px] text-slate-500">算力商</p>
           </div>
         </div>

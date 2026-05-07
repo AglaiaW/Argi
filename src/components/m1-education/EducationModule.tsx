@@ -225,7 +225,7 @@ function CampDetailPanel({ camp, onClose }: { camp: typeof CAMPS[0]; onClose: ()
     <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-slate-200 bg-white shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
         <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>共学营详情</span>
-        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[rgba(255,255,255,0.06)] hover:text-slate-900 transition-colors"><X className="h-4 w-4" /></button>
+        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-colors"><X className="h-4 w-4" /></button>
       </div>
       <div className="flex-1 overflow-y-auto p-5">
         <img src={camp.thumbnail} alt={camp.name} className="w-full h-36 object-cover rounded-2xl mb-4" />
@@ -237,8 +237,8 @@ function CampDetailPanel({ camp, onClose }: { camp: typeof CAMPS[0]; onClose: ()
         <h2 className="mb-2 text-lg font-bold text-slate-900 leading-snug" style={{ fontFamily: 'Space Grotesk, monospace' }}>{camp.name}</h2>
         <p className="mb-4 text-sm text-slate-400">{camp.description}</p>
         <div className="mb-4 flex flex-wrap gap-2">
-          <span className="rounded-full bg-[#2B59C3]/15 px-2.5 py-1 text-[10px] font-bold text-[#2B59C3]">{camp.category}</span>
-          <span className="rounded-full bg-[#FFD23F]/15 px-2.5 py-1 text-[10px] font-bold text-[#FFD23F]">{camp.difficulty}</span>
+          <span className="rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-bold text-blue-600">{camp.category}</span>
+          <span className="rounded-full bg-amber-50 px-2.5 py-1 text-[10px] font-bold text-amber-500">{camp.difficulty}</span>
         </div>
         <div className="mb-4 space-y-2">
           {[
@@ -253,7 +253,7 @@ function CampDetailPanel({ camp, onClose }: { camp: typeof CAMPS[0]; onClose: ()
             </div>
           ))}
         </div>
-        <div className="mb-4 rounded-2xl border border-slate-200 bg-[rgba(255,255,255,0.02)] p-4">
+        <div className="mb-4 rounded-2xl border border-slate-200 bg-slate-100 p-4">
           <p className="mb-2 text-xs font-bold text-slate-400">课程大纲</p>
           <div className="space-y-2">
             {['Day 1-2: 选品策略与竞品分析', 'Day 3-4: 投放素材制作与优化', 'Day 5-6: 转化链路设计与AB测试', 'Day 7: 复盘与后续策略'].map((d, i) => (
@@ -268,7 +268,7 @@ function CampDetailPanel({ camp, onClose }: { camp: typeof CAMPS[0]; onClose: ()
       <div className="border-t border-slate-100 p-4 space-y-2">
         {joined ? (
           <>
-            <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[#14D1A0] py-3 text-sm font-bold text-[#14D1A0]">
+            <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[#14D1A0] py-3 text-sm font-bold text-emerald-600">
               <MessageSquare className="h-4 w-4" />进入学习群
             </button>
             <p className="text-center text-xs text-slate-500">加群码：OPCX618</p>
@@ -302,12 +302,12 @@ function BuddyDetailPanel({ buddy, onClose }: { buddy: typeof BUDDY; onClose: ()
           </div>
           <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>学习搭子</span>
         </div>
-        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[rgba(255,255,255,0.06)] hover:text-slate-900"><X className="h-4 w-4" /></button>
+        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-900"><X className="h-4 w-4" /></button>
       </div>
       {/* Tabs */}
       <div className="flex border-b border-slate-100">
         {[['profile', '资料'], ['chat', '聊天']].map(([t, label]) => (
-          <button key={t} onClick={() => setTab(t as typeof tab)} className={`flex-1 py-3 text-xs font-medium transition-colors ${tab === t ? 'text-[#14D1A0] border-b-2 border-[#14D1A0]' : 'text-slate-500'}`}>{label}</button>
+          <button key={t} onClick={() => setTab(t as typeof tab)} className={`flex-1 py-3 text-xs font-medium transition-colors ${tab === t ? 'text-emerald-600 border-b-2 border-[#14D1A0]' : 'text-slate-500'}`}>{label}</button>
         ))}
       </div>
       <div className="flex-1 overflow-y-auto">
@@ -318,10 +318,10 @@ function BuddyDetailPanel({ buddy, onClose }: { buddy: typeof BUDDY; onClose: ()
               <div>
                 <div className="flex items-center gap-2 mb-1">
                   <h3 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>{buddy.name}</h3>
-                  {buddy.isVerified && <CheckCircle2 className="h-4 w-4 text-[#14D1A0]" />}
+                  {buddy.isVerified && <CheckCircle2 className="h-4 w-4 text-emerald-600" />}
                 </div>
                 <p className="text-xs text-slate-500">{buddy.title}</p>
-                <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-[#14D1A0]/15 px-2 py-0.5 text-[10px] font-bold text-[#14D1A0]"><Zap className="h-3 w-3" />{buddy.matchScore}% 匹配</span>
+                <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-600"><Zap className="h-3 w-3" />{buddy.matchScore}% 匹配</span>
               </div>
             </div>
             <div>
@@ -331,13 +331,13 @@ function BuddyDetailPanel({ buddy, onClose }: { buddy: typeof BUDDY; onClose: ()
             <div>
               <p className="mb-2 text-xs font-bold text-slate-400">技能标签</p>
               <div className="flex flex-wrap gap-1.5">
-                {buddy.interests.map((i) => <span key={i} className="rounded-full bg-[rgba(255,255,255,0.04)] px-2.5 py-1 text-[10px] text-slate-400">#{i}</span>)}
+                {buddy.interests.map((i) => <span key={i} className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] text-slate-400">#{i}</span>)}
               </div>
             </div>
             <div className="grid grid-cols-3 gap-2">
               {[{ label: '连续打卡', value: `${buddy.streakDays}天` }, { label: '完成课时', value: `${buddy.sessionsCompleted}节` }, { label: '完课率', value: `${buddy.completionRate}%` }].map(({ label, value }) => (
-                <div key={label} className="rounded-xl border border-slate-100 bg-[rgba(255,255,255,0.02)] p-3 text-center">
-                  <p className="text-sm font-bold text-[#14D1A0]">{value}</p><p className="text-[10px] text-slate-500">{label}</p>
+                <div key={label} className="rounded-xl border border-slate-100 bg-slate-100 p-3 text-center">
+                  <p className="text-sm font-bold text-emerald-600">{value}</p><p className="text-[10px] text-slate-500">{label}</p>
                 </div>
               ))}
             </div>
@@ -352,7 +352,7 @@ function BuddyDetailPanel({ buddy, onClose }: { buddy: typeof BUDDY; onClose: ()
               ))}
             </div>
             <div className="border-t border-slate-100 p-3 flex gap-2">
-              <input value={message} onChange={(e) => setMessage(e.target.value)} placeholder="发消息..." className="flex-1 rounded-xl border border-slate-200 bg-[rgba(255,255,255,0.04)] px-3 py-2 text-xs text-slate-900 placeholder-slate-500 outline-none focus:border-[#14D1A0]/40" />
+              <input value={message} onChange={(e) => setMessage(e.target.value)} placeholder="发消息..." className="flex-1 rounded-xl border border-slate-200 bg-slate-100 px-3 py-2 text-xs text-slate-900 placeholder-slate-500 outline-none focus:border-[#14D1A0]/40" />
               <button className="rounded-xl bg-[#14D1A0] px-3 py-2 text-xs font-bold text-[#010409]">发送</button>
             </div>
           </div>
@@ -382,14 +382,14 @@ function SixDimensionalAssessment({ onClose }: { onClose: () => void }) {
     { key: 'hardware', label: '硬件落地', score: scores.hardware },
   ]
   return (
-    <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+    <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/10 backdrop-blur-sm">
       <div className="w-[480px] rounded-3xl border border-[rgba(255,255,255,0.1)] bg-white p-6 shadow-2xl">
         <div className="mb-5 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#2B59C3]/15"><Shield className="h-4 w-4 text-[#2B59C3]" /></div>
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50"><Shield className="h-4 w-4 text-blue-600" /></div>
             <h2 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>{step === 0 ? '六维能力测评' : '测评结果'}</h2>
           </div>
-          <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[rgba(255,255,255,0.06)] hover:text-slate-900"><X className="h-4 w-4" /></button>
+          <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-900"><X className="h-4 w-4" /></button>
         </div>
         {step === 0 ? (
           <>
@@ -400,7 +400,7 @@ function SixDimensionalAssessment({ onClose }: { onClose: () => void }) {
                   <span className="w-20 text-xs text-slate-400">{d.label}</span>
                   <div className="h-2 w-full flex-1 overflow-hidden rounded-full bg-[rgba(255,255,255,0.08)]">
                     <div className="h-full rounded-full bg-[#14D1A0]" style={{ width: `${d.score}%` }} /></div>
-                  <span className="w-10 text-right text-xs font-bold text-[#14D1A0]">{d.score}</span>
+                  <span className="w-10 text-right text-xs font-bold text-emerald-600">{d.score}</span>
                 </div>
               ))}
             </div>
@@ -414,9 +414,9 @@ function SixDimensionalAssessment({ onClose }: { onClose: () => void }) {
             <p className="mb-4 text-sm text-slate-400">根据你的能力画像，系统为你推荐以下学习路径：</p>
             <div className="mb-5 space-y-2">
               {[{ title: 'AI 内容创作从0到1', match: 92 }, { title: '7天 AI 创业启动计划', match: 78 }].map((rec) => (
-                <div key={rec.title} className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-[rgba(255,255,255,0.02)] p-4">
+                <div key={rec.title} className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-100 p-4">
                   <div className="flex-1"><p className="text-sm font-bold text-slate-900">{rec.title}</p><p className="text-xs text-slate-500">匹配度 {rec.match}%</p></div>
-                  <span className="text-lg font-bold text-[#14D1A0]">{rec.match}%</span>
+                  <span className="text-lg font-bold text-emerald-600">{rec.match}%</span>
                 </div>
               ))}
             </div>
@@ -439,19 +439,19 @@ function PathDetailPanel({ path, onClose }: { path: typeof PATHS[0]; onClose: ()
     <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-slate-200 bg-white shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
         <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>学习路径详情</span>
-        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[rgba(255,255,255,0.06)] hover:text-slate-900 transition-colors"><X className="h-4 w-4" /></button>
+        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-colors"><X className="h-4 w-4" /></button>
       </div>
       <div className="flex-1 overflow-y-auto p-5">
         <img src={path.thumbnail} alt={path.title} className="w-full h-32 object-cover rounded-2xl mb-4" />
         <div className="flex items-center gap-2 mb-2">
-          <span className="rounded-full bg-[#2B59C3]/15 px-2.5 py-1 text-[10px] font-bold text-[#2B59C3]">{path.category}</span>
-          <span className="rounded-full bg-[#14D1A0]/15 px-2.5 py-1 text-[10px] font-bold text-[#14D1A0]">{path.difficulty}</span>
+          <span className="rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-bold text-blue-600">{path.category}</span>
+          <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-600">{path.difficulty}</span>
         </div>
         <h2 className="mb-2 text-lg font-bold text-slate-900 leading-snug" style={{ fontFamily: 'Space Grotesk, monospace' }}>{path.title}</h2>
         <p className="mb-4 text-sm text-slate-400">{path.subtitle}</p>
         <div className="mb-4 flex items-center gap-4 text-xs text-slate-500">
           <span>{path.totalCourses}节课程</span><span>{path.totalDuration}</span>
-          <span className="flex items-center gap-1"><Star className="h-3 w-3 fill-[#FFD23F] text-[#FFD23F]" />{path.rating}</span>
+          <span className="flex items-center gap-1"><Star className="h-3 w-3 fill-[#FFD23F] text-amber-500" />{path.rating}</span>
           <span>{path.enrolledCount.toLocaleString()}人学习</span>
         </div>
         <div className="mb-4 space-y-2">
@@ -465,10 +465,10 @@ function PathDetailPanel({ path, onClose }: { path: typeof PATHS[0]; onClose: ()
             </div>
           ))}
         </div>
-        <div className="mb-4 rounded-2xl border border-slate-200 bg-[rgba(255,255,255,0.02)] p-4">
+        <div className="mb-4 rounded-2xl border border-slate-200 bg-slate-100 p-4">
           <p className="mb-2 text-xs font-bold text-slate-400">关联 Agent 模板</p>
-          <div className="flex items-center gap-2 rounded-xl bg-[rgba(255,255,255,0.04)] p-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#14D1A0]/15"><Zap className="h-4 w-4 text-[#14D1A0]" /></div>
+          <div className="flex items-center gap-2 rounded-xl bg-slate-100 p-3">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50"><Zap className="h-4 w-4 text-emerald-600" /></div>
             <div className="flex-1"><p className="text-xs font-medium text-slate-900">AI 内容创作助手</p><p className="text-[10px] text-slate-500">学完即可免费试用</p></div>
             <ArrowRight className="h-4 w-4 text-slate-500" />
           </div>
@@ -490,7 +490,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
     <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-slate-200 bg-white shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
         <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>详情</span>
-        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[rgba(255,255,255,0.06)] hover:text-slate-900 transition-colors">
+        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-colors">
           <X className="h-4 w-4" />
         </button>
       </div>
@@ -500,12 +500,12 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         )}
         <div className="flex items-center gap-2 mb-2">
           {item.category && (
-            <span className="rounded-full bg-[#2B59C3]/15 px-2.5 py-1 text-[10px] font-bold text-[#2B59C3]">
+            <span className="rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-bold text-blue-600">
               {item.category as string}
             </span>
           )}
           {item.level && (
-            <span className="rounded-full bg-[#14D1A0]/15 px-2.5 py-1 text-[10px] font-bold text-[#14D1A0]">
+            <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-600">
               {item.level as string}
             </span>
           )}
@@ -522,7 +522,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         {item.tags && Array.isArray(item.tags) && (
           <div className="flex flex-wrap gap-2 mb-4">
             {(item.tags as string[]).map((tag) => (
-              <span key={tag} className="rounded-full border border-slate-200 bg-[rgba(255,255,255,0.04)] px-2.5 py-1 text-[10px] text-slate-400">
+              <span key={tag} className="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[10px] text-slate-400">
                 #{tag}
               </span>
             ))}
@@ -531,8 +531,8 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         <div className="space-y-3">
           {item.rating && (
             <div className="flex items-center gap-2">
-              <Star className="h-4 w-4 fill-[#FFD23F] text-[#FFD23F]" />
-              <span className="text-sm font-bold text-[#FFD23F]">{(item.rating as number).toFixed(1)}</span>
+              <Star className="h-4 w-4 fill-[#FFD23F] text-amber-500" />
+              <span className="text-sm font-bold text-amber-500">{(item.rating as number).toFixed(1)}</span>
               {item.reviewCount && <span className="text-xs text-slate-500">({(item.reviewCount as number).toLocaleString()} 评价)</span>}
             </div>
           )}
@@ -556,7 +556,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
           )}
           {item.price !== undefined && (
             <div className="flex items-center gap-2 pt-1">
-              <span className="text-2xl font-bold text-[#14D1A0]">
+              <span className="text-2xl font-bold text-emerald-600">
                 {item.price === 0 ? '免费' : `¥${(item.price as number).toLocaleString()}`}
               </span>
               {item.originalPrice && item.originalPrice > 0 && (
@@ -591,26 +591,26 @@ function StatsBlock() {
   ]
   return (
     <div
-      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-[#0f2744] to-[#0a1628] p-4"
+      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4"
       style={{ gridColumn: 'span 1', gridRow: 'span 1' }}
     >
       <div className="mb-4 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#14D1A0]/15">
-          <BookOpen className="h-4 w-4 text-[#14D1A0]" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50">
+          <BookOpen className="h-4 w-4 text-emerald-600" />
         </div>
         <span className="text-xs font-bold text-slate-400" style={{ fontFamily: 'monospace' }}>平台数据</span>
       </div>
       <div className="grid grid-cols-2 gap-3">
         {stats.map((s) => (
-          <div key={s.label} className="rounded-xl border border-slate-100 bg-[rgba(255,255,255,0.03)] p-3">
+          <div key={s.label} className="rounded-xl border border-slate-100 bg-slate-100 p-3">
             <p className="text-xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
             <p className="text-[10px] text-slate-500">{s.label}</p>
           </div>
         ))}
       </div>
-      <div className="mt-3 flex items-center gap-2 rounded-xl bg-[#14D1A0]/10 px-3 py-2">
-        <Gift className="h-4 w-4 text-[#14D1A0]" />
-        <span className="text-xs text-[#14D1A0]">新用户首月课程8折优惠</span>
+      <div className="mt-3 flex items-center gap-2 rounded-xl bg-emerald-50 px-3 py-2">
+        <Gift className="h-4 w-4 text-emerald-600" />
+        <span className="text-xs text-emerald-600">新用户首月课程8折优惠</span>
       </div>
     </div>
   )
@@ -644,10 +644,10 @@ function FeaturedCourseBlock({ course, onClick }: { course: typeof COURSES[0]; o
       <div className="absolute inset-0 flex flex-col justify-between p-5">
         <div>
           <div className="mb-3 flex items-center gap-2">
-            <span className="rounded-full bg-[#14D1A0]/15 px-3 py-1 text-[10px] font-bold text-[#14D1A0]">
+            <span className="rounded-full bg-emerald-50 px-3 py-1 text-[10px] font-bold text-emerald-600">
               {course.category}
             </span>
-            <span className="rounded-full border border-[rgba(255,255,255,0.15)] bg-[rgba(0,0,0,0.3)] backdrop-blur-sm px-2.5 py-1 text-[10px] text-slate-900">
+            <span className="rounded-full border border-slate-100 bg-slate-200 backdrop-blur-sm px-2.5 py-1 text-[10px] text-slate-900">
               {course.level}
             </span>
           </div>
@@ -668,8 +668,8 @@ function FeaturedCourseBlock({ course, onClick }: { course: typeof COURSES[0]; o
 
           <div className="mb-3 flex items-center gap-4 text-xs text-slate-900/70">
             <div className="flex items-center gap-1">
-              <Star className="h-4 w-4 fill-[#FFD23F] text-[#FFD23F]" />
-              <span className="font-bold text-[#FFD23F]">{course.rating}</span>
+              <Star className="h-4 w-4 fill-[#FFD23F] text-amber-500" />
+              <span className="font-bold text-amber-500">{course.rating}</span>
               <span className="text-slate-900/60">({course.reviewCount})</span>
             </div>
             <div className="flex items-center gap-1">
@@ -686,7 +686,7 @@ function FeaturedCourseBlock({ course, onClick }: { course: typeof COURSES[0]; o
             <div className="mb-3">
               <div className="mb-1 flex items-center justify-between text-[10px] text-slate-900/60">
                 <span>学习进度</span>
-                <span className="text-[#14D1A0]">{course.progress}%</span>
+                <span className="text-emerald-600">{course.progress}%</span>
               </div>
               <div className="h-1.5 w-full rounded-full bg-white/20">
                 <div className="h-1.5 rounded-full bg-[#14D1A0]" style={{ width: `${course.progress}%` }} />
@@ -696,12 +696,12 @@ function FeaturedCourseBlock({ course, onClick }: { course: typeof COURSES[0]; o
 
           <div className="flex items-center justify-between">
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-[#14D1A0]">¥{course.price.toLocaleString()}</span>
+              <span className="text-2xl font-bold text-emerald-600">¥{course.price.toLocaleString()}</span>
               {course.originalPrice > 0 && (
                 <span className="text-sm text-slate-900/50 line-through">¥{course.originalPrice}</span>
               )}
             </div>
-            <div className="flex items-center gap-1 text-[#14D1A0] opacity-0 transition-all duration-300 group-hover:opacity-100">
+            <div className="flex items-center gap-1 text-emerald-600 opacity-0 transition-all duration-300 group-hover:opacity-100">
               <span className="text-sm font-bold">查看详情</span>
               <ChevronRight className="h-4 w-4" />
             </div>
@@ -745,11 +745,11 @@ function CourseBlock({ course, size, onClick }: { course: typeof COURSES[0]; siz
       <div className="flex flex-1 flex-col justify-between p-2.5">
         <div>
           <div className="mb-1 flex items-center gap-1">
-            <span className="rounded-full bg-[#2B59C3]/15 px-2 py-0.5 text-[9px] font-medium text-[#2B59C3]">
+            <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[9px] font-medium text-blue-600">
               {course.level}
             </span>
           </div>
-          <h4 className="mb-1 line-clamp-2 text-xs font-bold leading-snug text-slate-900 transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+          <h4 className="mb-1 line-clamp-2 text-xs font-bold leading-snug text-slate-900 transition-colors group-hover:text-emerald-600" style={{ fontFamily: 'Space Grotesk, monospace' }}>
             {course.title}
           </h4>
           <div className="mb-2 flex items-center gap-2">
@@ -760,11 +760,11 @@ function CourseBlock({ course, size, onClick }: { course: typeof COURSES[0]; siz
 
         <div className="mt-auto flex items-center justify-between border-t border-[rgba(255,255,255,0.04)] pt-2">
           <div className="flex items-center gap-1">
-            <Star className="h-3 w-3 fill-[#FFD23F] text-[#FFD23F]" />
-            <span className="text-[10px] font-bold text-[#FFD23F]">{course.rating}</span>
+            <Star className="h-3 w-3 fill-[#FFD23F] text-amber-500" />
+            <span className="text-[10px] font-bold text-amber-500">{course.rating}</span>
           </div>
           <div className="flex items-center gap-1">
-            <span className="text-xs font-bold text-[#14D1A0]">¥{course.price}</span>
+            <span className="text-xs font-bold text-emerald-600">¥{course.price}</span>
             {course.originalPrice > 0 && (
               <span className="text-[10px] text-slate-500 line-through">¥{course.originalPrice}</span>
             )}
@@ -788,7 +788,7 @@ function PathBlock({ path, size, onClick }: { path: typeof PATHS[0]; size: 'md' 
         <img src={path.thumbnail} alt={path.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-[#0a1628]/30 to-transparent" />
         <div className="absolute bottom-1.5 left-2">
-          <span className="rounded-full bg-[#14D1A0]/20 backdrop-blur-sm px-2 py-0.5 text-[9px] font-bold text-[#14D1A0]">
+          <span className="rounded-full bg-[#14D1A0]/20 backdrop-blur-sm px-2 py-0.5 text-[9px] font-bold text-emerald-600">
             {path.category} · {path.difficulty}
           </span>
         </div>
@@ -796,7 +796,7 @@ function PathBlock({ path, size, onClick }: { path: typeof PATHS[0]; size: 'md' 
 
       <div className="flex flex-1 flex-col justify-between p-2.5">
         <div>
-          <h4 className="mb-1 line-clamp-2 text-xs font-bold leading-snug text-slate-900 transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+          <h4 className="mb-1 line-clamp-2 text-xs font-bold leading-snug text-slate-900 transition-colors group-hover:text-emerald-600" style={{ fontFamily: 'Space Grotesk, monospace' }}>
             {path.title}
           </h4>
           <p className="line-clamp-1 text-[10px] text-slate-500">{path.subtitle}</p>
@@ -807,7 +807,7 @@ function PathBlock({ path, size, onClick }: { path: typeof PATHS[0]; size: 'md' 
             <div>
               <div className="mb-1 flex items-center justify-between text-[9px] text-slate-500">
                 <span>进度</span>
-                <span className="text-[#14D1A0]">{path.progress}%</span>
+                <span className="text-emerald-600">{path.progress}%</span>
               </div>
               <div className="h-1 w-full rounded-full bg-[rgba(255,255,255,0.08)]">
                 <div className="h-1 rounded-full bg-[#14D1A0]" style={{ width: `${path.progress}%` }} />
@@ -820,8 +820,8 @@ function PathBlock({ path, size, onClick }: { path: typeof PATHS[0]; size: 'md' 
               <span>{path.totalDuration}</span>
             </div>
             <div className="flex items-center gap-1">
-              <Star className="h-3 w-3 fill-[#FFD23F] text-[#FFD23F]" />
-              <span className="text-[9px] font-bold text-[#FFD23F]">{path.rating}</span>
+              <Star className="h-3 w-3 fill-[#FFD23F] text-amber-500" />
+              <span className="text-[9px] font-bold text-amber-500">{path.rating}</span>
             </div>
           </div>
         </div>
@@ -869,7 +869,7 @@ function CampBlock({ camp, onClick }: { camp: typeof CAMPS[0]; onClick: () => vo
             </div>
             <span className="text-[10px] text-slate-500">{camp.memberCount.toLocaleString()}人已报名</span>
           </div>
-          <span className="rounded-full bg-[#14D1A0]/15 px-2.5 py-1 text-[10px] font-bold text-[#14D1A0]">立即报名</span>
+          <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-600">立即报名</span>
         </div>
       </div>
     </button>
@@ -896,13 +896,13 @@ function InstructorBlock({ inst, size, onClick }: { inst: typeof INSTRUCTORS[0];
       <p className="mb-2 line-clamp-1 text-[10px] text-slate-500">{inst.title}</p>
       <div className="mb-3 flex flex-wrap justify-center gap-1">
         {inst.specialties.slice(0, 2).map((s) => (
-          <span key={s} className="rounded-full bg-[rgba(255,255,255,0.04)] px-2 py-0.5 text-[9px] text-slate-400">{s}</span>
+          <span key={s} className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] text-slate-400">{s}</span>
         ))}
       </div>
       <div className="mt-auto flex w-full items-center justify-between border-t border-[rgba(255,255,255,0.04)] pt-3">
         <div className="flex items-center gap-0.5">
-          <Star className="h-3 w-3 fill-[#FFD23F] text-[#FFD23F]" />
-          <span className="text-[10px] font-bold text-[#FFD23F]">{inst.rating}</span>
+          <Star className="h-3 w-3 fill-[#FFD23F] text-amber-500" />
+          <span className="text-[10px] font-bold text-amber-500">{inst.rating}</span>
         </div>
         <span className="text-[10px] text-slate-500">{(inst.studentCount / 1000).toFixed(1)}k学员</span>
       </div>
@@ -926,10 +926,10 @@ function BuddyBlock({ buddy, onClick }: { buddy: typeof BUDDY; onClick: () => vo
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-0.5">
             <h4 className="text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>{buddy.name}</h4>
-            {buddy.isVerified && <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-[#14D1A0]" />}
+            {buddy.isVerified && <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-600" />}
           </div>
           <p className="text-[10px] text-slate-500">{buddy.title}</p>
-          <span className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-[#14D1A0]/15 px-2.5 py-0.5 text-[10px] font-bold text-[#14D1A0]">
+          <span className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold text-emerald-600">
             <Zap className="h-3 w-3" />{buddy.matchScore}% 匹配度
           </span>
         </div>
@@ -939,7 +939,7 @@ function BuddyBlock({ buddy, onClick }: { buddy: typeof BUDDY; onClick: () => vo
 
       <div className="mb-3 flex flex-wrap gap-1.5">
         {buddy.interests.map((i) => (
-          <span key={i} className="rounded-full bg-[rgba(255,255,255,0.04)] px-2 py-0.5 text-[9px] text-slate-400">#{i}</span>
+          <span key={i} className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] text-slate-400">#{i}</span>
         ))}
       </div>
 
@@ -1045,8 +1045,8 @@ export default function EducationModule() {
       <div className="flex flex-col border-b border-slate-100 bg-white px-6 py-4 shrink-0 gap-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#14D1A0]/10">
-              <BookOpen className="h-5 w-5 text-[#14D1A0]" />
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50">
+              <BookOpen className="h-5 w-5 text-emerald-600" />
             </div>
             <div>
               <h1 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>M1 · 技能教育</h1>
@@ -1060,7 +1060,7 @@ export default function EducationModule() {
             </div>
             <div className="h-5 w-px bg-slate-200" />
             <div className="text-center">
-              <p className="text-sm font-bold tabular-nums text-[#14D1A0]" style={{ fontFamily: 'monospace' }}>2</p>
+              <p className="text-sm font-bold tabular-nums text-emerald-600" style={{ fontFamily: 'monospace' }}>2</p>
               <p className="text-[10px] text-slate-400">路径</p>
             </div>
             <div className="h-5 w-px bg-slate-200" />
@@ -1071,7 +1071,7 @@ export default function EducationModule() {
             <div className="h-5 w-px bg-slate-200" />
             <button
               onClick={() => setShowAssessment(true)}
-              className="flex items-center gap-1.5 rounded-xl border border-[#2B59C3]/30 bg-[#2B59C3]/10 px-3 py-1.5 text-xs font-medium text-[#2B59C3] transition-all hover:border-[#2B59C3]/50 hover:bg-[#2B59C3]/20"
+              className="flex items-center gap-1.5 rounded-xl border border-[#2B59C3]/30 bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-600 transition-all hover:border-[#2B59C3]/50 hover:bg-[#2B59C3]/20"
             >
               <Shield className="h-3.5 w-3.5" />六维测评
             </button>
@@ -1086,15 +1086,15 @@ export default function EducationModule() {
               placeholder="搜索课程、讲师或学习路径..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-slate-50 py-2 pl-9 pr-4 text-xs text-slate-900 placeholder-slate-400 outline-none focus:border-[#14D1A0] focus:bg-white transition-colors"
+              className="w-full rounded-xl border border-slate-200 bg-slate-100 py-2 pl-9 pr-4 text-xs text-slate-900 placeholder-slate-400 outline-none focus:border-[#14D1A0] focus:bg-white transition-colors"
             />
           </div>
-          <div className="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 p-1">
+          <div className="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-100 p-1">
             {['全部', '入门', '进阶', '高级', '免费'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${activeTab === tab ? 'bg-[#14D1A0] text-slate-900' : 'text-slate-500 hover:text-slate-900'}`}
+                className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${activeTab === tab ? 'bg-slate-900 text-slate-900' : 'text-slate-500 hover:text-slate-600'}`}
               >
                 {tab}
               </button>
@@ -1103,7 +1103,7 @@ export default function EducationModule() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
-            className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-700 outline-none focus:border-[#14D1A0]"
+            className="rounded-xl border border-slate-200 bg-slate-100 px-3 py-2 text-xs text-slate-700 outline-none focus:border-[#14D1A0]"
           >
             <option value="popular">最热</option>
             <option value="rating">评分最高</option>
@@ -1114,7 +1114,7 @@ export default function EducationModule() {
       </div>
 
       {/* 内容区 — 浅灰背景 + 卡片式布局 */}
-      <div className="relative flex-1 overflow-hidden bg-slate-50">
+      <div className="relative flex-1 overflow-hidden bg-slate-100">
         <div className="absolute inset-0 overflow-auto p-4">
           <div
             className="grid min-h-full gap-3"

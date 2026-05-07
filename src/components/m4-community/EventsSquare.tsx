@@ -18,7 +18,7 @@ import type { CommunityEvent } from './mockData'
 
 const EVENT_TYPE_CONFIG: Record<string, { label: string; color: string; bg: string; icon: React.ReactNode }> = {
   webinar: { label: '直播', color: '#6366f1', bg: 'bg-[#6366f1]/15', icon: <Video className="h-3.5 w-3.5" /> },
-  workshop: { label: '工作坊', color: '#14D1A0', bg: 'bg-[#14D1A0]/15', icon: <Users className="h-3.5 w-3.5" /> },
+  workshop: { label: '工作坊', color: '#14D1A0', bg: 'bg-emerald-50', icon: <Users className="h-3.5 w-3.5" /> },
   meetup: { label: '聚会', color: '#f59e0b', bg: 'bg-[#f59e0b]/15', icon: <MapPin className="h-3.5 w-3.5" /> },
   conference: { label: '峰会', color: '#ec4899', bg: 'bg-[#ec4899]/15', icon: <Calendar className="h-3.5 w-3.5" /> },
   hackathon: { label: 'Hackathon', color: '#f97316', bg: 'bg-[#f97316]/15', icon: <Star className="h-3.5 w-3.5" /> },
@@ -63,7 +63,7 @@ export default function EventsSquare({ events }: EventsSquareProps) {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setSelectedEvent(null)}
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] text-slate-400 hover:border-[rgba(255,255,255,0.16)] hover:text-white"
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-slate-100 text-slate-400 hover:border-[rgba(255,255,255,0.16)] hover:text-slate-900"
           >
             <ChevronRight className="h-4 w-4 rotate-180" />
           </button>
@@ -90,55 +90,55 @@ export default function EventsSquare({ events }: EventsSquareProps) {
             )}
           </div>
 
-          <h2 className="text-lg font-bold text-white leading-tight" style={{ fontFamily: 'monospace' }}>
+          <h2 className="text-lg font-bold text-slate-900 leading-tight" style={{ fontFamily: 'monospace' }}>
             {selectedEvent.title}
           </h2>
 
           {/* Meta info */}
           <div className="mt-4 grid grid-cols-2 gap-3">
-            <div className="flex items-center gap-2 rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] p-3">
+            <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-100 p-3">
               <Calendar className="h-4 w-4 text-slate-500" />
               <div>
-                <p className="text-xs font-medium text-white" style={{ fontFamily: 'monospace' }}>{selectedEvent.date}</p>
+                <p className="text-xs font-medium text-slate-900" style={{ fontFamily: 'monospace' }}>{selectedEvent.date}</p>
                 <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>{selectedEvent.time}</p>
               </div>
             </div>
-            <div className="flex items-center gap-2 rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] p-3">
+            <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-100 p-3">
               <Clock className="h-4 w-4 text-slate-500" />
               <div>
-                <p className="text-xs font-medium text-white" style={{ fontFamily: 'monospace' }}>{selectedEvent.duration}</p>
+                <p className="text-xs font-medium text-slate-900" style={{ fontFamily: 'monospace' }}>{selectedEvent.duration}</p>
                 <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>活动时长</p>
               </div>
             </div>
-            <div className="flex items-center gap-2 rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] p-3">
+            <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-100 p-3">
               <Users className="h-4 w-4 text-slate-500" />
               <div>
-                <p className="text-xs font-medium text-white" style={{ fontFamily: 'monospace' }}>
+                <p className="text-xs font-medium text-slate-900" style={{ fontFamily: 'monospace' }}>
                   {selectedEvent.maxAttendees ? `${selectedEvent.attendees}/${selectedEvent.maxAttendees}` : selectedEvent.attendees}
                 </p>
                 <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>报名人数</p>
               </div>
             </div>
-            <div className="flex items-center gap-2 rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] p-3">
+            <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-100 p-3">
               <MapPin className="h-4 w-4 text-slate-500" />
               <div>
-                <p className="text-xs font-medium text-white" style={{ fontFamily: 'monospace' }}>{selectedEvent.platform}</p>
+                <p className="text-xs font-medium text-slate-900" style={{ fontFamily: 'monospace' }}>{selectedEvent.platform}</p>
                 <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>活动形式</p>
               </div>
             </div>
           </div>
 
           {/* Host */}
-          <div className="mt-4 flex items-center gap-3 rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] p-3">
+          <div className="mt-4 flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-100 p-3">
             <img src={selectedEvent.hostAvatar} alt={selectedEvent.host} className="h-10 w-10 rounded-full object-cover" />
             <div>
-              <p className="text-xs font-medium text-white" style={{ fontFamily: 'monospace' }}>{selectedEvent.host}</p>
+              <p className="text-xs font-medium text-slate-900" style={{ fontFamily: 'monospace' }}>{selectedEvent.host}</p>
               <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>活动主讲/主办</p>
             </div>
           </div>
 
           {/* Description */}
-          <div className="mt-4 rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] p-4">
+          <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-100 p-4">
             <p className="text-sm leading-relaxed text-slate-300" style={{ fontFamily: 'monospace' }}>
               {selectedEvent.description}
             </p>
@@ -147,7 +147,7 @@ export default function EventsSquare({ events }: EventsSquareProps) {
           {/* Tags */}
           <div className="mt-4 flex flex-wrap gap-2">
             {selectedEvent.tags.map((tag) => (
-              <span key={tag} className="rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.05)] px-2.5 py-1 text-[10px] text-slate-400" style={{ fontFamily: 'monospace' }}>
+              <span key={tag} className="rounded-full border border-[rgba(255,255,255,0.1)] bg-slate-100 px-2.5 py-1 text-[10px] text-slate-400" style={{ fontFamily: 'monospace' }}>
                 #{tag}
               </span>
             ))}
@@ -157,7 +157,7 @@ export default function EventsSquare({ events }: EventsSquareProps) {
           <div className="mt-6 flex items-center justify-between border-t border-[rgba(255,255,255,0.06)] pt-5">
             <div>
               {spotsLeft !== null && spotsLeft > 0 && (
-                <p className="text-xs text-[#14D1A0]" style={{ fontFamily: 'monospace' }}>
+                <p className="text-xs text-emerald-600" style={{ fontFamily: 'monospace' }}>
                   仅剩 {spotsLeft} 个名额
                 </p>
               )}
@@ -169,12 +169,12 @@ export default function EventsSquare({ events }: EventsSquareProps) {
             </div>
             <div className="flex gap-3">
               {isEnded ? (
-                <button className="flex items-center gap-2 rounded-xl border border-[rgba(255,255,255,0.12)] bg-[rgba(255,255,255,0.05)] px-5 py-2.5 text-sm font-medium text-white">
+                <button className="flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-100 px-5 py-2.5 text-sm font-medium text-slate-900">
                   <ExternalLink className="h-4 w-4" />
                   查看回放
                 </button>
               ) : isLive ? (
-                <button className="flex items-center gap-2 rounded-xl bg-[#ef4444] px-5 py-2.5 text-sm font-bold text-white">
+                <button className="flex items-center gap-2 rounded-xl bg-[#ef4444] px-5 py-2.5 text-sm font-bold text-slate-900">
                   <Radio className="h-4 w-4 animate-pulse" />
                   立即加入
                 </button>
@@ -195,20 +195,20 @@ export default function EventsSquare({ events }: EventsSquareProps) {
     <div className="flex h-full flex-col gap-4">
       {/* Summary stats */}
       <div className="grid grid-cols-3 gap-3">
-        <div className="flex flex-col items-center rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] p-3">
-          <p className="text-xl font-bold text-white tabular-nums" style={{ fontFamily: 'monospace' }}>
+        <div className="flex flex-col items-center rounded-2xl border border-slate-200 bg-slate-100 p-3">
+          <p className="text-xl font-bold text-slate-900 tabular-nums" style={{ fontFamily: 'monospace' }}>
             {upcoming.length}
           </p>
           <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>近期活动</p>
         </div>
-        <div className="flex flex-col items-center rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] p-3">
-          <p className="text-xl font-bold text-[#14D1A0] tabular-nums" style={{ fontFamily: 'monospace' }}>
+        <div className="flex flex-col items-center rounded-2xl border border-slate-200 bg-slate-100 p-3">
+          <p className="text-xl font-bold text-emerald-600 tabular-nums" style={{ fontFamily: 'monospace' }}>
             {featured.length}
           </p>
           <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>精选活动</p>
         </div>
-        <div className="flex flex-col items-center rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] p-3">
-          <p className="text-xl font-bold text-[#2B59C3] tabular-nums" style={{ fontFamily: 'monospace' }}>
+        <div className="flex flex-col items-center rounded-2xl border border-slate-200 bg-slate-100 p-3">
+          <p className="text-xl font-bold text-blue-600 tabular-nums" style={{ fontFamily: 'monospace' }}>
             {events.filter((e) => e.status === 'live').length}
           </p>
           <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>正在进行</p>
@@ -228,8 +228,8 @@ export default function EventsSquare({ events }: EventsSquareProps) {
             onClick={() => setFilter(f.id)}
             className={`shrink-0 rounded-full px-3 py-1 text-[10px] font-medium transition ${
               filter === f.id
-                ? 'bg-[#14D1A0]/20 text-[#14D1A0]'
-                : 'bg-[rgba(255,255,255,0.05)] text-slate-500 hover:text-white'
+                ? 'bg-[#14D1A0]/20 text-emerald-600'
+                : 'bg-slate-100 text-slate-500 hover:text-slate-900'
             }`}
             style={{ fontFamily: 'monospace' }}
           >
@@ -250,7 +250,7 @@ export default function EventsSquare({ events }: EventsSquareProps) {
               <button
                 key={event.id}
                 onClick={() => setSelectedEvent(event)}
-                className="w-full text-left rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] p-4 transition hover:border-[rgba(255,255,255,0.12)] hover:bg-[rgba(255,255,255,0.05)]"
+                className="w-full text-left rounded-2xl border border-slate-200 bg-slate-100 p-4 transition hover:border-[rgba(255,255,255,0.12)] hover:bg-slate-100"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
@@ -265,7 +265,7 @@ export default function EventsSquare({ events }: EventsSquareProps) {
                         {statusCfg.label}
                       </span>
                     </div>
-                    <h3 className="text-sm font-medium text-white leading-snug" style={{ fontFamily: 'monospace' }}>
+                    <h3 className="text-sm font-medium text-slate-900 leading-snug" style={{ fontFamily: 'monospace' }}>
                       {event.title}
                     </h3>
                     <div className="mt-2 flex flex-wrap items-center gap-3">

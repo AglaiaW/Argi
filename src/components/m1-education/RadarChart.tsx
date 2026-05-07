@@ -177,7 +177,7 @@ export default function RadarChart({ data, size = 280, className = '' }: RadarCh
       />
       {hoveredIndex !== null && (
         <div
-          className="absolute pointer-events-none left-1/2 -translate-x-1/2 bg-slate-800/95 border border-white/20 text-white text-xs px-3 py-1.5 rounded-lg shadow-xl"
+          className="absolute pointer-events-none left-1/2 -translate-x-1/2 bg-slate-800/95 border border-white/20 text-slate-900 text-xs px-3 py-1.5 rounded-lg shadow-xl"
           style={{ bottom: '-2.5rem' }}
         >
           <span className="font-semibold">{data[hoveredIndex].label}:</span>{' '}

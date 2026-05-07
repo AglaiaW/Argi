@@ -77,19 +77,19 @@ export default function DiscussionZone({ discussions }: DiscussionZoneProps) {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setSelectedPost(null)}
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] text-slate-400 hover:border-[rgba(255,255,255,0.16)] hover:text-white"
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-slate-100 text-slate-400 hover:border-[rgba(255,255,255,0.16)] hover:text-slate-900"
           >
             <ChevronRight className="h-4 w-4 rotate-180" />
           </button>
           <div className="flex-1">
             {selectedPost.isSolved && (
-              <span className="flex items-center gap-1 rounded-full bg-[#14D1A0]/20 px-2 py-0.5 text-[10px] font-bold text-[#14D1A0]" style={{ fontFamily: 'monospace' }}>
+              <span className="flex items-center gap-1 rounded-full bg-[#14D1A0]/20 px-2 py-0.5 text-[10px] font-bold text-emerald-600" style={{ fontFamily: 'monospace' }}>
                 <CheckCircle className="h-3 w-3" />
                 已解决
               </span>
             )}
           </div>
-          <button className="flex h-8 w-8 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] text-slate-400 hover:border-[rgba(255,255,255,0.16)] hover:text-white">
+          <button className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-slate-100 text-slate-400 hover:border-[rgba(255,255,255,0.16)] hover:text-slate-900">
             <Bookmark className="h-4 w-4" />
           </button>
         </div>
@@ -104,7 +104,7 @@ export default function DiscussionZone({ discussions }: DiscussionZoneProps) {
             />
             <div className="flex-1">
               <div className="flex items-center gap-2">
-                <span className="text-sm font-medium text-white" style={{ fontFamily: 'monospace' }}>
+                <span className="text-sm font-medium text-slate-900" style={{ fontFamily: 'monospace' }}>
                   {selectedPost.author}
                 </span>
                 <span
@@ -124,7 +124,7 @@ export default function DiscussionZone({ discussions }: DiscussionZoneProps) {
             </div>
           </div>
 
-          <h2 className="mt-4 text-lg font-bold text-white" style={{ fontFamily: 'monospace' }}>
+          <h2 className="mt-4 text-lg font-bold text-slate-900" style={{ fontFamily: 'monospace' }}>
             {selectedPost.title}
           </h2>
 
@@ -132,7 +132,7 @@ export default function DiscussionZone({ discussions }: DiscussionZoneProps) {
             {selectedPost.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.05)] px-2.5 py-1 text-[10px] text-slate-400"
+                className="rounded-full border border-[rgba(255,255,255,0.1)] bg-slate-100 px-2.5 py-1 text-[10px] text-slate-400"
                 style={{ fontFamily: 'monospace' }}
               >
                 #{tag}
@@ -140,7 +140,7 @@ export default function DiscussionZone({ discussions }: DiscussionZoneProps) {
             ))}
           </div>
 
-          <div className="mt-5 rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] p-5">
+          <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-100 p-5">
             <p className="text-sm leading-relaxed text-slate-300" style={{ fontFamily: 'monospace' }}>
               {selectedPost.content}
             </p>
@@ -169,7 +169,7 @@ export default function DiscussionZone({ discussions }: DiscussionZoneProps) {
             <input
               type="text"
               placeholder="写下你的回复..."
-              className="flex-1 rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
+              className="flex-1 rounded-xl border border-slate-200 bg-slate-100 px-4 py-2.5 text-sm text-slate-900 placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
               style={{ fontFamily: 'monospace' }}
             />
             <button className="rounded-xl bg-[#14D1A0] px-4 py-2.5 text-sm font-bold text-black">
@@ -191,7 +191,7 @@ export default function DiscussionZone({ discussions }: DiscussionZoneProps) {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="搜索讨论话题..."
-          className="w-full rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] pl-10 pr-4 py-2.5 text-sm text-white placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
+          className="w-full rounded-xl border border-slate-200 bg-slate-100 pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
           style={{ fontFamily: 'monospace' }}
         />
       </div>
@@ -208,8 +208,8 @@ export default function DiscussionZone({ discussions }: DiscussionZoneProps) {
             onClick={() => setFilter(f.id)}
             className={`flex items-center gap-1.5 shrink-0 rounded-full px-3 py-1 text-[10px] font-medium transition ${
               filter === f.id
-                ? 'bg-[#14D1A0]/20 text-[#14D1A0]'
-                : 'bg-[rgba(255,255,255,0.05)] text-slate-500 hover:text-white'
+                ? 'bg-[#14D1A0]/20 text-emerald-600'
+                : 'bg-slate-100 text-slate-500 hover:text-slate-900'
             }`}
             style={{ fontFamily: 'monospace' }}
           >
@@ -224,8 +224,8 @@ export default function DiscussionZone({ discussions }: DiscussionZoneProps) {
         {pinned.length > 0 && (
           <div className="mb-3">
             <div className="mb-2 flex items-center gap-2">
-              <Pin className="h-3 w-3 text-[#14D1A0]" />
-              <span className="text-[10px] font-bold text-[#14D1A0]" style={{ fontFamily: 'monospace' }}>
+              <Pin className="h-3 w-3 text-emerald-600" />
+              <span className="text-[10px] font-bold text-emerald-600" style={{ fontFamily: 'monospace' }}>
                 置顶
               </span>
             </div>
@@ -286,7 +286,7 @@ function DiscussionCard({
   return (
     <button
       onClick={onClick}
-      className="w-full text-left rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] p-4 transition hover:border-[rgba(255,255,255,0.12)] hover:bg-[rgba(255,255,255,0.05)]"
+      className="w-full text-left rounded-2xl border border-slate-200 bg-slate-100 p-4 transition hover:border-[rgba(255,255,255,0.12)] hover:bg-slate-100"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3 flex-1 min-w-0">
@@ -297,10 +297,10 @@ function DiscussionCard({
           />
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1 flex-wrap">
-              {post.isPinned && <Pin className="h-3 w-3 shrink-0 text-[#14D1A0]" />}
+              {post.isPinned && <Pin className="h-3 w-3 shrink-0 text-emerald-600" />}
               {post.trending && <TrendingUp className="h-3 w-3 shrink-0 text-orange-400" />}
-              {post.isSolved && <CheckCircle className="h-3 w-3 shrink-0 text-[#14D1A0]" />}
-              <span className="text-xs font-medium text-white truncate" style={{ fontFamily: 'monospace' }}>
+              {post.isSolved && <CheckCircle className="h-3 w-3 shrink-0 text-emerald-600" />}
+              <span className="text-xs font-medium text-slate-900 truncate" style={{ fontFamily: 'monospace' }}>
                 {post.title}
               </span>
             </div>

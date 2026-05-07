@@ -60,13 +60,13 @@ export default function CourseCard({ course = DEFAULT_COURSE, variant = 'default
         <img src={course.thumbnail} alt={course.title} className="w-36 h-28 object-cover flex-shrink-0" />
         <div className="flex-1 p-4 min-w-0">
           <div className="flex items-start justify-between gap-2 mb-1">
-            <h3 className="text-sm font-bold text-white truncate">{course.title}</h3>
+            <h3 className="text-sm font-bold text-slate-900 truncate">{course.title}</h3>
             {course.isBestseller && (
               <span className="flex-shrink-0 px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 border border-amber-500/30 text-amber-400 uppercase">Bestseller</span>
             )}
           </div>
-          <p className="text-xs text-white/50 mb-2 truncate">{course.instructor}</p>
-          <div className="flex items-center gap-3 text-[10px] text-white/40">
+          <p className="text-xs text-slate-900/50 mb-2 truncate">{course.instructor}</p>
+          <div className="flex items-center gap-3 text-[10px] text-slate-900/40">
             <span className="flex items-center gap-1"><Star className="w-3 h-3 text-amber-400 fill-amber-400" />{course.rating}</span>
             <span className="flex items-center gap-1"><Users className="w-3 h-3" />{(course.studentCount / 1000).toFixed(1)}k</span>
             <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{course.duration}</span>
@@ -74,7 +74,7 @@ export default function CourseCard({ course = DEFAULT_COURSE, variant = 'default
           </div>
         </div>
         <div className="flex-shrink-0 pr-4 pt-4">
-          <span className="text-sm font-bold text-white">${course.price}</span>
+          <span className="text-sm font-bold text-slate-900">${course.price}</span>
         </div>
       </div>
     )
@@ -85,12 +85,12 @@ export default function CourseCard({ course = DEFAULT_COURSE, variant = 'default
       <div className={`flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 border border-white/8 hover:border-white/16 transition-all ${className}`}>
         <img src={course.thumbnail} alt={course.title} className="w-12 h-12 rounded-lg object-cover flex-shrink-0" />
         <div className="flex-1 min-w-0">
-          <p className="text-xs font-semibold text-white truncate">{course.title}</p>
-          <p className="text-[10px] text-white/40 mt-0.5">{course.instructor}</p>
+          <p className="text-xs font-semibold text-slate-900 truncate">{course.title}</p>
+          <p className="text-[10px] text-slate-900/40 mt-0.5">{course.instructor}</p>
         </div>
         <div className="flex-shrink-0 flex items-center gap-1">
           <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-          <span className="text-xs font-semibold text-white">{course.rating}</span>
+          <span className="text-xs font-semibold text-slate-900">{course.rating}</span>
         </div>
       </div>
     )
@@ -105,15 +105,15 @@ export default function CourseCard({ course = DEFAULT_COURSE, variant = 'default
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-transparent" />
         <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5">
           {course.isBestseller && (
-            <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-500 text-white">Bestseller</span>
+            <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-500 text-slate-900">Bestseller</span>
           )}
           {course.isNew && (
-            <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-500 text-white">New</span>
+            <span className="px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-500 text-slate-900">New</span>
           )}
         </div>
         <div className="absolute bottom-2.5 left-2.5">
           <button className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center hover:bg-white/30 transition-colors">
-            <Play className="w-4 h-4 text-white fill-white ml-0.5" />
+            <Play className="w-4 h-4 text-slate-900 fill-white ml-0.5" />
           </button>
         </div>
         {course.progress !== undefined && course.progress > 0 && (
@@ -127,27 +127,27 @@ export default function CourseCard({ course = DEFAULT_COURSE, variant = 'default
       <div className="p-4">
         <div className="flex items-center gap-2 mb-1.5">
           <span className={`px-2 py-0.5 rounded border text-[9px] font-medium ${LEVEL_COLORS[course.level]}`}>{course.level}</span>
-          <span className="text-[9px] text-white/40">{course.category}</span>
+          <span className="text-[9px] text-slate-900/40">{course.category}</span>
         </div>
-        <h3 className="text-sm font-bold text-white leading-snug mb-1 line-clamp-2">{course.title}</h3>
-        <p className="text-xs text-white/50 mb-3 truncate">{course.instructor}</p>
+        <h3 className="text-sm font-bold text-slate-900 leading-snug mb-1 line-clamp-2">{course.title}</h3>
+        <p className="text-xs text-slate-900/50 mb-3 truncate">{course.instructor}</p>
 
         {/* Stats */}
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center gap-1">
             <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-            <span className="text-xs font-semibold text-white">{course.rating}</span>
-            <span className="text-[10px] text-white/40">({(course.reviewCount / 1000).toFixed(1)}k)</span>
+            <span className="text-xs font-semibold text-slate-900">{course.rating}</span>
+            <span className="text-[10px] text-slate-900/40">({(course.reviewCount / 1000).toFixed(1)}k)</span>
           </div>
-          <div className="flex items-center gap-1 text-white/40">
+          <div className="flex items-center gap-1 text-slate-900/40">
             <Users className="w-3.5 h-3.5" />
             <span className="text-xs">{(course.studentCount / 1000).toFixed(1)}k</span>
           </div>
-          <div className="flex items-center gap-1 text-white/40">
+          <div className="flex items-center gap-1 text-slate-900/40">
             <Clock className="w-3.5 h-3.5" />
             <span className="text-xs">{course.duration}</span>
           </div>
-          <div className="flex items-center gap-1 text-white/40">
+          <div className="flex items-center gap-1 text-slate-900/40">
             <BookOpen className="w-3.5 h-3.5" />
             <span className="text-xs">{course.lessons}</span>
           </div>
@@ -156,20 +156,20 @@ export default function CourseCard({ course = DEFAULT_COURSE, variant = 'default
         {/* Tags */}
         <div className="flex flex-wrap gap-1 mb-3">
           {course.tags.slice(0, 3).map((tag) => (
-            <span key={tag} className="px-1.5 py-0.5 rounded text-[9px] bg-white/5 border border-white/8 text-white/50">{tag}</span>
+            <span key={tag} className="px-1.5 py-0.5 rounded text-[9px] bg-white/5 border border-white/8 text-slate-900/50">{tag}</span>
           ))}
         </div>
 
         {/* Price + CTA */}
         <div className="flex items-center justify-between pt-2 border-t border-white/6">
-          <span className="text-base font-bold text-white">${course.price}</span>
+          <span className="text-base font-bold text-slate-900">${course.price}</span>
           {course.progress !== undefined && course.progress > 0 ? (
             <span className="flex items-center gap-1.5 text-xs font-semibold text-emerald-400">
               <TrendingUp className="w-3.5 h-3.5" />
               {course.progress}% Done
             </span>
           ) : (
-            <button className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 hover:bg-emerald-400 text-white transition-colors">
+            <button className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 hover:bg-emerald-400 text-slate-900 transition-colors">
               Enroll
             </button>
           )}

@@ -33,7 +33,7 @@ const TIER_STYLES: Record<TokenTier, { label: string; bg: string; text: string; 
   standard: {
     label: 'Standard',
     bg: 'bg-white/5',
-    text: 'text-white/60',
+    text: 'text-slate-900/60',
     border: 'border-white/10',
   },
   priority: {
@@ -199,36 +199,36 @@ function PurchaseModal({ token: t, onClose }: PurchaseModalProps) {
   const total = amount * t.pricePerUnit
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-sm p-4" onClick={onClose}>
       <div className="w-full max-w-md rounded-2xl bg-[#0f172a] border border-white/20 p-6 space-y-5 shadow-2xl" onClick={e => e.stopPropagation()}>
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
             <span className="text-2xl">{t.logo}</span>
             <div>
-              <h3 className="text-base font-semibold text-white/90">{t.provider}</h3>
-              <p className="text-xs text-white/40">{t.tokenName}</p>
+              <h3 className="text-base font-semibold text-slate-900/90">{t.provider}</h3>
+              <p className="text-xs text-slate-900/40">{t.tokenName}</p>
             </div>
           </div>
-          <button onClick={onClose} className="text-white/40 hover:text-white/80 text-sm">✕</button>
+          <button onClick={onClose} className="text-slate-900/40 hover:text-slate-900/80 text-sm">✕</button>
         </div>
 
         <div className="rounded-xl bg-white/5 border border-white/10 p-4 space-y-3">
           <div className="flex justify-between text-sm">
-            <span className="text-white/50">Unit price</span>
+            <span className="text-slate-900/50">Unit price</span>
             <span className="text-emerald-400 font-medium">${t.pricePerUnit.toFixed(4)} / token</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-white/50">Min purchase</span>
-            <span className="text-white/70">{t.minPurchase.toLocaleString()} tokens</span>
+            <span className="text-slate-900/50">Min purchase</span>
+            <span className="text-slate-900/70">{t.minPurchase.toLocaleString()} tokens</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-white/50">Available</span>
-            <span className="text-white/70">{t.available.toLocaleString()} tokens</span>
+            <span className="text-slate-900/50">Available</span>
+            <span className="text-slate-900/70">{t.available.toLocaleString()} tokens</span>
           </div>
         </div>
 
         <div className="space-y-2">
-          <div className="flex justify-between text-xs text-white/50">
+          <div className="flex justify-between text-xs text-slate-900/50">
             <span>Amount (tokens)</span>
             <span>{amount.toLocaleString()}</span>
           </div>
@@ -246,7 +246,7 @@ function PurchaseModal({ token: t, onClose }: PurchaseModalProps) {
               <button
                 key={n}
                 onClick={() => setAmount(Math.min(n, t.maxPurchase, t.available))}
-                className="flex-1 rounded-lg bg-white/5 border border-white/10 text-[10px] text-white/60 py-1.5 hover:bg-white/10 transition-colors"
+                className="flex-1 rounded-lg bg-white/5 border border-white/10 text-[10px] text-slate-900/60 py-1.5 hover:bg-white/10 transition-colors"
               >
                 {n >= 1000 ? `${n/1000}K` : n}
               </button>
@@ -255,7 +255,7 @@ function PurchaseModal({ token: t, onClose }: PurchaseModalProps) {
         </div>
 
         <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/20 p-4 flex justify-between items-center">
-          <span className="text-sm text-white/60">Total cost</span>
+          <span className="text-sm text-slate-900/60">Total cost</span>
           <div className="text-right">
             <div className="text-xl font-bold text-emerald-400">${total.toFixed(2)}</div>
             {t.batchDiscount && <div className="text-[10px] text-emerald-400/70 mt-0.5">{t.batchDiscount}</div>}
@@ -290,28 +290,28 @@ function TokenRow({ token: t, onPurchase }: TokenRowProps) {
         <span className="text-2xl shrink-0">{t.logo}</span>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="text-sm font-semibold text-white/90">{t.provider}</h3>
+            <h3 className="text-sm font-semibold text-slate-900/90">{t.provider}</h3>
             <SellerLevelBadge level={t.level} size="sm" />
             <span className={['text-[10px] rounded-full px-2 py-0.5 border font-medium', tier.bg, tier.text, tier.border].join(' ')}>
               {tier.label}
             </span>
           </div>
-          <p className="text-[11px] text-white/40 mt-0.5">{t.tokenName} · {t.location}</p>
+          <p className="text-[11px] text-slate-900/40 mt-0.5">{t.tokenName} · {t.location}</p>
         </div>
 
         {/* Price + key stats */}
         <div className="hidden sm:flex items-center gap-4 shrink-0">
           <div className="text-right">
             <div className="text-sm font-bold text-emerald-400">${t.pricePerUnit.toFixed(4)}</div>
-            <div className="text-[10px] text-white/40">{t.priceUnit}</div>
+            <div className="text-[10px] text-slate-900/40">{t.priceUnit}</div>
           </div>
           <div className="text-right">
-            <div className="text-xs text-white/70">{t.avgLatency}</div>
-            <div className="text-[10px] text-white/40">latency</div>
+            <div className="text-xs text-slate-900/70">{t.avgLatency}</div>
+            <div className="text-[10px] text-slate-900/40">latency</div>
           </div>
           <div className="text-right">
-            <div className="text-xs text-white/70">{t.reliability}</div>
-            <div className="text-[10px] text-white/40">SLA</div>
+            <div className="text-xs text-slate-900/70">{t.reliability}</div>
+            <div className="text-[10px] text-slate-900/40">SLA</div>
           </div>
         </div>
 
@@ -325,7 +325,7 @@ function TokenRow({ token: t, onPurchase }: TokenRowProps) {
           </button>
           <button
             onClick={() => setExpanded(!expanded)}
-            className="rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/40 text-xs p-1.5 transition-colors"
+            className="rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-900/40 text-xs p-1.5 transition-colors"
           >
             {expanded ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
           </button>
@@ -342,14 +342,14 @@ function TokenRow({ token: t, onPurchase }: TokenRowProps) {
               { label: 'Reviews', value: t.reviews.toLocaleString() },
             ].map(stat => (
               <div key={stat.label} className="rounded-lg bg-white/5 p-2.5">
-                <div className="text-xs font-semibold text-white/80">{stat.value}</div>
-                <div className="text-[10px] text-white/40 mt-0.5">{stat.label}</div>
+                <div className="text-xs font-semibold text-slate-900/80">{stat.value}</div>
+                <div className="text-[10px] text-slate-900/40 mt-0.5">{stat.label}</div>
               </div>
             ))}
           </div>
           <div className="flex flex-wrap gap-1.5">
             {t.features.map(f => (
-              <span key={f} className="inline-flex items-center rounded-full bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] text-white/50">{f}</span>
+              <span key={f} className="inline-flex items-center rounded-full bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] text-slate-900/50">{f}</span>
             ))}
           </div>
           {t.batchDiscount && (
@@ -358,7 +358,7 @@ function TokenRow({ token: t, onPurchase }: TokenRowProps) {
               <span className="text-xs text-amber-400">{t.batchDiscount}</span>
             </div>
           )}
-          <div className="text-[10px] text-white/30 flex items-center gap-1">
+          <div className="text-[10px] text-slate-900/30 flex items-center gap-1">
             <Clock className="h-2.5 w-2.5" />
             Valid until {t.validUntil} · {t.usageMode}
           </div>
@@ -392,8 +392,8 @@ export function ComputeTokenCard({ tokens = MOCK_TOKENS }: ComputeTokenCardProps
     <section className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-white/90">Compute Tokens</h2>
-          <p className="text-xs text-white/40 mt-0.5">Trade GPU & AI compute by the token</p>
+          <h2 className="text-lg font-semibold text-slate-900/90">Compute Tokens</h2>
+          <p className="text-xs text-slate-900/40 mt-0.5">Trade GPU & AI compute by the token</p>
         </div>
         <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-500/15 border border-blue-500/30 px-2.5 py-1 text-xs text-blue-400">
           <TrendingUp className="h-3 w-3" />
@@ -403,7 +403,7 @@ export function ComputeTokenCard({ tokens = MOCK_TOKENS }: ComputeTokenCardProps
 
       {/* Sort & filter bar */}
       <div className="flex items-center gap-2 flex-wrap">
-        <span className="text-[10px] text-white/40">Sort:</span>
+        <span className="text-[10px] text-slate-900/40">Sort:</span>
         {(['price', 'reliability', 'available'] as const).map(key => (
           <button
             key={key}
@@ -415,7 +415,7 @@ export function ComputeTokenCard({ tokens = MOCK_TOKENS }: ComputeTokenCardProps
               'flex items-center gap-1 rounded-lg text-[10px] px-2 py-1 border transition-colors',
               sortKey === key
                 ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400'
-                : 'bg-white/5 border-white/10 text-white/50 hover:bg-white/10',
+                : 'bg-white/5 border-white/10 text-slate-900/50 hover:bg-white/10',
             ].join(' ')}
           >
             {key.charAt(0).toUpperCase() + key.slice(1)}
@@ -423,7 +423,7 @@ export function ComputeTokenCard({ tokens = MOCK_TOKENS }: ComputeTokenCardProps
           </button>
         ))}
         <div className="ml-auto flex items-center gap-1.5">
-          <span className="text-[10px] text-white/40">Tier:</span>
+          <span className="text-[10px] text-slate-900/40">Tier:</span>
           {(['all', 'standard', 'priority', 'dedicated', 'enterprise'] as const).map(t => (
             <button
               key={t}
@@ -431,8 +431,8 @@ export function ComputeTokenCard({ tokens = MOCK_TOKENS }: ComputeTokenCardProps
               className={[
                 'rounded-lg text-[10px] px-2 py-1 border transition-colors',
                 filterTier === t
-                  ? 'bg-white/15 border-white/25 text-white/80'
-                  : 'bg-white/5 border-white/10 text-white/40 hover:bg-white/10',
+                  ? 'bg-white/15 border-white/25 text-slate-900/80'
+                  : 'bg-white/5 border-white/10 text-slate-900/40 hover:bg-white/10',
               ].join(' ')}
             >
               {t.charAt(0).toUpperCase() + t.slice(1)}

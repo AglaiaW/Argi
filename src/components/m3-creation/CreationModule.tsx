@@ -130,10 +130,10 @@ const SCHEDULE = [
 function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; onClose: () => void }) {
   if (!item) return null
   return (
-    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-[#0a1628] shadow-2xl w-[340px]">
+    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-white shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-[rgba(255,255,255,0.06)] px-5 py-4">
         <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>详情</span>
-        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[rgba(255,255,255,0.06)]">
+        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100">
           <X className="h-4 w-4" />
         </button>
       </div>
@@ -143,10 +143,10 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         )}
         <div className="flex items-center gap-2 mb-2">
           {item.type && (
-            <span className="rounded-full bg-[#14D1A0]/15 px-2.5 py-1 text-[10px] font-bold text-[#14D1A0]">{item.type as string}</span>
+            <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-600">{item.type as string}</span>
           )}
         </div>
-        <h2 className="mb-2 text-lg font-bold text-white leading-snug" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+        <h2 className="mb-2 text-lg font-bold text-slate-900 leading-snug" style={{ fontFamily: 'Space Grotesk, monospace' }}>
           {item.title as string}
         </h2>
         {item.subtitle && (
@@ -158,14 +158,14 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         <div className="space-y-3">
           {item.rating && (
             <div className="flex items-center gap-2">
-              <Star className="h-4 w-4 fill-[#FFD23F] text-[#FFD23F]" />
-              <span className="text-sm font-bold text-[#FFD23F]">{(item.rating as number).toFixed(1)}</span>
+              <Star className="h-4 w-4 fill-[#FFD23F] text-amber-500" />
+              <span className="text-sm font-bold text-amber-500">{(item.rating as number).toFixed(1)}</span>
               {item.sales && <span className="text-xs text-slate-500">已售 {item.sales as number} 件</span>}
             </div>
           )}
           {item.price !== undefined && item.price > 0 && (
             <div className="flex items-center gap-2 pt-1">
-              <span className="text-2xl font-bold text-[#14D1A0]">¥{item.price.toLocaleString()}</span>
+              <span className="text-2xl font-bold text-emerald-600">¥{item.price.toLocaleString()}</span>
               {item.originalPrice && item.originalPrice > 0 && (
                 <span className="text-sm text-slate-500 line-through">¥{item.originalPrice as number}</span>
               )}
@@ -177,7 +177,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         <button className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90">
           <ArrowRight className="h-4 w-4" /> 立即购买
         </button>
-        <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[rgba(255,255,255,0.08)] py-2.5 text-sm text-slate-400 transition-all">
+        <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 py-2.5 text-sm text-slate-400 transition-all">
           <Play className="h-4 w-4" /> 预览内容
         </button>
       </div>
@@ -195,26 +195,26 @@ function StatsBlock() {
   ]
   return (
     <div
-      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-gradient-to-br from-[#0f2744] to-[#0a1628] p-4"
+      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-100 to-slate-50 p-4"
       style={{ gridColumn: 'span 3' }}
     >
       <div className="mb-4 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#14D1A0]/15">
-          <BarChart2 className="h-4 w-4 text-[#14D1A0]" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50">
+          <BarChart2 className="h-4 w-4 text-emerald-600" />
         </div>
         <span className="text-xs font-bold text-slate-400" style={{ fontFamily: 'monospace' }}>创作数据</span>
       </div>
       <div className="grid grid-cols-2 gap-3">
         {stats.map((s) => (
-          <div key={s.label} className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-3">
-            <p className="text-xl font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
+          <div key={s.label} className="rounded-xl border border-slate-200 bg-slate-100 p-3">
+            <p className="text-xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
             <p className="text-[10px] text-slate-500">{s.label}</p>
           </div>
         ))}
       </div>
-      <div className="mt-3 flex items-center gap-2 rounded-xl bg-[#14D1A0]/10 px-3 py-2">
-        <TrendingUp className="h-4 w-4 text-[#14D1A0]" />
-        <span className="text-xs text-[#14D1A0]">本周曝光较上周 +23%</span>
+      <div className="mt-3 flex items-center gap-2 rounded-xl bg-emerald-50 px-3 py-2">
+        <TrendingUp className="h-4 w-4 text-emerald-600" />
+        <span className="text-xs text-emerald-600">本周曝光较上周 +23%</span>
       </div>
     </div>
   )
@@ -225,7 +225,7 @@ function FeaturedBlock({ item, onClick }: { item: typeof FEATURED_PACKAGE; onCli
   return (
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.15)] active:scale-[0.98]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.15)] active:scale-[0.98]"
       style={{ gridColumn: 'span 3', gridRow: 'span 4' }}
     >
       <div className="relative w-3/5 shrink-0 overflow-hidden">
@@ -242,23 +242,23 @@ function FeaturedBlock({ item, onClick }: { item: typeof FEATURED_PACKAGE; onCli
       <div className="flex w-2/5 flex-col justify-between p-6 text-left">
         <div>
           <div className="mb-3 flex items-center gap-2">
-            <span className="rounded-full bg-[#14D1A0]/15 px-3 py-1 text-[10px] font-bold text-[#14D1A0]">{item.type}</span>
+            <span className="rounded-full bg-emerald-50 px-3 py-1 text-[10px] font-bold text-emerald-600">{item.type}</span>
           </div>
-          <h3 className="mb-2 text-xl font-bold leading-snug text-white transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+          <h3 className="mb-2 text-xl font-bold leading-snug text-slate-900 transition-colors group-hover:text-emerald-600" style={{ fontFamily: 'Space Grotesk, monospace' }}>
             {item.title}
           </h3>
           <p className="mb-4 line-clamp-2 text-sm text-slate-400">{item.subtitle}</p>
 
           <div className="mb-4 flex flex-wrap gap-1.5">
             {item.tags.map((tag) => (
-              <span key={tag} className="rounded-full bg-[rgba(255,255,255,0.04)] px-2.5 py-1 text-[10px] text-slate-400">#{tag}</span>
+              <span key={tag} className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] text-slate-400">#{tag}</span>
             ))}
           </div>
 
           <div className="mb-4 space-y-1.5">
             {item.items.map((it) => (
               <div key={it} className="flex items-center gap-2 text-xs text-slate-400">
-                <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-[#14D1A0]" />
+                <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-600" />
                 <span>{it}</span>
               </div>
             ))}
@@ -266,8 +266,8 @@ function FeaturedBlock({ item, onClick }: { item: typeof FEATURED_PACKAGE; onCli
 
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
-              <Star className="h-4 w-4 fill-[#FFD23F] text-[#FFD23F]" />
-              <span className="text-sm font-bold text-[#FFD23F]">{item.rating}</span>
+              <Star className="h-4 w-4 fill-[#FFD23F] text-amber-500" />
+              <span className="text-sm font-bold text-amber-500">{item.rating}</span>
             </div>
             <span className="text-sm text-slate-400">已售 {item.sales}</span>
           </div>
@@ -275,12 +275,12 @@ function FeaturedBlock({ item, onClick }: { item: typeof FEATURED_PACKAGE; onCli
 
         <div className="flex items-center justify-between">
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-[#14D1A0]">¥{item.price}</span>
+            <span className="text-2xl font-bold text-emerald-600">¥{item.price}</span>
             {item.originalPrice > 0 && (
               <span className="text-sm text-slate-500 line-through">¥{item.originalPrice}</span>
             )}
           </div>
-          <div className="flex items-center gap-1 text-[#14D1A0] opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1">
+          <div className="flex items-center gap-1 text-emerald-600 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1">
             <span className="text-sm font-bold">查看详情</span>
             <ChevronRight className="h-4 w-4" />
           </div>
@@ -295,7 +295,7 @@ function DraftBlock({ item, size, onClick }: { item: typeof DRAFTS[0]; size: 'md
   return (
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: 'span 1' }}
     >
       <div className="relative overflow-hidden" style={{ height: size === 'md' ? '100px' : '70px' }}>
@@ -307,17 +307,17 @@ function DraftBlock({ item, size, onClick }: { item: typeof DRAFTS[0]; size: 'md
       </div>
 
       <div className="flex flex-1 flex-col p-3">
-        <h4 className="mb-1 line-clamp-2 text-sm font-bold leading-snug text-white transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+        <h4 className="mb-1 line-clamp-2 text-sm font-bold leading-snug text-slate-900 transition-colors group-hover:text-emerald-600" style={{ fontFamily: 'Space Grotesk, monospace' }}>
           {item.title}
         </h4>
         <div className="mb-2 flex flex-wrap gap-1">
           {item.tags.slice(0, 2).map((tag) => (
-            <span key={tag} className="rounded-full bg-[rgba(255,255,255,0.04)] px-2 py-0.5 text-[9px] text-slate-400">#{tag}</span>
+            <span key={tag} className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] text-slate-400">#{tag}</span>
           ))}
         </div>
         <div className="mt-auto flex items-center justify-between border-t border-[rgba(255,255,255,0.04)] pt-2.5">
           <span className="text-[10px] text-slate-500">{item.updatedAt}</span>
-          <span className={`rounded-full px-2 py-0.5 text-[9px] font-bold ${item.status === '待发布' ? 'bg-[#14D1A0]/15 text-[#14D1A0]' : 'bg-[rgba(255,255,255,0.04)] text-slate-400'}`}>
+          <span className={`rounded-full px-2 py-0.5 text-[9px] font-bold ${item.status === '待发布' ? 'bg-emerald-50 text-emerald-600' : 'bg-slate-100 text-slate-400'}`}>
             {item.status}
           </span>
         </div>
@@ -330,12 +330,12 @@ function DraftBlock({ item, size, onClick }: { item: typeof DRAFTS[0]; size: 'md
 function PlatformBlock() {
   return (
     <div
-      className="flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628] p-4"
+      className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4"
       style={{ gridColumn: 'span 2' }}
     >
       <div className="mb-3 flex items-center justify-between">
-        <span className="text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>已绑定平台</span>
-        <button className="flex items-center gap-1 text-[10px] text-[#14D1A0]">
+        <span className="text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>已绑定平台</span>
+        <button className="flex items-center gap-1 text-[10px] text-emerald-600">
           <Plus className="h-3 w-3" /> 添加平台
         </button>
       </div>
@@ -351,16 +351,16 @@ function PlatformBlock() {
                 )}
               </div>
               <div>
-                <p className="text-xs font-medium text-white">{p.name}</p>
+                <p className="text-xs font-medium text-slate-900">{p.name}</p>
                 <p className="text-[9px] text-slate-500">{p.followers} 粉丝</p>
               </div>
             </div>
             {p.connected ? (
-              <span className="flex items-center gap-1 rounded-full bg-[#14D1A0]/15 px-2.5 py-0.5 text-[9px] font-bold text-[#14D1A0]">
+              <span className="flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[9px] font-bold text-emerald-600">
                 <CheckCircle2 className="h-3 w-3" /> 已连接
               </span>
             ) : (
-              <span className="rounded-full bg-[rgba(255,255,255,0.04)] px-2.5 py-0.5 text-[9px] text-slate-500">未连接</span>
+              <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-[9px] text-slate-500">未连接</span>
             )}
           </div>
         ))}
@@ -375,7 +375,7 @@ function ToolBlock({ item, size, onClick }: { item: typeof TOOLS[0]; size: 'md' 
   return (
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: 'span 1' }}
     >
       <div className="relative overflow-hidden" style={{ height: '70px' }}>
@@ -388,7 +388,7 @@ function ToolBlock({ item, size, onClick }: { item: typeof TOOLS[0]; size: 'md' 
         </div>
       </div>
       <div className="flex flex-1 flex-col p-3">
-        <h4 className="mb-1 text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>{item.name}</h4>
+        <h4 className="mb-1 text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>{item.name}</h4>
         <p className="line-clamp-2 text-[10px] text-slate-500">{item.desc}</p>
       </div>
     </button>
@@ -399,12 +399,12 @@ function ToolBlock({ item, size, onClick }: { item: typeof TOOLS[0]; size: 'md' 
 function ScheduleBlock() {
   return (
     <div
-      className="flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628] p-4"
+      className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4"
       style={{ gridColumn: 'span 2' }}
     >
       <div className="mb-3 flex items-center justify-between">
-        <span className="text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>发布排期</span>
-        <button className="flex items-center gap-1 text-[10px] text-[#14D1A0]">
+        <span className="text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>发布排期</span>
+        <button className="flex items-center gap-1 text-[10px] text-emerald-600">
           <Plus className="h-3 w-3" /> 添加任务
         </button>
       </div>
@@ -415,10 +415,10 @@ function ScheduleBlock() {
               <img src={s.thumbnail} alt={s.title} className="h-full w-full object-cover" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="truncate text-xs font-medium text-white">{s.title}</p>
+              <p className="truncate text-xs font-medium text-slate-900">{s.title}</p>
               <p className="text-[9px] text-slate-500">{s.platform} · {s.time}</p>
             </div>
-            <span className={`shrink-0 rounded-full px-2 py-0.5 text-[9px] font-bold ${s.status === '待发布' ? 'bg-[#14D1A0]/15 text-[#14D1A0]' : 'bg-[rgba(255,255,255,0.04)] text-slate-400'}`}>
+            <span className={`shrink-0 rounded-full px-2 py-0.5 text-[9px] font-bold ${s.status === '待发布' ? 'bg-emerald-50 text-emerald-600' : 'bg-slate-100 text-slate-400'}`}>
               {s.status}
             </span>
           </div>
@@ -478,31 +478,31 @@ export default function CreationModule() {
   }
 
   return (
-    <div className="relative flex h-full flex-col gap-0 overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(10,22,40,0.95)]">
+    <div className="relative flex h-full flex-col gap-0 overflow-hidden rounded-2xl border border-slate-200 bg-white">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-[rgba(255,255,255,0.06)] px-6 py-4 shrink-0">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#FFD23F]/15">
-            <Layers className="h-5 w-5 text-[#FFD23F]" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-50">
+            <Layers className="h-5 w-5 text-amber-500" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>M3 · 创作中心</h1>
+            <h1 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>M3 · 创作中心</h1>
             <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>内容 · 价值包 · 平台 · 排期</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
           <div className="text-center">
-            <p className="text-sm font-bold tabular-nums text-white" style={{ fontFamily: 'monospace' }}>3</p>
+            <p className="text-sm font-bold tabular-nums text-slate-900" style={{ fontFamily: 'monospace' }}>3</p>
             <p className="text-[10px] text-slate-500">草稿</p>
           </div>
           <div className="h-5 w-px bg-[rgba(255,255,255,0.08)]" />
           <div className="text-center">
-            <p className="text-sm font-bold tabular-nums text-[#FFD23F]" style={{ fontFamily: 'monospace' }}>5</p>
+            <p className="text-sm font-bold tabular-nums text-amber-500" style={{ fontFamily: 'monospace' }}>5</p>
             <p className="text-[10px] text-slate-500">平台</p>
           </div>
           <div className="h-5 w-px bg-[rgba(255,255,255,0.08)]" />
           <div className="text-center">
-            <p className="text-sm font-bold tabular-nums text-[#14D1A0]" style={{ fontFamily: 'monospace' }}>2</p>
+            <p className="text-sm font-bold tabular-nums text-emerald-600" style={{ fontFamily: 'monospace' }}>2</p>
             <p className="text-[10px] text-slate-500">待发布</p>
           </div>
         </div>

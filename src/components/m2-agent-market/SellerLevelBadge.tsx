@@ -21,7 +21,7 @@ const levelConfig: Record<SellerLevel, {
     label: 'New',
     icon: <Star className="h-2.5 w-2.5" />,
     bgClass: 'bg-white/5',
-    textClass: 'text-white/50',
+    textClass: 'text-slate-900/50',
     borderClass: 'border-white/10',
   },
   verified: {

@@ -422,7 +422,7 @@ function UtilizationBar({ rate }: { rate: number }) {
       <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
         <div className={`h-full rounded-full ${color}`} style={{ width: `${rate}%` }} />
       </div>
-      <span className="text-[10px] text-white/50 tabular-nums w-8 text-right">{rate}%</span>
+      <span className="text-[10px] text-slate-900/50 tabular-nums w-8 text-right">{rate}%</span>
     </div>
   )
 }
@@ -436,11 +436,11 @@ function HardwareCardGrid({ item }: { item: HardwareItem }) {
         <span className="text-3xl">{item.vendorLogo}</span>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap mb-0.5">
-            <h3 className="text-sm font-semibold text-white/90">{item.vendor}</h3>
+            <h3 className="text-sm font-semibold text-slate-900/90">{item.vendor}</h3>
             <SellerLevelBadge level={item.level} size="sm" />
           </div>
-          <div className="flex items-center gap-2 text-[11px] text-white/50">
-            <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 border text-white/60 ${catColor.split(' ').slice(1).join(' ')}`}>
+          <div className="flex items-center gap-2 text-[11px] text-slate-900/50">
+            <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 border text-slate-900/60 ${catColor.split(' ').slice(1).join(' ')}`}>
               {CATEGORY_ICONS[item.category]}
               {CATEGORY_LABELS[item.category]}
             </span>
@@ -449,7 +449,7 @@ function HardwareCardGrid({ item }: { item: HardwareItem }) {
         </div>
         <div className="text-right shrink-0">
           <div className="text-base font-bold text-emerald-400">${item.pricePerUnit}</div>
-          <div className="text-[10px] text-white/40">{item.priceUnit}</div>
+          <div className="text-[10px] text-slate-900/40">{item.priceUnit}</div>
         </div>
       </div>
 
@@ -457,14 +457,14 @@ function HardwareCardGrid({ item }: { item: HardwareItem }) {
       <div className="rounded-xl bg-white/[0.04] border border-white/8 p-3">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-xs font-semibold text-white/80">{item.modelName}</p>
-            <p className="text-[10px] text-white/40 mt-0.5">★ {item.rating} · {item.reviews.toLocaleString()} reviews</p>
+            <p className="text-xs font-semibold text-slate-900/80">{item.modelName}</p>
+            <p className="text-[10px] text-slate-900/40 mt-0.5">★ {item.rating} · {item.reviews.toLocaleString()} reviews</p>
           </div>
           <div className="text-right">
             <p className={`text-xs font-medium ${item.inStock ? 'text-emerald-400' : 'text-amber-400/80'}`}>
               {item.inStock ? '● In Stock' : '○ Pre-order'}
             </p>
-            <p className="text-[10px] text-white/40 flex items-center gap-0.5 justify-end"><Clock className="h-2.5 w-2.5" />{item.leadTime}</p>
+            <p className="text-[10px] text-slate-900/40 flex items-center gap-0.5 justify-end"><Clock className="h-2.5 w-2.5" />{item.leadTime}</p>
           </div>
         </div>
       </div>
@@ -473,8 +473,8 @@ function HardwareCardGrid({ item }: { item: HardwareItem }) {
       <div className="rounded-xl bg-white/[0.04] border border-white/8 px-3">
         {item.specs.slice(0, 3).map(s => (
           <div key={s.label} className="flex justify-between items-center py-1.5 border-b border-white/5 last:border-0">
-            <span className="text-[11px] text-white/40">{s.label}</span>
-            <span className="text-[11px] text-white/70 font-medium">{s.value}</span>
+            <span className="text-[11px] text-slate-900/40">{s.label}</span>
+            <span className="text-[11px] text-slate-900/70 font-medium">{s.value}</span>
           </div>
         ))}
       </div>
@@ -483,8 +483,8 @@ function HardwareCardGrid({ item }: { item: HardwareItem }) {
       {item.utilizationRate !== undefined && (
         <div className="space-y-1">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-white/40">Cluster Utilization</span>
-            <span className="text-[10px] text-white/50">{item.availableUnits?.toLocaleString()} units avail.</span>
+            <span className="text-[10px] text-slate-900/40">Cluster Utilization</span>
+            <span className="text-[10px] text-slate-900/50">{item.availableUnits?.toLocaleString()} units avail.</span>
           </div>
           <UtilizationBar rate={item.utilizationRate} />
         </div>
@@ -498,11 +498,11 @@ function HardwareCardGrid({ item }: { item: HardwareItem }) {
           </span>
         ))}
         {item.highlights.slice(0, 2).map(h => (
-          <span key={h} className="inline-flex items-center rounded-full bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] text-white/50">{h}</span>
+          <span key={h} className="inline-flex items-center rounded-full bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] text-slate-900/50">{h}</span>
         ))}
       </div>
 
-      <button className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-xs text-white/70 font-medium py-2 transition-colors group/btn">
+      <button className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-xs text-slate-900/70 font-medium py-2 transition-colors group/btn">
         View Details <ChevronRight className="h-3.5 w-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
       </button>
     </div>
@@ -516,25 +516,25 @@ function HardwareCardList({ item }: { item: HardwareItem }) {
       <span className="text-2xl shrink-0">{item.vendorLogo}</span>
       <div className="flex-1 min-w-0 grid grid-cols-2 sm:grid-cols-4 gap-2">
         <div>
-          <p className="text-sm font-medium text-white/80">{item.vendor}</p>
+          <p className="text-sm font-medium text-slate-900/80">{item.vendor}</p>
           <SellerLevelBadge level={item.level} size="sm" showLabel={false} />
         </div>
         <div>
-          <p className="text-xs text-white/50">{item.modelName}</p>
+          <p className="text-xs text-slate-900/50">{item.modelName}</p>
           <p className={`inline-flex items-center gap-1 text-[10px] ${catColor.split(' ')[0]}`}>
             {CATEGORY_ICONS[item.category]}{CATEGORY_LABELS[item.category]}
           </p>
         </div>
         <div>
           <p className="text-sm font-bold text-emerald-400">${item.pricePerUnit}</p>
-          <p className="text-[10px] text-white/40">{item.priceUnit}</p>
+          <p className="text-[10px] text-slate-900/40">{item.priceUnit}</p>
         </div>
         <div>
           <p className={`text-xs font-medium ${item.inStock ? 'text-emerald-400' : 'text-amber-400/80'}`}>{item.inStock ? '● In Stock' : '○ Pre-order'}</p>
-          <p className="text-[10px] text-white/40">★ {item.rating} · {item.reviews.toLocaleString()}</p>
+          <p className="text-[10px] text-slate-900/40">★ {item.rating} · {item.reviews.toLocaleString()}</p>
         </div>
       </div>
-      <ChevronRight className="h-4 w-4 text-white/30 shrink-0" />
+      <ChevronRight className="h-4 w-4 text-slate-900/30 shrink-0" />
     </div>
   )
 }
@@ -593,16 +593,16 @@ export function HardwareLibrary() {
       {/* ── Toolbar ─────────────────────────────────────────── */}
       <div className="flex items-center gap-3 flex-wrap">
         <div className="relative flex-1 min-w-[200px]">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-900/30" />
           <input
             type="text"
             placeholder="Search hardware, vendors, models..."
             value={filters.search}
             onChange={e => setFilters(f => ({ ...f, search: e.target.value }))}
-            className="w-full rounded-xl bg-white/[0.04] border border-white/10 text-xs text-white/80 placeholder:text-white/30 pl-9 pr-4 py-2.5 focus:outline-none focus:border-white/25 focus:bg-white/[0.06] transition-all"
+            className="w-full rounded-xl bg-white/[0.04] border border-white/10 text-xs text-slate-900/80 placeholder:text-slate-900/30 pl-9 pr-4 py-2.5 focus:outline-none focus:border-white/25 focus:bg-white/[0.06] transition-all"
           />
           {filters.search && (
-            <button onClick={() => setFilters(f => ({ ...f, search: '' }))} className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60">
+            <button onClick={() => setFilters(f => ({ ...f, search: '' }))} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-900/30 hover:text-slate-900/60">
               <X className="h-3.5 w-3.5" />
             </button>
           )}
@@ -618,7 +618,7 @@ export function HardwareLibrary() {
                 'inline-flex items-center gap-1 rounded-lg text-[10px] px-2.5 py-1.5 border transition-all',
                 filters.categories.has(cat)
                   ? `${CATEGORY_COLORS[cat]} font-medium`
-                  : 'bg-white/[0.04] border-white/10 text-white/40 hover:bg-white/[0.08]',
+                  : 'bg-white/[0.04] border-white/10 text-slate-900/40 hover:bg-white/[0.08]',
               ].join(' ')}
             >
               {CATEGORY_ICONS[cat]}{CATEGORY_LABELS[cat]}
@@ -629,7 +629,7 @@ export function HardwareLibrary() {
         <button
           onClick={() => setShowFilters(f => !f)}
           className={['flex items-center gap-1.5 rounded-xl text-xs px-3 py-2 border transition-colors',
-            showFilters ? 'bg-white/10 border-white/20 text-white/80' : 'bg-white/[0.04] border-white/10 text-white/40 hover:bg-white/[0.08]'].join(' ')}
+            showFilters ? 'bg-white/10 border-white/20 text-slate-900/80' : 'bg-white/[0.04] border-white/10 text-slate-900/40 hover:bg-white/[0.08]'].join(' ')}
         >
           <SlidersHorizontal className="h-4 w-4" />Filters
           {activeCategoryCount > 0 && (
@@ -639,11 +639,11 @@ export function HardwareLibrary() {
 
         {/* Sort */}
         <div className="flex items-center gap-1">
-          <ArrowUpDown className="h-3.5 w-3.5 text-white/30 shrink-0" />
+          <ArrowUpDown className="h-3.5 w-3.5 text-slate-900/30 shrink-0" />
           <select
             value={filters.sortKey}
             onChange={e => setFilters(f => ({ ...f, sortKey: e.target.value as SortKey }))}
-            className="rounded-lg bg-white/[0.04] border border-white/10 text-xs text-white/60 px-2 py-1.5 focus:outline-none focus:border-white/25 cursor-pointer"
+            className="rounded-lg bg-white/[0.04] border border-white/10 text-xs text-slate-900/60 px-2 py-1.5 focus:outline-none focus:border-white/25 cursor-pointer"
           >
             {SORT_OPTIONS.map(o => <option key={o.key} value={o.key}>{o.label}</option>)}
           </select>
@@ -651,10 +651,10 @@ export function HardwareLibrary() {
 
         {/* Layout toggle */}
         <div className="flex items-center rounded-xl bg-white/[0.04] border border-white/10 overflow-hidden ml-auto">
-          <button onClick={() => setFilters(f => ({ ...f, layout: 'grid' }))} className={['p-2 transition-colors', filters.layout === 'grid' ? 'bg-white/15 text-white/80' : 'text-white/30 hover:text-white/60'].join(' ')}>
+          <button onClick={() => setFilters(f => ({ ...f, layout: 'grid' }))} className={['p-2 transition-colors', filters.layout === 'grid' ? 'bg-white/15 text-slate-900/80' : 'text-slate-900/30 hover:text-slate-900/60'].join(' ')}>
             <LayoutGrid className="h-4 w-4" />
           </button>
-          <button onClick={() => setFilters(f => ({ ...f, layout: 'list' }))} className={['p-2 transition-colors', filters.layout === 'list' ? 'bg-white/15 text-white/80' : 'text-white/30 hover:text-white/60'].join(' ')}>
+          <button onClick={() => setFilters(f => ({ ...f, layout: 'list' }))} className={['p-2 transition-colors', filters.layout === 'list' ? 'bg-white/15 text-slate-900/80' : 'text-slate-900/30 hover:text-slate-900/60'].join(' ')}>
             <List className="h-4 w-4" />
           </button>
         </div>
@@ -664,7 +664,7 @@ export function HardwareLibrary() {
       {showFilters && (
         <div className="rounded-xl bg-white/[0.04] border border-white/10 p-4 flex flex-wrap items-center gap-6">
           <div className="space-y-2">
-            <p className="text-[10px] text-white/40 uppercase tracking-wider font-medium">Seller Level</p>
+            <p className="text-[10px] text-slate-900/40 uppercase tracking-wider font-medium">Seller Level</p>
             <div className="flex items-center gap-1.5">
               {(['all', 'new', 'verified', 'pro', 'elite'] as const).map(level => (
                 <button
@@ -672,8 +672,8 @@ export function HardwareLibrary() {
                   onClick={() => setFilters(f => ({ ...f, sellerLevel: level }))}
                   className={['rounded-lg text-[10px] px-2.5 py-1.5 border transition-colors',
                     filters.sellerLevel === level
-                      ? 'bg-white/15 border-white/25 text-white/80'
-                      : 'bg-white/5 border-white/10 text-white/40 hover:bg-white/10'].join(' ')}
+                      ? 'bg-white/15 border-white/25 text-slate-900/80'
+                      : 'bg-white/5 border-white/10 text-slate-900/40 hover:bg-white/10'].join(' ')}
                 >
                   {level.charAt(0).toUpperCase() + level.slice(1)}
                 </button>
@@ -684,13 +684,13 @@ export function HardwareLibrary() {
           <div className="h-8 w-px bg-white/10" />
 
           <div className="space-y-2">
-            <p className="text-[10px] text-white/40 uppercase tracking-wider font-medium">Availability</p>
+            <p className="text-[10px] text-slate-900/40 uppercase tracking-wider font-medium">Availability</p>
             <button
               onClick={() => setFilters(f => ({ ...f, inStockOnly: !f.inStockOnly }))}
               className={['flex items-center gap-2 rounded-lg text-[10px] px-3 py-1.5 border transition-colors',
                 filters.inStockOnly
                   ? 'bg-emerald-500/15 border-emerald-500/30 text-emerald-400'
-                  : 'bg-white/5 border-white/10 text-white/40 hover:bg-white/10'].join(' ')}
+                  : 'bg-white/5 border-white/10 text-slate-900/40 hover:bg-white/10'].join(' ')}
             >
               {filters.inStockOnly ? <CheckCircle2 className="h-3.5 w-3.5" /> : <AlertCircle className="h-3.5 w-3.5" />}
               In Stock Only
@@ -699,7 +699,7 @@ export function HardwareLibrary() {
 
           <div className="h-8 w-px bg-white/10" />
 
-          <button onClick={() => setFilters(f => ({ ...f, categories: new Set(), sellerLevel: 'all', inStockOnly: false }))} className="flex items-center gap-1.5 rounded-lg bg-white/5 border border-white/10 text-[10px] text-white/40 hover:bg-white/10 px-3 py-1.5 transition-colors">
+          <button onClick={() => setFilters(f => ({ ...f, categories: new Set(), sellerLevel: 'all', inStockOnly: false }))} className="flex items-center gap-1.5 rounded-lg bg-white/5 border border-white/10 text-[10px] text-slate-900/40 hover:bg-white/10 px-3 py-1.5 transition-colors">
             <X className="h-3 w-3" />Reset All
           </button>
         </div>
@@ -708,18 +708,18 @@ export function HardwareLibrary() {
       {/* ── Results header ───────────────────────────────────── */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <h2 className="text-base font-semibold text-white/90">Hardware Catalog</h2>
-          <span className="inline-flex items-center rounded-full bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] text-white/40">
+          <h2 className="text-base font-semibold text-slate-900/90">Hardware Catalog</h2>
+          <span className="inline-flex items-center rounded-full bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] text-slate-900/40">
             {filtered.length} results
           </span>
         </div>
         {(filters.categories.size > 0 || filters.sellerLevel !== 'all' || filters.inStockOnly) && (
           <div className="flex items-center gap-2 flex-wrap">
             {filters.categories.size > 0 && (
-              <span className="text-[10px] text-white/40">{filters.categories.size} category filter(s)</span>
+              <span className="text-[10px] text-slate-900/40">{filters.categories.size} category filter(s)</span>
             )}
             {filters.sellerLevel !== 'all' && <SellerLevelBadge level={filters.sellerLevel} size="sm" />}
-            <button onClick={() => setFilters(f => ({ ...f, categories: new Set(), sellerLevel: 'all', inStockOnly: false }))} className="text-[10px] text-white/40 hover:text-white/60 flex items-center gap-0.5">
+            <button onClick={() => setFilters(f => ({ ...f, categories: new Set(), sellerLevel: 'all', inStockOnly: false }))} className="text-[10px] text-slate-900/40 hover:text-slate-900/60 flex items-center gap-0.5">
               <X className="h-2.5 w-2.5" />clear
             </button>
           </div>
@@ -728,7 +728,7 @@ export function HardwareLibrary() {
 
       {/* ── Grid/List ────────────────────────────────────────── */}
       {filtered.length === 0 ? (
-        <div className="text-center py-20 text-white/30 text-sm">No hardware matches your current filters.</div>
+        <div className="text-center py-20 text-slate-900/30 text-sm">No hardware matches your current filters.</div>
       ) : filters.layout === 'grid' ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
           {filtered.map(item => <HardwareCardGrid key={item.id} item={item} />)}

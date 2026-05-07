@@ -86,7 +86,7 @@ const MOCK_HUMANS: DigitalHumanConfig[] = [
 interface PersonalityTagProps { label: string }
 function PersonalityTag({ label }: PersonalityTagProps) {
   return (
-    <span className="inline-flex items-center rounded-full bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] text-white/60">
+    <span className="inline-flex items-center rounded-full bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] text-slate-900/60">
       {label}
     </span>
   )
@@ -105,7 +105,7 @@ function ConfigSlider({ label, value, min, max, step = 1, unit = '', onChange }:
   return (
     <div className="space-y-1">
       <div className="flex justify-between text-xs">
-        <span className="text-white/50">{label}</span>
+        <span className="text-slate-900/50">{label}</span>
         <span className="text-emerald-400/80">{value}{unit}</span>
       </div>
       <input
@@ -133,8 +133,8 @@ export function DigitalHumanBuilder() {
     <section className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-white/90">Digital Human Builder</h2>
-          <p className="text-xs text-white/40 mt-0.5">Configure and deploy AI-powered digital humans</p>
+          <h2 className="text-lg font-semibold text-slate-900/90">Digital Human Builder</h2>
+          <p className="text-xs text-slate-900/40 mt-0.5">Configure and deploy AI-powered digital humans</p>
         </div>
         <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 px-2.5 py-1 text-xs text-emerald-400">
           <Sparkles className="h-3 w-3" />
@@ -157,8 +157,8 @@ export function DigitalHumanBuilder() {
           >
             <span className="text-3xl">{h.avatar}</span>
             <div className="text-center">
-              <p className="text-xs font-medium text-white/80">{h.name}</p>
-              <p className="text-[10px] text-white/40">{h.vendor}</p>
+              <p className="text-xs font-medium text-slate-900/80">{h.name}</p>
+              <p className="text-[10px] text-slate-900/40">{h.vendor}</p>
             </div>
           </button>
         ))}
@@ -171,15 +171,15 @@ export function DigitalHumanBuilder() {
           <span className="text-4xl">{human.avatar}</span>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              <h3 className="text-base font-semibold text-white/90">{human.name}</h3>
+              <h3 className="text-base font-semibold text-slate-900/90">{human.name}</h3>
               <SellerLevelBadge level={human.vendorLevel} size="sm" />
             </div>
-            <p className="text-xs text-white/40 mt-0.5">{human.vendor}</p>
-            <p className="text-xs text-white/60 mt-2 leading-relaxed">{human.description}</p>
+            <p className="text-xs text-slate-900/40 mt-0.5">{human.vendor}</p>
+            <p className="text-xs text-slate-900/60 mt-2 leading-relaxed">{human.description}</p>
           </div>
           <div className="text-right shrink-0">
             <div className="text-lg font-bold text-emerald-400">${human.pricePerMinute.toFixed(2)}</div>
-            <div className="text-[10px] text-white/40">/ minute</div>
+            <div className="text-[10px] text-slate-900/40">/ minute</div>
           </div>
         </div>
 
@@ -192,8 +192,8 @@ export function DigitalHumanBuilder() {
             { label: 'Languages', value: human.language.split(' / ').length.toString() },
           ].map(stat => (
             <div key={stat.label} className="rounded-xl bg-white/5 border border-white/10 p-2.5 text-center">
-              <div className="text-xs font-semibold text-white/80">{stat.value}</div>
-              <div className="text-[10px] text-white/40 mt-0.5">{stat.label}</div>
+              <div className="text-xs font-semibold text-slate-900/80">{stat.value}</div>
+              <div className="text-[10px] text-slate-900/40 mt-0.5">{stat.label}</div>
             </div>
           ))}
         </div>
@@ -206,7 +206,7 @@ export function DigitalHumanBuilder() {
 
         {/* Config sliders */}
         <div className="space-y-3 pt-1 border-t border-white/10">
-          <p className="text-xs font-medium text-white/60 flex items-center gap-1.5">
+          <p className="text-xs font-medium text-slate-900/60 flex items-center gap-1.5">
             <Settings2 className="h-3 w-3" />
             Behavior Calibration
           </p>

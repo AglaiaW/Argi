@@ -133,10 +133,10 @@ const TALENTS = [
 function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; onClose: () => void }) {
   if (!item) return null
   return (
-    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-[#0a1628] shadow-2xl w-[340px]">
+    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-white shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-[rgba(255,255,255,0.06)] px-5 py-4">
         <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>帖子详情</span>
-        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[rgba(255,255,255,0.06)]">
+        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100">
           <X className="h-4 w-4" />
         </button>
       </div>
@@ -150,9 +150,9 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
               {item.sect as string}
             </span>
           )}
-          {item.isPinned && <span className="rounded-full bg-[#14D1A0]/15 px-2.5 py-1 text-[10px] font-bold text-[#14D1A0]">置顶</span>}
+          {item.isPinned && <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-600">置顶</span>}
         </div>
-        <h2 className="mb-2 text-lg font-bold text-white leading-snug" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+        <h2 className="mb-2 text-lg font-bold text-slate-900 leading-snug" style={{ fontFamily: 'Space Grotesk, monospace' }}>
           {item.title as string}
         </h2>
         {item.summary && (
@@ -161,7 +161,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         {item.tags && Array.isArray(item.tags) && (
           <div className="flex flex-wrap gap-2 mb-4">
             {(item.tags as string[]).map((tag) => (
-              <span key={tag} className="rounded-full border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-2.5 py-1 text-[10px] text-slate-400">#{tag}</span>
+              <span key={tag} className="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[10px] text-slate-400">#{tag}</span>
             ))}
           </div>
         )}
@@ -181,7 +181,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         <button className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90">
           <ArrowRight className="h-4 w-4" /> 阅读全文
         </button>
-        <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[rgba(255,255,255,0.08)] py-2.5 text-sm text-slate-400 transition-all">
+        <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 py-2.5 text-sm text-slate-400 transition-all">
           <Heart className="h-4 w-4" /> 收藏
         </button>
       </div>
@@ -199,26 +199,26 @@ function StatsBlock() {
   ]
   return (
     <div
-      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-gradient-to-br from-[#0f2744] to-[#0a1628] p-5"
+      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-100 to-slate-50 p-5"
       style={{ gridColumn: 'span 2', gridRow: 'span 1' }}
     >
       <div className="mb-4 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#14D1A0]/15">
-          <Users className="h-4 w-4 text-[#14D1A0]" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50">
+          <Users className="h-4 w-4 text-emerald-600" />
         </div>
         <span className="text-xs font-bold text-slate-400" style={{ fontFamily: 'monospace' }}>社区数据</span>
       </div>
       <div className="grid grid-cols-2 gap-3">
         {stats.map((s) => (
-          <div key={s.label} className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-3">
-            <p className="text-xl font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
+          <div key={s.label} className="rounded-xl border border-slate-200 bg-slate-100 p-3">
+            <p className="text-xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
             <p className="text-[10px] text-slate-500">{s.label}</p>
           </div>
         ))}
       </div>
       <div className="mt-3 flex items-center gap-2 rounded-xl bg-[#FFD23F]/10 px-3 py-2">
-        <Bell className="h-4 w-4 text-[#FFD23F]" />
-        <span className="text-xs text-[#FFD23F]">2026 AI 创业大赛 · 报名中</span>
+        <Bell className="h-4 w-4 text-amber-500" />
+        <span className="text-xs text-amber-500">2026 AI 创业大赛 · 报名中</span>
       </div>
     </div>
   )
@@ -229,7 +229,7 @@ function FeaturedBlock({ item, onClick }: { item: typeof FEATURED_POST; onClick:
   return (
     <button
       onClick={onClick}
-      className="group relative flex overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.15)] active:scale-[0.99]"
+      className="group relative flex overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.15)] active:scale-[0.99]"
       style={{ gridColumn: 'span 4', gridRow: 'span 2' }}
     >
       <div className="relative w-3/5 shrink-0 overflow-hidden">
@@ -249,23 +249,23 @@ function FeaturedBlock({ item, onClick }: { item: typeof FEATURED_POST; onClick:
             <span className="rounded-full px-3 py-1 text-[10px] font-bold" style={{ backgroundColor: item.sectColor + '22', color: item.sectColor }}>
               {item.sect}
             </span>
-            {item.isHot && <span className="rounded-full bg-[#FF6B6B]/15 px-3 py-1 text-[10px] font-bold text-[#FF6B6B]">热议</span>}
+            {item.isHot && <span className="rounded-full bg-red-50 px-3 py-1 text-[10px] font-bold text-red-500">热议</span>}
           </div>
-          <h3 className="mb-2 text-xl font-bold leading-snug text-white transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+          <h3 className="mb-2 text-xl font-bold leading-snug text-slate-900 transition-colors group-hover:text-emerald-600" style={{ fontFamily: 'Space Grotesk, monospace' }}>
             {item.title}
           </h3>
           <p className="mb-4 line-clamp-3 text-sm text-slate-400">{item.summary}</p>
 
           <div className="mb-4 flex flex-wrap gap-1.5">
             {item.tags.map((tag) => (
-              <span key={tag} className="rounded-full bg-[rgba(255,255,255,0.04)] px-2.5 py-1 text-[10px] text-slate-400">#{tag}</span>
+              <span key={tag} className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] text-slate-400">#{tag}</span>
             ))}
           </div>
 
           <div className="mb-4 flex items-center gap-3">
             <div className="flex items-center gap-2">
               <img src={item.authorAvatar} alt={item.author} className="h-7 w-7 rounded-full object-cover" />
-              <span className="text-xs font-medium text-white">{item.author}</span>
+              <span className="text-xs font-medium text-slate-900">{item.author}</span>
             </div>
             <span className="text-[10px] text-slate-500">{item.time}</span>
           </div>
@@ -277,7 +277,7 @@ function FeaturedBlock({ item, onClick }: { item: typeof FEATURED_POST; onClick:
           </div>
         </div>
 
-        <div className="flex items-center gap-1 text-[#14D1A0] opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1">
+        <div className="flex items-center gap-1 text-emerald-600 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1">
           <span className="text-sm font-bold">阅读全文</span>
           <ChevronRight className="h-4 w-4" />
         </div>
@@ -291,7 +291,7 @@ function PostBlock({ item, size, onClick }: { item: typeof POSTS[0]; size: 'md' 
   return (
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: 'span 2' }}
     >
       <div className="relative overflow-hidden" style={{ height: size === 'md' ? '100px' : '70px' }}>
@@ -302,14 +302,14 @@ function PostBlock({ item, size, onClick }: { item: typeof POSTS[0]; size: 'md' 
         </div>
         {item.isHot && (
           <div className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-[#FF6B6B] px-2 py-0.5">
-            <Zap className="h-2.5 w-2.5 text-white" />
-            <span className="text-[9px] font-bold text-white">热</span>
+            <Zap className="h-2.5 w-2.5 text-slate-900" />
+            <span className="text-[9px] font-bold text-slate-900">热</span>
           </div>
         )}
       </div>
 
       <div className="flex flex-1 flex-col p-3">
-        <h4 className="mb-1 line-clamp-2 text-sm font-bold leading-snug text-white transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+        <h4 className="mb-1 line-clamp-2 text-sm font-bold leading-snug text-slate-900 transition-colors group-hover:text-emerald-600" style={{ fontFamily: 'Space Grotesk, monospace' }}>
           {item.title}
         </h4>
         <div className="mb-2 flex items-center gap-2">
@@ -332,12 +332,12 @@ function PostBlock({ item, size, onClick }: { item: typeof POSTS[0]; size: 'md' 
 function SectionBlock() {
   return (
     <div
-      className="flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628] p-4"
+      className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4"
       style={{ gridColumn: 'span 3', gridRow: 'span 1' }}
     >
       <div className="mb-3 flex items-center justify-between">
-        <span className="text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>社区版块</span>
-        <button className="flex items-center gap-1 text-[10px] text-[#14D1A0]">
+        <span className="text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>社区版块</span>
+        <button className="flex items-center gap-1 text-[10px] text-emerald-600">
           <Crown className="h-3 w-3" /> 全部版块
         </button>
       </div>
@@ -345,12 +345,12 @@ function SectionBlock() {
         {SECTIONS.map((s) => {
           const Icon = s.icon
           return (
-            <button key={s.id} className="group flex items-center gap-3 rounded-xl border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.02)] p-3 text-left transition-all hover:border-[rgba(255,255,255,0.1)] hover:bg-[rgba(255,255,255,0.05)]">
+            <button key={s.id} className="group flex items-center gap-3 rounded-xl border border-[rgba(255,255,255,0.04)] bg-slate-100 p-3 text-left transition-all hover:border-[rgba(255,255,255,0.1)] hover:bg-slate-100">
               <div className="flex h-9 w-9 items-center justify-center rounded-xl" style={{ backgroundColor: s.color + '22' }}>
                 <Icon className="h-4 w-4" style={{ color: s.color }} />
               </div>
               <div className="flex-1">
-                <p className="text-xs font-medium text-white">{s.name}</p>
+                <p className="text-xs font-medium text-slate-900">{s.name}</p>
                 <p className="text-[9px] text-slate-500">{s.desc}</p>
               </div>
               <div className="flex items-center gap-1">
@@ -370,7 +370,7 @@ function EventBlock({ item, size, onClick }: { item: typeof EVENTS[0]; size: 'md
   return (
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: 'span 2' }}
     >
       <div className="relative overflow-hidden" style={{ height: '90px' }}>
@@ -382,14 +382,14 @@ function EventBlock({ item, size, onClick }: { item: typeof EVENTS[0]; size: 'md
       </div>
 
       <div className="flex flex-1 flex-col p-3">
-        <h4 className="mb-1 line-clamp-1 text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>{item.title}</h4>
+        <h4 className="mb-1 line-clamp-1 text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>{item.title}</h4>
         <p className="mb-2 text-[10px] text-slate-500">主办：{item.organizer} · 截止 {item.deadline}</p>
 
         <div className="mt-auto flex items-center justify-between border-t border-[rgba(255,255,255,0.04)] pt-2.5">
           <div className="flex items-center gap-1 text-[10px] text-slate-500">
             <Users className="h-3 w-3" />{item.participants.toLocaleString()}人已报名
           </div>
-          <span className="rounded-full bg-[#FFD23F]/15 px-2.5 py-1 text-[10px] font-bold text-[#FFD23F]">{item.prize}</span>
+          <span className="rounded-full bg-amber-50 px-2.5 py-1 text-[10px] font-bold text-amber-500">{item.prize}</span>
         </div>
       </div>
     </button>
@@ -401,7 +401,7 @@ function TalentBlock({ item, size, onClick }: { item: typeof TALENTS[0]; size: '
   return (
     <button
       onClick={onClick}
-      className="group flex flex-col items-center overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628] p-3 text-center transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group flex flex-col items-center overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 text-center transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: 'span 1' }}
     >
       <div className="relative mb-3">
@@ -410,17 +410,17 @@ function TalentBlock({ item, size, onClick }: { item: typeof TALENTS[0]; size: '
           <CheckCircle2 className="h-3 w-3 text-[#010409]" />
         </div>
       </div>
-      <h4 className="mb-0.5 text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>{item.name}</h4>
+      <h4 className="mb-0.5 text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>{item.name}</h4>
       <p className="mb-2 line-clamp-1 text-[10px] text-slate-500">{item.title}</p>
 
       <div className="mb-3 flex flex-wrap justify-center gap-1">
         {item.skills.slice(0, 2).map((s) => (
-          <span key={s} className="rounded-full bg-[rgba(255,255,255,0.04)] px-2 py-0.5 text-[9px] text-slate-400">{s}</span>
+          <span key={s} className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] text-slate-400">{s}</span>
         ))}
       </div>
 
       <div className="mt-auto flex w-full items-center justify-between border-t border-[rgba(255,255,255,0.04)] pt-3">
-        <span className="text-[10px] font-bold text-[#14D1A0]">{item.score}% 匹配</span>
+        <span className="text-[10px] font-bold text-emerald-600">{item.score}% 匹配</span>
         <span className="text-[10px] text-slate-500">{item.hourlyRate}</span>
       </div>
     </button>
@@ -486,31 +486,31 @@ export default function CommunityModule() {
   }
 
   return (
-    <div className="relative flex h-full flex-col gap-0 overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(10,22,40,0.95)]">
+    <div className="relative flex h-full flex-col gap-0 overflow-hidden rounded-2xl border border-slate-200 bg-white">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-[rgba(255,255,255,0.06)] px-6 py-4 shrink-0">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#14D1A0]/15">
-            <Users className="h-5 w-5 text-[#14D1A0]" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50">
+            <Users className="h-5 w-5 text-emerald-600" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>M4 · 超级社区</h1>
+            <h1 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>M4 · 超级社区</h1>
             <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>知识 · 交流 · 活动 · 人才</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
           <div className="text-center">
-            <p className="text-sm font-bold tabular-nums text-white" style={{ fontFamily: 'monospace' }}>8</p>
+            <p className="text-sm font-bold tabular-nums text-slate-900" style={{ fontFamily: 'monospace' }}>8</p>
             <p className="text-[10px] text-slate-500">文章</p>
           </div>
           <div className="h-5 w-px bg-[rgba(255,255,255,0.08)]" />
           <div className="text-center">
-            <p className="text-sm font-bold tabular-nums text-[#FF6B6B]" style={{ fontFamily: 'monospace' }}>3</p>
+            <p className="text-sm font-bold tabular-nums text-red-500" style={{ fontFamily: 'monospace' }}>3</p>
             <p className="text-[10px] text-slate-500">热议</p>
           </div>
           <div className="h-5 w-px bg-[rgba(255,255,255,0.08)]" />
           <div className="text-center">
-            <p className="text-sm font-bold tabular-nums text-[#FFD23F]" style={{ fontFamily: 'monospace' }}>5</p>
+            <p className="text-sm font-bold tabular-nums text-amber-500" style={{ fontFamily: 'monospace' }}>5</p>
             <p className="text-[10px] text-slate-500">活动</p>
           </div>
         </div>

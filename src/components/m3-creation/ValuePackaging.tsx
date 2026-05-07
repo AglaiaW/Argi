@@ -61,12 +61,12 @@ export default function ValuePackaging({ packs = MOCK_VALUE_PACKS, onEdit, onDup
   const avgRating = packs.reduce((s, p) => s + p.rating, 0) / packs.length
 
   return (
-    <div className="flex h-full flex-col gap-4 rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(15,23,42,0.85)] p-5 backdrop-blur-xl">
+    <div className="flex h-full flex-col gap-4 rounded-2xl border border-slate-200 bg-[rgba(15,23,42,0.85)] p-5 backdrop-blur-xl">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Gift className="h-5 w-5 text-[#14D1A0]" />
-          <h2 className="text-base font-semibold text-white" style={{ fontFamily: 'monospace' }}>
+          <Gift className="h-5 w-5 text-emerald-600" />
+          <h2 className="text-base font-semibold text-slate-900" style={{ fontFamily: 'monospace' }}>
             价值包装
           </h2>
         </div>
@@ -80,8 +80,8 @@ export default function ValuePackaging({ packs = MOCK_VALUE_PACKS, onEdit, onDup
               onClick={() => setSortBy(s)}
               className={`rounded-md px-2 py-1 text-[10px] font-medium transition ${
                 sortBy === s
-                  ? 'bg-[#14D1A0]/20 text-[#14D1A0]'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-[#14D1A0]/20 text-emerald-600'
+                  : 'text-slate-400 hover:text-slate-900'
               }`}
               style={{ fontFamily: 'monospace' }}
             >
@@ -97,8 +97,8 @@ export default function ValuePackaging({ packs = MOCK_VALUE_PACKS, onEdit, onDup
           onClick={() => setActiveCategory('all')}
           className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition ${
             activeCategory === 'all'
-              ? 'bg-[#14D1A0]/20 text-[#14D1A0]'
-              : 'bg-[rgba(255,255,255,0.05)] text-slate-400 hover:text-white'
+              ? 'bg-[#14D1A0]/20 text-emerald-600'
+              : 'bg-slate-100 text-slate-400 hover:text-slate-900'
           }`}
           style={{ fontFamily: 'monospace' }}
         >
@@ -110,8 +110,8 @@ export default function ValuePackaging({ packs = MOCK_VALUE_PACKS, onEdit, onDup
             onClick={() => setActiveCategory(cat)}
             className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium transition ${
               activeCategory === cat
-                ? 'bg-[#14D1A0]/20 text-[#14D1A0]'
-                : 'bg-[rgba(255,255,255,0.05)] text-slate-400 hover:text-white'
+                ? 'bg-[#14D1A0]/20 text-emerald-600'
+                : 'bg-slate-100 text-slate-400 hover:text-slate-900'
             }`}
             style={{ fontFamily: 'monospace' }}
           >
@@ -130,7 +130,7 @@ export default function ValuePackaging({ packs = MOCK_VALUE_PACKS, onEdit, onDup
               className={`group cursor-pointer rounded-xl border p-4 transition ${
                 selected?.id === pack.id
                   ? 'border-[#14D1A0]/60 bg-[#14D1A0]/5'
-                  : 'border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] hover:border-[rgba(255,255,255,0.16)]'
+                  : 'border-[rgba(255,255,255,0.08)] bg-slate-100 hover:border-[rgba(255,255,255,0.16)]'
               }`}
             >
               <div className="flex gap-3">
@@ -140,7 +140,7 @@ export default function ValuePackaging({ packs = MOCK_VALUE_PACKS, onEdit, onDup
                     <img src={pack.thumbnail} alt={pack.name} className="h-full w-full object-cover opacity-80" />
                   </div>
                 ) : (
-                  <div className="flex h-20 w-32 flex-shrink-0 items-center justify-center rounded-lg bg-[rgba(255,255,255,0.05)]">
+                  <div className="flex h-20 w-32 flex-shrink-0 items-center justify-center rounded-lg bg-slate-100">
                     {CATEGORY_ICONS[pack.category]}
                   </div>
                 )}
@@ -150,7 +150,7 @@ export default function ValuePackaging({ packs = MOCK_VALUE_PACKS, onEdit, onDup
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <div className="flex items-center gap-1.5">
-                        <span className={`inline-flex items-center gap-1 rounded bg-[rgba(255,255,255,0.06)] px-1.5 py-0.5 text-[10px] text-slate-400`}>
+                        <span className={`inline-flex items-center gap-1 rounded bg-slate-100 px-1.5 py-0.5 text-[10px] text-slate-400`}>
                           {CATEGORY_ICONS[pack.category]}
                           {CATEGORY_LABELS[pack.category]}
                         </span>
@@ -160,7 +160,7 @@ export default function ValuePackaging({ packs = MOCK_VALUE_PACKS, onEdit, onDup
                           </span>
                         )}
                       </div>
-                      <p className="mt-1 truncate text-sm font-semibold text-white" style={{ fontFamily: 'monospace' }}>
+                      <p className="mt-1 truncate text-sm font-semibold text-slate-900" style={{ fontFamily: 'monospace' }}>
                         {pack.name}
                       </p>
                       <p className="mt-0.5 truncate text-xs text-slate-400" style={{ fontFamily: 'monospace' }}>
@@ -170,7 +170,7 @@ export default function ValuePackaging({ packs = MOCK_VALUE_PACKS, onEdit, onDup
 
                     {/* Price */}
                     <div className="text-right">
-                      <p className="text-lg font-bold text-[#14D1A0]" style={{ fontFamily: 'monospace' }}>
+                      <p className="text-lg font-bold text-emerald-600" style={{ fontFamily: 'monospace' }}>
                         {pack.price === 0 ? '免费' : `¥${pack.price.toLocaleString()}`}
                       </p>
                       {pack.originalPrice && (
@@ -216,7 +216,7 @@ export default function ValuePackaging({ packs = MOCK_VALUE_PACKS, onEdit, onDup
                   <div className="mt-3 grid grid-cols-2 gap-1.5">
                     {pack.features.map((f, i) => (
                       <div key={i} className="flex items-start gap-1.5">
-                        <Check className="mt-0.5 h-3 w-3 flex-shrink-0 text-[#14D1A0]" />
+                        <Check className="mt-0.5 h-3 w-3 flex-shrink-0 text-emerald-600" />
                         <span className="text-[10px] text-slate-400">{f}</span>
                       </div>
                     ))}
@@ -233,20 +233,20 @@ export default function ValuePackaging({ packs = MOCK_VALUE_PACKS, onEdit, onDup
                   <div className="mt-4 flex gap-2">
                     <button
                       onClick={(e) => { e.stopPropagation(); onEdit?.(pack.id) }}
-                      className="flex items-center gap-1.5 rounded-lg bg-[rgba(43,89,195,0.25)] px-3 py-1.5 text-xs font-medium text-[#2B59C3] hover:bg-[rgba(43,89,195,0.35)]"
+                      className="flex items-center gap-1.5 rounded-lg bg-[rgba(43,89,195,0.25)] px-3 py-1.5 text-xs font-medium text-blue-600 hover:bg-[rgba(43,89,195,0.35)]"
                       style={{ fontFamily: 'monospace' }}
                     >
                       编辑
                     </button>
                     <button
                       onClick={(e) => { e.stopPropagation(); onDuplicate?.(pack.id) }}
-                      className="flex items-center gap-1.5 rounded-lg bg-[rgba(255,255,255,0.06)] px-3 py-1.5 text-xs font-medium text-slate-400 hover:bg-[rgba(255,255,255,0.1)] hover:text-white"
+                      className="flex items-center gap-1.5 rounded-lg bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-400 hover:bg-[rgba(255,255,255,0.1)] hover:text-slate-900"
                       style={{ fontFamily: 'monospace' }}
                     >
                       复制
                     </button>
                     <button
-                      className="flex items-center gap-1.5 rounded-lg bg-[#14D1A0]/20 px-3 py-1.5 text-xs font-medium text-[#14D1A0] hover:bg-[#14D1A0]/30"
+                      className="flex items-center gap-1.5 rounded-lg bg-[#14D1A0]/20 px-3 py-1.5 text-xs font-medium text-emerald-600 hover:bg-[#14D1A0]/30"
                       style={{ fontFamily: 'monospace' }}
                     >
                       <Zap className="h-3 w-3" /> 上架
@@ -260,17 +260,17 @@ export default function ValuePackaging({ packs = MOCK_VALUE_PACKS, onEdit, onDup
       </div>
 
       {/* Summary Bar */}
-      <div className="flex items-center justify-between rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] px-4 py-3">
+      <div className="flex items-center justify-between rounded-xl border border-slate-200 bg-slate-100 px-4 py-3">
         <div className="flex items-center gap-6">
           <div className="text-center">
-            <p className="text-lg font-bold tabular-nums text-white" style={{ fontFamily: 'monospace' }}>
+            <p className="text-lg font-bold tabular-nums text-slate-900" style={{ fontFamily: 'monospace' }}>
               {packs.length}
             </p>
             <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>产品包</p>
           </div>
           <div className="h-8 w-px bg-[rgba(255,255,255,0.08)]" />
           <div className="text-center">
-            <p className="text-lg font-bold tabular-nums text-[#14D1A0]" style={{ fontFamily: 'monospace' }}>
+            <p className="text-lg font-bold tabular-nums text-emerald-600" style={{ fontFamily: 'monospace' }}>
               {totalEnrolled.toLocaleString()}
             </p>
             <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>总用户</p>
@@ -291,7 +291,7 @@ export default function ValuePackaging({ packs = MOCK_VALUE_PACKS, onEdit, onDup
           </div>
         </div>
         <button
-          className="flex items-center gap-2 rounded-xl bg-[#14D1A0]/20 px-4 py-2 text-xs font-semibold text-[#14D1A0] hover:bg-[#14D1A0]/30"
+          className="flex items-center gap-2 rounded-xl bg-[#14D1A0]/20 px-4 py-2 text-xs font-semibold text-emerald-600 hover:bg-[#14D1A0]/30"
           style={{ fontFamily: 'monospace' }}
         >
           <Gift className="h-4 w-4" /> 新建产品包

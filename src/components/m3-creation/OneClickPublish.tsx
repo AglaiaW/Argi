@@ -148,12 +148,12 @@ export default function OneClickPublish({
   }
 
   return (
-    <div className="flex h-full flex-col gap-4 rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(15,23,42,0.85)] p-5 backdrop-blur-xl">
+    <div className="flex h-full flex-col gap-4 rounded-2xl border border-slate-200 bg-[rgba(15,23,42,0.85)] p-5 backdrop-blur-xl">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Rocket className="h-5 w-5 text-[#14D1A0]" />
-          <h2 className="text-base font-semibold text-white" style={{ fontFamily: 'monospace' }}>
+          <Rocket className="h-5 w-5 text-emerald-600" />
+          <h2 className="text-base font-semibold text-slate-900" style={{ fontFamily: 'monospace' }}>
             一键发布
           </h2>
         </div>
@@ -183,9 +183,9 @@ export default function OneClickPublish({
       {publishing && (
         <div className="rounded-xl border border-[#14D1A0]/30 bg-[#14D1A0]/5 p-4">
           <div className="flex items-center gap-3">
-            <RefreshCw className="h-4 w-4 animate-spin text-[#14D1A0]" />
+            <RefreshCw className="h-4 w-4 animate-spin text-emerald-600" />
             <div className="flex-1">
-              <p className="text-sm font-medium text-[#14D1A0]" style={{ fontFamily: 'monospace' }}>
+              <p className="text-sm font-medium text-emerald-600" style={{ fontFamily: 'monospace' }}>
                 正在同步发布到 {connectedPlatforms.length} 个平台...
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
@@ -194,8 +194,8 @@ export default function OneClickPublish({
                     key={p.id}
                     className={`inline-flex items-center gap-1 rounded-lg px-2.5 py-1 text-xs font-medium ${
                       publishStep === p.platform
-                        ? 'bg-[#14D1A0]/30 text-[#14D1A0]'
-                        : 'bg-[rgba(255,255,255,0.06)] text-slate-500'
+                        ? 'bg-[#14D1A0]/30 text-emerald-600'
+                        : 'bg-slate-100 text-slate-500'
                     }`}
                     style={{ fontFamily: 'monospace' }}
                   >
@@ -211,26 +211,26 @@ export default function OneClickPublish({
 
       {/* Stats Row */}
       <div className="grid grid-cols-4 gap-3">
-        <div className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-3 text-center">
-          <p className="text-xl font-bold tabular-nums text-white" style={{ fontFamily: 'monospace' }}>
+        <div className="rounded-xl border border-slate-200 bg-slate-100 p-3 text-center">
+          <p className="text-xl font-bold tabular-nums text-slate-900" style={{ fontFamily: 'monospace' }}>
             {connectedPlatforms.length}
           </p>
           <p className="mt-0.5 text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>已连接</p>
         </div>
-        <div className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-3 text-center">
+        <div className="rounded-xl border border-slate-200 bg-slate-100 p-3 text-center">
           <p className="text-xl font-bold tabular-nums text-amber-400" style={{ fontFamily: 'monospace' }}>
             {pendingScheduled.length}
           </p>
           <p className="mt-0.5 text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>待发布</p>
         </div>
-        <div className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-3 text-center">
+        <div className="rounded-xl border border-slate-200 bg-slate-100 p-3 text-center">
           <p className="text-xl font-bold tabular-nums text-emerald-400" style={{ fontFamily: 'monospace' }}>
             {successCount}
           </p>
           <p className="mt-0.5 text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>成功发布</p>
         </div>
-        <div className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-3 text-center">
-          <p className="text-xl font-bold tabular-nums text-[#2B59C3]" style={{ fontFamily: 'monospace' }}>
+        <div className="rounded-xl border border-slate-200 bg-slate-100 p-3 text-center">
+          <p className="text-xl font-bold tabular-nums text-blue-600" style={{ fontFamily: 'monospace' }}>
             {totalViews >= 1000 ? `${(totalViews / 1000).toFixed(0)}k` : totalViews}
           </p>
           <p className="mt-0.5 text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>总曝光</p>
@@ -238,13 +238,13 @@ export default function OneClickPublish({
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 rounded-lg bg-[rgba(255,255,255,0.05)] p-1">
+      <div className="flex gap-1 rounded-lg bg-slate-100 p-1">
         <button
           onClick={() => setActiveTab('pending')}
           className={`flex-1 rounded-md px-3 py-2 text-xs font-medium transition ${
             activeTab === 'pending'
-              ? 'bg-[#14D1A0]/20 text-[#14D1A0]'
-              : 'text-slate-400 hover:text-white'
+              ? 'bg-[#14D1A0]/20 text-emerald-600'
+              : 'text-slate-400 hover:text-slate-900'
           }`}
           style={{ fontFamily: 'monospace' }}
         >
@@ -254,8 +254,8 @@ export default function OneClickPublish({
           onClick={() => setActiveTab('history')}
           className={`flex-1 rounded-md px-3 py-2 text-xs font-medium transition ${
             activeTab === 'history'
-              ? 'bg-[#14D1A0]/20 text-[#14D1A0]'
-              : 'text-slate-400 hover:text-white'
+              ? 'bg-[#14D1A0]/20 text-emerald-600'
+              : 'text-slate-400 hover:text-slate-900'
           }`}
           style={{ fontFamily: 'monospace' }}
         >
@@ -278,13 +278,13 @@ export default function OneClickPublish({
               pendingScheduled.map((post) => (
                 <div
                   key={post.id}
-                  className="flex items-center gap-3 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-3.5"
+                  className="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-100 p-3.5"
                 >
                   <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${PLATFORM_COLORS[post.platform]}`}>
                     {PLATFORM_NAMES[post.platform]}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm text-white" style={{ fontFamily: 'monospace' }}>
+                    <p className="truncate text-sm text-slate-900" style={{ fontFamily: 'monospace' }}>
                       {post.title}
                     </p>
                     <div className="mt-0.5 flex items-center gap-2 text-[10px] text-slate-500">
@@ -308,7 +308,7 @@ export default function OneClickPublish({
             {MOCK_PUBLISH_LOGS.map((log) => (
               <div
                 key={log.id}
-                className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-3.5"
+                className="rounded-xl border border-slate-200 bg-slate-100 p-3.5"
               >
                 <div className="flex items-start gap-3">
                   {/* Status Icon */}
@@ -335,7 +335,7 @@ export default function OneClickPublish({
                         </span>
                       )}
                     </div>
-                    <p className="mt-1 truncate text-sm text-white" style={{ fontFamily: 'monospace' }}>
+                    <p className="mt-1 truncate text-sm text-slate-900" style={{ fontFamily: 'monospace' }}>
                       {log.title}
                     </p>
 
@@ -365,7 +365,7 @@ export default function OneClickPublish({
                             href={log.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="ml-auto flex items-center gap-1 text-[10px] text-[#2B59C3] hover:underline"
+                            className="ml-auto flex items-center gap-1 text-[10px] text-blue-600 hover:underline"
                           >
                             <Globe className="h-3 w-3" />
                             查看

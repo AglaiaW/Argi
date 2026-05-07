@@ -9,6 +9,8 @@ import {
   BookOpen,
   Sparkles,
   ShoppingBag,
+  Sun,
+  Moon,
   User,
   Search,
   Bell,
@@ -529,6 +531,15 @@ const GlobalTopBar = ({ lang, setLang }: { lang: 'CN' | 'EN', setLang: (l: 'CN' 
         </div>
 
         <div className="flex items-center gap-3 lg:gap-6">
+          {/* Theme Toggle */}
+          <button
+            onClick={() => setTheme(t => t === 'dark' ? 'light' : 'dark')}
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 border border-slate-200 text-slate-600 hover:text-amber-500 hover:bg-amber-50 transition-all"
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+
           {/* Language Switcher */}
           <div className="flex items-center p-1 bg-slate-100 rounded-full border border-slate-200 text-[10px] font-mono font-bold">
             <button 
@@ -2171,17 +2182,19 @@ const Profile: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabType>('community');
   const [lang, setLang] = useState<'CN' | 'EN'>('CN');
+  const [theme, setTheme] = useState<'dark' | 'light'>('light');
   const [isAssistantOpen, setIsAssistantOpen] = useState(true);
 
   return (
-    <div className="min-h-screen bg-dark-bg font-sans select-none overflow-x-hidden selection:bg-primary selection:text-dark-bg text-white">
-      {/* Global Starry Ocean Background */}
+    <div className={`min-h-screen font-sans select-none overflow-x-hidden${theme === 'dark' ? ' bg-[#010409] text-white' : ' bg-slate-50 text-slate-900'}`}>
+      {/* Video background only in dark mode */}
+      {theme === 'dark' && (
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none -z-10">
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
           className="w-full h-full object-cover opacity-18 scale-110 blur-[1px] brightness-60"
         >
           <source src="https://player.vimeo.com/external/370364966.hd.mp4?s=12643a6d9620ed737976865d44445353&profile_id=175" type="video/mp4" />
@@ -2189,6 +2202,7 @@ export default function App() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#010409_88%)]" />
         <div className="absolute inset-0 bg-linear-to-b from-[#05101c]/28 via-[#081220]/42 to-[#010409]" />
       </div>
+      )}
 
       <GlobalTopBar lang={lang} setLang={setLang} />
       

@@ -53,7 +53,7 @@ export default function BadgeShowcase({ badges = DEFAULT_BADGES, className = '' 
     <div className={`space-y-6 ${className}`}>
       {/* Earned Badges */}
       <div>
-        <h3 className="text-sm font-semibold text-white/80 uppercase tracking-wider mb-3 flex items-center gap-2">
+        <h3 className="text-sm font-semibold text-slate-900/80 uppercase tracking-wider mb-3 flex items-center gap-2">
           <Award className="w-4 h-4 text-amber-400" />
           Earned Badges ({earned.length})
         </h3>
@@ -67,12 +67,12 @@ export default function BadgeShowcase({ badges = DEFAULT_BADGES, className = '' 
                 className={`relative flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br ${colorClass} bg-opacity-10 border backdrop-blur-sm transition-transform hover:scale-105`}
               >
                 <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-current to-current opacity-80">
-                  <div className="text-white">{IconComp}</div>
+                  <div className="text-slate-900">{IconComp}</div>
                 </div>
-                <span className="text-xs font-bold text-center text-white">{badge.name}</span>
-                <span className="text-[10px] text-white/60 text-center leading-tight">{badge.description}</span>
+                <span className="text-xs font-bold text-center text-slate-900">{badge.name}</span>
+                <span className="text-[10px] text-slate-900/60 text-center leading-tight">{badge.description}</span>
                 {badge.earnedDate && (
-                  <span className="absolute top-1.5 right-1.5 text-[9px] text-white/40">{badge.earnedDate}</span>
+                  <span className="absolute top-1.5 right-1.5 text-[9px] text-slate-900/40">{badge.earnedDate}</span>
                 )}
               </div>
             )
@@ -83,7 +83,7 @@ export default function BadgeShowcase({ badges = DEFAULT_BADGES, className = '' 
       {/* Locked Badges */}
       {locked.length > 0 && (
         <div>
-          <h3 className="text-sm font-semibold text-white/40 uppercase tracking-wider mb-3 flex items-center gap-2">
+          <h3 className="text-sm font-semibold text-slate-900/40 uppercase tracking-wider mb-3 flex items-center gap-2">
             <Award className="w-4 h-4" />
             Locked ({locked.length})
           </h3>
@@ -95,10 +95,10 @@ export default function BadgeShowcase({ badges = DEFAULT_BADGES, className = '' 
                   className="flex flex-col items-center gap-2 p-4 rounded-xl bg-white/5 border border-white/10 opacity-50 grayscale"
                 >
                   <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10">
-                    <Award className="w-5 h-5 text-white/40" />
+                    <Award className="w-5 h-5 text-slate-900/40" />
                   </div>
-                  <span className="text-xs font-bold text-center text-white/60">{badge.name}</span>
-                  <span className="text-[10px] text-white/30 text-center leading-tight">{badge.description}</span>
+                  <span className="text-xs font-bold text-center text-slate-900/60">{badge.name}</span>
+                  <span className="text-[10px] text-slate-900/30 text-center leading-tight">{badge.description}</span>
                 </div>
               )
             })}

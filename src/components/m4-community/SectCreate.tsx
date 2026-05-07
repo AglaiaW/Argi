@@ -31,7 +31,7 @@ export default function SectCreate() {
       description: '分享运营经验、行业洞察或教程攻略',
       icon: <FileText className="h-6 w-6" />,
       color: '#14D1A0',
-      bg: 'bg-[#14D1A0]/10',
+      bg: 'bg-emerald-50',
     },
     {
       id: 'discussion' as CreateType,
@@ -80,10 +80,10 @@ export default function SectCreate() {
     return (
       <div className="flex h-full flex-col items-center justify-center gap-6 py-20">
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#14D1A0]/20">
-          <Send className="h-10 w-10 text-[#14D1A0]" />
+          <Send className="h-10 w-10 text-emerald-600" />
         </div>
         <div className="text-center">
-          <h3 className="text-lg font-bold text-white" style={{ fontFamily: 'monospace' }}>
+          <h3 className="text-lg font-bold text-slate-900" style={{ fontFamily: 'monospace' }}>
             发布成功！
           </h3>
           <p className="mt-2 text-sm text-slate-400" style={{ fontFamily: 'monospace' }}>
@@ -98,7 +98,7 @@ export default function SectCreate() {
             setContent('')
             setTags([])
           }}
-          className="rounded-xl border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.05)] px-6 py-2.5 text-sm text-slate-300 hover:bg-[rgba(255,255,255,0.1)]"
+          className="rounded-xl border border-[rgba(255,255,255,0.1)] bg-slate-100 px-6 py-2.5 text-sm text-slate-300 hover:bg-[rgba(255,255,255,0.1)]"
           style={{ fontFamily: 'monospace' }}
         >
           继续发布
@@ -111,7 +111,7 @@ export default function SectCreate() {
     return (
       <div className="flex h-full flex-col gap-6">
         <div>
-          <h2 className="text-base font-bold text-white" style={{ fontFamily: 'monospace' }}>
+          <h2 className="text-base font-bold text-slate-900" style={{ fontFamily: 'monospace' }}>
             发起内容
           </h2>
           <p className="mt-1 text-xs text-slate-500" style={{ fontFamily: 'monospace' }}>
@@ -124,13 +124,13 @@ export default function SectCreate() {
             <button
               key={opt.id}
               onClick={() => setCreateType(opt.id)}
-              className="flex items-start gap-4 rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] p-5 text-left transition hover:border-[rgba(255,255,255,0.16)] hover:bg-[rgba(255,255,255,0.06)]"
+              className="flex items-start gap-4 rounded-2xl border border-slate-200 bg-slate-100 p-5 text-left transition hover:border-[rgba(255,255,255,0.16)] hover:bg-slate-100"
             >
               <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${opt.bg}`}>
                 <div style={{ color: opt.color }}>{opt.icon}</div>
               </div>
               <div className="flex-1">
-                <h3 className="text-sm font-bold text-white" style={{ fontFamily: 'monospace' }}>
+                <h3 className="text-sm font-bold text-slate-900" style={{ fontFamily: 'monospace' }}>
                   {opt.label}
                 </h3>
                 <p className="mt-1 text-xs text-slate-500" style={{ fontFamily: 'monospace' }}>
@@ -142,7 +142,7 @@ export default function SectCreate() {
         </div>
 
         {/* Community Guidelines */}
-        <div className="mt-auto rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] p-4">
+        <div className="mt-auto rounded-2xl border border-slate-200 bg-slate-100 p-4">
           <h4 className="text-xs font-bold text-slate-400" style={{ fontFamily: 'monospace' }}>
             社区公约
           </h4>
@@ -174,12 +174,12 @@ export default function SectCreate() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setCreateType(null)}
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] text-slate-400 hover:border-[rgba(255,255,255,0.16)] hover:text-white"
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-slate-100 text-slate-400 hover:border-[rgba(255,255,255,0.16)] hover:text-slate-900"
           >
             <X className="h-4 w-4" />
           </button>
           <div>
-            <h2 className="text-sm font-bold text-white" style={{ fontFamily: 'monospace' }}>
+            <h2 className="text-sm font-bold text-slate-900" style={{ fontFamily: 'monospace' }}>
               {getTypeConfig().label}
             </h2>
             <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>
@@ -208,7 +208,7 @@ export default function SectCreate() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="输入一个吸引人的标题..."
-            className="w-full rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
+            className="w-full rounded-xl border border-slate-200 bg-slate-100 px-4 py-2.5 text-sm text-slate-900 placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
             style={{ fontFamily: 'monospace' }}
           />
         </div>
@@ -222,7 +222,7 @@ export default function SectCreate() {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="详细描述您想分享的内容..."
-            className="h-48 w-full resize-none rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-4 py-3 text-sm text-white placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
+            className="h-48 w-full resize-none rounded-xl border border-slate-200 bg-slate-100 px-4 py-3 text-sm text-slate-900 placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
             style={{ fontFamily: 'monospace' }}
           />
         </div>
@@ -236,12 +236,12 @@ export default function SectCreate() {
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="flex items-center gap-1 rounded-full border border-[rgba(255,255,255,0.12)] bg-[rgba(255,255,255,0.06)] px-2.5 py-1 text-xs text-slate-300"
+                className="flex items-center gap-1 rounded-full border border-slate-100 bg-slate-100 px-2.5 py-1 text-xs text-slate-300"
                 style={{ fontFamily: 'monospace' }}
               >
                 <Tag className="h-2.5 w-2.5" />
                 {tag}
-                <button onClick={() => handleRemoveTag(tag)} className="ml-0.5 text-slate-500 hover:text-white">
+                <button onClick={() => handleRemoveTag(tag)} className="ml-0.5 text-slate-500 hover:text-slate-900">
                   <X className="h-2.5 w-2.5" />
                 </button>
               </span>
@@ -253,12 +253,12 @@ export default function SectCreate() {
                 onChange={(e) => setTagInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddTag())}
                 placeholder="添加标签..."
-                className="w-24 rounded-lg border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-2.5 py-1 text-xs text-white placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
+                className="w-24 rounded-lg border border-slate-200 bg-slate-100 px-2.5 py-1 text-xs text-slate-900 placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
                 style={{ fontFamily: 'monospace' }}
               />
               <button
                 onClick={handleAddTag}
-                className="flex h-6 w-6 items-center justify-center rounded-lg border border-dashed border-[rgba(255,255,255,0.12)] text-slate-500 hover:border-[#14D1A0]/50 hover:text-[#14D1A0]"
+                className="flex h-6 w-6 items-center justify-center rounded-lg border border-dashed border-[rgba(255,255,255,0.12)] text-slate-500 hover:border-[#14D1A0]/50 hover:text-emerald-600"
               >
                 <Plus className="h-3 w-3" />
               </button>
@@ -275,7 +275,7 @@ export default function SectCreate() {
               </label>
               <input
                 type="date"
-                className="w-full rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-4 py-2.5 text-sm text-white focus:border-[#14D1A0]/50 focus:outline-none"
+                className="w-full rounded-xl border border-slate-200 bg-slate-100 px-4 py-2.5 text-sm text-slate-900 focus:border-[#14D1A0]/50 focus:outline-none"
                 style={{ fontFamily: 'monospace', colorScheme: 'dark' }}
               />
             </div>
@@ -286,7 +286,7 @@ export default function SectCreate() {
               <input
                 type="text"
                 placeholder="如：2小时"
-                className="w-full rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
+                className="w-full rounded-xl border border-slate-200 bg-slate-100 px-4 py-2.5 text-sm text-slate-900 placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
                 style={{ fontFamily: 'monospace' }}
               />
             </div>
@@ -302,7 +302,7 @@ export default function SectCreate() {
               <input
                 type="text"
                 placeholder="如：¥5000-10000"
-                className="w-full rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
+                className="w-full rounded-xl border border-slate-200 bg-slate-100 px-4 py-2.5 text-sm text-slate-900 placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
                 style={{ fontFamily: 'monospace' }}
               />
             </div>
@@ -313,7 +313,7 @@ export default function SectCreate() {
               <input
                 type="text"
                 placeholder="如：2周内"
-                className="w-full rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-4 py-2.5 text-sm text-white placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
+                className="w-full rounded-xl border border-slate-200 bg-slate-100 px-4 py-2.5 text-sm text-slate-900 placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
                 style={{ fontFamily: 'monospace' }}
               />
             </div>
@@ -322,7 +322,7 @@ export default function SectCreate() {
 
         {/* Attachment hint */}
         <div className="flex items-center gap-3 rounded-xl border border-dashed border-[rgba(255,255,255,0.08)] p-3">
-          <button className="flex items-center gap-2 text-xs text-slate-500 hover:text-white" style={{ fontFamily: 'monospace' }}>
+          <button className="flex items-center gap-2 text-xs text-slate-500 hover:text-slate-900" style={{ fontFamily: 'monospace' }}>
             <Image className="h-4 w-4" />
             添加图片
           </button>
