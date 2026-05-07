@@ -4,14 +4,14 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { 
-  Home, 
-  BookOpen, 
-  Sparkles, 
-  ShoppingBag, 
-  User, 
-  Search, 
-  Bell, 
+import {
+  Home,
+  BookOpen,
+  Sparkles,
+  ShoppingBag,
+  User,
+  Search,
+  Bell,
   ChevronRight,
   ChevronLeft,
   TrendingUp,
@@ -34,16 +34,24 @@ import {
   Ghost,
   Heart,
   Share2,
-  Users
+  Users,
+  CircuitBoard,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { GoogleGenAI } from "@google/genai";
 import aagiLogo from './assets/aagi-logo-cutout.png';
 import argiCat from './assets/argi-cat-seedream.jpeg';
 
+// New Argi Modules (M1-M5)
+import EducationModule from './components/m1-education/EducationModule';
+import AgentMarketModule from './components/m2-agent-market/AgentMarketModule';
+import CreationModule from './components/m3-creation/CreationModule';
+import CommunityModule from './components/m4-community/CommunityModule';
+import HardwareModule from './components/m5-hardware/HardwareModule';
+
 // --- Types ---
 
-type TabType = 'workbench' | 'growth' | 'workshop' | 'discovery' | 'profile';
+type TabType = 'community' | 'education' | 'market' | 'creation' | 'profile' | 'hardware';
 type CommunitySection = 'discover' | 'market' | 'events' | 'circles';
 type CommunityFeedTab = 'follow' | 'recommend' | 'trending';
 type EventStatusFilter = 'all' | 'registration' | 'ongoing' | 'review' | 'ended';
@@ -554,11 +562,12 @@ const GlobalTopBar = ({ lang, setLang }: { lang: 'CN' | 'EN', setLang: (l: 'CN' 
 
 const SideNav = ({ activeTab, setActiveTab, lang }: { activeTab: TabType, setActiveTab: (tab: TabType) => void, lang: 'CN' | 'EN' }) => {
   const tabs: { id: TabType, icon: React.ReactNode, label: { CN: string, EN: string } }[] = [
-    { id: 'discovery', icon: <ShoppingBag />, label: { CN: '超级社区', EN: 'GALAXY' } },
-    { id: 'workbench', icon: <Home />, label: { CN: '工作台', EN: 'WORKBENCH' } },
-    { id: 'growth', icon: <BookOpen />, label: { CN: '技能树', EN: 'SKILL TREE' } },
-    { id: 'workshop', icon: <Sparkles />, label: { CN: '创造营', EN: 'FORGE' } },
-    { id: 'profile', icon: <User />, label: { CN: '个人中心', EN: 'IDENTITY' } },
+    { id: 'community', icon: <Users />, label: { CN: '超级社区', EN: 'COMMUNITY' } },
+    { id: 'education', icon: <BookOpen />, label: { CN: '技能教育', EN: 'EDUCATION' } },
+    { id: 'market', icon: <Bot />, label: { CN: 'Agent市场', EN: 'MARKET' } },
+    { id: 'creation', icon: <Sparkles />, label: { CN: '创作中心', EN: 'CREATION' } },
+    { id: 'hardware', icon: <CircuitBoard />, label: { CN: '硬件生态', EN: 'HARDWARE' } },
+    { id: 'profile', icon: <User />, label: { CN: '个人中心', EN: 'PROFILE' } },
   ];
 
   return (
@@ -2160,7 +2169,7 @@ const Profile: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
 // --- Main App ---
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<TabType>('discovery');
+  const [activeTab, setActiveTab] = useState<TabType>('community');
   const [lang, setLang] = useState<'CN' | 'EN'>('CN');
   const [isAssistantOpen, setIsAssistantOpen] = useState(true);
 
@@ -2188,10 +2197,11 @@ export default function App() {
       
       <main className={`relative z-10 pl-24 lg:pl-32 pr-0 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${isAssistantOpen ? 'lg:pr-96' : 'lg:pr-0'}`}>
         <AnimatePresence mode="wait">
-          {activeTab === 'workbench' && <Workbench key="w" lang={lang} />}
-          {activeTab === 'growth' && <Growth key="g" lang={lang} />}
-          {activeTab === 'workshop' && <Workshop key="wk" lang={lang} />}
-          {activeTab === 'discovery' && <SuperCommunity key="d" lang={lang} onPublish={() => setActiveTab('workshop')} />}
+          {activeTab === 'education' && <EducationModule key="edu" />}
+          {activeTab === 'market' && <AgentMarketModule key="mkt" />}
+          {activeTab === 'creation' && <CreationModule key="crt" />}
+          {activeTab === 'community' && <CommunityModule key="com" />}
+          {activeTab === 'hardware' && <HardwareModule key="hw" activeTab="library" />}
           {activeTab === 'profile' && <Profile key="p" lang={lang} />}
         </AnimatePresence>
       </main>

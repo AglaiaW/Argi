@@ -47,7 +47,7 @@ const MOCK_METRICS: HardwareMetric[] = [
   { label: 'Temp Avg', value: '68', unit: '°C', icon: <Thermometer className="h-4 w-4" />, color: 'text-amber-400' },
   { label: 'Power Draw', value: '38.4', unit: 'kW', icon: <Zap className="h-4 w-4" />, color: 'text-rose-400' },
   { label: 'IOPS', value: '18.4', unit: 'M /s', icon: <Activity className="h-4 w-4" />, color: 'text-teal-400' },
-  { label: 'Pkt Rate', value: '2.1', unit: 'B/s', icon: <CpuCluster className="h-4 w-4" />, color: 'text-indigo-400' },
+  { label: 'Pkt Rate', value: '2.1', unit: 'B/s', icon: <Cpu className="h-4 w-4" />, color: 'text-indigo-400' },
 ]
 
 const MOCK_ALERTS: HardwareAlert[] = [

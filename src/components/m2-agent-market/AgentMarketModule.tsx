@@ -3,275 +3,577 @@
 import { useState } from 'react'
 import {
   Store, Users, Cpu, Coins, TrendingUp,
-  Search, Filter, X,
-  LayoutGrid, List, Bell
+  X, Star, Zap, Eye, Shield,
+  ArrowRight, ShoppingCart, Heart, ExternalLink, CheckCircle2,
+  ChevronRight, MessageSquare, Play, AlertCircle, Package
 } from 'lucide-react'
-import { DigitalHumanBuilder } from './DigitalHumanBuilder'
-import { IndustryCaseCard, MOCK_CASES } from './IndustryCaseCard'
-import { HardwareVendorCard, MOCK_VENDORS } from './HardwareVendorCard'
-import { ComputeTokenCard, MOCK_TOKENS } from './ComputeTokenCard'
-import { SellerLevelBadge } from './SellerLevelBadge'
 
-export type MarketTab = 'digital_humans' | 'industry_cases' | 'hardware' | 'compute_tokens'
-export type CardLayout = 'grid' | 'list'
+// ─── Block types ─────────────────────────────────────────────────────────────
+type BlockSize = 'sm' | 'md' | 'lg' | 'xl'
 
-interface TabConfig {
-  id: MarketTab
-  label: string
-  icon: React.ReactNode
-  count: number
-  accentColor: string
+interface Block {
+  id: string
+  type: 'featured' | 'digital_human' | 'case' | 'hardware' | 'compute' | 'stats'
+  size: BlockSize
 }
 
-const TABS: TabConfig[] = [
-  { id: 'digital_humans', label: 'Digital Humans', icon: <Users className="h-4 w-4" />, count: 4, accentColor: 'emerald' },
-  { id: 'industry_cases', label: 'Industry Cases', icon: <TrendingUp className="h-4 w-4" />, count: 6, accentColor: 'blue' },
-  { id: 'hardware', label: 'Hardware Vendors', icon: <Cpu className="h-4 w-4" />, count: 6, accentColor: 'cyan' },
-  { id: 'compute_tokens', label: 'Compute Tokens', icon: <Coins className="h-4 w-4" />, count: 6, accentColor: 'amber' },
+// ─── 版型：数字人画廊 + 横向滚动 ─────────────────────────────────────────────
+// 顶行：特色数字人(4列) + 统计(2列)
+// 底行：数字人×2(各2列) + 行业案例(2列)
+// 第三行：硬件商(3列) + 算力通证(3列)
+const BLOCKS: Block[] = [
+  // 顶行
+  { id: 'feat', type: 'featured', size: 'xl' },
+  { id: 'stats', type: 'stats', size: 'sm' },
+  // 底行
+  { id: 'dh-0', type: 'digital_human', size: 'md' },
+  { id: 'dh-1', type: 'digital_human', size: 'md' },
+  { id: 'case-0', type: 'case', size: 'sm' },
+  // 第三行
+  { id: 'hw-0', type: 'hardware', size: 'sm' },
+  { id: 'comp-0', type: 'compute', size: 'sm' },
 ]
 
-interface FilterState {
-  sellerLevel: 'all' | 'new' | 'verified' | 'pro' | 'elite'
-  search: string
-  layout: CardLayout
-}
+// ─── Mock data ───────────────────────────────────────────────────────────────
+const DIGITAL_HUMANS = [
+  {
+    id: 'dh1',
+    name: '智能客服数字人·小雅',
+    avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80',
+    category: '零售客服',
+    price: 2999,
+    originalPrice: 4999,
+    rating: 4.9,
+    sales: 1247,
+   试用次数: '3次免费',
+    tags: ['7×24在线', '多轮对话', '情绪识别'],
+    isNew: false,
+    isHot: true,
+    description: '基于大模型的新一代智能客服，可接入网站、APP、微信等多渠道，平均响应时间<1秒',
+  },
+  {
+    id: 'dh2',
+    name: '直播带货数字人·小蓝',
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80',
+    category: '直播主播',
+    price: 5999,
+    originalPrice: 8999,
+    rating: 4.8,
+    sales: 834,
+   试用次数: '3次免费',
+    tags: ['实时互动', '商品推荐', '弹幕回复'],
+    isNew: true,
+    isHot: false,
+    description: '支持抖音、快手、淘宝直播等多平台，AI实时生成话术，24小时不间断直播',
+  },
+]
 
-const MOCK_BANNER = {
-  title: 'Agent Market · Spring 2026',
-  subtitle: 'Discover, deploy, and trade AI agents, digital humans, compute, and hardware — all in one unified marketplace.',
-  stats: [
-    { label: 'Active Agents', value: '2,847' },
-    { label: 'Digital Humans', value: '1,204' },
-    { label: 'Hardware Listings', value: '483' },
-    { label: 'Compute Providers', value: '156' },
-  ],
-}
+const CASES = [
+  {
+    id: 'case1',
+    title: '某头部电商平台智能客服升级案例',
+    industry: '零售电商',
+    scenario: '智能客服',
+    thumbnail: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80',
+    company: '某头部电商',
+    effect: '人工客服成本降低 67%，响应速度提升 300%',
+    product: '智能客服数字人·小雅',
+    views: '12.4k',
+    likes: 342,
+    description: '接入数字人客服后，实现7×24小时全天候服务，智能识别用户意图并精准回复',
+  },
+]
 
-export function AgentMarketModule() {
-  const [activeTab, setActiveTab] = useState<MarketTab>('digital_humans')
-  const [filters, setFilters] = useState<FilterState>({
-    sellerLevel: 'all',
-    search: '',
-    layout: 'grid',
-  })
+const HARDWARE = [
+  {
+    id: 'hw1',
+    name: 'NVIDIA Jetson AGX Orin',
+    category: '边缘计算',
+    thumbnail: 'https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=600&q=80',
+    priceRange: '¥8,000-12,000',
+    tops: '275 TOPS',
+    adapter: '客服/巡检/导览',
+    vendor: '英伟达官方',
+    isVerified: true,
+  },
+  {
+    id: 'hw2',
+    name: '华为昇腾 Atlas 200DK',
+    category: 'AI加速卡',
+    thumbnail: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80',
+    priceRange: '¥5,000-8,000',
+    tops: '88 TOPS',
+    adapter: '图像识别/推理',
+    vendor: '华为云',
+    isVerified: true,
+  },
+]
 
-  const activeConfig = TABS.find(t => t.id === activeTab)!
+const COMPUTE_PACKAGES = [
+  {
+    id: 'comp1',
+    name: '创业版套餐',
+    thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80',
+    tokens: '500万tokens/月',
+    models: 'GPT-4o / Claude-3.5 / 国产主流模型',
+    price: 299,
+    originalPrice: 0,
+    features: ['优先推理通道', '50GB存储', 'API调用'],
+    badge: '推荐',
+    isHot: true,
+  },
+]
 
-  // Filter helpers
-  function filterByLevel<T extends { sellerLevel?: string; level?: string }>(items: T[]): T[] {
-    if (filters.sellerLevel === 'all') return items
-    return items.filter(item => (item.sellerLevel ?? item.level) === filters.sellerLevel)
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function filterBySearch<T extends Record<string, any>>(items: T[]): T[] {
-    if (!filters.search.trim()) return items
-    const q = filters.search.toLowerCase()
-    return items.filter(item =>
-      item.name?.toLowerCase().includes(q) ||
-      item.title?.toLowerCase().includes(q) ||
-      item.company?.toLowerCase().includes(q) ||
-      item.provider?.toLowerCase().includes(q)
-    )
-  }
-
-  const filteredCases = filterBySearch(filterByLevel(MOCK_CASES)) as typeof MOCK_CASES
-  const filteredVendors = filterBySearch(filterByLevel(MOCK_VENDORS)) as typeof MOCK_VENDORS
-  const filteredTokens = MOCK_TOKENS // tokens have internal filtering
-  const gridCols = filters.layout === 'grid'
-    ? activeTab === 'industry_cases' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 sm:grid-cols-2'
-    : 'grid-cols-1'
-
+// ─── Detail Panel ─────────────────────────────────────────────────────────────
+function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; onClose: () => void }) {
+  if (!item) return null
   return (
-    <div className="min-h-screen bg-[#010409] text-white" data-testid="agent-market-module">
-      {/* ── Hero Banner ─────────────────────────────────────── */}
-      <div className="relative overflow-hidden">
-        {/* Background glow */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-emerald-500/10 rounded-full blur-[120px]" />
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-6 pt-10 pb-8">
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center h-10 w-10 rounded-xl bg-emerald-500/20 border border-emerald-500/30">
-                <Store className="h-5 w-5 text-emerald-400" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-white/90">{MOCK_BANNER.title}</h1>
-                <p className="text-xs text-white/40 mt-0.5 max-w-lg">{MOCK_BANNER.subtitle}</p>
-              </div>
-            </div>
-            <button className="relative shrink-0 flex items-center gap-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-white/60 px-3 py-2 transition-colors">
-              <Bell className="h-4 w-4" />
-              <span className="hidden sm:inline">Alerts</span>
-              <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-emerald-500 border border-[#010409] text-[9px] text-[#010409] font-bold flex items-center justify-center">3</span>
-            </button>
-          </div>
-
-          {/* Stats row */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8">
-            {MOCK_BANNER.stats.map(stat => (
-              <div key={stat.label} className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-center">
-                <div className="text-lg font-bold text-white/90">{stat.value}</div>
-                <div className="text-[10px] text-white/40 mt-0.5">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
+    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-[#0a1628] shadow-2xl w-[340px]">
+      <div className="flex items-center justify-between border-b border-[rgba(255,255,255,0.06)] px-5 py-4">
+        <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>商品详情</span>
+        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[rgba(255,255,255,0.06)] hover:text-white transition-colors">
+          <X className="h-4 w-4" />
+        </button>
       </div>
-
-      {/* ── Tab Navigation ───────────────────────────────────── */}
-      <div className="sticky top-0 z-30 bg-[#010409]/80 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center gap-1 overflow-x-auto py-2 scrollbar-none">
-            {TABS.map(tab => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={[
-                  'flex items-center gap-2 shrink-0 rounded-xl px-4 py-2 text-xs font-medium transition-all duration-200 border',
-                  activeTab === tab.id
-                    ? 'bg-white/10 border-white/20 text-white'
-                    : 'text-white/40 border-transparent hover:bg-white/5 hover:text-white/70',
-                ].join(' ')}
-              >
-                {tab.icon}
-                <span className="hidden sm:inline">{tab.label}</span>
-                <span className={[
-                  'inline-flex items-center justify-center rounded-full text-[10px] min-w-[18px] h-[18px] px-1',
-                  activeTab === tab.id ? 'bg-white/20 text-white/80' : 'bg-white/10 text-white/40',
-                ].join(' ')}>
-                  {tab.count}
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ── Toolbar ───────────────────────────────────────────── */}
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        <div className="flex items-center gap-3 flex-wrap">
-          {/* Search */}
-          <div className="relative flex-1 min-w-[200px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30" />
-            <input
-              type="text"
-              placeholder="Search agents, vendors, tokens..."
-              value={filters.search}
-              onChange={e => setFilters(f => ({ ...f, search: e.target.value }))}
-              className="w-full rounded-xl bg-white/5 border border-white/10 text-xs text-white/80 placeholder:text-white/30 pl-9 pr-4 py-2.5 focus:outline-none focus:border-white/25 focus:bg-white/8 transition-all"
-            />
-            {filters.search && (
-              <button
-                onClick={() => setFilters(f => ({ ...f, search: '' }))}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 hover:text-white/60"
-              >
-                <X className="h-3.5 w-3.5" />
-              </button>
-            )}
-          </div>
-
-          {/* Level filter */}
-          <div className="flex items-center gap-1.5">
-            <Filter className="h-4 w-4 text-white/30 shrink-0" />
-            <div className="flex items-center gap-1">
-              {(['all', 'new', 'verified', 'pro', 'elite'] as const).map(level => (
-                <button
-                  key={level}
-                  onClick={() => setFilters(f => ({ ...f, sellerLevel: level }))}
-                  className={[
-                    'rounded-lg text-[10px] px-2 py-1 border transition-colors',
-                    filters.sellerLevel === level
-                      ? 'bg-white/15 border-white/25 text-white/80'
-                      : 'bg-white/5 border-white/10 text-white/40 hover:bg-white/10',
-                  ].join(' ')}
-                >
-                  {level.charAt(0).toUpperCase() + level.slice(1)}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Layout toggle */}
-          <div className="flex items-center rounded-xl bg-white/5 border border-white/10 overflow-hidden">
-            <button
-              onClick={() => setFilters(f => ({ ...f, layout: 'grid' }))}
-              className={['p-2 transition-colors', filters.layout === 'grid' ? 'bg-white/15 text-white/80' : 'text-white/30 hover:text-white/60'].join(' ')}
-            >
-              <LayoutGrid className="h-4 w-4" />
-            </button>
-            <button
-              onClick={() => setFilters(f => ({ ...f, layout: 'list' }))}
-              className={['p-2 transition-colors', filters.layout === 'list' ? 'bg-white/15 text-white/80' : 'text-white/30 hover:text-white/60'].join(' ')}
-            >
-              <List className="h-4 w-4" />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Tab Content ───────────────────────────────────────── */}
-      <div className="max-w-7xl mx-auto px-6 pb-12">
-        {/* Tab header */}
-        <div className="flex items-center justify-between mb-5">
-          <div className="flex items-center gap-2">
-            <h2 className="text-base font-semibold text-white/90">{activeConfig.label}</h2>
-            <span className="inline-flex items-center rounded-full bg-white/5 border border-white/10 px-2 py-0.5 text-[10px] text-white/40">
-              {activeTab === 'digital_humans' ? filteredCases.length : activeTab === 'industry_cases' ? filteredCases.length : filteredVendors.length} results
+      <div className="flex-1 overflow-y-auto p-5">
+        {item.thumbnail && (
+          <img src={item.thumbnail as string} alt="" className="w-full h-44 object-cover rounded-2xl mb-4" />
+        )}
+        <div className="flex items-center gap-2 mb-2">
+          {item.category && (
+            <span className="rounded-full bg-[#2B59C3]/15 px-2.5 py-1 text-[10px] font-bold text-[#2B59C3]">
+              {item.category as string}
             </span>
+          )}
+          {item.isHot && <span className="rounded-full bg-[#FF6B6B]/15 px-2.5 py-1 text-[10px] font-bold text-[#FF6B6B]">热门</span>}
+          {item.isNew && <span className="rounded-full bg-[#14D1A0]/15 px-2.5 py-1 text-[10px] font-bold text-[#14D1A0]">新品</span>}
+        </div>
+        <h2 className="mb-2 text-lg font-bold text-white leading-snug" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+          {item.name as string}
+        </h2>
+        {item.description && (
+          <p className="mb-3 text-sm text-slate-400">{item.description as string}</p>
+        )}
+        {item.tags && Array.isArray(item.tags) && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {(item.tags as string[]).map((tag) => (
+              <span key={tag} className="rounded-full border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] px-2.5 py-1 text-[10px] text-slate-400">
+                #{tag}
+              </span>
+            ))}
           </div>
-          {filters.sellerLevel !== 'all' && (
-            <button
-              onClick={() => setFilters(f => ({ ...f, sellerLevel: 'all' }))}
-              className="flex items-center gap-1 rounded-lg bg-white/5 border border-white/10 text-[10px] text-white/50 px-2 py-1 hover:bg-white/10 transition-colors"
-            >
-              <SellerLevelBadge level={filters.sellerLevel} size="sm" />
-              <X className="h-2.5 w-2.5" />
-            </button>
+        )}
+        <div className="space-y-3">
+          {item.rating && (
+            <div className="flex items-center gap-2">
+              <Star className="h-4 w-4 fill-[#FFD23F] text-[#FFD23F]" />
+              <span className="text-sm font-bold text-[#FFD23F]">{(item.rating as number).toFixed(1)}</span>
+              {item.sales && <span className="text-xs text-slate-500">已售 {item.sales as number} 件</span>}
+            </div>
+          )}
+          {item.priceRange && (
+            <div className="flex items-center gap-2 text-sm text-slate-400">
+              <Coins className="h-4 w-4" />
+              <span>{item.priceRange as string}</span>
+            </div>
+          )}
+          {item.tops && (
+            <div className="flex items-center gap-2 text-sm text-slate-400">
+              <Cpu className="h-4 w-4" />
+              <span>{item.tops as string} 算力</span>
+            </div>
+          )}
+          {item.effect && (
+            <div className="flex items-start gap-2 rounded-xl bg-[#14D1A0]/10 p-3">
+              <TrendingUp className="h-4 w-4 shrink-0 text-[#14D1A0] mt-0.5" />
+              <p className="text-sm text-[#14D1A0]">{item.effect as string}</p>
+            </div>
+          )}
+          {item.price !== undefined && item.price > 0 && (
+            <div className="flex items-center gap-2 pt-1">
+              <span className="text-2xl font-bold text-[#14D1A0]">¥{item.price.toLocaleString()}</span>
+              {item.originalPrice && item.originalPrice > 0 && (
+                <span className="text-sm text-slate-500 line-through">¥{item.originalPrice as number}</span>
+              )}
+            </div>
           )}
         </div>
-
-        {/* ── Digital Humans ── */}
-        {activeTab === 'digital_humans' && (
-          <DigitalHumanBuilder />
+      </div>
+      <div className="border-t border-[rgba(255,255,255,0.06)] p-4 space-y-2">
+        {item.price !== undefined && item.price > 0 ? (
+          <>
+            <button className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90 active:scale-[0.98]">
+              <ShoppingCart className="h-4 w-4" /> 立即购买
+            </button>
+            <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[rgba(255,255,255,0.08)] py-2.5 text-sm text-slate-400 transition-all hover:border-[rgba(255,255,255,0.15)]">
+              <Play className="h-4 w-4" /> {item.试用次数 as string || '免费试用3次'}
+            </button>
+          </>
+        ) : (
+          <button className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90">
+            <ArrowRight className="h-4 w-4" /> 查看套餐详情
+          </button>
         )}
+      </div>
+    </div>
+  )
+}
 
-        {/* ── Industry Cases ── */}
-        {activeTab === 'industry_cases' && (
-          <div className="space-y-5">
-            {filteredCases.length === 0 ? (
-              <div className="text-center py-16 text-white/30 text-sm">No cases match your filters.</div>
-            ) : (
-              <div className={['grid gap-4 transition-all', gridCols].join(' ')}>
-                {filteredCases.map(c => (
-                  <IndustryCaseCard key={c.id} caseData={c} />
-                ))}
-              </div>
-            )}
+// ─── Stats Block ───────────────────────────────────────────────────────────────
+function StatsBlock() {
+  const stats = [
+    { label: 'Agent总数', value: '2,847', icon: Package, color: '#14D1A0' },
+    { label: '数字人', value: '1,204', icon: Users, color: '#2B59C3' },
+    { label: '硬件商', value: '156', icon: Cpu, color: '#FFD23F' },
+    { label: '算力商', value: '89', icon: Coins, color: '#14D1A0' },
+  ]
+  return (
+    <div
+      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-gradient-to-br from-[#0f2744] to-[#0a1628] p-4"
+      style={{ gridColumn: 'span 1' }}
+    >
+      <div className="mb-4 flex items-center gap-2">
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#2B59C3]/15">
+          <Store className="h-4 w-4 text-[#2B59C3]" />
+        </div>
+        <span className="text-xs font-bold text-slate-400" style={{ fontFamily: 'monospace' }}>市场数据</span>
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        {stats.map((s) => (
+          <div key={s.label} className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-3">
+            <p className="text-xl font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
+            <p className="text-[10px] text-slate-500">{s.label}</p>
+          </div>
+        ))}
+      </div>
+      <div className="mt-3 flex items-center gap-2 rounded-xl bg-[#2B59C3]/10 px-3 py-2">
+        <Shield className="h-4 w-4 text-[#2B59C3]" />
+        <span className="text-xs text-[#2B59C3]">7天无理由退款 · 交易保障</span>
+      </div>
+    </div>
+  )
+}
+
+// ─── Featured Agent Block ──────────────────────────────────────────────────────
+function FeaturedBlock({ agent, onClick }: { agent: typeof DIGITAL_HUMANS[0]; onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.15)] active:scale-[0.98]"
+      style={{ gridColumn: 'span 4', gridRow: 'span 2' }}
+    >
+      {/* 全宽图片背景 */}
+      <div className="relative flex-1 overflow-hidden">
+        <img
+          src={agent.cover}
+          alt={agent.name}
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-[#0a1628]/40 to-transparent" />
+        {agent.isHot && (
+          <div className="absolute left-4 top-4 flex items-center gap-1 rounded-full bg-[#FF6B6B] px-3 py-1">
+            <Zap className="h-3 w-3 text-white" />
+            <span className="text-[10px] font-bold text-white">热门爆款</span>
           </div>
         )}
+      </div>
 
-        {/* ── Hardware Vendors ── */}
-        {activeTab === 'hardware' && (
-          <div className="space-y-5">
-            {filteredVendors.length === 0 ? (
-              <div className="text-center py-16 text-white/30 text-sm">No vendors match your filters.</div>
-            ) : (
-              <div className={['grid gap-4 transition-all', gridCols].join(' ')}>
-                {filteredVendors.map(v => (
-                  <HardwareVendorCard key={v.id} vendor={v} />
-                ))}
+      {/* Content overlay bottom */}
+      <div className="absolute inset-x-0 bottom-0 flex flex-col justify-between p-5">
+        <div className="mb-3 flex items-center gap-2">
+          <span className="rounded-full bg-[#2B59C3]/15 px-3 py-1 text-[10px] font-bold text-[#2B59C3]">{agent.category}</span>
+          <span className="rounded-full border border-[rgba(255,255,255,0.15)] bg-[rgba(0,0,0,0.3)] backdrop-blur-sm px-2.5 py-1 text-[10px] text-white">数字人</span>
+        </div>
+        <div>
+          <h3 className="mb-1 text-xl font-bold leading-snug text-white drop-shadow-lg" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+            {agent.name}
+          </h3>
+          <p className="mb-3 line-clamp-1 text-xs text-white/70">{agent.description}</p>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1">
+                <Star className="h-4 w-4 fill-[#FFD23F] text-[#FFD23F]" />
+                <span className="text-sm font-bold text-[#FFD23F]">{agent.rating}</span>
               </div>
-            )}
+              <span className="text-xs text-white/60">已售 {agent.sales.toLocaleString()}</span>
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="text-2xl font-bold text-[#14D1A0]">¥{agent.price.toLocaleString()}</span>
+              {agent.originalPrice > 0 && <span className="text-sm text-white/50 line-through">¥{agent.originalPrice}</span>}
+            </div>
+          </div>
+        </div>
+      </div>
+    </button>
+  )
+}
+
+// ─── Digital Human Block ────────────────────────────────────────────────────────
+function DigitalHumanBlock({ agent, size, onClick }: { agent: typeof DIGITAL_HUMANS[0]; size: 'md' | 'sm'; onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      style={{ gridColumn: 'span 2' }}
+    >
+      <div className="relative overflow-hidden" style={{ height: size === 'md' ? '110px' : '70px' }}>
+        <img src={item.avatar} alt={item.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628]/60 to-transparent" />
+        {item.isHot && (
+          <div className="absolute left-2 top-2 flex items-center gap-1 rounded-full bg-[#FF6B6B] px-2 py-0.5">
+            <Zap className="h-2.5 w-2.5 text-white" />
+            <span className="text-[9px] font-bold text-white">热门</span>
           </div>
         )}
-
-        {/* ── Compute Tokens ── */}
-        {activeTab === 'compute_tokens' && (
-          <ComputeTokenCard tokens={filteredTokens} />
+        {item.isNew && (
+          <div className="absolute left-2 top-2 flex items-center rounded-full bg-[#14D1A0] px-2 py-0.5">
+            <span className="text-[9px] font-bold text-black">新品</span>
+          </div>
         )}
+      </div>
+
+      <div className="flex flex-1 flex-col p-3">
+        <div className="mb-1 flex items-center gap-1.5">
+          <span className="rounded-full bg-[#2B59C3]/15 px-2 py-0.5 text-[9px] font-medium text-[#2B59C3]">{item.category}</span>
+        </div>
+        <h4 className="mb-1 line-clamp-1 text-sm font-bold leading-snug text-white transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+          {item.name}
+        </h4>
+        <p className="mb-2 line-clamp-2 text-[10px] text-slate-500">{item.description}</p>
+
+        <div className="mt-auto flex items-center justify-between border-t border-[rgba(255,255,255,0.04)] pt-2.5">
+          <div className="flex items-center gap-1">
+            <Star className="h-3 w-3 fill-[#FFD23F] text-[#FFD23F]" />
+            <span className="text-[10px] font-bold text-[#FFD23F]">{item.rating}</span>
+          </div>
+          <span className="text-sm font-bold text-[#14D1A0]">¥{item.price.toLocaleString()}</span>
+        </div>
+      </div>
+    </button>
+  )
+}
+
+// ─── Case Block ────────────────────────────────────────────────────────────────
+function CaseBlock({ item, size, onClick }: { item: typeof CASES[0]; size: 'md' | 'lg'; onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      style={{ gridColumn: size === 'lg' ? 'span 3' : 'span 1' }}
+    >
+      <div className="relative overflow-hidden" style={{ height: size === 'lg' ? '100px' : '70px' }}>
+        <img src={item.thumbnail} alt={item.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-[#0a1628]/30 to-transparent" />
+        <div className="absolute bottom-2 left-3">
+          <span className="rounded-full bg-[#2B59C3]/20 backdrop-blur-sm px-2.5 py-1 text-[10px] font-bold text-[#2B59C3]">
+            {item.industry} · {item.scenario}
+          </span>
+        </div>
+      </div>
+
+      <div className="flex flex-1 flex-col p-3">
+        <h4 className="mb-1 text-sm font-bold leading-snug text-white transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+          {item.title}
+        </h4>
+        <p className="mb-2 line-clamp-1 text-[10px] text-slate-400">{item.company} · {item.description}</p>
+
+        <div className="mt-auto flex items-start gap-2 rounded-xl bg-[#14D1A0]/10 p-2.5">
+          <TrendingUp className="h-3.5 w-3.5 shrink-0 text-[#14D1A0] mt-0.5" />
+          <p className="text-[10px] text-[#14D1A0]">{item.effect}</p>
+        </div>
+
+        <div className="mt-2 flex items-center justify-between border-t border-[rgba(255,255,255,0.04)] pt-2">
+          <div className="flex items-center gap-3 text-[10px] text-slate-500">
+            <span className="flex items-center gap-1"><Eye className="h-3 w-3" />{item.views}</span>
+            <span className="flex items-center gap-1"><Heart className="h-3 w-3" />{item.likes}</span>
+          </div>
+          <span className="rounded-full bg-[#2B59C3]/15 px-2.5 py-1 text-[10px] font-bold text-[#2B59C3]">查看方案</span>
+        </div>
+      </div>
+    </button>
+  )
+}
+
+// ─── Hardware Block ─────────────────────────────────────────────────────────────
+function HardwareBlock({ item, size, onClick }: { item: typeof HARDWARE[0]; size: 'md' | 'sm'; onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      style={{ gridColumn: 'span 3' }}
+    >
+      <div className="relative overflow-hidden" style={{ height: '80px' }}>
+        <img src={item.thumbnail} alt={item.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628]/60 to-transparent" />
+        {item.isVerified && (
+          <div className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#14D1A0]">
+            <CheckCircle2 className="h-3 w-3 text-[#010409]" />
+          </div>
+        )}
+      </div>
+
+      <div className="flex flex-1 flex-col p-3">
+        <h4 className="mb-1 line-clamp-1 text-sm font-bold text-white transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+          {item.name}
+        </h4>
+        <p className="mb-2 text-[10px] text-slate-500">{item.vendor} · {item.tops}</p>
+
+        <div className="mt-auto flex items-center justify-between">
+          <span className="rounded-full bg-[rgba(255,255,255,0.04)] px-2 py-0.5 text-[9px] text-slate-400">{item.category}</span>
+          <span className="text-xs font-bold text-[#14D1A0]">{item.priceRange}</span>
+        </div>
+      </div>
+    </button>
+  )
+}
+
+// ─── Compute Block ──────────────────────────────────────────────────────────────
+function ComputeBlock({ item, onClick }: { item: typeof COMPUTE_PACKAGES[0]; onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.06)] bg-gradient-to-br from-[#0f2744] to-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      style={{ gridColumn: 'span 3' }}
+    >
+      <div className="relative overflow-hidden" style={{ height: '80px' }}>
+        <img src={item.thumbnail} alt={item.name} className="h-full w-full object-cover opacity-30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] to-transparent" />
+        {item.badge && (
+          <div className="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-[#14D1A0] px-3 py-1">
+            <Zap className="h-3 w-3 text-black" />
+            <span className="text-[10px] font-bold text-black">{item.badge}</span>
+          </div>
+        )}
+      </div>
+
+      <div className="flex flex-1 flex-col p-3">
+        <h4 className="mb-1 text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>{item.name}</h4>
+        <p className="mb-2 text-[10px] text-slate-400">{item.tokens} · {item.models.split('/')[0]}</p>
+
+        <div className="mb-2 flex flex-wrap gap-1">
+          {item.features.map((f) => (
+            <span key={f} className="rounded-full bg-[rgba(255,255,255,0.04)] px-2 py-0.5 text-[9px] text-slate-400">{f}</span>
+          ))}
+        </div>
+
+        <div className="mt-auto flex items-center justify-between border-t border-[rgba(255,255,255,0.04)] pt-2.5">
+          <div className="flex items-baseline gap-1">
+            <span className="text-xl font-bold text-[#14D1A0]">¥{item.price}</span>
+            <span className="text-[10px] text-slate-500">/月</span>
+          </div>
+          <span className="rounded-full bg-[#14D1A0]/15 px-2.5 py-1 text-[10px] font-bold text-[#14D1A0]">立即订阅</span>
+        </div>
+      </div>
+    </button>
+  )
+}
+
+// ─── Main AgentMarketModule ────────────────────────────────────────────────────
+export default function AgentMarketModule() {
+  const [selectedItem, setSelectedItem] = useState<Record<string, unknown> | null>(null)
+
+  const getBlockContent = (block: Block) => {
+    switch (block.type) {
+      case 'stats':
+        return <StatsBlock key={block.id} />
+      case 'featured':
+        return (
+          <FeaturedBlock
+            key={block.id}
+            item={DIGITAL_HUMANS[0]}
+            onClick={() => setSelectedItem(DIGITAL_HUMANS[0] as unknown as Record<string, unknown>)}
+          />
+        )
+      case 'digital_human': {
+        const idx = parseInt(block.id.split('-')[1])
+        const dh = DIGITAL_HUMANS[idx % DIGITAL_HUMANS.length]
+        return (
+          <DigitalHumanBlock
+            key={block.id}
+            item={dh}
+            size={block.size as 'md' | 'sm'}
+            onClick={() => setSelectedItem(dh as unknown as Record<string, unknown>)}
+          />
+        )
+      }
+      case 'case': {
+        const c = CASES[0]
+        return (
+          <CaseBlock
+            key={block.id}
+            item={c}
+            size={block.size as 'md' | 'lg'}
+            onClick={() => setSelectedItem(c as unknown as Record<string, unknown>)}
+          />
+        )
+      }
+      case 'hardware': {
+        const idx = parseInt(block.id.split('-')[1])
+        const hw = HARDWARE[idx % HARDWARE.length]
+        return (
+          <HardwareBlock
+            key={block.id}
+            item={hw}
+            size={block.size as 'md' | 'sm'}
+            onClick={() => setSelectedItem(hw as unknown as Record<string, unknown>)}
+          />
+        )
+      }
+      case 'compute': {
+        const comp = COMPUTE_PACKAGES[0]
+        return (
+          <ComputeBlock
+            key={block.id}
+            item={comp}
+            onClick={() => setSelectedItem(comp as unknown as Record<string, unknown>)}
+          />
+        )
+      }
+      default:
+        return null
+    }
+  }
+
+  return (
+    <div className="relative flex h-full flex-col gap-0 overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(10,22,40,0.95)]">
+      {/* Header */}
+      <div className="flex items-center justify-between border-b border-[rgba(255,255,255,0.06)] px-6 py-4 shrink-0">
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#2B59C3]/15">
+            <Store className="h-5 w-5 text-[#2B59C3]" />
+          </div>
+          <div>
+            <h1 className="text-base font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>M2 · AGENT 市场</h1>
+            <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>数字人 · 案例 · 硬件 · 算力通证</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="text-center">
+            <p className="text-sm font-bold tabular-nums text-white" style={{ fontFamily: 'monospace' }}>2,847</p>
+            <p className="text-[10px] text-slate-500">Agent</p>
+          </div>
+          <div className="h-5 w-px bg-[rgba(255,255,255,0.08)]" />
+          <div className="text-center">
+            <p className="text-sm font-bold tabular-nums text-[#2B59C3]" style={{ fontFamily: 'monospace' }}>1,204</p>
+            <p className="text-[10px] text-slate-500">数字人</p>
+          </div>
+          <div className="h-5 w-px bg-[rgba(255,255,255,0.08)]" />
+          <div className="text-center">
+            <p className="text-sm font-bold tabular-nums text-[#FFD23F]" style={{ fontFamily: 'monospace' }}>156</p>
+            <p className="text-[10px] text-slate-500">算力商</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Grid: 6列，差异化版型 */}
+      <div className="relative flex-1 overflow-auto p-4">
+        <div
+          className="grid min-h-full gap-3"
+          style={{ gridTemplateColumns: 'repeat(6, 1fr)', gridAutoRows: '160px' }}
+        >
+          {BLOCKS.map(getBlockContent)}
+        </div>
+        {selectedItem && <DetailPanel item={selectedItem} onClose={() => setSelectedItem(null)} />}
       </div>
     </div>
   )
