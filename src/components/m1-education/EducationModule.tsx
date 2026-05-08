@@ -7,6 +7,7 @@ import {
   ArrowRight, Zap, Shield, UserCheck, Calendar,
   MessageSquare, Play, Gift, Lock, Search
 } from 'lucide-react'
+import CourseDetailPage from './CourseDetailPage'
 
 // ─── Block types ─────────────────────────────────────────────────────────────
 type BlockSize = 'sm' | 'md' | 'lg' | 'xl'
@@ -146,6 +147,28 @@ const PATHS = [
     completedSteps: 1,
   },
 ]
+
+// ─── Course Detail ────────────────────────────────────────────────────────────
+export const COURSE_DETAIL = {
+  id: 'c1',
+  title: 'AI 运营实战训练营',
+  subtitle: '从 0 到 1 打造百万级私域流量，28天系统化课程',
+  thumbnail: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80',
+  instructor: '张运营',
+  instructorAvatar: 'https://i.pravatar.cc/150?img=32',
+  instructorTitle: '前字节跳动运营总监',
+  rating: 4.9,
+  reviewCount: 1847,
+  studentCount: 3847,
+  duration: '42课时',
+  level: '进阶',
+  price: 2999,
+  originalPrice: 4999,
+  category: '运营增长',
+  tags: ['私域运营', 'AI工具', '内容创作'],
+  isEnrolled: true,
+  progress: 35,
+}
 
 const CAMPS = [
   {
@@ -965,7 +988,9 @@ export default function EducationModule() {
   const [selectedPath, setSelectedPath] = useState<typeof PATHS[0] | null>(null)
   const [selectedCamp, setSelectedCamp] = useState<typeof CAMPS[0] | null>(null)
   const [selectedBuddy, setSelectedBuddy] = useState<typeof BUDDY | null>(null)
+  const [selectedCourse, setSelectedCourse] = useState<typeof COURSE_DETAIL | null>(null)
   const [activeTab, setActiveTab] = useState('全部')
+  const [contentType, setContentType] = useState<'all' | 'course' | 'path' | 'camp' | 'buddy'>('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [sortBy, setSortBy] = useState<'popular' | 'rating' | 'newest' | 'price'>('popular')
   const [showAssessment, setShowAssessment] = useState(false)
@@ -990,7 +1015,9 @@ export default function EducationModule() {
   const displayCourses = tabFilter
     ? COURSES.filter(c => c.level === tabFilter)
     : COURSES
-  const displayBlocks = !isSearchActive && !tabFilter ? BLOCKS : null
+  // contentType filter: when not 'all', show only that type's cards
+  const showMagazineLayout = !isSearchActive && !tabFilter && contentType === 'all'
+  const displayBlocks = showMagazineLayout ? BLOCKS : null
 
   const getBlockContent = (block: Block) => {
     switch (block.type) {
@@ -1001,7 +1028,7 @@ export default function EducationModule() {
           <FeaturedCourseBlock
             key={block.id}
             course={COURSES[0]}
-            onClick={() => setSelectedItem(COURSES[0] as unknown as Record<string, unknown>)}
+            onClick={() => setSelectedCourse(COURSE_DETAIL)}
           />
         )
       case 'course': {
@@ -1012,7 +1039,7 @@ export default function EducationModule() {
             key={block.id}
             course={c}
             size={block.size as 'md' | 'sm'}
-            onClick={() => setSelectedItem(c as unknown as Record<string, unknown>)}
+            onClick={() => setSelectedCourse(COURSE_DETAIL)}
           />
         )
       }
@@ -1122,6 +1149,23 @@ export default function EducationModule() {
               </button>
             ))}
           </div>
+          <div className="flex items-center gap-1 rounded-xl border border-slate-200 bg-slate-100 p-1">
+            {[
+              { id: 'all', label: '全部' },
+              { id: 'course', label: '课程' },
+              { id: 'path', label: '路径' },
+              { id: 'camp', label: '共学营' },
+              { id: 'buddy', label: '搭子' },
+            ].map((ct) => (
+              <button
+                key={ct.id}
+                onClick={() => setContentType(ct.id as typeof contentType)}
+                className={`rounded-lg px-2.5 py-1.5 text-xs font-medium transition-all ${contentType === ct.id ? 'bg-slate-800 text-white' : 'text-slate-500 hover:text-slate-600'}`}
+              >
+                {ct.label}
+              </button>
+            ))}
+          </div>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
@@ -1164,7 +1208,7 @@ export default function EducationModule() {
                       key={c.id}
                       course={c}
                       size="md"
-                      onClick={() => setSelectedItem(c as unknown as Record<string, unknown>)}
+                      onClick={() => setSelectedCourse(COURSE_DETAIL)}
                     />
                   ))}
                   {filteredPaths.map((p, i) => (
@@ -1197,7 +1241,7 @@ export default function EducationModule() {
                   key={c.id}
                   course={c}
                   size="md"
-                  onClick={() => setSelectedItem(c as unknown as Record<string, unknown>)}
+                  onClick={() => setSelectedCourse(COURSE_DETAIL)}
                 />
               ))}
             </div>
@@ -1208,6 +1252,13 @@ export default function EducationModule() {
         {selectedCamp && <CampDetailPanel camp={selectedCamp} onClose={() => setSelectedCamp(null)} />}
         {selectedBuddy && <BuddyDetailPanel buddy={selectedBuddy} onClose={() => setSelectedBuddy(null)} />}
         {showAssessment && <SixDimensionalAssessment onClose={() => setShowAssessment(false)} />}
+        {selectedCourse && (
+          <CourseDetailPage
+            course={selectedCourse}
+            onBack={() => setSelectedCourse(null)}
+            onEnroll={(id) => console.log('enroll', id)}
+          />
+        )}
       </div>
     </div>
   )
