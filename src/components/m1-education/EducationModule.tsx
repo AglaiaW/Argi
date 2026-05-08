@@ -257,7 +257,7 @@ function CampDetailPanel({ camp, onClose }: { camp: typeof CAMPS[0]; onClose: ()
           <p className="mb-2 text-xs font-bold text-slate-400">课程大纲</p>
           <div className="space-y-2">
             {['Day 1-2: 选品策略与竞品分析', 'Day 3-4: 投放素材制作与优化', 'Day 5-6: 转化链路设计与AB测试', 'Day 7: 复盘与后续策略'].map((d, i) => (
-              <div key={i} className="flex items-center gap-2 text-xs text-slate-300">
+              <div key={i} className="flex items-center gap-2 text-xs text-slate-700">
                 <div className="h-1.5 w-1.5 rounded-full bg-[#14D1A0] shrink-0" />
                 <span>{d}</span>
               </div>
@@ -326,7 +326,7 @@ function BuddyDetailPanel({ buddy, onClose }: { buddy: typeof BUDDY; onClose: ()
             </div>
             <div>
               <p className="mb-2 text-xs font-bold text-slate-400">学习目标</p>
-              <p className="text-sm text-slate-300">{buddy.learningGoal}</p>
+              <p className="text-sm text-slate-700">{buddy.learningGoal}</p>
             </div>
             <div>
               <p className="mb-2 text-xs font-bold text-slate-400">技能标签</p>
@@ -458,10 +458,10 @@ function PathDetailPanel({ path, onClose }: { path: typeof PATHS[0]; onClose: ()
           <p className="text-xs font-bold text-slate-400">学习阶段</p>
           {STEPS.map((step, i) => (
             <div key={i} className="flex items-center gap-3">
-              <div className={`flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold shrink-0 ${step.done ? 'bg-[#14D1A0] text-[#010409]' : step.locked ? 'border border-slate-600 text-slate-600' : 'bg-[rgba(255,255,255,0.08)] text-slate-400'}`}>
+              <div className={`flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold shrink-0 ${step.done ? 'bg-[#14D1A0] text-[#010409]' : step.locked ? 'border border-slate-300 text-slate-500' : 'bg-[rgba(255,255,255,0.08)] text-slate-400'}`}>
                 {step.done ? '✓' : i + 1}</div>
-              <span className={`text-xs ${step.locked ? 'text-slate-600' : 'text-slate-300'}`}>{step.label}</span>
-              {step.locked && <Lock className="h-3 w-3 text-slate-600 shrink-0" />}
+              <span className={`text-xs ${step.locked ? 'text-slate-500' : 'text-slate-300'}`}>{step.label}</span>
+              {step.locked && <Lock className="h-3 w-3 text-slate-500 shrink-0" />}
             </div>
           ))}
         </div>
@@ -688,7 +688,7 @@ function FeaturedCourseBlock({ course, onClick }: { course: typeof COURSES[0]; o
                 <span>学习进度</span>
                 <span className="text-emerald-600">{course.progress}%</span>
               </div>
-              <div className="h-1.5 w-full rounded-full bg-white/20">
+              <div className="h-1.5 w-full rounded-full bg-slate-200">
                 <div className="h-1.5 rounded-full bg-[#14D1A0]" style={{ width: `${course.progress}%` }} />
               </div>
             </div>
@@ -970,6 +970,28 @@ export default function EducationModule() {
   const [sortBy, setSortBy] = useState<'popular' | 'rating' | 'newest' | 'price'>('popular')
   const [showAssessment, setShowAssessment] = useState(false)
 
+  // Filter logic
+  const isSearchActive = searchQuery.trim().length > 0
+  const filteredCourses = COURSES.filter(c =>
+    !isSearchActive || (
+      c.title.includes(searchQuery) ||
+      c.instructor.includes(searchQuery) ||
+      c.category.includes(searchQuery) ||
+      c.tags.some((t: string) => t.includes(searchQuery))
+    )
+  )
+  const filteredPaths = PATHS.filter(p =>
+    !isSearchActive || (
+      p.title.includes(searchQuery) ||
+      p.category.includes(searchQuery)
+    )
+  )
+  const tabFilter = activeTab === '全部' ? null : activeTab
+  const displayCourses = tabFilter
+    ? COURSES.filter(c => c.level === tabFilter)
+    : COURSES
+  const displayBlocks = !isSearchActive && !tabFilter ? BLOCKS : null
+
   const getBlockContent = (block: Block) => {
     switch (block.type) {
       case 'stats':
@@ -1094,7 +1116,7 @@ export default function EducationModule() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${activeTab === tab ? 'bg-slate-900 text-slate-900' : 'text-slate-500 hover:text-slate-600'}`}
+                className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${activeTab === tab ? 'bg-emerald-500 text-white' : 'text-slate-500 hover:text-slate-600'}`}
               >
                 {tab}
               </button>
@@ -1116,12 +1138,70 @@ export default function EducationModule() {
       {/* 内容区 — 浅灰背景 + 卡片式布局 */}
       <div className="relative flex-1 overflow-hidden bg-slate-100">
         <div className="absolute inset-0 overflow-auto p-4">
-          <div
-            className="grid min-h-full gap-3"
-            style={{ gridTemplateColumns: 'repeat(6, 1fr)', gridAutoRows: '150px' }}
-          >
-            {BLOCKS.map(getBlockContent)}
-          </div>
+          {isSearchActive ? (
+            /* 搜索结果视图 */
+            <div>
+              <div className="mb-4 flex items-center gap-2 text-sm text-slate-500">
+                <Search className="h-4 w-4" />
+                <span>找到 <span className="font-bold text-slate-900">{filteredCourses.length + filteredPaths.length}</span> 个结果：</span>
+                <span className="rounded-full bg-slate-200 px-2 py-0.5 text-xs">"{searchQuery}"</span>
+                <button onClick={() => setSearchQuery('')} className="ml-auto flex items-center gap-1 text-xs text-emerald-600 hover:underline">
+                  <X className="h-3 w-3" />清除
+                </button>
+              </div>
+              {filteredCourses.length === 0 && filteredPaths.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-20 text-center">
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-slate-200">
+                    <Search className="h-8 w-8 text-slate-400" />
+                  </div>
+                  <h3 className="mb-2 text-lg font-bold text-slate-900">未找到"{searchQuery}"</h3>
+                  <p className="text-sm text-slate-400">试试其他关键词，或<button onClick={() => setSearchQuery('')} className="text-emerald-600 hover:underline">查看全部课程</button></p>
+                </div>
+              ) : (
+                <div className="grid gap-3" style={{ gridTemplateColumns: 'repeat(6, 1fr)', gridAutoRows: '150px' }}>
+                  {filteredCourses.map((c, i) => (
+                    <CourseBlock
+                      key={c.id}
+                      course={c}
+                      size="md"
+                      onClick={() => setSelectedItem(c as unknown as Record<string, unknown>)}
+                    />
+                  ))}
+                  {filteredPaths.map((p, i) => (
+                    <PathBlock
+                      key={p.id}
+                      path={p}
+                      size="lg"
+                      onClick={() => { setSelectedPath(p); setSelectedItem(null) }}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          ) : displayBlocks ? (
+            /* 默认网格视图 */
+            <div
+              className="grid min-h-full gap-3"
+              style={{ gridTemplateColumns: 'repeat(6, 1fr)', gridAutoRows: '150px' }}
+            >
+              {BLOCKS.map(getBlockContent)}
+            </div>
+          ) : (
+            /* Tab 筛选视图 */
+            <div
+              className="grid min-h-full gap-3"
+              style={{ gridTemplateColumns: 'repeat(6, 1fr)', gridAutoRows: '150px' }}
+            >
+              {displayCourses.map((c, i) => (
+                <CourseBlock
+                  key={c.id}
+                  course={c}
+                  size="md"
+                  onClick={() => setSelectedItem(c as unknown as Record<string, unknown>)}
+                />
+              ))}
+            </div>
+          )}
         </div>
         {selectedItem && <DetailPanel item={selectedItem} onClose={() => setSelectedItem(null)} />}
         {selectedPath && <PathDetailPanel path={selectedPath} onClose={() => setSelectedPath(null)} />}
