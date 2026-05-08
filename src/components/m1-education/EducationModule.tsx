@@ -375,8 +375,8 @@ function BuddyDetailPanel({ buddy, onClose }: { buddy: typeof BUDDY; onClose: ()
               ))}
             </div>
             <div className="border-t border-slate-100 p-3 flex gap-2">
-              <input value={message} onChange={(e) => setMessage(e.target.value)} placeholder="发消息..." className="flex-1 rounded-xl border border-slate-200 bg-slate-100 px-3 py-2 text-xs text-slate-900 placeholder-slate-500 outline-none focus:border-[#14D1A0]/40" />
-              <button className="rounded-xl bg-[#14D1A0] px-3 py-2 text-xs font-bold text-[#010409]">发送</button>
+              <input value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && message.trim()) { setChatMsgs([...chatMsgs, { from: "me", text: message }]); setMessage("") } }} placeholder="发消息..." className="flex-1 rounded-xl border border-slate-200 bg-slate-100 px-3 py-2 text-xs text-slate-900 placeholder-slate-500 outline-none focus:border-[#14D1A0]/40" />
+              <button onClick={() => { if (message.trim()) { setChatMsgs([...chatMsgs, { from: "me", text: message }]); setMessage("") } }} className="rounded-xl bg-[#14D1A0] px-3 py-2 text-xs font-bold text-[#010409] hover:bg-[#14D1A0]/90 transition-colors">发送</button>
             </div>
           </div>
         )}
@@ -473,6 +473,53 @@ function SixDimensionalAssessment({ onClose }: { onClose: () => void }) {
             <button onClick={onClose} className="w-full rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] hover:bg-[#14D1A0]/90 transition-all">开始学习</button>
           </>
         )}
+      </div>
+    </div>
+  )
+}
+
+// ─── Instructor Detail Panel ─────────────────────────────────────────────────────
+function InstructorDetailPanel({ inst, onClose }: { inst: Record<string, unknown>; onClose: () => void }) {
+  return (
+    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-slate-200 bg-white shadow-2xl w-[340px]">
+      <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
+        <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>讲师详情</span>
+        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-colors"><X className="h-4 w-4" /></button>
+      </div>
+      <div className="flex-1 overflow-y-auto p-5">
+        <div className="mb-4 flex flex-col items-center text-center">
+          <img src={inst.avatar as string} alt={inst.name as string} className="mb-3 h-16 w-16 rounded-full object-cover" />
+          <h3 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>{inst.name as string}</h3>
+          <p className="text-xs text-slate-500">{inst.title as string}</p>
+        </div>
+        <div className="mb-4 grid grid-cols-3 gap-2 text-center">
+          {[{ label: '学员', value: '12,847' }, { label: '评分', value: '4.9' }, { label: '课程', value: '8门' }].map(s => (
+            <div key={s.label} className="rounded-xl bg-slate-100 p-3">
+              <p className="text-sm font-bold text-slate-900">{s.value}</p>
+              <p className="text-[10px] text-slate-500">{s.label}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mb-4">
+          <p className="mb-2 text-xs font-bold text-slate-400">讲师简介</p>
+          <p className="text-sm leading-relaxed text-slate-500">{inst.bio as string || '深耕AI运营与内容创作领域多年，擅长从0到1搭建私域流量体系，服务过多家头部品牌。'}</p>
+        </div>
+        <div>
+          <p className="mb-2 text-xs font-bold text-slate-400">代表课程</p>
+          <div className="space-y-2">
+            {['AI运营实战训练营', '私域流量搭建指南'].map((c, i) => (
+              <div key={i} className="flex items-center gap-2 rounded-xl bg-slate-100 p-3">
+                <div className="h-8 w-8 rounded-lg bg-emerald-100 flex items-center justify-center text-xs font-bold text-emerald-600">{i + 1}</div>
+                <span className="text-xs font-medium text-slate-700">{c}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="border-t border-slate-100 p-4">
+        <button className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90">
+          <BookOpen className="h-4 w-4" />查看全部课程
+        </button>
       </div>
     </div>
   )
@@ -859,7 +906,7 @@ function PathBlock({ path, size, onClick }: { path: typeof PATHS[0]; size: 'md' 
                 <span>进度</span>
                 <span className="text-emerald-600">{path.progress}%</span>
               </div>
-              <div className="h-1 w-full rounded-full bg-[rgba(255,255,255,0.08)]">
+              <div className="h-1 w-full rounded-full bg-slate-200">
                 <div className="h-1 rounded-full bg-[#14D1A0]" style={{ width: `${path.progress}%` }} />
               </div>
             </div>
@@ -921,7 +968,7 @@ function CampBlock({ camp, onClick }: { camp: typeof CAMPS[0]; onClick: () => vo
           </div>
         )}
         {/* Countdown badge */}
-        <div className="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-1 backdrop-blur-sm">
+        <div className="absolute bottom-3 left-3 flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-1 backdrop-blur-sm">
           <Clock className="h-3 w-3 text-white" />
           <span className="text-[10px] font-mono font-bold text-white">
             {countdown.days > 0 ? `${countdown.days}天` : countdown.hours > 0 ? `${countdown.hours}时` : `${countdown.mins}分`}
@@ -1098,7 +1145,8 @@ export default function EducationModule() {
   const [selectedPath, setSelectedPath] = useState<typeof PATHS[0] | null>(null)
   const [selectedCamp, setSelectedCamp] = useState<typeof CAMPS[0] | null>(null)
   const [selectedBuddy, setSelectedBuddy] = useState<typeof BUDDY | null>(null)
-  const [selectedCourse, setSelectedCourse] = useState<typeof COURSE_DETAIL | null>(null)
+  const [selectedCourse, setSelectedCourse] = useState<Record<string, unknown> | null>(null)
+  const [selectedInstructor, setSelectedInstructor] = useState<Record<string, unknown> | null>(null)
   const [activeTab, setActiveTab] = useState('全部')
   const [contentType, setContentType] = useState<'all' | 'course' | 'path' | 'camp' | 'buddy'>('all')
   const [searchQuery, setSearchQuery] = useState('')
@@ -1122,11 +1170,25 @@ export default function EducationModule() {
     )
   )
   const tabFilter = activeTab === '全部' ? null : activeTab
-  const displayCourses = tabFilter
+  const contentFilter = contentType === 'all' ? null : contentType
+  const levelFiltered = tabFilter
     ? COURSES.filter(c => c.level === tabFilter)
     : COURSES
+  const contentFiltered = contentFilter
+    ? levelFiltered.filter(c => c.category === contentFilter)
+    : levelFiltered
+  const sortFn = (a: typeof COURSES[0], b: typeof COURSES[0]) => {
+    if (sortBy === 'rating') return b.rating - a.rating
+    if (sortBy === 'newest') return b.id.localeCompare(a.id)
+    if (sortBy === 'price') return a.price - b.price
+    if (sortBy === 'popular') return b.studentCount - a.studentCount
+    return 0
+  }
+  const displayCourses = [...contentFiltered].sort(sortFn)
   // contentType filter: when not 'all', show only that type's cards
   const showMagazineLayout = !isSearchActive && !tabFilter && contentType === 'all'
+  const showFeaturedTop = !isSearchActive && !tabFilter && contentType === 'course'
+  const showFeaturedTopPath = !isSearchActive && !tabFilter && contentType === 'path'
   const displayBlocks = showMagazineLayout ? BLOCKS : null
 
   const getBlockContent = (block: Block) => {
@@ -1138,7 +1200,7 @@ export default function EducationModule() {
           <FeaturedCourseBlock
             key={block.id}
             course={COURSES[0]}
-            onClick={() => setSelectedCourse(COURSE_DETAIL)}
+            onClick={() => setSelectedCourse({ ...COURSE_DETAIL, id: "c1" })}
           />
         )
       case 'course': {
@@ -1149,7 +1211,7 @@ export default function EducationModule() {
             key={block.id}
             course={c}
             size={block.size as 'md' | 'sm'}
-            onClick={() => setSelectedCourse(COURSE_DETAIL)}
+            onClick={() => setSelectedCourse({ ...COURSE_DETAIL, id: "c1" })}
           />
         )
       }
@@ -1318,7 +1380,7 @@ export default function EducationModule() {
                       key={c.id}
                       course={c}
                       size="md"
-                      onClick={() => setSelectedCourse(COURSE_DETAIL)}
+                      onClick={() => setSelectedCourse({ ...COURSE_DETAIL, id: "c1" })}
                     />
                   ))}
                   {filteredPaths.map((p, i) => (
@@ -1331,6 +1393,31 @@ export default function EducationModule() {
                   ))}
                 </div>
               )}
+            </div>
+          ) : showFeaturedTop ? (
+            <div className="space-y-3">
+              <FeaturedCourseBlock course={COURSES[0]} onClick={() => setSelectedCourse({ ...COURSE_DETAIL, id: 'c1' })} />
+              <div className="grid grid-cols-2 gap-3">
+                {COURSES.slice(1).map(c => (
+                  <CourseBlock key={c.id} course={c} size="md" onClick={() => setSelectedCourse({ ...COURSE_DETAIL, id: c.id })} />
+                ))}
+              </div>
+            </div>
+          ) : showFeaturedTopPath ? (
+            <div className="space-y-3">
+              <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+                <div className="mb-2 flex items-center gap-2">
+                  <Zap className="h-4 w-4 text-emerald-500" />
+                  <span className="text-xs font-bold text-emerald-500">推荐路径</span>
+                </div>
+                <p className="text-sm font-bold text-slate-900">AI 内容创作从0到1 · 8节课程</p>
+                <p className="text-xs text-slate-500">匹配度 98%</p>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {PATHS.slice(0, 2).map(p => (
+                  <PathBlock key={p.id} path={p} size="md" onClick={() => setSelectedPath(p)} />
+                ))}
+              </div>
             </div>
           ) : displayBlocks ? (
             /* 默认网格视图 */
@@ -1351,7 +1438,7 @@ export default function EducationModule() {
                   key={c.id}
                   course={c}
                   size="md"
-                  onClick={() => setSelectedCourse(COURSE_DETAIL)}
+                  onClick={() => setSelectedCourse({ ...COURSE_DETAIL, id: "c1" })}
                 />
               ))}
             </div>
@@ -1359,6 +1446,7 @@ export default function EducationModule() {
         </div>
         {selectedItem && <DetailPanel item={selectedItem} onClose={() => setSelectedItem(null)} />}
         {selectedPath && <PathDetailPanel path={selectedPath} onClose={() => setSelectedPath(null)} />}
+        {selectedInstructor && <InstructorDetailPanel inst={selectedInstructor} onClose={() => setSelectedInstructor(null)} />}
         {selectedCamp && <CampDetailPanel camp={selectedCamp} onClose={() => setSelectedCamp(null)} />}
         {selectedBuddy && <BuddyDetailPanel buddy={selectedBuddy} onClose={() => setSelectedBuddy(null)} />}
         {showAssessment && <SixDimensionalAssessment onClose={() => setShowAssessment(false)} />}

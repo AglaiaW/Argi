@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   ArrowLeft, Star, Users, Clock, BookOpen, Award,
   CheckCircle2, Lock, Play, FileText, MessageSquare,
@@ -368,6 +368,17 @@ function ExamModal({ course, onClose }: { course: CourseDetail; onClose: () => v
   const [answers, setAnswers] = useState<Record<string, number | number[]>>({})
   const [submitted, setSubmitted] = useState(false)
   const [timeLeft, setTimeLeft] = useState(30 * 60) // 30 min
+
+  useEffect(() => {
+    if (submitted) return
+    const id = setInterval(() => {
+      setTimeLeft(t => {
+        if (t <= 1) { clearInterval(id); setSubmitted(true); return 0 }
+        return t - 1
+      })
+    }, 1000)
+    return () => clearInterval(id)
+  }, [submitted])
 
   const totalScore = questions.length
   const earnedScore = questions.filter(q => {
