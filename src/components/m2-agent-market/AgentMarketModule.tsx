@@ -543,7 +543,7 @@ export default function AgentMarketModule() {
             <Store className="h-5 w-5 text-blue-600" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>M2 · AGENT 市场</h1>
+            <h1 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>AGENT 市场</h1>
             <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>数字人 · 案例 · 硬件 · 算力通证</p>
           </div>
         </div>

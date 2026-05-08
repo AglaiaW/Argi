@@ -530,7 +530,7 @@ export default function HardwareModule() {
             <Server className="h-5 w-5 text-blue-600" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>M5 · 硬件生态</h1>
+            <h1 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>硬件生态</h1>
             <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>GPU集群 · 算力商店 · 订阅管理</p>
           </div>
         </div>

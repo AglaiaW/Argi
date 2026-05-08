@@ -1200,7 +1200,7 @@ export default function EducationModule() {
           <FeaturedCourseBlock
             key={block.id}
             course={COURSES[0]}
-            onClick={() => setSelectedCourse({ ...COURSE_DETAIL, id: "c1" })}
+            onClick={() => setSelectedCourse(c)}
           />
         )
       case 'course': {
@@ -1211,7 +1211,7 @@ export default function EducationModule() {
             key={block.id}
             course={c}
             size={block.size as 'md' | 'sm'}
-            onClick={() => setSelectedCourse({ ...COURSE_DETAIL, id: "c1" })}
+            onClick={() => setSelectedCourse(c)}
           />
         )
       }
@@ -1270,7 +1270,7 @@ export default function EducationModule() {
               <BookOpen className="h-5 w-5 text-emerald-600" />
             </div>
             <div>
-              <h1 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>M1 · 技能教育</h1>
+              <h1 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>技能教育</h1>
               <p className="text-[10px] text-slate-400" style={{ fontFamily: 'monospace' }}>课程 · 路径 · 导师 · 学习伙伴</p>
             </div>
           </div>
@@ -1380,7 +1380,7 @@ export default function EducationModule() {
                       key={c.id}
                       course={c}
                       size="md"
-                      onClick={() => setSelectedCourse({ ...COURSE_DETAIL, id: "c1" })}
+                      onClick={() => setSelectedCourse(c)}
                     />
                   ))}
                   {filteredPaths.map((p, i) => (
@@ -1396,10 +1396,10 @@ export default function EducationModule() {
             </div>
           ) : showFeaturedTop ? (
             <div className="space-y-3">
-              <FeaturedCourseBlock course={COURSES[0]} onClick={() => setSelectedCourse({ ...COURSE_DETAIL, id: 'c1' })} />
+              <FeaturedCourseBlock course={COURSES[0]} onClick={() => setSelectedCourse(COURSES[0])} />
               <div className="grid grid-cols-2 gap-3">
                 {COURSES.slice(1).map(c => (
-                  <CourseBlock key={c.id} course={c} size="md" onClick={() => setSelectedCourse({ ...COURSE_DETAIL, id: c.id })} />
+                  <CourseBlock key={c.id} course={c} size="md" onClick={() => setSelectedCourse(c)} />
                 ))}
               </div>
             </div>
@@ -1438,7 +1438,7 @@ export default function EducationModule() {
                   key={c.id}
                   course={c}
                   size="md"
-                  onClick={() => setSelectedCourse({ ...COURSE_DETAIL, id: "c1" })}
+                  onClick={() => setSelectedCourse(c)}
                 />
               ))}
             </div>

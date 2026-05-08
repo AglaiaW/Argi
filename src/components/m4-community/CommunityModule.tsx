@@ -494,7 +494,7 @@ export default function CommunityModule() {
             <Users className="h-5 w-5 text-emerald-600" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>M4 · 超级社区</h1>
+            <h1 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>超级社区</h1>
             <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>知识 · 交流 · 活动 · 人才</p>
           </div>
         </div>

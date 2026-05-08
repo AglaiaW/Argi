@@ -486,7 +486,7 @@ export default function CreationModule() {
             <Layers className="h-5 w-5 text-amber-500" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>M3 · 创作中心</h1>
+            <h1 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>创作中心</h1>
             <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>内容 · 价值包 · 平台 · 排期</p>
           </div>
         </div>

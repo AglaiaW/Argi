@@ -2209,7 +2209,7 @@ export default function App() {
       <SideNav activeTab={activeTab} setActiveTab={setActiveTab} lang={lang} />
       <AISecretary lang={lang} isOpen={isAssistantOpen} setIsOpen={setIsAssistantOpen} />
       
-      <main className={`relative z-10 pl-24 lg:pl-32 pr-0 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${isAssistantOpen ? 'lg:pr-96' : 'lg:pr-0'}`}>
+      <main className={`relative z-10 pl-24 lg:pl-32 pr-0 pt-20 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${isAssistantOpen ? 'lg:pr-96' : 'lg:pr-0'}`}>
         <AnimatePresence mode="wait">
           {activeTab === 'education' && <EducationModule key="edu" />}
           {activeTab === 'market' && <AgentMarketModule key="mkt" />}
