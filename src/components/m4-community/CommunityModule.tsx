@@ -29,6 +29,7 @@ const BLOCKS: Block[] = [
   { id: 'post-1', type: 'post', size: 'md' },
   // 底行
   { id: 'event-0', type: 'event', size: 'md' },
+  { id: 'event-1', type: 'event', size: 'md' },
   { id: 'talent-0', type: 'talent', size: 'sm' },
   { id: 'talent-1', type: 'talent', size: 'sm' },
 ]
@@ -178,10 +179,10 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         </div>
       </div>
       <div className="border-t border-[rgba(255,255,255,0.06)] p-4 space-y-2">
-        <button className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90">
+        <button onClick={() => alert('即将跳转到文章详情页（需接入路由）')} className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90">
           <ArrowRight className="h-4 w-4" /> 阅读全文
         </button>
-        <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 py-2.5 text-sm text-slate-400 transition-all">
+        <button onClick={() => { alert('已添加到收藏夹') }} className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 py-2.5 text-sm text-slate-400 transition-all">
           <Heart className="h-4 w-4" /> 收藏
         </button>
       </div>
@@ -199,7 +200,7 @@ function StatsBlock() {
   ]
   return (
     <div
-      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-100 to-slate-50 p-5"
+      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-gradient-to-br from-[#0a1628] to-[#1a2744] p-5"
       style={{ gridColumn: 'span 2', gridRow: 'span 1' }}
     >
       <div className="mb-4 flex items-center gap-2">
@@ -210,9 +211,9 @@ function StatsBlock() {
       </div>
       <div className="grid grid-cols-2 gap-3">
         {stats.map((s) => (
-          <div key={s.label} className="rounded-xl border border-slate-200 bg-slate-100 p-3">
-            <p className="text-xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
-            <p className="text-[10px] text-slate-500">{s.label}</p>
+          <div key={s.label} className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628]/50 p-3">
+            <p className="text-xl font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
+            <p className="text-[10px] text-slate-400">{s.label}</p>
           </div>
         ))}
       </div>
@@ -329,7 +330,7 @@ function PostBlock({ item, size, onClick }: { item: typeof POSTS[0]; size: 'md' 
 }
 
 // ─── Section Block ──────────────────────────────────────────────────────────────
-function SectionBlock() {
+function SectionBlock({ onSectionClick }: { onSectionClick?: (id: string) => void }) {
   return (
     <div
       className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4"
@@ -345,7 +346,7 @@ function SectionBlock() {
         {SECTIONS.map((s) => {
           const Icon = s.icon
           return (
-            <button key={s.id} className="group flex items-center gap-3 rounded-xl border border-[rgba(255,255,255,0.04)] bg-slate-100 p-3 text-left transition-all hover:border-[rgba(255,255,255,0.1)] hover:bg-slate-100">
+            <button key={s.id} onClick={() => onSectionClick?.(s.id)} className="group flex items-center gap-3 rounded-xl border border-[rgba(255,255,255,0.04)] bg-slate-100 p-3 text-left transition-all hover:border-[rgba(255,255,255,0.1)] hover:bg-slate-100">
               <div className="flex h-9 w-9 items-center justify-center rounded-xl" style={{ backgroundColor: s.color + '22' }}>
                 <Icon className="h-4 w-4" style={{ color: s.color }} />
               </div>
@@ -430,6 +431,7 @@ function TalentBlock({ item, size, onClick }: { item: typeof TALENTS[0]; size: '
 // ─── Main CommunityModule ─────────────────────────────────────────────────────
 export default function CommunityModule() {
   const [selectedItem, setSelectedItem] = useState<Record<string, unknown> | null>(null)
+  const [activeSection, setActiveSection] = useState<string | null>(null)
 
   const getBlockContent = (block: Block) => {
     switch (block.type) {
@@ -456,9 +458,10 @@ export default function CommunityModule() {
         )
       }
       case 'sect':
-        return <SectionBlock key={block.id} />
+        return <SectionBlock key={block.id} onSectionClick={(id) => setActiveSection(id)} />
       case 'event': {
-        const e = EVENTS[0]
+        const idx = parseInt(block.id.split('-')[1])
+        const e = EVENTS[idx % EVENTS.length]
         return (
           <EventBlock
             key={block.id}

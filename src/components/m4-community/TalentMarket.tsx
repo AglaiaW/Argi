@@ -155,7 +155,7 @@ export default function TalentMarket({ talents }: TalentMarketProps) {
             <h3 className="mb-2 text-xs font-bold text-slate-400" style={{ fontFamily: 'monospace' }}>
               个人简介
             </h3>
-            <p className="text-sm leading-relaxed text-slate-300" style={{ fontFamily: 'monospace' }}>
+            <p className="text-sm leading-relaxed text-slate-700" style={{ fontFamily: 'monospace' }}>
               {selectedTalent.bio}
             </p>
           </div>
@@ -215,7 +215,8 @@ export default function TalentMarket({ talents }: TalentMarketProps) {
                 查看主页
               </button>
               <button
-                className="flex items-center gap-2 rounded-xl bg-[#14D1A0] px-5 py-2.5 text-sm font-bold text-black disabled:cursor-not-allowed disabled:opacity-40"
+                onClick={() => alert(`正在发起与「${selectedTalent.name}」的咨询对话（需接入消息API）`)}
+                className="flex items-center gap-2 rounded-xl bg-[#14D1A0] px-5 py-2.5 text-sm font-bold text-black hover:bg-[#14D1A0]/90 disabled:cursor-not-allowed disabled:opacity-40"
                 disabled={selectedTalent.availability !== 'available'}
               >
                 <MessageSquare className="h-4 w-4" />

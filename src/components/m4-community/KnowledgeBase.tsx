@@ -129,7 +129,7 @@ export default function KnowledgeBase({ articles }: KnowledgeBaseProps) {
           </div>
 
           <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-100 p-6">
-            <p className="text-sm leading-relaxed text-slate-300" style={{ fontFamily: 'monospace' }}>
+            <p className="text-sm leading-relaxed text-slate-700" style={{ fontFamily: 'monospace' }}>
               {selectedArticle.content}
             </p>
           </div>

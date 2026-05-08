@@ -37,6 +37,8 @@ export default function DiscussionZone({ discussions }: DiscussionZoneProps) {
   const [filter, setFilter] = useState<'all' | 'trending' | 'unsolved' | 'mine'>('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedPost, setSelectedPost] = useState<DiscussionPost | null>(null)
+  const [replyText, setReplyText] = useState('')
+  const [replyCount, setReplyCount] = useState(0)
 
   const filtered = discussions.filter((d) => {
     const matchesSearch =
@@ -46,7 +48,7 @@ export default function DiscussionZone({ discussions }: DiscussionZoneProps) {
     if (!matchesSearch) return false
     if (filter === 'trending') return d.trending
     if (filter === 'unsolved') return !d.isSolved
-    if (filter === 'mine') return false // placeholder for user-specific
+    if (filter === 'mine') return d.authorRole === '运营新人' // placeholder - should filter by current user id
     return true
   })
 
@@ -141,7 +143,7 @@ export default function DiscussionZone({ discussions }: DiscussionZoneProps) {
           </div>
 
           <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-100 p-5">
-            <p className="text-sm leading-relaxed text-slate-300" style={{ fontFamily: 'monospace' }}>
+            <p className="text-sm leading-relaxed text-slate-700" style={{ fontFamily: 'monospace' }}>
               {selectedPost.content}
             </p>
           </div>
@@ -164,16 +166,26 @@ export default function DiscussionZone({ discussions }: DiscussionZoneProps) {
             </div>
           </div>
 
-          {/* Reply placeholder */}
+          {/* Reply */}
           <div className="mt-5 flex items-center gap-3">
             <input
               type="text"
+              value={replyText}
+              onChange={(e) => setReplyText(e.target.value)}
               placeholder="写下你的回复..."
               className="flex-1 rounded-xl border border-slate-200 bg-slate-100 px-4 py-2.5 text-sm text-slate-900 placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
               style={{ fontFamily: 'monospace' }}
             />
-            <button className="rounded-xl bg-[#14D1A0] px-4 py-2.5 text-sm font-bold text-black">
-              回复
+            <button
+              onClick={() => {
+                if (!replyText.trim()) return
+                setReplyCount((c) => c + 1)
+                setReplyText('')
+                alert('回复已发送（需接入真实评论API）')
+              }}
+              className="rounded-xl bg-[#14D1A0] px-4 py-2.5 text-sm font-bold text-black hover:bg-[#14D1A0]/90"
+            >
+              回复 {replyCount > 0 ? `(${replyCount})` : ''}
             </button>
           </div>
         </div>

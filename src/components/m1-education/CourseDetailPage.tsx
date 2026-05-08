@@ -749,6 +749,38 @@ export default function CourseDetailPage({
               })}
             </div>
           </div>
+
+          {/* Reviews Section */}
+          <div className="border-t border-slate-200 pt-6 mt-4">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-bold text-slate-900">用户评价</h3>
+              <button className="text-xs text-[#14D1A0] font-medium hover:underline">写评价</button>
+            </div>
+            <div className="space-y-3">
+              {[
+                { avatar: 'https://i.pravatar.cc/150?img=11', name: '林学员', rating: 5, date: '2026-04-12', text: '张运营老师讲得非常系统！私域流量这块终于学明白了，3天就建了3个500人社群。', course: 'AI 运营实战训练营' },
+                { avatar: 'https://i.pravatar.cc/150?img=22', name: '王营销', rating: 5, date: '2026-04-08', text: 'AI工具那章超实用，直接拿来用在工作里，领导还以为我加班到很晚 😂', course: 'AI 运营实战训练营' },
+                { avatar: 'https://i.pravatar.cc/150?img=33', name: '陈小白', rating: 4, date: '2026-03-30', text: '入门友好！以前完全不懂私域，现在能独立做活动策划了，案例拆解特别清晰。', course: 'AI 运营实战训练营' },
+              ].map((r, i) => (
+                <div key={i} className="rounded-2xl border border-slate-200 bg-white p-4">
+                  <div className="flex items-start gap-3">
+                    <img src={r.avatar} className="h-8 w-8 rounded-full object-cover shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-2 mb-1">
+                        <p className="text-xs font-bold text-slate-900">{r.name}</p>
+                        <div className="flex gap-0.5">
+                          {Array.from({length: r.rating}).map((_, si) => <span key={si} className="text-amber-400 text-xs">★</span>)}
+                          {Array.from({length: 5 - r.rating}).map((_, si) => <span key={si} className="text-slate-200 text-xs">★</span>)}
+                        </div>
+                      </div>
+                      <p className="text-[10px] text-slate-400 mb-2">{r.date} · {r.course}</p>
+                      <p className="text-xs text-slate-600 leading-relaxed">{r.text}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Right: sticky enrollment panel */}

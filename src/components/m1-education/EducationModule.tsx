@@ -76,6 +76,13 @@ const COURSES = [
     progress: 0,
     tags: ['数字人', 'AI克隆', '变现指南'],
     category: 'AI技术',
+    chapters: [
+      { id: 'ch1', title: '第一章：数字人认知与工具选择', duration: '4课时 · 3小时', isFree: true, hasQuiz: false },
+      { id: 'ch2', title: '第二章：数字人形象创建流程', duration: '5课时 · 4小时', isFree: false, hasQuiz: true },
+      { id: 'ch3', title: '第三章：声音克隆与唇形同步', duration: '6课时 · 5小时', isFree: false, hasQuiz: true },
+      { id: 'ch4', title: '第四章：商业化变现路径', duration: '4课时 · 3小时', isFree: false, hasQuiz: false },
+      { id: 'ch5', title: '结业实战', duration: '3小时', isFree: false, hasQuiz: false },
+    ],
   },
   {
     id: 'c3',
@@ -94,6 +101,13 @@ const COURSES = [
     progress: 0,
     tags: ['数字化转型', '企业咨询', '案例拆解'],
     category: '企业管理',
+    chapters: [
+      { id: 'ch1', title: '第一章：数字化转型认知框架', duration: '6课时 · 5小时', isFree: true, hasQuiz: true },
+      { id: 'ch2', title: '第二章：制造业数字化案例', duration: '8课时 · 7小时', isFree: false, hasQuiz: true },
+      { id: 'ch3', title: '第三章：零售业数字化升级', duration: '7课时 · 6小时', isFree: false, hasQuiz: false },
+      { id: 'ch4', title: '第四章：数字化组织建设', duration: '6课时 · 5小时', isFree: false, hasQuiz: false },
+      { id: 'ch5', title: '结业答辩', duration: '3小时', isFree: false, hasQuiz: false },
+    ],
   },
   {
     id: 'c4',
@@ -112,6 +126,13 @@ const COURSES = [
     progress: 12,
     tags: ['小红书', '内容营销', 'AI创作'],
     category: '内容运营',
+    chapters: [
+      { id: 'ch1', title: '第一章：小红书算法与流量逻辑', duration: '3课时 · 2.5小时', isFree: true, hasQuiz: true },
+      { id: 'ch2', title: '第二章：AI辅助内容创作工具链', duration: '4课时 · 3小时', isFree: false, hasQuiz: true },
+      { id: 'ch3', title: '第三章：爆款标题与封面公式', duration: '3课时 · 2.5小时', isFree: false, hasQuiz: false },
+      { id: 'ch4', title: '第四章：数据复盘与迭代优化', duration: '3课时 · 2.5小时', isFree: false, hasQuiz: false },
+      { id: 'ch5', title: '结业：完整爆款笔记打造', duration: '3小时', isFree: false, hasQuiz: false },
+    ],
   },
 ]
 
@@ -310,11 +331,11 @@ function CampDetailPanel({ camp, onClose }: { camp: typeof CAMPS[0]; onClose: ()
 function BuddyDetailPanel({ buddy, onClose }: { buddy: typeof BUDDY; onClose: () => void }) {
   const [tab, setTab] = useState<'profile' | 'chat'>('profile')
   const [message, setMessage] = useState('')
-  const chatMsgs = [
+  const [chatMsgs, setChatMsgs] = useState([
     { from: 'them', text: '你好！看到你也在学数字人变现，我们组队吧～' },
     { from: 'me', text: '好的！我已经学完第一节了' },
     { from: 'them', text: '我也是！第三节的AI克隆部分有点难，一起讨论？' },
-  ]
+  ])
   return (
     <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-slate-200 bg-white shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
@@ -493,7 +514,11 @@ function InstructorDetailPanel({ inst, onClose }: { inst: Record<string, unknown
           <p className="text-xs text-slate-500">{inst.title as string}</p>
         </div>
         <div className="mb-4 grid grid-cols-3 gap-2 text-center">
-          {[{ label: '学员', value: '12,847' }, { label: '评分', value: '4.9' }, { label: '课程', value: '8门' }].map(s => (
+          {[
+            { label: '学员', value: (inst.studentCount as number).toLocaleString() },
+            { label: '评分', value: String(inst.rating as number) },
+            { label: '课程', value: `${inst.courseCount as number}门` },
+          ].map(s => (
             <div key={s.label} className="rounded-xl bg-slate-100 p-3">
               <p className="text-sm font-bold text-slate-900">{s.value}</p>
               <p className="text-[10px] text-slate-500">{s.label}</p>
@@ -1200,7 +1225,7 @@ export default function EducationModule() {
           <FeaturedCourseBlock
             key={block.id}
             course={COURSES[0]}
-            onClick={() => setSelectedCourse(c)}
+            onClick={() => setSelectedCourse(COURSES[0])}
           />
         )
       case 'course': {
@@ -1384,12 +1409,14 @@ export default function EducationModule() {
                     />
                   ))}
                   {filteredPaths.map((p, i) => (
+                    contentType !== 'course' && (
                     <PathBlock
                       key={p.id}
                       path={p}
                       size="lg"
                       onClick={() => { setSelectedPath(p); setSelectedItem(null) }}
                     />
+                    )
                   ))}
                 </div>
               )}

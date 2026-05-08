@@ -139,7 +139,7 @@ export default function EventsSquare({ events }: EventsSquareProps) {
 
           {/* Description */}
           <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-100 p-4">
-            <p className="text-sm leading-relaxed text-slate-300" style={{ fontFamily: 'monospace' }}>
+            <p className="text-sm leading-relaxed text-slate-700" style={{ fontFamily: 'monospace' }}>
               {selectedEvent.description}
             </p>
           </div>
@@ -169,17 +169,22 @@ export default function EventsSquare({ events }: EventsSquareProps) {
             </div>
             <div className="flex gap-3">
               {isEnded ? (
-                <button className="flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-100 px-5 py-2.5 text-sm font-medium text-slate-900">
+                <button onClick={() => alert('即将跳转到回放页面（需接入路由）')} className="flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-100 px-5 py-2.5 text-sm font-medium text-slate-900">
                   <ExternalLink className="h-4 w-4" />
                   查看回放
                 </button>
               ) : isLive ? (
-                <button className="flex items-center gap-2 rounded-xl bg-[#ef4444] px-5 py-2.5 text-sm font-bold text-slate-900">
+                <button onClick={() => alert('即将加入直播（需接入直播SDK）')} className="flex items-center gap-2 rounded-xl bg-[#ef4440] px-5 py-2.5 text-sm font-bold text-white">
                   <Radio className="h-4 w-4 animate-pulse" />
                   立即加入
                 </button>
               ) : (
-                <button className="flex items-center gap-2 rounded-xl bg-[#14D1A0] px-5 py-2.5 text-sm font-bold text-black">
+                <button
+                  onClick={() => {
+                    alert(`报名成功！您已报名参加「${selectedEvent.title}」（需接入报名API）`)
+                  }}
+                  className="flex items-center gap-2 rounded-xl bg-[#14D1A0] px-5 py-2.5 text-sm font-bold text-black hover:bg-[#14D1A0]/90"
+                >
                   <Ticket className="h-4 w-4" />
                   立即报名
                 </button>
