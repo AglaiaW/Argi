@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   BookOpen, Users, Star, Award, Clock, TrendingUp,
   CheckCircle2, MapPin, Globe, X, ChevronRight,
@@ -395,7 +395,30 @@ function BuddyDetailPanel({ buddy, onClose }: { buddy: typeof BUDDY; onClose: ()
 // ─── Six-Dimensional Assessment Modal ───────────────────────────────────────────
 function SixDimensionalAssessment({ onClose }: { onClose: () => void }) {
   const [step, setStep] = useState(0)
-  const scores = { ai: 72, tools: 65, content: 58, business: 45, community: 38, hardware: 25 }
+  // Load from localStorage or use default scores
+  const [scores, setScores] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('m1-six-dimensional-scores')
+      if (saved) {
+        try { return JSON.parse(saved) } catch { /* ignore */ }
+      }
+    }
+    return { ai: 72, tools: 65, content: 58, business: 45, community: 38, hardware: 25 }
+  })
+  const [hasTakenAssessment, setHasTakenAssessment] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('m1-has-taken-assessment') === 'true'
+    }
+    return false
+  })
+
+  const saveAssessment = (newScores: typeof scores) => {
+    setScores(newScores)
+    localStorage.setItem('m1-six-dimensional-scores', JSON.stringify(newScores))
+    localStorage.setItem('m1-has-taken-assessment', 'true')
+    setHasTakenAssessment(true)
+  }
+
   const dimensions = [
     { key: 'ai', label: 'AI认知', score: scores.ai },
     { key: 'tools', label: '工具使用', score: scores.tools },
@@ -404,6 +427,7 @@ function SixDimensionalAssessment({ onClose }: { onClose: () => void }) {
     { key: 'community', label: '社区运营', score: scores.community },
     { key: 'hardware', label: '硬件落地', score: scores.hardware },
   ]
+  const avgScore = Math.round(Object.values(scores).reduce((a, b) => a + b, 0) / Object.values(scores).length)
   return (
     <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/10 backdrop-blur-sm">
       <div className="w-[480px] rounded-3xl border border-[rgba(255,255,255,0.1)] bg-white p-6 shadow-2xl">
@@ -421,15 +445,18 @@ function SixDimensionalAssessment({ onClose }: { onClose: () => void }) {
               {dimensions.map((d) => (
                 <div key={d.key} className="flex items-center gap-3">
                   <span className="w-20 text-xs text-slate-400">{d.label}</span>
-                  <div className="h-2 w-full flex-1 overflow-hidden rounded-full bg-[rgba(255,255,255,0.08)]">
-                    <div className="h-full rounded-full bg-[#14D1A0]" style={{ width: `${d.score}%` }} /></div>
+                  <div className="h-2 w-full flex-1 overflow-hidden rounded-full bg-slate-100">
+                    <div className="h-full rounded-full bg-emerald-500" style={{ width: `${d.score}%` }} /></div>
                   <span className="w-10 text-right text-xs font-bold text-emerald-600">{d.score}</span>
                 </div>
               ))}
             </div>
+            {hasTakenAssessment && (
+              <p className="mb-3 rounded-xl bg-blue-50 px-3 py-2 text-xs text-blue-600">已有测评记录 · 平均分 {avgScore} · 可重新生成</p>
+            )}
             <div className="flex gap-3">
-              <button onClick={() => setStep(1)} className="flex-1 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] hover:bg-[#14D1A0]/90 transition-all">查看推荐路径</button>
-              <button onClick={onClose} className="rounded-2xl border border-slate-200 px-4 py-3 text-sm text-slate-400 hover:border-[rgba(255,255,255,0.15)] hover:text-slate-900 transition-all">先看看</button>
+              <button onClick={() => saveAssessment(scores)} className="flex-1 rounded-2xl bg-emerald-500 py-3 text-sm font-bold text-white hover:bg-emerald-600 transition-all">保存结果</button>
+              <button onClick={onClose} className="rounded-2xl border border-slate-200 px-4 py-3 text-sm text-slate-400 hover:border-slate-300 hover:text-slate-600 transition-all">先看看</button>
             </div>
           </>
         ) : (
@@ -855,6 +882,28 @@ function PathBlock({ path, size, onClick }: { path: typeof PATHS[0]; size: 'md' 
 
 // ─── Camp Block ────────────────────────────────────────────────────────────────
 function CampBlock({ camp, onClick }: { camp: typeof CAMPS[0]; onClick: () => void }) {
+  // Countdown to start date
+  const [countdown, setCountdown] = useState({ days: 0, hours: 0, mins: 0 })
+  useEffect(() => {
+    const update = () => {
+      const now = new Date()
+      const start = new Date(camp.startDate)
+      const diff = Math.max(0, start.getTime() - now.getTime())
+      setCountdown({
+        days: Math.floor(diff / 86400000),
+        hours: Math.floor((diff % 86400000) / 3600000),
+        mins: Math.floor((diff % 3600000) / 60000),
+      })
+    }
+    update()
+    const id = setInterval(update, 60000)
+    return () => clearInterval(id)
+  }, [camp.startDate])
+
+  // Member avatars — up to 6 shown
+  const AVATAR_IDS = [32, 25, 44, 51, 12, 68]
+  const shownAvatars = AVATAR_IDS.slice(0, 6)
+
   return (
     <button
       onClick={onClick}
@@ -871,6 +920,13 @@ function CampBlock({ camp, onClick }: { camp: typeof CAMPS[0]; onClick: () => vo
             <span className="text-[10px] font-bold text-black">{camp.badge}</span>
           </div>
         )}
+        {/* Countdown badge */}
+        <div className="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-1 backdrop-blur-sm">
+          <Clock className="h-3 w-3 text-white" />
+          <span className="text-[10px] font-mono font-bold text-white">
+            {countdown.days > 0 ? `${countdown.days}天` : countdown.hours > 0 ? `${countdown.hours}时` : `${countdown.mins}分`}
+          </span>
+        </div>
         <div className="absolute bottom-3 left-3 right-3">
           <span className="mb-1 block text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>{camp.name}</span>
           <p className="line-clamp-1 text-[11px] text-slate-300">{camp.tagline}</p>
@@ -884,11 +940,22 @@ function CampBlock({ camp, onClick }: { camp: typeof CAMPS[0]; onClick: () => vo
           <span>{camp.schedule}</span>
         </div>
         <div className="mt-auto flex items-center justify-between border-t border-[rgba(255,255,255,0.04)] pt-2.5">
+          {/* Avatar wall — up to 6 members with overlap */}
           <div className="flex items-center gap-2">
-            <div className="flex -space-x-2">
-              {[32, 25, 44, 51].slice(0, 3).map((n) => (
-                <img key={n} src={`https://i.pravatar.cc/150?img=${n}`} className="h-5 w-5 rounded-full border border-[#0a1628] object-cover" />
+            <div className="flex">
+              {shownAvatars.map((n, i) => (
+                <img
+                  key={n}
+                  src={`https://i.pravatar.cc/150?img=${n}`}
+                  className="h-6 w-6 rounded-full border-2 border-white object-cover"
+                  style={{ marginLeft: i > 0 ? '-8px' : 0, zIndex: 6 - i }}
+                />
               ))}
+              {camp.memberCount > 6 && (
+                <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-slate-200" style={{ marginLeft: '-8px', zIndex: 0 }}>
+                  <span className="text-[9px] font-bold text-slate-600">+{camp.memberCount - 6}</span>
+                </div>
+              )}
             </div>
             <span className="text-[10px] text-slate-500">{camp.memberCount.toLocaleString()}人已报名</span>
           </div>
@@ -935,11 +1002,21 @@ function InstructorBlock({ inst, size, onClick }: { inst: typeof INSTRUCTORS[0];
 
 // ─── Buddy Block ──────────────────────────────────────────────────────────────
 function BuddyBlock({ buddy, onClick }: { buddy: typeof BUDDY; onClick: () => void }) {
+  const [showMatchInfo, setShowMatchInfo] = useState(false)
+
+  const matchReasons = [
+    { label: '学习目标相似', score: 30 },
+    { label: '课程进度接近', score: 25 },
+    { label: '兴趣标签重合', score: 20 },
+    { label: '在线时间互补', score: 15 },
+    { label: '社区活跃度匹配', score: 10 },
+  ]
+
   return (
+    <div className="relative" style={{ gridColumn: 'span 3' }}>
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4 text-left transition-all duration-300 hover:border-slate-300 hover:shadow-md active:scale-[0.98]"
-      style={{ gridColumn: 'span 3' }}
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4 text-left transition-all duration-300 hover:border-slate-300 hover:shadow-md active:scale-[0.98] w-full"
     >
       <div className="mb-3 flex items-start gap-3">
         <div className="relative shrink-0">
@@ -952,9 +1029,13 @@ function BuddyBlock({ buddy, onClick }: { buddy: typeof BUDDY; onClick: () => vo
             {buddy.isVerified && <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-600" />}
           </div>
           <p className="text-[10px] text-slate-500">{buddy.title}</p>
-          <span className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold text-emerald-600">
+          {/* Match score — clickable */}
+          <button
+            onClick={(e) => { e.stopPropagation(); setShowMatchInfo(v => !v) }}
+            className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold text-emerald-600 hover:bg-emerald-100 transition-colors cursor-pointer"
+          >
             <Zap className="h-3 w-3" />{buddy.matchScore}% 匹配度
-          </span>
+          </button>
         </div>
       </div>
 
@@ -979,6 +1060,35 @@ function BuddyBlock({ buddy, onClick }: { buddy: typeof BUDDY; onClick: () => vo
         </span>
       </div>
     </button>
+
+    {/* Match explanation tooltip */}
+    {showMatchInfo && (
+      <div className="absolute left-1/2 top-full z-20 mt-2 w-64 -translate-x-1/2 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl">
+        <div className="mb-3 flex items-center justify-between">
+          <p className="text-xs font-bold text-slate-900">匹配分解释</p>
+          <button onClick={() => setShowMatchInfo(false)} className="text-slate-400 hover:text-slate-600">
+            <X className="h-3.5 w-3.5" />
+          </button>
+        </div>
+        <div className="space-y-2">
+          {matchReasons.map((r) => (
+            <div key={r.label} className="flex items-center gap-2">
+              <span className="flex-1 text-xs text-slate-600">{r.label}</span>
+              <div className="h-1.5 w-24 overflow-hidden rounded-full bg-slate-100">
+                <div className="h-full rounded-full bg-emerald-400" style={{ width: `${r.score * 2.5}%` }} />
+              </div>
+              <span className="text-[10px] font-bold text-emerald-600 w-8 text-right">+{r.score}</span>
+            </div>
+          ))}
+          <div className="border-t border-slate-100 pt-2 flex items-center justify-between">
+            <span className="text-xs font-medium text-slate-900">总分</span>
+            <span className="text-sm font-bold text-emerald-600">{buddy.matchScore}%</span>
+          </div>
+        </div>
+        <p className="mt-3 text-[10px] text-slate-400">基于学习行为、兴趣标签和活跃时段综合计算</p>
+      </div>
+    )}
+    </div>
   )
 }
 
