@@ -28,10 +28,13 @@ const BLOCKS: Block[] = [
   // 底行
   { id: 'dh-0', type: 'digital_human', size: 'md' },
   { id: 'dh-1', type: 'digital_human', size: 'md' },
-  { id: 'case-0', type: 'case', size: 'sm' },
+  { id: 'case-0', type: 'case', size: 'md' },
+  { id: 'case-1', type: 'case', size: 'sm' },
   // 第三行
   { id: 'hw-0', type: 'hardware', size: 'sm' },
-  { id: 'comp-0', type: 'compute', size: 'sm' },
+  { id: 'hw-1', type: 'hardware', size: 'sm' },
+  { id: 'comp-0', type: 'compute', size: 'md' },
+  { id: 'comp-1', type: 'compute', size: 'md' },
 ]
 
 // ─── Mock data ───────────────────────────────────────────────────────────────
@@ -82,6 +85,19 @@ const CASES = [
     likes: 342,
     description: '接入数字人客服后，实现7×24小时全天候服务，智能识别用户意图并精准回复',
   },
+  {
+    id: 'case2',
+    title: '连锁餐饮品牌直播数字人落地案例',
+    industry: '餐饮连锁',
+    scenario: '直播主播',
+    thumbnail: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80',
+    company: '某知名连锁餐饮',
+    effect: '直播时长延长至24小时，GMV提升 45%',
+    product: '直播带货数字人·小蓝',
+    views: '8.7k',
+    likes: 218,
+    description: '数字人主播接管非黄金时段直播，保持品牌曝光持续性，大幅降低人力成本',
+  },
 ]
 
 const HARDWARE = [
@@ -121,6 +137,18 @@ const COMPUTE_PACKAGES = [
     features: ['优先推理通道', '50GB存储', 'API调用'],
     badge: '推荐',
     isHot: true,
+  },
+  {
+    id: 'comp2',
+    name: '企业版套餐',
+    thumbnail: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80',
+    tokens: '5000万tokens/月',
+    models: 'GPT-4o / Claude-3.5 / 国产主流模型',
+    price: 1999,
+    originalPrice: 0,
+    features: ['独享推理通道', '1TB存储', 'SLA保障', '专属客服'],
+    badge: '',
+    isHot: false,
   },
 ]
 
@@ -202,15 +230,15 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
       <div className="border-t border-[rgba(255,255,255,0.06)] p-4 space-y-2">
         {item.price !== undefined && item.price > 0 ? (
           <>
-            <button className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90 active:scale-[0.98]">
+            <button onClick={() => alert(`即将购买「${item.name}」（需接入支付API）`)} className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90 active:scale-[0.98]">
               <ShoppingCart className="h-4 w-4" /> 立即购买
             </button>
-            <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 py-2.5 text-sm text-slate-400 transition-all hover:border-[rgba(255,255,255,0.15)]">
+            <button onClick={() => alert(`即将申请「${item.name}」的免费试用（需接入试用API）`)} className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[rgba(255,255,255,0.08)] py-2.5 text-sm text-slate-400 transition-all hover:border-[rgba(255,255,255,0.15)]">
               <Play className="h-4 w-4" /> {item.试用次数 as string || '免费试用3次'}
             </button>
           </>
         ) : (
-          <button className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90">
+          <button onClick={() => alert('即将跳转到套餐详情页（需接入路由）')} className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90">
             <ArrowRight className="h-4 w-4" /> 查看套餐详情
           </button>
         )}
@@ -229,20 +257,20 @@ function StatsBlock() {
   ]
   return (
     <div
-      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4"
+      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-gradient-to-br from-[#0a1628] to-[#1a2744] p-4"
       style={{ gridColumn: 'span 1' }}
     >
       <div className="mb-4 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50">
-          <Store className="h-4 w-4 text-blue-600" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#2B59C3]/20">
+          <Store className="h-4 w-4 text-blue-400" />
         </div>
         <span className="text-xs font-bold text-slate-400" style={{ fontFamily: 'monospace' }}>市场数据</span>
       </div>
       <div className="grid grid-cols-2 gap-3">
         {stats.map((s) => (
-          <div key={s.label} className="rounded-xl border border-slate-200 bg-slate-100 p-3">
-            <p className="text-xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
-            <p className="text-[10px] text-slate-500">{s.label}</p>
+            <div key={s.label} className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628]/50 p-3">
+              <p className="text-xl font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
+              <p className="text-[10px] text-slate-400">{s.label}</p>
           </div>
         ))}
       </div>
@@ -480,7 +508,7 @@ export default function AgentMarketModule() {
         return (
           <FeaturedBlock
             key={block.id}
-            item={DIGITAL_HUMANS[0]}
+            agent={DIGITAL_HUMANS[0]}
             onClick={() => setSelectedItem(DIGITAL_HUMANS[0] as unknown as Record<string, unknown>)}
           />
         )
@@ -490,14 +518,15 @@ export default function AgentMarketModule() {
         return (
           <DigitalHumanBlock
             key={block.id}
-            item={dh}
+            agent={dh}
             size={block.size as 'md' | 'sm'}
             onClick={() => setSelectedItem(dh as unknown as Record<string, unknown>)}
           />
         )
       }
       case 'case': {
-        const c = CASES[0]
+        const idx = parseInt(block.id.split('-')[1])
+        const c = CASES[idx % CASES.length]
         return (
           <CaseBlock
             key={block.id}
@@ -520,7 +549,8 @@ export default function AgentMarketModule() {
         )
       }
       case 'compute': {
-        const comp = COMPUTE_PACKAGES[0]
+        const idx = parseInt(block.id.split('-')[1])
+        const comp = COMPUTE_PACKAGES[idx % COMPUTE_PACKAGES.length]
         return (
           <ComputeBlock
             key={block.id}
