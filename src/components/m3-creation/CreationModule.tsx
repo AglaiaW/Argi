@@ -130,7 +130,7 @@ const SCHEDULE = [
 function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; onClose: () => void }) {
   if (!item) return null
   return (
-    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-white shadow-2xl w-[340px]">
+    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-slate-200 bg-white shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-[rgba(255,255,255,0.06)] px-5 py-4">
         <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>详情</span>
         <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100">
@@ -153,7 +153,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
           <p className="mb-3 text-sm text-slate-400">{item.subtitle as string}</p>
         )}
         {item.description && (
-          <p className="mb-4 text-sm leading-relaxed text-slate-300">{item.description as string}</p>
+          <p className="mb-4 text-sm leading-relaxed text-slate-600">{item.description as string}</p>
         )}
         <div className="space-y-3">
           {item.rating && (
@@ -174,10 +174,16 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         </div>
       </div>
       <div className="border-t border-[rgba(255,255,255,0.06)] p-4 space-y-2">
-        <button className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90">
+        <button
+          onClick={() => alert(`正在购买「${item.title}」，价格 ¥${item.price?.toLocaleString() ?? '—'}（需接入支付API）`)}
+          className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90 active:scale-[0.98]"
+        >
           <ArrowRight className="h-4 w-4" /> 立即购买
         </button>
-        <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 py-2.5 text-sm text-slate-400 transition-all">
+        <button
+          onClick={() => alert(`正在预览「${item.title}」内容详情`)}
+          className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 py-2.5 text-sm text-slate-400 transition-all hover:border-slate-300 active:scale-[0.98]"
+        >
           <Play className="h-4 w-4" /> 预览内容
         </button>
       </div>
@@ -195,26 +201,26 @@ function StatsBlock() {
   ]
   return (
     <div
-      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-100 to-slate-50 p-4"
+      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-gradient-to-br from-[#0a1628] to-[#1a2744] p-4"
       style={{ gridColumn: 'span 3' }}
     >
       <div className="mb-4 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50">
-          <BarChart2 className="h-4 w-4 text-emerald-600" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#14D1A0]/20">
+          <BarChart2 className="h-4 w-4 text-[#14D1A0]" />
         </div>
-        <span className="text-xs font-bold text-slate-400" style={{ fontFamily: 'monospace' }}>创作数据</span>
+        <span className="text-xs font-bold text-slate-300" style={{ fontFamily: 'monospace' }}>创作数据</span>
       </div>
       <div className="grid grid-cols-2 gap-3">
         {stats.map((s) => (
-          <div key={s.label} className="rounded-xl border border-slate-200 bg-slate-100 p-3">
-            <p className="text-xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
-            <p className="text-[10px] text-slate-500">{s.label}</p>
+          <div key={s.label} className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628]/50 p-3">
+            <p className="text-xl font-bold" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
+            <p className="text-[10px] text-slate-400">{s.label}</p>
           </div>
         ))}
       </div>
-      <div className="mt-3 flex items-center gap-2 rounded-xl bg-emerald-50 px-3 py-2">
-        <TrendingUp className="h-4 w-4 text-emerald-600" />
-        <span className="text-xs text-emerald-600">本周曝光较上周 +23%</span>
+      <div className="mt-3 flex items-center gap-2 rounded-xl bg-[#14D1A0]/20 px-3 py-2">
+        <TrendingUp className="h-4 w-4 text-[#14D1A0]" />
+        <span className="text-xs text-[#14D1A0]">本周曝光较上周 +23%</span>
       </div>
     </div>
   )
@@ -335,7 +341,7 @@ function PlatformBlock() {
     >
       <div className="mb-3 flex items-center justify-between">
         <span className="text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>已绑定平台</span>
-        <button className="flex items-center gap-1 text-[10px] text-emerald-600">
+        <button onClick={() => alert('正在打开「添加平台」配置面板（需接入平台API）')} className="flex items-center gap-1 text-[10px] text-emerald-600 hover:text-emerald-500">
           <Plus className="h-3 w-3" /> 添加平台
         </button>
       </div>
@@ -404,7 +410,7 @@ function ScheduleBlock() {
     >
       <div className="mb-3 flex items-center justify-between">
         <span className="text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>发布排期</span>
-        <button className="flex items-center gap-1 text-[10px] text-emerald-600">
+        <button onClick={() => alert('正在打开「新建发布任务」配置面板（需接入排期系统）')} className="flex items-center gap-1 text-[10px] text-emerald-600 hover:text-emerald-500">
           <Plus className="h-3 w-3" /> 添加任务
         </button>
       </div>
@@ -492,17 +498,17 @@ export default function CreationModule() {
         </div>
         <div className="flex items-center gap-4">
           <div className="text-center">
-            <p className="text-sm font-bold tabular-nums text-slate-900" style={{ fontFamily: 'monospace' }}>3</p>
+            <p className="text-sm font-bold tabular-nums text-slate-900" style={{ fontFamily: 'monospace' }}>{DRAFTS.length}</p>
             <p className="text-[10px] text-slate-500">草稿</p>
           </div>
           <div className="h-5 w-px bg-[rgba(255,255,255,0.08)]" />
           <div className="text-center">
-            <p className="text-sm font-bold tabular-nums text-amber-500" style={{ fontFamily: 'monospace' }}>5</p>
+            <p className="text-sm font-bold tabular-nums text-amber-500" style={{ fontFamily: 'monospace' }}>{PLATFORMS.filter(p => p.connected).length}</p>
             <p className="text-[10px] text-slate-500">平台</p>
           </div>
           <div className="h-5 w-px bg-[rgba(255,255,255,0.08)]" />
           <div className="text-center">
-            <p className="text-sm font-bold tabular-nums text-emerald-600" style={{ fontFamily: 'monospace' }}>2</p>
+            <p className="text-sm font-bold tabular-nums text-emerald-600" style={{ fontFamily: 'monospace' }}>{SCHEDULE.filter(s => s.status === '待发布').length}</p>
             <p className="text-[10px] text-slate-500">待发布</p>
           </div>
         </div>
