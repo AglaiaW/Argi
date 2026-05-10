@@ -193,15 +193,24 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
       <div className="border-t border-[rgba(255,255,255,0.06)] p-4 space-y-2">
         {item.pricePerHour !== undefined ? (
           <>
-            <button className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90">
+            <button
+              onClick={() => alert(`正在租用「${item.name}」，¥${item.pricePerHour}/小时（需接入计费系统）`)}
+              className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90 active:scale-[0.98]"
+            >
               <Play className="h-4 w-4" /> 立即租用
             </button>
-            <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 py-2.5 text-sm text-slate-400 transition-all">
+            <button
+              onClick={() => alert('正在申请试用资格（需企业认证）')}
+              className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 py-2.5 text-sm text-slate-400 transition-all hover:border-slate-300 active:scale-[0.98]"
+            >
               <Shield className="h-4 w-4" /> 申请试用
             </button>
           </>
         ) : (
-          <button className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90">
+          <button
+            onClick={() => alert(`正在升级至「${item.name}」（需接入订阅系统）`)}
+            className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90 active:scale-[0.98]"
+          >
             <ArrowRight className="h-4 w-4" /> 升级套餐
           </button>
         )}
@@ -220,26 +229,26 @@ function StatsBlock() {
   ]
   return (
     <div
-      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-100 to-slate-50 p-5"
+      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-gradient-to-br from-[#0a1628] to-[#1a2744] p-5"
       style={{ gridColumn: 'span 2', gridRow: 'span 1' }}
     >
       <div className="mb-4 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50">
-          <HardDrive className="h-4 w-4 text-blue-600" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#2B59C3]/20">
+          <HardDrive className="h-4 w-4 text-[#2B59C3]" />
         </div>
-        <span className="text-xs font-bold text-slate-400" style={{ fontFamily: 'monospace' }}>算力数据</span>
+        <span className="text-xs font-bold text-slate-300" style={{ fontFamily: 'monospace' }}>算力数据</span>
       </div>
       <div className="grid grid-cols-2 gap-3">
         {stats.map((s) => (
-          <div key={s.label} className="rounded-xl border border-slate-200 bg-slate-100 p-3">
-            <p className="text-xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
-            <p className="text-[10px] text-slate-500">{s.label}</p>
+          <div key={s.label} className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628]/50 p-3">
+            <p className="text-xl font-bold" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
+            <p className="text-[10px] text-slate-400">{s.label}</p>
           </div>
         ))}
       </div>
-      <div className="mt-3 flex items-center gap-2 rounded-xl bg-blue-50 px-3 py-2">
-        <Shield className="h-4 w-4 text-blue-600" />
-        <span className="text-xs text-blue-600">企业级安全保障 · 7×24运维</span>
+      <div className="mt-3 flex items-center gap-2 rounded-xl bg-[#2B59C3]/20 px-3 py-2">
+        <Shield className="h-4 w-4 text-[#2B59C3]" />
+        <span className="text-xs text-[#2B59C3]">企业级安全保障 · 7×24运维</span>
       </div>
     </div>
   )
@@ -270,29 +279,29 @@ function FeaturedBlock({ item, onClick }: { item: typeof GPU_CLUSTERS[0]; onClic
       <div className="flex w-2/5 flex-col justify-between p-6 text-left">
         <div>
           <div className="mb-3 flex items-center gap-2">
-            <span className="rounded-full bg-blue-50 px-3 py-1 text-[10px] font-bold text-blue-600">{item.vendor}</span>
-            <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] text-slate-400">{item.location}</span>
+            <span className="rounded-full bg-[#2B59C3]/20 px-3 py-1 text-[10px] font-bold text-[#2B59C3]">{item.vendor}</span>
+            <span className="rounded-full bg-[rgba(255,255,255,0.06)] px-2.5 py-1 text-[10px] text-slate-400">{item.location}</span>
           </div>
-          <h3 className="mb-2 text-xl font-bold leading-snug text-slate-900 transition-colors group-hover:text-emerald-600" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+          <h3 className="mb-2 text-xl font-bold leading-snug text-white transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
             {item.name}
           </h3>
 
           <div className="mb-4 grid grid-cols-2 gap-2">
-            <div className="rounded-xl border border-slate-200 bg-slate-100 p-2.5">
-              <p className="text-[10px] text-slate-500">显存</p>
-              <p className="text-xs font-bold text-slate-900">{item.hbm}</p>
+            <div className="rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 p-2.5">
+              <p className="text-[10px] text-slate-400">显存</p>
+              <p className="text-xs font-bold text-white">{item.hbm}</p>
             </div>
-            <div className="rounded-xl border border-slate-200 bg-slate-100 p-2.5">
-              <p className="text-[10px] text-slate-500">带宽</p>
-              <p className="text-xs font-bold text-slate-900">{item.bandwidth}</p>
+            <div className="rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 p-2.5">
+              <p className="text-[10px] text-slate-400">带宽</p>
+              <p className="text-xs font-bold text-white">{item.bandwidth}</p>
             </div>
-            <div className="rounded-xl border border-slate-200 bg-slate-100 p-2.5">
-              <p className="text-[10px] text-slate-500">可用率</p>
-              <p className="text-xs font-bold text-emerald-600">{item.uptime}</p>
+            <div className="rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 p-2.5">
+              <p className="text-[10px] text-slate-400">可用率</p>
+              <p className="text-xs font-bold text-[#14D1A0]">{item.uptime}</p>
             </div>
-            <div className="rounded-xl border border-slate-200 bg-slate-100 p-2.5">
-              <p className="text-[10px] text-slate-500">计费</p>
-              <p className="text-xs font-bold text-slate-900">¥{item.pricePerHour}/h</p>
+            <div className="rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 p-2.5">
+              <p className="text-[10px] text-slate-400">计费</p>
+              <p className="text-xs font-bold text-white">¥{item.pricePerHour}/h</p>
             </div>
           </div>
 
@@ -384,7 +393,12 @@ function PackageBlock({ item, size, onClick }: { item: typeof PACKAGES[0]; size:
             <span className="text-xl font-bold text-emerald-600">¥{item.price}</span>
             <span className="text-[10px] text-slate-500">/月</span>
           </div>
-          <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-600">立即订阅</span>
+          <button
+            onClick={(e) => { e.stopPropagation(); alert(`正在订阅「${item.name}」，¥${item.price}/月（需接入支付系统）`) }}
+            className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-600 hover:bg-emerald-100 transition-colors"
+          >
+            立即订阅
+          </button>
         </div>
       </div>
     </button>
@@ -396,52 +410,52 @@ function MyDeviceBlock() {
   const pct = MY_DEVICE.usagePercent
   return (
     <div
-      className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-100 to-slate-50 p-4"
+      className="flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-gradient-to-br from-[#0a1628] to-[#1a2744] p-4"
       style={{ gridColumn: 'span 2', gridRow: 'span 1' }}
     >
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50">
-            <Database className="h-4 w-4 text-emerald-600" />
+          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#14D1A0]/20">
+            <Database className="h-4 w-4 text-[#14D1A0]" />
           </div>
-          <span className="text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>我的算力</span>
+          <span className="text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>我的算力</span>
         </div>
-        <span className="rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-bold text-blue-600">
+        <span className="rounded-full bg-[#2B59C3]/20 px-2.5 py-1 text-[10px] font-bold text-[#2B59C3]">
           {MY_DEVICE.currentPlan}
         </span>
       </div>
 
       {/* Progress */}
       <div className="mb-3">
-        <div className="mb-1 flex items-center justify-between text-[10px] text-slate-500">
+        <div className="mb-1 flex items-center justify-between text-[10px] text-slate-400">
           <span>已用 {(MY_DEVICE.usedTokens / 10000).toFixed(0)}万 / {MY_DEVICE.totalTokens / 10000}万 tokens</span>
           <span style={{ color: pct > 80 ? '#FF6B6B' : '#14D1A0' }}>{pct}%</span>
         </div>
-        <div className="h-2.5 w-full overflow-hidden rounded-full bg-[rgba(255,255,255,0.08)]">
+        <div className="h-2.5 w-full overflow-hidden rounded-full bg-[#0a1628]/50">
           <div
             className="h-full rounded-full transition-all"
             style={{ width: `${pct}%`, backgroundColor: pct > 80 ? '#FF6B6B' : '#14D1A0' }}
           />
         </div>
         {pct > 80 && (
-          <div className="mt-1 flex items-center gap-1 text-[9px] text-red-500">
+          <div className="mt-1 flex items-center gap-1 text-[9px] text-red-400">
             <AlertTriangle className="h-3 w-3" />用量即将达上限，建议升级套餐
           </div>
         )}
       </div>
 
       <div className="grid grid-cols-3 gap-2">
-        <div className="rounded-xl border border-slate-200 bg-slate-100 p-2.5 text-center">
-          <p className="text-sm font-bold text-slate-900" style={{ fontFamily: 'monospace' }}>{MY_DEVICE.daysLeft}</p>
-          <p className="text-[9px] text-slate-500">剩余天数</p>
+        <div className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628]/50 p-2.5 text-center">
+          <p className="text-sm font-bold text-white" style={{ fontFamily: 'monospace' }}>{MY_DEVICE.daysLeft}</p>
+          <p className="text-[9px] text-slate-400">剩余天数</p>
         </div>
-        <div className="rounded-xl border border-slate-200 bg-slate-100 p-2.5 text-center">
-          <p className="text-sm font-bold text-slate-900" style={{ fontFamily: 'monospace' }}>{MY_DEVICE.activeAgents}</p>
-          <p className="text-[9px] text-slate-500">在线Agent</p>
+        <div className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628]/50 p-2.5 text-center">
+          <p className="text-sm font-bold text-white" style={{ fontFamily: 'monospace' }}>{MY_DEVICE.activeAgents}</p>
+          <p className="text-[9px] text-slate-400">在线Agent</p>
         </div>
-        <div className="rounded-xl border border-slate-200 bg-slate-100 p-2.5 text-center">
-          <p className="text-xs font-bold text-slate-900" style={{ fontFamily: 'monospace' }}>{MY_DEVICE.nextBilling}</p>
-          <p className="text-[9px] text-slate-500">下次账单日</p>
+        <div className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628]/50 p-2.5 text-center">
+          <p className="text-xs font-bold text-white" style={{ fontFamily: 'monospace' }}>{MY_DEVICE.nextBilling}</p>
+          <p className="text-[9px] text-slate-400">下次账单日</p>
         </div>
       </div>
     </div>
@@ -449,9 +463,10 @@ function MyDeviceBlock() {
 }
 
 // ─── Promo Block ────────────────────────────────────────────────────────────────
-function PromoBlock() {
+function PromoBlock({ onCtaClick }: { onCtaClick: () => void }) {
   return (
     <button
+      onClick={onCtaClick}
       className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-100 to-slate-50 p-4 transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: 'span 2', gridRow: 'span 1' }}
     >
@@ -515,7 +530,7 @@ export default function HardwareModule() {
       case 'my_device':
         return <MyDeviceBlock key={block.id} />
       case 'promo':
-        return <PromoBlock key={block.id} />
+        return <PromoBlock key={block.id} onCtaClick={() => alert('正在认证「学生/初创特惠」资格（需上传资质证明）')} />
       default:
         return null
     }
