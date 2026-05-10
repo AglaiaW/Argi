@@ -8,6 +8,7 @@ import {
   MousePointer, TrendingUp, Calendar, CheckCircle2,
   RefreshCw, Globe, ChevronRight, Play
 } from 'lucide-react'
+import { useAction, ActionToast } from '@/hooks/useAction'
 
 // ─── Block types ─────────────────────────────────────────────────────────────
 type BlockSize = 'sm' | 'md' | 'lg' | 'xl'
@@ -129,6 +130,25 @@ const SCHEDULE = [
 // ─── Detail Panel ─────────────────────────────────────────────────────────────
 function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; onClose: () => void }) {
   if (!item) return null
+
+  const [successMsg, setSuccessMsg] = useState<string | null>(null)
+
+  const { loading, error, execute: executePurchase } = useAction(
+    async () => {
+      // 正在购买（需接入支付API）
+      return true
+    },
+    { onSuccess: () => setSuccessMsg(`购买成功！`), onError: (e) => console.error(e) }
+  )
+
+  const { execute: executePreview } = useAction(
+    async () => {
+      // 正在预览内容详情
+      return true
+    },
+    { onSuccess: () => setSuccessMsg(`正在打开预览...`), onError: (e) => console.error(e) }
+  )
+
   return (
     <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-slate-200 bg-white shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-[rgba(255,255,255,0.06)] px-5 py-4">
@@ -175,18 +195,19 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
       </div>
       <div className="border-t border-[rgba(255,255,255,0.06)] p-4 space-y-2">
         <button
-          onClick={() => alert(`正在购买「${item.title}」，价格 ¥${item.price?.toLocaleString() ?? '—'}（需接入支付API）`)}
+          onClick={() => executePurchase()}
           className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90 active:scale-[0.98]"
         >
           <ArrowRight className="h-4 w-4" /> 立即购买
         </button>
         <button
-          onClick={() => alert(`正在预览「${item.title}」内容详情`)}
+          onClick={() => executePreview()}
           className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 py-2.5 text-sm text-slate-400 transition-all hover:border-slate-300 active:scale-[0.98]"
         >
           <Play className="h-4 w-4" /> 预览内容
         </button>
       </div>
+      <ActionToast loading={loading} error={error} success={successMsg ?? undefined} onClose={() => setSuccessMsg(null)} />
     </div>
   )
 }
@@ -334,6 +355,16 @@ function DraftBlock({ item, size, onClick }: { item: typeof DRAFTS[0]; size: 'md
 
 // ─── Platform Block ────────────────────────────────────────────────────────────
 function PlatformBlock() {
+  const [successMsg, setSuccessMsg] = useState<string | null>(null)
+
+  const { execute: executeAddPlatform } = useAction(
+    async () => {
+      // 正在打开「添加平台」配置面板（需接入平台API）
+      return true
+    },
+    { onSuccess: () => setSuccessMsg(`平台配置面板即将打开...`), onError: (e) => console.error(e) }
+  )
+
   return (
     <div
       className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4"
@@ -341,7 +372,7 @@ function PlatformBlock() {
     >
       <div className="mb-3 flex items-center justify-between">
         <span className="text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>已绑定平台</span>
-        <button onClick={() => alert('正在打开「添加平台」配置面板（需接入平台API）')} className="flex items-center gap-1 text-[10px] text-emerald-600 hover:text-emerald-500">
+        <button onClick={() => executeAddPlatform()} className="flex items-center gap-1 text-[10px] text-emerald-600 hover:text-emerald-500">
           <Plus className="h-3 w-3" /> 添加平台
         </button>
       </div>
@@ -371,6 +402,7 @@ function PlatformBlock() {
           </div>
         ))}
       </div>
+      <ActionToast loading={false} error={null} success={successMsg ?? undefined} onClose={() => setSuccessMsg(null)} />
     </div>
   )
 }
@@ -403,6 +435,16 @@ function ToolBlock({ item, size, onClick }: { item: typeof TOOLS[0]; size: 'md' 
 
 // ─── Schedule Block ──────────────────────────────────────────────────────────────
 function ScheduleBlock() {
+  const [successMsg, setSuccessMsg] = useState<string | null>(null)
+
+  const { execute: executeAddTask } = useAction(
+    async () => {
+      // 正在打开「新建发布任务」配置面板（需接入排期系统）
+      return true
+    },
+    { onSuccess: () => setSuccessMsg(`新建任务面板即将打开...`), onError: (e) => console.error(e) }
+  )
+
   return (
     <div
       className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-4"
@@ -410,7 +452,7 @@ function ScheduleBlock() {
     >
       <div className="mb-3 flex items-center justify-between">
         <span className="text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>发布排期</span>
-        <button onClick={() => alert('正在打开「新建发布任务」配置面板（需接入排期系统）')} className="flex items-center gap-1 text-[10px] text-emerald-600 hover:text-emerald-500">
+        <button onClick={() => executeAddTask()} className="flex items-center gap-1 text-[10px] text-emerald-600 hover:text-emerald-500">
           <Plus className="h-3 w-3" /> 添加任务
         </button>
       </div>
@@ -430,6 +472,7 @@ function ScheduleBlock() {
           </div>
         ))}
       </div>
+      <ActionToast loading={false} error={null} success={successMsg ?? undefined} onClose={() => setSuccessMsg(null)} />
     </div>
   )
 }

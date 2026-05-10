@@ -7,6 +7,7 @@ import {
   ArrowRight, ShoppingCart, Heart, ExternalLink, CheckCircle2,
   ChevronRight, MessageSquare, Play, AlertCircle, Package
 } from 'lucide-react'
+import { useAction, ActionToast } from '@/hooks/useAction'
 
 // ─── Block types ─────────────────────────────────────────────────────────────
 type BlockSize = 'sm' | 'md' | 'lg' | 'xl'
@@ -155,6 +156,33 @@ const COMPUTE_PACKAGES = [
 // ─── Detail Panel ─────────────────────────────────────────────────────────────
 function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; onClose: () => void }) {
   if (!item) return null
+
+  const [successMsg, setSuccessMsg] = useState<string | null>(null)
+
+  const { loading, error, execute: executePurchase } = useAction(
+    async () => {
+      // 即将购买（需接入支付API）
+      return true
+    },
+    { onSuccess: () => setSuccessMsg(`购买成功！`), onError: (e) => console.error(e) }
+  )
+
+  const { execute: executeTrial } = useAction(
+    async () => {
+      // 即将申请免费试用（需接入试用API）
+      return true
+    },
+    { onSuccess: () => setSuccessMsg(`试用申请已提交！`), onError: (e) => console.error(e) }
+  )
+
+  const { execute: executeViewPlan } = useAction(
+    async () => {
+      // 即将跳转到套餐详情页（需接入路由）
+      return true
+    },
+    { onSuccess: () => setSuccessMsg(`正在跳转套餐详情...`), onError: (e) => console.error(e) }
+  )
+
   return (
     <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-white shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-[rgba(255,255,255,0.06)] px-5 py-4">
@@ -230,19 +258,20 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
       <div className="border-t border-[rgba(255,255,255,0.06)] p-4 space-y-2">
         {item.price !== undefined && item.price > 0 ? (
           <>
-            <button onClick={() => alert(`即将购买「${item.name}」（需接入支付API）`)} className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90 active:scale-[0.98]">
+            <button onClick={() => executePurchase()} className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90 active:scale-[0.98]">
               <ShoppingCart className="h-4 w-4" /> 立即购买
             </button>
-            <button onClick={() => alert(`即将申请「${item.name}」的免费试用（需接入试用API）`)} className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[rgba(255,255,255,0.08)] py-2.5 text-sm text-slate-400 transition-all hover:border-[rgba(255,255,255,0.15)]">
+            <button onClick={() => executeTrial()} className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[rgba(255,255,255,0.08)] py-2.5 text-sm text-slate-400 transition-all hover:border-[rgba(255,255,255,0.15)]">
               <Play className="h-4 w-4" /> {item.试用次数 as string || '免费试用3次'}
             </button>
           </>
         ) : (
-          <button onClick={() => alert('即将跳转到套餐详情页（需接入路由）')} className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90">
+          <button onClick={() => executeViewPlan()} className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90">
             <ArrowRight className="h-4 w-4" /> 查看套餐详情
           </button>
         )}
       </div>
+      <ActionToast loading={loading} error={error} success={successMsg ?? undefined} onClose={() => setSuccessMsg(null)} />
     </div>
   )
 }

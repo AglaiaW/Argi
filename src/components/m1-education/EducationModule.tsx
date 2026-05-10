@@ -8,6 +8,7 @@ import {
   MessageSquare, Play, Gift, Lock, Search
 } from 'lucide-react'
 import CourseDetailPage from './CourseDetailPage'
+import { useAction, ActionToast } from '@/hooks/useAction'
 
 // ─── Block types ─────────────────────────────────────────────────────────────
 type BlockSize = 'sm' | 'md' | 'lg' | 'xl'
@@ -713,26 +714,26 @@ function StatsBlock() {
   ]
   return (
     <div
-      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4"
+      className="flex flex-col justify-between overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-gradient-to-br from-[#0a1628] to-[#1a2744] p-4"
       style={{ gridColumn: 'span 1', gridRow: 'span 1' }}
     >
       <div className="mb-4 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-50">
-          <BookOpen className="h-4 w-4 text-emerald-600" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#14D1A0]/20">
+          <BookOpen className="h-4 w-4 text-[#14D1A0]" />
         </div>
-        <span className="text-xs font-bold text-slate-400" style={{ fontFamily: 'monospace' }}>平台数据</span>
+        <span className="text-xs font-bold text-slate-300" style={{ fontFamily: 'monospace' }}>平台数据</span>
       </div>
       <div className="grid grid-cols-2 gap-3">
         {stats.map((s) => (
-          <div key={s.label} className="rounded-xl border border-slate-100 bg-slate-100 p-3">
-            <p className="text-xl font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
-            <p className="text-[10px] text-slate-500">{s.label}</p>
+          <div key={s.label} className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[#0a1628]/50 p-3">
+            <p className="text-xl font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace', color: s.color }}>{s.value}</p>
+            <p className="text-[10px] text-slate-400">{s.label}</p>
           </div>
         ))}
       </div>
-      <div className="mt-3 flex items-center gap-2 rounded-xl bg-emerald-50 px-3 py-2">
-        <Gift className="h-4 w-4 text-emerald-600" />
-        <span className="text-xs text-emerald-600">新用户首月课程8折优惠</span>
+      <div className="mt-3 flex items-center gap-2 rounded-xl bg-[#14D1A0]/20 px-3 py-2">
+        <Gift className="h-4 w-4 text-[#14D1A0]" />
+        <span className="text-xs text-[#14D1A0]">新用户首月课程8折优惠</span>
       </div>
     </div>
   )
@@ -743,7 +744,7 @@ function FeaturedCourseBlock({ course, onClick }: { course: typeof COURSES[0]; o
   return (
     <button
       onClick={onClick}
-      className="group relative flex overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.15)] active:scale-[0.99]"
+      className="group relative flex overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.15)] active:scale-[0.99]"
       style={{ gridColumn: 'span 3', gridRow: 'span 4' }}
     >
       {/* 全高图片背景 */}
@@ -839,7 +840,7 @@ function CourseBlock({ course, size, onClick }: { course: typeof COURSES[0]; siz
   return (
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: 'span 1' }}
     >
       {/* Image top */}
@@ -867,16 +868,16 @@ function CourseBlock({ course, size, onClick }: { course: typeof COURSES[0]; siz
       <div className="flex flex-1 flex-col justify-between p-2.5">
         <div>
           <div className="mb-1 flex items-center gap-1">
-            <span className="rounded-full bg-blue-50 px-2 py-0.5 text-[9px] font-medium text-blue-600">
+            <span className="rounded-full bg-[#2B59C3]/20 px-2 py-0.5 text-[9px] font-medium text-[#2B59C3]">
               {course.level}
             </span>
           </div>
-          <h4 className="mb-1 line-clamp-2 text-xs font-bold leading-snug text-slate-900 transition-colors group-hover:text-emerald-600" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+          <h4 className="mb-1 line-clamp-2 text-xs font-bold leading-snug text-white transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
             {course.title}
           </h4>
           <div className="mb-2 flex items-center gap-2">
             <img src={course.instructorAvatar} alt="" className="h-4 w-4 rounded-full object-cover" />
-            <span className="text-[10px] text-slate-500">{course.instructor}</span>
+            <span className="text-[10px] text-slate-400">{course.instructor}</span>
           </div>
         </div>
 
@@ -886,7 +887,7 @@ function CourseBlock({ course, size, onClick }: { course: typeof COURSES[0]; siz
             <span className="text-[10px] font-bold text-amber-500">{course.rating}</span>
           </div>
           <div className="flex items-center gap-1">
-            <span className="text-xs font-bold text-emerald-600">¥{course.price}</span>
+            <span className="text-xs font-bold text-[#14D1A0]">¥{course.price}</span>
             {course.originalPrice > 0 && (
               <span className="text-[10px] text-slate-500 line-through">¥{course.originalPrice}</span>
             )}
@@ -902,7 +903,7 @@ function PathBlock({ path, size, onClick }: { path: typeof PATHS[0]; size: 'md' 
   return (
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: 'span 1' }}
     >
       {/* Image */}
@@ -918,32 +919,32 @@ function PathBlock({ path, size, onClick }: { path: typeof PATHS[0]; size: 'md' 
 
       <div className="flex flex-1 flex-col justify-between p-2.5">
         <div>
-          <h4 className="mb-1 line-clamp-2 text-xs font-bold leading-snug text-slate-900 transition-colors group-hover:text-emerald-600" style={{ fontFamily: 'Space Grotesk, monospace' }}>
+          <h4 className="mb-1 line-clamp-2 text-xs font-bold leading-snug text-white transition-colors group-hover:text-[#14D1A0]" style={{ fontFamily: 'Space Grotesk, monospace' }}>
             {path.title}
           </h4>
-          <p className="line-clamp-1 text-[10px] text-slate-500">{path.subtitle}</p>
+          <p className="line-clamp-1 text-[10px] text-slate-400">{path.subtitle}</p>
         </div>
 
         <div className="mt-2 space-y-1.5">
           {path.progress > 0 && (
             <div>
-              <div className="mb-1 flex items-center justify-between text-[9px] text-slate-500">
+              <div className="mb-1 flex items-center justify-between text-[9px] text-slate-400">
                 <span>进度</span>
-                <span className="text-emerald-600">{path.progress}%</span>
+                <span className="text-[#14D1A0]">{path.progress}%</span>
               </div>
-              <div className="h-1 w-full rounded-full bg-slate-200">
+              <div className="h-1 w-full rounded-full bg-[rgba(255,255,255,0.08)]">
                 <div className="h-1 rounded-full bg-[#14D1A0]" style={{ width: `${path.progress}%` }} />
               </div>
             </div>
           )}
           <div className="flex items-center justify-between border-t border-[rgba(255,255,255,0.04)] pt-1.5">
-            <div className="flex items-center gap-2 text-[9px] text-slate-500">
+            <div className="flex items-center gap-2 text-[9px] text-slate-400">
               <span>{path.totalCourses}节</span>
               <span>{path.totalDuration}</span>
             </div>
             <div className="flex items-center gap-1">
-              <Star className="h-3 w-3 fill-[#FFD23F] text-amber-500" />
-              <span className="text-[9px] font-bold text-amber-500">{path.rating}</span>
+              <Star className="h-3 w-3 fill-[#FFD23F] text-[#FFD23F]" />
+              <span className="text-[9px] font-bold text-[#FFD23F]">{path.rating}</span>
             </div>
           </div>
         </div>
@@ -979,7 +980,7 @@ function CampBlock({ camp, onClick }: { camp: typeof CAMPS[0]; onClick: () => vo
   return (
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: 'span 3' }}
     >
       {/* Full image background */}
@@ -1000,8 +1001,8 @@ function CampBlock({ camp, onClick }: { camp: typeof CAMPS[0]; onClick: () => vo
           </span>
         </div>
         <div className="absolute bottom-3 left-3 right-3">
-          <span className="mb-1 block text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>{camp.name}</span>
-          <p className="line-clamp-1 text-[11px] text-slate-300">{camp.tagline}</p>
+          <span className="mb-1 block text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>{camp.name}</span>
+          <p className="line-clamp-1 text-[11px] text-slate-400">{camp.tagline}</p>
         </div>
       </div>
 
@@ -1019,19 +1020,19 @@ function CampBlock({ camp, onClick }: { camp: typeof CAMPS[0]; onClick: () => vo
                 <img
                   key={n}
                   src={`https://i.pravatar.cc/150?img=${n}`}
-                  className="h-6 w-6 rounded-full border-2 border-white object-cover"
+                  className="h-6 w-6 rounded-full border-2 border-[#0a1628] object-cover"
                   style={{ marginLeft: i > 0 ? '-8px' : 0, zIndex: 6 - i }}
                 />
               ))}
               {camp.memberCount > 6 && (
-                <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-slate-200" style={{ marginLeft: '-8px', zIndex: 0 }}>
-                  <span className="text-[9px] font-bold text-slate-600">+{camp.memberCount - 6}</span>
+                <div className="flex h-6 w-6 items-center justify-center rounded-full border-2 border-[#0a1628] bg-[#0a1628]/50" style={{ marginLeft: '-8px', zIndex: 0 }}>
+                  <span className="text-[9px] font-bold text-slate-400">+{camp.memberCount - 6}</span>
                 </div>
               )}
             </div>
-            <span className="text-[10px] text-slate-500">{camp.memberCount.toLocaleString()}人已报名</span>
+            <span className="text-[10px] text-slate-400">{camp.memberCount.toLocaleString()}人已报名</span>
           </div>
-          <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-600">立即报名</span>
+          <span className="rounded-full bg-[#14D1A0]/20 px-2.5 py-1 text-[10px] font-bold text-[#14D1A0]">立即报名</span>
         </div>
       </div>
     </button>
@@ -1043,7 +1044,7 @@ function InstructorBlock({ inst, size, onClick }: { inst: typeof INSTRUCTORS[0];
   return (
     <button
       onClick={onClick}
-      className="group flex flex-col items-center overflow-hidden rounded-2xl border border-slate-100 bg-white p-3 text-center transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group flex flex-col items-center overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 p-3 text-center transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: 'span 1' }}
     >
       <div className="relative mb-3">
@@ -1054,19 +1055,19 @@ function InstructorBlock({ inst, size, onClick }: { inst: typeof INSTRUCTORS[0];
           </div>
         )}
       </div>
-      <h4 className="mb-0.5 text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>{inst.name}</h4>
-      <p className="mb-2 line-clamp-1 text-[10px] text-slate-500">{inst.title}</p>
+      <h4 className="mb-0.5 text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>{inst.name}</h4>
+      <p className="mb-2 line-clamp-1 text-[10px] text-slate-400">{inst.title}</p>
       <div className="mb-3 flex flex-wrap justify-center gap-1">
         {inst.specialties.slice(0, 2).map((s) => (
-          <span key={s} className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] text-slate-400">{s}</span>
+          <span key={s} className="rounded-full bg-[#0a1628]/40 px-2 py-0.5 text-[9px] text-slate-300">{s}</span>
         ))}
       </div>
       <div className="mt-auto flex w-full items-center justify-between border-t border-[rgba(255,255,255,0.04)] pt-3">
         <div className="flex items-center gap-0.5">
-          <Star className="h-3 w-3 fill-[#FFD23F] text-amber-500" />
-          <span className="text-[10px] font-bold text-amber-500">{inst.rating}</span>
+          <Star className="h-3 w-3 fill-[#FFD23F] text-[#FFD23F]" />
+          <span className="text-[10px] font-bold text-[#FFD23F]">{inst.rating}</span>
         </div>
-        <span className="text-[10px] text-slate-500">{(inst.studentCount / 1000).toFixed(1)}k学员</span>
+        <span className="text-[10px] text-slate-400">{(inst.studentCount / 1000).toFixed(1)}k学员</span>
       </div>
     </button>
   )
@@ -1075,6 +1076,18 @@ function InstructorBlock({ inst, size, onClick }: { inst: typeof INSTRUCTORS[0];
 // ─── Buddy Block ──────────────────────────────────────────────────────────────
 function BuddyBlock({ buddy, onClick }: { buddy: typeof BUDDY; onClick: () => void }) {
   const [showMatchInfo, setShowMatchInfo] = useState(false)
+  const [successMsg, setSuccessMsg] = useState<string | null>(null)
+
+  const { loading, error, execute } = useAction(
+    async () => {
+      // 搭子功能开发中，后续接入真实API
+      return true
+    },
+    {
+      onSuccess: () => setSuccessMsg('搭子功能即将上线！'),
+      onError: (e) => console.error(e),
+    }
+  )
 
   const matchReasons = [
     { label: '学习目标相似', score: 30 },
@@ -1088,7 +1101,7 @@ function BuddyBlock({ buddy, onClick }: { buddy: typeof BUDDY; onClick: () => vo
     <div className="relative" style={{ gridColumn: 'span 3' }}>
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-4 text-left transition-all duration-300 hover:border-slate-300 hover:shadow-md active:scale-[0.98] w-full"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 p-4 text-left transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] hover:shadow-md active:scale-[0.98] w-full"
     >
       <div className="mb-3 flex items-start gap-3">
         <div className="relative shrink-0">
@@ -1097,14 +1110,14 @@ function BuddyBlock({ buddy, onClick }: { buddy: typeof BUDDY; onClick: () => vo
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-0.5">
-            <h4 className="text-sm font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>{buddy.name}</h4>
-            {buddy.isVerified && <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-600" />}
+            <h4 className="text-sm font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>{buddy.name}</h4>
+            {buddy.isVerified && <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-[#14D1A0]" />}
           </div>
-          <p className="text-[10px] text-slate-500">{buddy.title}</p>
+          <p className="text-[10px] text-slate-400">{buddy.title}</p>
           {/* Match score — clickable */}
           <button
             onClick={(e) => { e.stopPropagation(); setShowMatchInfo(v => !v) }}
-            className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold text-emerald-600 hover:bg-emerald-100 transition-colors cursor-pointer"
+            className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-[#14D1A0]/20 px-2.5 py-0.5 text-[10px] font-bold text-[#14D1A0] hover:bg-[#14D1A0]/30 transition-colors cursor-pointer"
           >
             <Zap className="h-3 w-3" />{buddy.matchScore}% 匹配度
           </button>
@@ -1115,7 +1128,7 @@ function BuddyBlock({ buddy, onClick }: { buddy: typeof BUDDY; onClick: () => vo
 
       <div className="mb-3 flex flex-wrap gap-1.5">
         {buddy.interests.map((i) => (
-          <span key={i} className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] text-slate-400">#{i}</span>
+          <span key={i} className="rounded-full bg-[#0a1628]/40 px-2 py-0.5 text-[9px] text-slate-300">#{i}</span>
         ))}
       </div>
 
@@ -1125,7 +1138,7 @@ function BuddyBlock({ buddy, onClick }: { buddy: typeof BUDDY; onClick: () => vo
           <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />连续{buddy.streakDays}天</span>
         </div>
         <span
-          onClick={(e) => { e.stopPropagation(); alert('搭子功能开发中') }}
+          onClick={(e) => { e.stopPropagation(); execute() }}
           className="cursor-pointer rounded-full bg-[#14D1A0] px-3 py-1 text-[10px] font-bold text-[#010409] hover:bg-[#14D1A0]/80 transition-colors"
         >
           发起搭子
@@ -1135,31 +1148,33 @@ function BuddyBlock({ buddy, onClick }: { buddy: typeof BUDDY; onClick: () => vo
 
     {/* Match explanation tooltip */}
     {showMatchInfo && (
-      <div className="absolute left-1/2 top-full z-20 mt-2 w-64 -translate-x-1/2 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl">
+      <div className="absolute left-1/2 top-full z-20 mt-2 w-64 -translate-x-1/2 rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628] p-4 shadow-xl">
         <div className="mb-3 flex items-center justify-between">
-          <p className="text-xs font-bold text-slate-900">匹配分解释</p>
-          <button onClick={() => setShowMatchInfo(false)} className="text-slate-400 hover:text-slate-600">
+          <p className="text-xs font-bold text-white">匹配分解释</p>
+          <button onClick={() => setShowMatchInfo(false)} className="text-slate-400 hover:text-slate-200">
             <X className="h-3.5 w-3.5" />
           </button>
         </div>
         <div className="space-y-2">
           {matchReasons.map((r) => (
             <div key={r.label} className="flex items-center gap-2">
-              <span className="flex-1 text-xs text-slate-600">{r.label}</span>
-              <div className="h-1.5 w-24 overflow-hidden rounded-full bg-slate-100">
-                <div className="h-full rounded-full bg-emerald-400" style={{ width: `${r.score * 2.5}%` }} />
+              <span className="flex-1 text-xs text-slate-300">{r.label}</span>
+              <div className="h-1.5 w-24 overflow-hidden rounded-full bg-[rgba(255,255,255,0.08)]">
+                <div className="h-full rounded-full bg-[#14D1A0]" style={{ width: `${r.score * 2.5}%` }} />
               </div>
-              <span className="text-[10px] font-bold text-emerald-600 w-8 text-right">+{r.score}</span>
+              <span className="text-[10px] font-bold text-[#14D1A0] w-8 text-right">+{r.score}</span>
             </div>
           ))}
-          <div className="border-t border-slate-100 pt-2 flex items-center justify-between">
-            <span className="text-xs font-medium text-slate-900">总分</span>
-            <span className="text-sm font-bold text-emerald-600">{buddy.matchScore}%</span>
+          <div className="border-t border-[rgba(255,255,255,0.04)] pt-2 flex items-center justify-between">
+            <span className="text-xs font-medium text-white">总分</span>
+            <span className="text-sm font-bold text-[#14D1A0]">{buddy.matchScore}%</span>
           </div>
         </div>
         <p className="mt-3 text-[10px] text-slate-400">基于学习行为、兴趣标签和活跃时段综合计算</p>
       </div>
     )}
+
+    <ActionToast loading={loading} error={error} success={successMsg ?? undefined} onClose={() => setSuccessMsg(null)} />
     </div>
   )
 }
@@ -1286,38 +1301,38 @@ export default function EducationModule() {
   }
 
   return (
-    <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white">
+    <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]">
       {/* Header — 深色，突出搜索和筛选区 */}
-      <div className="flex flex-col border-b border-slate-100 bg-white px-6 py-4 shrink-0 gap-3">
+      <div className="flex flex-col border-b border-[rgba(255,255,255,0.06)] bg-[#0a1628] px-6 py-4 shrink-0 gap-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50">
-              <BookOpen className="h-5 w-5 text-emerald-600" />
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#14D1A0]/20">
+              <BookOpen className="h-5 w-5 text-[#14D1A0]" />
             </div>
             <div>
-              <h1 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>技能教育</h1>
+              <h1 className="text-base font-bold text-white" style={{ fontFamily: 'Space Grotesk, monospace' }}>技能教育</h1>
               <p className="text-[10px] text-slate-400" style={{ fontFamily: 'monospace' }}>课程 · 路径 · 导师 · 学习伙伴</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
             <div className="text-center">
-              <p className="text-sm font-bold tabular-nums text-slate-900" style={{ fontFamily: 'monospace' }}>4</p>
+              <p className="text-sm font-bold tabular-nums text-white" style={{ fontFamily: 'monospace' }}>4</p>
               <p className="text-[10px] text-slate-400">课程</p>
             </div>
-            <div className="h-5 w-px bg-slate-200" />
+            <div className="h-5 w-px bg-[rgba(255,255,255,0.08)]" />
             <div className="text-center">
-              <p className="text-sm font-bold tabular-nums text-emerald-600" style={{ fontFamily: 'monospace' }}>2</p>
+              <p className="text-sm font-bold tabular-nums text-[#14D1A0]" style={{ fontFamily: 'monospace' }}>2</p>
               <p className="text-[10px] text-slate-400">路径</p>
             </div>
-            <div className="h-5 w-px bg-slate-200" />
+            <div className="h-5 w-px bg-[rgba(255,255,255,0.08)]" />
             <div className="text-center">
-              <p className="text-sm font-bold tabular-nums text-[#F59E0B]" style={{ fontFamily: 'monospace' }}>36</p>
+              <p className="text-sm font-bold tabular-nums text-[#FFD23F]" style={{ fontFamily: 'monospace' }}>36</p>
               <p className="text-[10px] text-slate-400">导师</p>
             </div>
-            <div className="h-5 w-px bg-slate-200" />
+            <div className="h-5 w-px bg-[rgba(255,255,255,0.08)]" />
             <button
               onClick={() => setShowAssessment(true)}
-              className="flex items-center gap-1.5 rounded-xl border border-[#2B59C3]/30 bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-600 transition-all hover:border-[#2B59C3]/50 hover:bg-[#2B59C3]/20"
+              className="flex items-center gap-1.5 rounded-xl border border-[#2B59C3]/30 bg-[#2B59C3]/20 px-3 py-1.5 text-xs font-medium text-[#2B59C3] transition-all hover:border-[#2B59C3]/50 hover:bg-[#2B59C3]/30"
             >
               <Shield className="h-3.5 w-3.5" />六维测评
             </button>
@@ -1332,21 +1347,21 @@ export default function EducationModule() {
               placeholder="搜索课程、讲师或学习路径..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-slate-100 py-2 pl-9 pr-4 text-xs text-slate-900 placeholder-slate-400 outline-none focus:border-[#14D1A0] focus:bg-white transition-colors"
+              className="w-full rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 py-2 pl-9 pr-4 text-xs text-white placeholder-slate-400 outline-none focus:border-[#14D1A0] focus:bg-[#0a1628]/80 transition-colors"
             />
           </div>
-          <div className="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-100 p-1">
+          <div className="flex items-center gap-1.5 rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 p-1">
             {['全部', '入门', '进阶', '高级', '免费'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${activeTab === tab ? 'bg-emerald-500 text-white' : 'text-slate-500 hover:text-slate-600'}`}
+                className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${activeTab === tab ? 'bg-emerald-500 text-white' : 'text-slate-400 hover:text-slate-200'}`}
               >
                 {tab}
               </button>
             ))}
           </div>
-          <div className="flex items-center gap-1 rounded-xl border border-slate-200 bg-slate-100 p-1">
+          <div className="flex items-center gap-1 rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 p-1">
             {[
               { id: 'all', label: '全部' },
               { id: 'course', label: '课程' },
@@ -1357,7 +1372,7 @@ export default function EducationModule() {
               <button
                 key={ct.id}
                 onClick={() => setContentType(ct.id as typeof contentType)}
-                className={`rounded-lg px-2.5 py-1.5 text-xs font-medium transition-all ${contentType === ct.id ? 'bg-slate-800 text-white' : 'text-slate-500 hover:text-slate-600'}`}
+                className={`rounded-lg px-2.5 py-1.5 text-xs font-medium transition-all ${contentType === ct.id ? 'bg-[#14D1A0] text-[#010409]' : 'text-slate-400 hover:text-slate-200'}`}
               >
                 {ct.label}
               </button>
@@ -1366,7 +1381,7 @@ export default function EducationModule() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
-            className="rounded-xl border border-slate-200 bg-slate-100 px-3 py-2 text-xs text-slate-700 outline-none focus:border-[#14D1A0]"
+            className="rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 px-3 py-2 text-xs text-slate-300 outline-none focus:border-[#14D1A0]"
           >
             <option value="popular">最热</option>
             <option value="rating">评分最高</option>
@@ -1376,27 +1391,27 @@ export default function EducationModule() {
         </div>
       </div>
 
-      {/* 内容区 — 浅灰背景 + 卡片式布局 */}
-      <div className="relative flex-1 overflow-hidden bg-slate-100">
+      {/* 内容区 — 深色背景 + 卡片式布局 */}
+      <div className="relative flex-1 overflow-hidden bg-[#0a1628]">
         <div className="absolute inset-0 overflow-auto p-4">
           {isSearchActive ? (
             /* 搜索结果视图 */
             <div>
-              <div className="mb-4 flex items-center gap-2 text-sm text-slate-500">
+              <div className="mb-4 flex items-center gap-2 text-sm text-slate-400">
                 <Search className="h-4 w-4" />
-                <span>找到 <span className="font-bold text-slate-900">{filteredCourses.length + filteredPaths.length}</span> 个结果：</span>
-                <span className="rounded-full bg-slate-200 px-2 py-0.5 text-xs">"{searchQuery}"</span>
-                <button onClick={() => setSearchQuery('')} className="ml-auto flex items-center gap-1 text-xs text-emerald-600 hover:underline">
+                <span>找到 <span className="font-bold text-white">{filteredCourses.length + filteredPaths.length}</span> 个结果：</span>
+                <span className="rounded-full bg-[rgba(255,255,255,0.08)] px-2 py-0.5 text-xs text-slate-300">"{searchQuery}"</span>
+                <button onClick={() => setSearchQuery('')} className="ml-auto flex items-center gap-1 text-xs text-[#14D1A0] hover:underline">
                   <X className="h-3 w-3" />清除
                 </button>
               </div>
               {filteredCourses.length === 0 && filteredPaths.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-20 text-center">
-                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-slate-200">
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(255,255,255,0.08)]">
                     <Search className="h-8 w-8 text-slate-400" />
                   </div>
-                  <h3 className="mb-2 text-lg font-bold text-slate-900">未找到"{searchQuery}"</h3>
-                  <p className="text-sm text-slate-400">试试其他关键词，或<button onClick={() => setSearchQuery('')} className="text-emerald-600 hover:underline">查看全部课程</button></p>
+                  <h3 className="mb-2 text-lg font-bold text-white">未找到"{searchQuery}"</h3>
+                  <p className="text-sm text-slate-400">试试其他关键词，或<button onClick={() => setSearchQuery('')} className="text-[#14D1A0] hover:underline">查看全部课程</button></p>
                 </div>
               ) : (
                 <div className="grid gap-3" style={{ gridTemplateColumns: 'repeat(6, 1fr)', gridAutoRows: '150px' }}>
@@ -1432,13 +1447,13 @@ export default function EducationModule() {
             </div>
           ) : showFeaturedTopPath ? (
             <div className="space-y-3">
-              <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-4">
+              <div className="rounded-2xl border border-[#14D1A0]/30 bg-[#14D1A0]/10 p-4">
                 <div className="mb-2 flex items-center gap-2">
-                  <Zap className="h-4 w-4 text-emerald-500" />
-                  <span className="text-xs font-bold text-emerald-500">推荐路径</span>
+                  <Zap className="h-4 w-4 text-[#14D1A0]" />
+                  <span className="text-xs font-bold text-[#14D1A0]">推荐路径</span>
                 </div>
-                <p className="text-sm font-bold text-slate-900">AI 内容创作从0到1 · 8节课程</p>
-                <p className="text-xs text-slate-500">匹配度 98%</p>
+                <p className="text-sm font-bold text-white">AI 内容创作从0到1 · 8节课程</p>
+                <p className="text-xs text-slate-400">匹配度 98%</p>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 {PATHS.slice(0, 2).map(p => (

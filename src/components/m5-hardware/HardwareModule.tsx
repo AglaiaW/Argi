@@ -7,6 +7,7 @@ import {
   ChevronRight, Activity, Database, Battery, Wifi,
   Package, TrendingUp, Calendar, AlertTriangle, Play
 } from 'lucide-react'
+import { useAction, ActionToast } from '@/hooks/useAction'
 
 // ─── Block types ─────────────────────────────────────────────────────────────
 type BlockSize = 'sm' | 'md' | 'lg' | 'xl'
@@ -123,6 +124,33 @@ const PROMO = {
 // ─── Detail Panel ─────────────────────────────────────────────────────────────
 function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; onClose: () => void }) {
   if (!item) return null
+
+  const [successMsg, setSuccessMsg] = useState<string | null>(null)
+
+  const { loading, error, execute: executeRent } = useAction(
+    async () => {
+      // 正在租用GPU集群（需接入计费系统）
+      return true
+    },
+    { onSuccess: () => setSuccessMsg(`租用请求已提交！`), onError: (e) => console.error(e) }
+  )
+
+  const { execute: executeTrial } = useAction(
+    async () => {
+      // 正在申请试用资格（需企业认证）
+      return true
+    },
+    { onSuccess: () => setSuccessMsg(`试用申请已提交！`), onError: (e) => console.error(e) }
+  )
+
+  const { execute: executeUpgrade } = useAction(
+    async () => {
+      // 正在升级套餐（需接入订阅系统）
+      return true
+    },
+    { onSuccess: () => setSuccessMsg(`升级请求已提交！`), onError: (e) => console.error(e) }
+  )
+
   return (
     <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-white shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-[rgba(255,255,255,0.06)] px-5 py-4">
@@ -194,13 +222,13 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         {item.pricePerHour !== undefined ? (
           <>
             <button
-              onClick={() => alert(`正在租用「${item.name}」，¥${item.pricePerHour}/小时（需接入计费系统）`)}
+              onClick={() => executeRent()}
               className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90 active:scale-[0.98]"
             >
               <Play className="h-4 w-4" /> 立即租用
             </button>
             <button
-              onClick={() => alert('正在申请试用资格（需企业认证）')}
+              onClick={() => executeTrial()}
               className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 py-2.5 text-sm text-slate-400 transition-all hover:border-slate-300 active:scale-[0.98]"
             >
               <Shield className="h-4 w-4" /> 申请试用
@@ -208,13 +236,14 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
           </>
         ) : (
           <button
-            onClick={() => alert(`正在升级至「${item.name}」（需接入订阅系统）`)}
+            onClick={() => executeUpgrade()}
             className="flex w-full items-center justify-center gap-2 rounded-2xl bg-[#14D1A0] py-3 text-sm font-bold text-[#010409] transition-all hover:bg-[#14D1A0]/90 active:scale-[0.98]"
           >
             <ArrowRight className="h-4 w-4" /> 升级套餐
           </button>
         )}
       </div>
+      <ActionToast loading={loading} error={error} success={successMsg ?? undefined} onClose={() => setSuccessMsg(null)} />
     </div>
   )
 }
@@ -362,6 +391,16 @@ function GPUBlock({ item, size, onClick }: { item: typeof GPU_CLUSTERS[0]; size:
 
 // ─── Package Block ──────────────────────────────────────────────────────────────
 function PackageBlock({ item, size, onClick }: { item: typeof PACKAGES[0]; size: 'md' | 'lg'; onClick: () => void }) {
+  const [successMsg, setSuccessMsg] = useState<string | null>(null)
+
+  const { execute: executeSubscribe } = useAction(
+    async () => {
+      // 正在订阅套餐（需接入支付系统）
+      return true
+    },
+    { onSuccess: () => setSuccessMsg(`订阅成功！`), onError: (e) => console.error(e) }
+  )
+
   return (
     <button
       onClick={onClick}
@@ -394,13 +433,14 @@ function PackageBlock({ item, size, onClick }: { item: typeof PACKAGES[0]; size:
             <span className="text-[10px] text-slate-500">/月</span>
           </div>
           <button
-            onClick={(e) => { e.stopPropagation(); alert(`正在订阅「${item.name}」，¥${item.price}/月（需接入支付系统）`) }}
+            onClick={(e) => { e.stopPropagation(); executeSubscribe() }}
             className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-600 hover:bg-emerald-100 transition-colors"
           >
             立即订阅
           </button>
         </div>
       </div>
+      <ActionToast loading={false} error={null} success={successMsg ?? undefined} onClose={() => setSuccessMsg(null)} />
     </button>
   )
 }
@@ -464,9 +504,19 @@ function MyDeviceBlock() {
 
 // ─── Promo Block ────────────────────────────────────────────────────────────────
 function PromoBlock({ onCtaClick }: { onCtaClick: () => void }) {
+  const [successMsg, setSuccessMsg] = useState<string | null>(null)
+
+  const { execute } = useAction(
+    async () => {
+      // 正在认证「学生/初创特惠」资格（需上传资质证明）
+      return true
+    },
+    { onSuccess: () => { setSuccessMsg(`认证申请已提交！`); onCtaClick() }, onError: (e) => console.error(e) }
+  )
+
   return (
     <button
-      onClick={onCtaClick}
+      onClick={() => execute()}
       className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-slate-100 to-slate-50 p-4 transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: 'span 2', gridRow: 'span 1' }}
     >
@@ -483,6 +533,7 @@ function PromoBlock({ onCtaClick }: { onCtaClick: () => void }) {
         <span>{PROMO.cta}</span>
         <ChevronRight className="h-4 w-4" />
       </div>
+      <ActionToast loading={false} error={null} success={successMsg ?? undefined} onClose={() => setSuccessMsg(null)} />
     </button>
   )
 }
@@ -530,7 +581,7 @@ export default function HardwareModule() {
       case 'my_device':
         return <MyDeviceBlock key={block.id} />
       case 'promo':
-        return <PromoBlock key={block.id} onCtaClick={() => alert('正在认证「学生/初创特惠」资格（需上传资质证明）')} />
+        return <PromoBlock key={block.id} onCtaClick={() => {}} />
       default:
         return null
     }
