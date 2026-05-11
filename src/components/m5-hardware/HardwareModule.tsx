@@ -155,7 +155,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
     <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-white shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-[rgba(255,255,255,0.06)] px-5 py-4">
         <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>详情</span>
-        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100">
+        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[#1a2744]">
           <X className="h-4 w-4" />
         </button>
       </div>
@@ -177,7 +177,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         {item.tags && Array.isArray(item.tags) && (
           <div className="flex flex-wrap gap-2 mb-4">
             {(item.tags as string[]).map((tag) => (
-              <span key={tag} className="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[10px] text-slate-400">#{tag}</span>
+              <span key={tag} className="rounded-full border border-[rgba(255,255,255,0.1)] bg-[#1a2744] px-2.5 py-1 text-[10px] text-slate-300">#{tag}</span>
             ))}
           </div>
         )}
@@ -229,7 +229,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
             </button>
             <button
               onClick={() => executeTrial()}
-              className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 py-2.5 text-sm text-slate-400 transition-all hover:border-slate-300 active:scale-[0.98]"
+              className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[rgba(255,255,255,0.15)] py-2.5 text-sm text-slate-300 transition-all hover:border-[rgba(255,255,255,0.25)] hover:text-white active:scale-[0.98]"
             >
               <Shield className="h-4 w-4" /> 申请试用
             </button>
@@ -288,7 +288,7 @@ function FeaturedBlock({ item, onClick }: { item: typeof GPU_CLUSTERS[0]; onClic
   return (
     <button
       onClick={onClick}
-      className="group relative flex overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.15)] active:scale-[0.99]"
+      className="group relative flex overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.15)] active:scale-[0.99]"
       style={{ gridColumn: 'span 4', gridRow: 'span 2' }}
     >
       <div className="relative w-3/5 shrink-0 overflow-hidden">
@@ -361,7 +361,7 @@ function GPUBlock({ item, size, onClick }: { item: typeof GPU_CLUSTERS[0]; size:
   return (
     <button
       onClick={onClick}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628] transition-all duration-300 hover:border-[rgba(255,255,255,0.12)] active:scale-[0.98]"
       style={{ gridColumn: size === 'md' ? 'span 2' : 'span 1' }}
     >
       <div className="relative overflow-hidden" style={{ height: size === 'md' ? '90px' : '60px' }}>
@@ -423,7 +423,7 @@ function PackageBlock({ item, size, onClick }: { item: typeof PACKAGES[0]; size:
 
         <div className="mb-2 flex flex-wrap gap-1">
           {item.features.slice(0, 2).map((f) => (
-            <span key={f} className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] text-slate-400">{f}</span>
+            <span key={f} className="rounded-full bg-[#1a2744] px-2 py-0.5 text-[9px] text-slate-300">{f}</span>
           ))}
         </div>
 
@@ -588,7 +588,7 @@ export default function HardwareModule() {
   }
 
   return (
-    <div className="relative flex h-full flex-col gap-0 overflow-hidden rounded-2xl border border-slate-200 bg-white">
+    <div className="relative flex h-full flex-col gap-0 overflow-hidden rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-[rgba(255,255,255,0.06)] px-6 py-4 shrink-0">
         <div className="flex items-center gap-3">

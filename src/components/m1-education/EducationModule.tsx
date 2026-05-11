@@ -267,10 +267,10 @@ const BUDDY = {
 function CampDetailPanel({ camp, onClose }: { camp: typeof CAMPS[0]; onClose: () => void }) {
   const [joined, setJoined] = useState(false)
   return (
-    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-slate-200 bg-white shadow-2xl w-[340px]">
+    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-[#0a1628] shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
         <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>共学营详情</span>
-        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-colors"><X className="h-4 w-4" /></button>
+        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[#1a2744] hover:text-white transition-colors"><X className="h-4 w-4" /></button>
       </div>
       <div className="flex-1 overflow-y-auto p-5">
         <img src={camp.thumbnail} alt={camp.name} className="w-full h-36 object-cover rounded-2xl mb-4" />
@@ -298,7 +298,7 @@ function CampDetailPanel({ camp, onClose }: { camp: typeof CAMPS[0]; onClose: ()
             </div>
           ))}
         </div>
-        <div className="mb-4 rounded-2xl border border-slate-200 bg-slate-100 p-4">
+        <div className="mb-4 rounded-2xl border border-[rgba(255,255,255,0.1)] bg-[#0a1628]/60 p-4">
           <p className="mb-2 text-xs font-bold text-slate-400">课程大纲</p>
           <div className="space-y-2">
             {['Day 1-2: 选品策略与竞品分析', 'Day 3-4: 投放素材制作与优化', 'Day 5-6: 转化链路设计与AB测试', 'Day 7: 复盘与后续策略'].map((d, i) => (
@@ -338,7 +338,7 @@ function BuddyDetailPanel({ buddy, onClose }: { buddy: typeof BUDDY; onClose: ()
     { from: 'them', text: '我也是！第三节的AI克隆部分有点难，一起讨论？' },
   ])
   return (
-    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-slate-200 bg-white shadow-2xl w-[340px]">
+    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-[#0a1628] shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
         <div className="flex items-center gap-2">
           <div className="relative">
@@ -347,7 +347,7 @@ function BuddyDetailPanel({ buddy, onClose }: { buddy: typeof BUDDY; onClose: ()
           </div>
           <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>学习搭子</span>
         </div>
-        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-900"><X className="h-4 w-4" /></button>
+        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[#1a2744] hover:text-white"><X className="h-4 w-4" /></button>
       </div>
       {/* Tabs */}
       <div className="flex border-b border-slate-100">
@@ -376,12 +376,12 @@ function BuddyDetailPanel({ buddy, onClose }: { buddy: typeof BUDDY; onClose: ()
             <div>
               <p className="mb-2 text-xs font-bold text-slate-400">技能标签</p>
               <div className="flex flex-wrap gap-1.5">
-                {buddy.interests.map((i) => <span key={i} className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] text-slate-400">#{i}</span>)}
+                {buddy.interests.map((i) => <span key={i} className="rounded-full bg-[#1a2744] px-2.5 py-1 text-[10px] text-slate-300">#{i}</span>)}
               </div>
             </div>
             <div className="grid grid-cols-3 gap-2">
               {[{ label: '连续打卡', value: `${buddy.streakDays}天` }, { label: '完成课时', value: `${buddy.sessionsCompleted}节` }, { label: '完课率', value: `${buddy.completionRate}%` }].map(({ label, value }) => (
-                <div key={label} className="rounded-xl border border-slate-100 bg-slate-100 p-3 text-center">
+                <div key={label} className="rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 p-3 text-center">
                   <p className="text-sm font-bold text-emerald-600">{value}</p><p className="text-[10px] text-slate-500">{label}</p>
                 </div>
               ))}
@@ -397,7 +397,7 @@ function BuddyDetailPanel({ buddy, onClose }: { buddy: typeof BUDDY; onClose: ()
               ))}
             </div>
             <div className="border-t border-slate-100 p-3 flex gap-2">
-              <input value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && message.trim()) { setChatMsgs([...chatMsgs, { from: "me", text: message }]); setMessage("") } }} placeholder="发消息..." className="flex-1 rounded-xl border border-slate-200 bg-slate-100 px-3 py-2 text-xs text-slate-900 placeholder-slate-500 outline-none focus:border-[#14D1A0]/40" />
+              <input value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter" && message.trim()) { setChatMsgs([...chatMsgs, { from: "me", text: message }]); setMessage("") } }} placeholder="发消息..." className="flex-1 rounded-xl border border-[rgba(255,255,255,0.1)] bg-[#0a1628]/60 px-3 py-2 text-xs text-slate-900 placeholder-slate-500 outline-none focus:border-[#14D1A0]/40" />
               <button onClick={() => { if (message.trim()) { setChatMsgs([...chatMsgs, { from: "me", text: message }]); setMessage("") } }} className="rounded-xl bg-[#14D1A0] px-3 py-2 text-xs font-bold text-[#010409] hover:bg-[#14D1A0]/90 transition-colors">发送</button>
             </div>
           </div>
@@ -452,13 +452,13 @@ function SixDimensionalAssessment({ onClose }: { onClose: () => void }) {
   const avgScore = Math.round(Object.values(scores).reduce((a, b) => a + b, 0) / Object.values(scores).length)
   return (
     <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/10 backdrop-blur-sm">
-      <div className="w-[480px] rounded-3xl border border-[rgba(255,255,255,0.1)] bg-white p-6 shadow-2xl">
+      <div className="w-[480px] rounded-3xl border border-[rgba(255,255,255,0.1)] bg-[#0a1628] p-6 shadow-2xl">
         <div className="mb-5 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-50"><Shield className="h-4 w-4 text-blue-600" /></div>
             <h2 className="text-base font-bold text-slate-900" style={{ fontFamily: 'Space Grotesk, monospace' }}>{step === 0 ? '六维能力测评' : '测评结果'}</h2>
           </div>
-          <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-900"><X className="h-4 w-4" /></button>
+          <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[#1a2744] hover:text-white"><X className="h-4 w-4" /></button>
         </div>
         {step === 0 ? (
           <>
@@ -467,7 +467,7 @@ function SixDimensionalAssessment({ onClose }: { onClose: () => void }) {
               {dimensions.map((d) => (
                 <div key={d.key} className="flex items-center gap-3">
                   <span className="w-20 text-xs text-slate-400">{d.label}</span>
-                  <div className="h-2 w-full flex-1 overflow-hidden rounded-full bg-slate-100">
+                  <div className="h-2 w-full flex-1 overflow-hidden rounded-full bg-[#0a1628]/60">
                     <div className="h-full rounded-full bg-emerald-500" style={{ width: `${d.score}%` }} /></div>
                   <span className="w-10 text-right text-xs font-bold text-emerald-600">{d.score}</span>
                 </div>
@@ -478,7 +478,7 @@ function SixDimensionalAssessment({ onClose }: { onClose: () => void }) {
             )}
             <div className="flex gap-3">
               <button onClick={() => saveAssessment(scores)} className="flex-1 rounded-2xl bg-emerald-500 py-3 text-sm font-bold text-white hover:bg-emerald-600 transition-all">保存结果</button>
-              <button onClick={onClose} className="rounded-2xl border border-slate-200 px-4 py-3 text-sm text-slate-400 hover:border-slate-300 hover:text-slate-600 transition-all">先看看</button>
+              <button onClick={onClose} className="rounded-2xl border border-[rgba(255,255,255,0.15)] px-4 py-3 text-sm text-slate-300 hover:border-[rgba(255,255,255,0.25)] hover:text-white transition-all">先看看</button>
             </div>
           </>
         ) : (
@@ -486,7 +486,7 @@ function SixDimensionalAssessment({ onClose }: { onClose: () => void }) {
             <p className="mb-4 text-sm text-slate-400">根据你的能力画像，系统为你推荐以下学习路径：</p>
             <div className="mb-5 space-y-2">
               {[{ title: 'AI 内容创作从0到1', match: 92 }, { title: '7天 AI 创业启动计划', match: 78 }].map((rec) => (
-                <div key={rec.title} className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-100 p-4">
+                <div key={rec.title} className="flex items-center gap-3 rounded-2xl border border-[rgba(255,255,255,0.1)] bg-[#0a1628]/60 p-4">
                   <div className="flex-1"><p className="text-sm font-bold text-slate-900">{rec.title}</p><p className="text-xs text-slate-500">匹配度 {rec.match}%</p></div>
                   <span className="text-lg font-bold text-emerald-600">{rec.match}%</span>
                 </div>
@@ -503,10 +503,10 @@ function SixDimensionalAssessment({ onClose }: { onClose: () => void }) {
 // ─── Instructor Detail Panel ─────────────────────────────────────────────────────
 function InstructorDetailPanel({ inst, onClose }: { inst: Record<string, unknown>; onClose: () => void }) {
   return (
-    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-slate-200 bg-white shadow-2xl w-[340px]">
+    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-[#0a1628] shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
         <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>讲师详情</span>
-        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-colors"><X className="h-4 w-4" /></button>
+        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[#1a2744] hover:text-white transition-colors"><X className="h-4 w-4" /></button>
       </div>
       <div className="flex-1 overflow-y-auto p-5">
         <div className="mb-4 flex flex-col items-center text-center">
@@ -520,7 +520,7 @@ function InstructorDetailPanel({ inst, onClose }: { inst: Record<string, unknown
             { label: '评分', value: String(inst.rating as number) },
             { label: '课程', value: `${inst.courseCount as number}门` },
           ].map(s => (
-            <div key={s.label} className="rounded-xl bg-slate-100 p-3">
+            <div key={s.label} className="rounded-xl bg-[#0a1628]/60 p-3">
               <p className="text-sm font-bold text-slate-900">{s.value}</p>
               <p className="text-[10px] text-slate-500">{s.label}</p>
             </div>
@@ -534,7 +534,7 @@ function InstructorDetailPanel({ inst, onClose }: { inst: Record<string, unknown
           <p className="mb-2 text-xs font-bold text-slate-400">代表课程</p>
           <div className="space-y-2">
             {['AI运营实战训练营', '私域流量搭建指南'].map((c, i) => (
-              <div key={i} className="flex items-center gap-2 rounded-xl bg-slate-100 p-3">
+              <div key={i} className="flex items-center gap-2 rounded-xl bg-[#0a1628]/60 p-3">
                 <div className="h-8 w-8 rounded-lg bg-emerald-100 flex items-center justify-center text-xs font-bold text-emerald-600">{i + 1}</div>
                 <span className="text-xs font-medium text-slate-700">{c}</span>
               </div>
@@ -559,10 +559,10 @@ function PathDetailPanel({ path, onClose }: { path: typeof PATHS[0]; onClose: ()
     { label: 'MVP 上线与迭代', done: false, locked: true },
   ]
   return (
-    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-slate-200 bg-white shadow-2xl w-[340px]">
+    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-[#0a1628] shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
         <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>学习路径详情</span>
-        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-colors"><X className="h-4 w-4" /></button>
+        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[#1a2744] hover:text-white transition-colors"><X className="h-4 w-4" /></button>
       </div>
       <div className="flex-1 overflow-y-auto p-5">
         <img src={path.thumbnail} alt={path.title} className="w-full h-32 object-cover rounded-2xl mb-4" />
@@ -588,9 +588,9 @@ function PathDetailPanel({ path, onClose }: { path: typeof PATHS[0]; onClose: ()
             </div>
           ))}
         </div>
-        <div className="mb-4 rounded-2xl border border-slate-200 bg-slate-100 p-4">
+        <div className="mb-4 rounded-2xl border border-[rgba(255,255,255,0.1)] bg-[#0a1628]/60 p-4">
           <p className="mb-2 text-xs font-bold text-slate-400">关联 Agent 模板</p>
-          <div className="flex items-center gap-2 rounded-xl bg-slate-100 p-3">
+          <div className="flex items-center gap-2 rounded-xl bg-[#0a1628]/60 p-3">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50"><Zap className="h-4 w-4 text-emerald-600" /></div>
             <div className="flex-1"><p className="text-xs font-medium text-slate-900">AI 内容创作助手</p><p className="text-[10px] text-slate-500">学完即可免费试用</p></div>
             <ArrowRight className="h-4 w-4 text-slate-500" />
@@ -610,10 +610,10 @@ function PathDetailPanel({ path, onClose }: { path: typeof PATHS[0]; onClose: ()
 function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; onClose: () => void }) {
   if (!item) return null
   return (
-    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-slate-200 bg-white shadow-2xl w-[340px]">
+    <div className="absolute inset-y-0 right-0 z-20 flex flex-col border-l border-[rgba(255,255,255,0.08)] bg-[#0a1628] shadow-2xl w-[340px]">
       <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
         <span className="text-xs font-medium text-slate-500" style={{ fontFamily: 'monospace' }}>详情</span>
-        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-colors">
+        <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 hover:bg-[#1a2744] hover:text-white transition-colors">
           <X className="h-4 w-4" />
         </button>
       </div>
@@ -645,7 +645,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
         {item.tags && Array.isArray(item.tags) && (
           <div className="flex flex-wrap gap-2 mb-4">
             {(item.tags as string[]).map((tag) => (
-              <span key={tag} className="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[10px] text-slate-400">
+              <span key={tag} className="rounded-full border border-[rgba(255,255,255,0.1)] bg-[#0a1628]/60 px-2.5 py-1 text-[10px] text-slate-400">
                 #{tag}
               </span>
             ))}
@@ -695,7 +695,7 @@ function DetailPanel({ item, onClose }: { item: Record<string, unknown> | null; 
           {item.price === 0 ? '免费学习' : item.price ? `¥${item.price} 立即购买` : '查看详情'}
         </button>
         {(item.studentCount || item.memberCount) && (
-          <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 py-2.5 text-sm text-slate-400 transition-all hover:border-[rgba(255,255,255,0.15)] hover:text-slate-900">
+          <button className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[rgba(255,255,255,0.15)] py-2.5 text-sm text-slate-300 transition-all hover:border-[rgba(255,255,255,0.25)] hover:text-white">
             <Play className="h-4 w-4" /> 先试听课程
           </button>
         )}

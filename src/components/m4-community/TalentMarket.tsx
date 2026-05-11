@@ -72,7 +72,7 @@ export default function TalentMarket({ talents }: TalentMarketProps) {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setSelectedTalent(null)}
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-slate-100 text-slate-400 hover:border-[rgba(255,255,255,0.16)] hover:text-slate-900"
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 text-slate-400 hover:border-[rgba(255,255,255,0.16)] hover:text-white"
           >
             <ChevronRight className="h-4 w-4 rotate-180" />
           </button>
@@ -109,7 +109,7 @@ export default function TalentMarket({ talents }: TalentMarketProps) {
 
           {/* Rating & Stats */}
           <div className="mt-5 grid grid-cols-3 gap-3">
-            <div className="flex flex-col items-center rounded-2xl border border-slate-200 bg-slate-100 p-3">
+            <div className="flex flex-col items-center rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 p-3">
               <div className="flex items-center gap-1">
                 <Star className="h-4 w-4 text-amber-400" />
                 <p className="text-lg font-bold text-slate-900 tabular-nums" style={{ fontFamily: 'monospace' }}>
@@ -118,13 +118,13 @@ export default function TalentMarket({ talents }: TalentMarketProps) {
               </div>
               <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>评分</p>
             </div>
-            <div className="flex flex-col items-center rounded-2xl border border-slate-200 bg-slate-100 p-3">
+            <div className="flex flex-col items-center rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 p-3">
               <p className="text-lg font-bold text-slate-900 tabular-nums" style={{ fontFamily: 'monospace' }}>
                 {selectedTalent.completedProjects}
               </p>
               <p className="text-[10px] text-slate-500" style={{ fontFamily: 'monospace' }}>完成项目</p>
             </div>
-            <div className="flex flex-col items-center rounded-2xl border border-slate-200 bg-slate-100 p-3">
+            <div className="flex flex-col items-center rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 p-3">
               <p className="text-lg font-bold text-emerald-600 tabular-nums" style={{ fontFamily: 'monospace' }}>
                 {selectedTalent.responseRate}%
               </p>
@@ -141,7 +141,7 @@ export default function TalentMarket({ talents }: TalentMarketProps) {
               {selectedTalent.skills.map((skill) => (
                 <span
                   key={skill}
-                  className="rounded-full border border-[rgba(255,255,255,0.1)] bg-slate-100 px-3 py-1 text-xs text-slate-300"
+                  className="rounded-full border border-[rgba(255,255,255,0.1)] bg-[#0a1628]/60 px-3 py-1 text-xs text-slate-300"
                   style={{ fontFamily: 'monospace' }}
                 >
                   {skill}
@@ -151,7 +151,7 @@ export default function TalentMarket({ talents }: TalentMarketProps) {
           </div>
 
           {/* Bio */}
-          <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-100 p-4">
+          <div className="mt-5 rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 p-4">
             <h3 className="mb-2 text-xs font-bold text-slate-400" style={{ fontFamily: 'monospace' }}>
               个人简介
             </h3>
@@ -210,7 +210,7 @@ export default function TalentMarket({ talents }: TalentMarketProps) {
               )}
             </div>
             <div className="flex gap-3">
-              <button className="flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-100 px-5 py-2.5 text-sm font-medium text-slate-900">
+              <button className="flex items-center gap-2 rounded-xl border border-slate-100 bg-[#0a1628]/60 px-5 py-2.5 text-sm font-medium text-slate-900">
                 <BadgeCheck className="h-4 w-4" />
                 查看主页
               </button>
@@ -239,7 +239,7 @@ export default function TalentMarket({ talents }: TalentMarketProps) {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="搜索人才姓名、职位或技能..."
-          className="w-full rounded-xl border border-slate-200 bg-slate-100 pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
+          className="w-full rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder-slate-600 focus:border-[#14D1A0]/50 focus:outline-none"
           style={{ fontFamily: 'monospace' }}
         />
       </div>
@@ -257,7 +257,7 @@ export default function TalentMarket({ talents }: TalentMarketProps) {
             className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-medium transition ${
               filterAvailability === f.id
                 ? 'bg-[#14D1A0]/20 text-emerald-600'
-                : 'bg-slate-100 text-slate-500 hover:text-slate-900'
+                : 'bg-[#0a1628]/60 text-slate-500 hover:text-white'
             }`}
             style={{ fontFamily: 'monospace' }}
           >
@@ -274,7 +274,7 @@ export default function TalentMarket({ talents }: TalentMarketProps) {
       </div>
 
       {/* Stats bar */}
-      <div className="flex items-center justify-between rounded-2xl border border-slate-200 bg-slate-100 px-4 py-3">
+      <div className="flex items-center justify-between rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 px-4 py-3">
         <div className="flex items-center gap-2">
           <Briefcase className="h-4 w-4 text-slate-500" />
           <span className="text-xs text-slate-400" style={{ fontFamily: 'monospace' }}>
@@ -299,7 +299,7 @@ export default function TalentMarket({ talents }: TalentMarketProps) {
               <button
                 key={talent.id}
                 onClick={() => setSelectedTalent(talent)}
-                className="w-full text-left rounded-2xl border border-slate-200 bg-slate-100 p-4 transition hover:border-[rgba(255,255,255,0.12)] hover:bg-slate-100"
+                className="w-full text-left rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 p-4 transition hover:border-[rgba(255,255,255,0.12)] hover:bg-[#0a1628]/60"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-start gap-3 flex-1 min-w-0">
@@ -336,7 +336,7 @@ export default function TalentMarket({ talents }: TalentMarketProps) {
                       </div>
                       <div className="mt-2 flex flex-wrap gap-1.5">
                         {talent.skills.slice(0, 3).map((skill) => (
-                          <span key={skill} className="rounded-full border border-slate-200 bg-slate-100 px-2 py-0.5 text-[10px] text-slate-400" style={{ fontFamily: 'monospace' }}>
+                          <span key={skill} className="rounded-full border border-[rgba(255,255,255,0.08)] bg-[#0a1628]/60 px-2 py-0.5 text-[10px] text-slate-400" style={{ fontFamily: 'monospace' }}>
                             {skill}
                           </span>
                         ))}
