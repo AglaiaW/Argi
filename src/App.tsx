@@ -2182,7 +2182,7 @@ const Profile: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabType>('community');
   const [lang, setLang] = useState<'CN' | 'EN'>('CN');
-  const [theme, setTheme] = useState<'dark' | 'light'>('light');
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [isAssistantOpen, setIsAssistantOpen] = useState(true);
 
   return (
