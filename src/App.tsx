@@ -37,7 +37,6 @@ import {
   Heart,
   Share2,
   Users,
-  CircuitBoard,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { GoogleGenAI } from "@google/genai";
@@ -49,11 +48,10 @@ import EducationModule from './components/m1-education/EducationModule';
 import AgentMarketModule from './components/m2-agent-market/AgentMarketModule';
 import CreationModule from './components/m3-creation/CreationModule';
 import CommunityModule from './components/m4-community/CommunityModule';
-import HardwareModule from './components/m5-hardware/HardwareModule';
 
 // --- Types ---
 
-type TabType = 'community' | 'education' | 'market' | 'creation' | 'profile' | 'hardware';
+type TabType = 'community' | 'education' | 'market' | 'creation' | 'profile';
 type CommunitySection = 'discover' | 'market' | 'events' | 'circles';
 type CommunityFeedTab = 'follow' | 'recommend' | 'trending';
 type EventStatusFilter = 'all' | 'registration' | 'ongoing' | 'review' | 'ended';
@@ -577,7 +575,6 @@ const SideNav = ({ activeTab, setActiveTab, lang }: { activeTab: TabType, setAct
     { id: 'education', icon: <BookOpen />, label: { CN: '技能教育', EN: 'EDUCATION' } },
     { id: 'market', icon: <Bot />, label: { CN: 'Agent市场', EN: 'MARKET' } },
     { id: 'creation', icon: <Sparkles />, label: { CN: '创作中心', EN: 'CREATION' } },
-    { id: 'hardware', icon: <CircuitBoard />, label: { CN: '硬件生态', EN: 'HARDWARE' } },
     { id: 'profile', icon: <User />, label: { CN: '个人中心', EN: 'PROFILE' } },
   ];
 
@@ -2182,8 +2179,22 @@ const Profile: React.FC<{ lang: 'CN' | 'EN' }> = ({ lang }) => {
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabType>('community');
   const [lang, setLang] = useState<'CN' | 'EN'>('CN');
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    if (typeof window !== 'undefined') {
+      return (localStorage.getItem('theme') as 'dark' | 'light') || 'dark';
+    }
+    return 'dark';
+  });
   const [isAssistantOpen, setIsAssistantOpen] = useState(true);
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
 
   return (
     <div className={`min-h-screen font-sans select-none overflow-x-hidden${theme === 'dark' ? ' bg-[#010409] text-inherit' : ' bg-slate-50 text-slate-900'}`}>
@@ -2215,7 +2226,6 @@ export default function App() {
           {activeTab === 'market' && <AgentMarketModule key="mkt" />}
           {activeTab === 'creation' && <CreationModule key="crt" />}
           {activeTab === 'community' && <CommunityModule key="com" />}
-          {activeTab === 'hardware' && <HardwareModule key="hw" activeTab="library" />}
           {activeTab === 'profile' && <Profile key="p" lang={lang} />}
         </AnimatePresence>
       </main>

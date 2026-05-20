@@ -47,7 +47,7 @@ const CATEGORY_ICONS: Record<HardwareCategory, React.ReactNode> = {
   full_rack: <Server className="h-3.5 w-3.5" />,
 }
 
-const MOCK_VENDORS: HardwareVendor[] = [
+export const MOCK_VENDORS: HardwareVendor[] = [
   {
     id: 'hw-001',
     name: 'NeuralCore Systems',
@@ -306,5 +306,3 @@ export function HardwareVendorCard({ vendor: v, compact = false }: HardwareVendo
     </div>
   )
 }
-
-export { MOCK_VENDORS }

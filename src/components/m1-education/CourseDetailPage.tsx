@@ -4,8 +4,9 @@ import { useState, useEffect } from 'react'
 import {
   ArrowLeft, Star, Users, Clock, BookOpen, Award,
   CheckCircle2, Lock, Play, FileText, MessageSquare,
-  ChevronDown, ChevronUp, X, Zap, Send, Download
+  ChevronDown, ChevronUp, X, Zap, Send, Download, Trophy
 } from 'lucide-react'
+import { useAction, ActionToast } from '@/hooks/useAction'
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -153,6 +154,31 @@ const COURSE_DETAIL: CourseDetail = {
     },
   ],
 }
+
+const RELATED_COMPETITIONS = [
+  {
+    id: 'comp-edu-1',
+    title: '2026 AI 创新创业大赛',
+    prize: '¥50,000',
+    deadline: '2026-06-01',
+    participants: 1247,
+    status: '报名中',
+    statusColor: '#14D1A0',
+    description: '完成本课程即可解锁专属参赛资格',
+    banner: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&q=80',
+  },
+  {
+    id: 'comp-edu-2',
+    title: '数字人直播 PK 赛',
+    prize: '¥5,000',
+    deadline: '2026-06-15',
+    participants: 342,
+    status: '进行中',
+    statusColor: '#A855F7',
+    description: '学完课程获得赛前练习资格',
+    banner: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&q=80',
+  },
+]
 
 // ─── Quiz Component ─────────────────────────────────────────────────────────────
 
@@ -600,6 +626,20 @@ export default function CourseDetailPage({
   const progress = course.progress
   const isEnrolled = course.isEnrolled
 
+  const [toastSuccess, setToastSuccess] = useState<string | null>(null)
+  const { loading: joinLoading, execute: executeJoin } = useAction(
+    async (compTitle: string) => {
+      await new Promise(r => setTimeout(r, 800))
+      return compTitle
+    },
+    {
+      onSuccess: (compTitle) => {
+        setToastSuccess(`已报名「${compTitle}」，请关注赛事通知`)
+        setTimeout(() => setToastSuccess(null), 3000)
+      },
+    }
+  )
+
   return (
     <div className="flex h-full flex-col bg-slate-50">
       {/* Top bar */}
@@ -845,6 +885,49 @@ export default function CourseDetailPage({
           )}
         </div>
       </div>
+
+      {/* Related Competitions Section */}
+      <div className="mt-8 mb-8 px-6">
+        <div className="mb-4 flex items-center gap-2">
+          <Trophy className="h-5 w-5 text-amber-500" />
+          <h2 className="text-lg font-bold text-slate-800">相关竞赛</h2>
+          <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs text-amber-600">完成课程解锁参赛资格</span>
+        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {RELATED_COMPETITIONS.map(comp => (
+            <div key={comp.id} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all hover:shadow-md">
+              <div className="relative h-32 overflow-hidden">
+                <img src={comp.banner} alt={comp.title} className="h-full w-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-2 left-3 right-3">
+                  <h3 className="text-sm font-bold text-white">{comp.title}</h3>
+                </div>
+                <span className="absolute top-2 right-2 rounded-full px-2 py-0.5 text-[10px] font-bold text-white" style={{ backgroundColor: comp.statusColor }}>
+                  {comp.status}
+                </span>
+              </div>
+              <div className="p-3">
+                <p className="mb-2 text-xs text-slate-500">{comp.description}</p>
+                <div className="mb-3 flex items-center gap-3 text-xs text-slate-500">
+                  <span className="font-bold text-amber-600">奖池 {comp.prize}</span>
+                  <span>截止 {comp.deadline}</span>
+                  <span className="flex items-center gap-1"><Users className="h-3 w-3" />{comp.participants}人参赛</span>
+                </div>
+                <button
+                  onClick={() => executeJoin(comp.title)}
+                  disabled={joinLoading}
+                  className="flex w-full items-center justify-center gap-1 rounded-xl bg-emerald-500 py-2 text-xs font-bold text-white hover:bg-emerald-600 disabled:opacity-60"
+                >
+                  <Trophy className="h-3.5 w-3.5" />{joinLoading ? '报名中...' : '立即参赛'}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Action Toast */}
+      <ActionToast success={toastSuccess || undefined} onClose={() => setToastSuccess(null)} />
 
       {/* Modals */}
       {showQuiz && <QuizModal chapter={showQuiz} onClose={() => setShowQuiz(null)} />}
